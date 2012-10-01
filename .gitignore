@@ -12,3 +12,5 @@ Snapshots
 
 # osx noise
 .DS_Store
+
+DerivedData/*
