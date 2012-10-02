@@ -17,12 +17,13 @@
 		BF5B429F161A3ACB002C67D1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B429E161A3ACB002C67D1 /* Default@2x.png */; };
 		BF5B42A1161A3ACB002C67D1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42A0161A3ACB002C67D1 /* Default-568h@2x.png */; };
 		BF5B42A4161A3ACB002C67D1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42A2161A3ACB002C67D1 /* MainStoryboard.storyboard */; };
-		BF5B42A7161A3ACB002C67D1 /* LocalBuzzFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5B42A6161A3ACB002C67D1 /* LocalBuzzFirstViewController.m */; };
 		BF5B42A9161A3ACB002C67D1 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42A8161A3ACB002C67D1 /* first.png */; };
 		BF5B42AB161A3ACB002C67D1 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42AA161A3ACB002C67D1 /* first@2x.png */; };
-		BF5B42AE161A3ACB002C67D1 /* LocalBuzzSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5B42AD161A3ACB002C67D1 /* LocalBuzzSecondViewController.m */; };
 		BF5B42B0161A3ACB002C67D1 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42AF161A3ACB002C67D1 /* second.png */; };
 		BF5B42B2161A3ACB002C67D1 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42B1161A3ACB002C67D1 /* second@2x.png */; };
+		D5CE3F14161A571600CA3A96 /* PastEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CE3F13161A571600CA3A96 /* PastEventViewController.m */; };
+		D5CE3F1C161A5B8F00CA3A96 /* CurrentEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CE3F1B161A5B8F00CA3A96 /* CurrentEventViewController.m */; };
+		D5CE3F1F161A611E00CA3A96 /* DetailEventDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CE3F1E161A611E00CA3A96 /* DetailEventDescriptionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,14 +41,16 @@
 		BF5B429E161A3ACB002C67D1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BF5B42A0161A3ACB002C67D1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BF5B42A3161A3ACB002C67D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		BF5B42A5161A3ACB002C67D1 /* LocalBuzzFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalBuzzFirstViewController.h; sourceTree = "<group>"; };
-		BF5B42A6161A3ACB002C67D1 /* LocalBuzzFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalBuzzFirstViewController.m; sourceTree = "<group>"; };
 		BF5B42A8161A3ACB002C67D1 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		BF5B42AA161A3ACB002C67D1 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		BF5B42AC161A3ACB002C67D1 /* LocalBuzzSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalBuzzSecondViewController.h; sourceTree = "<group>"; };
-		BF5B42AD161A3ACB002C67D1 /* LocalBuzzSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalBuzzSecondViewController.m; sourceTree = "<group>"; };
 		BF5B42AF161A3ACB002C67D1 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		BF5B42B1161A3ACB002C67D1 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		D5CE3F12161A571600CA3A96 /* PastEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastEventViewController.h; sourceTree = "<group>"; };
+		D5CE3F13161A571600CA3A96 /* PastEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastEventViewController.m; sourceTree = "<group>"; };
+		D5CE3F1A161A5B8F00CA3A96 /* CurrentEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentEventViewController.h; sourceTree = "<group>"; };
+		D5CE3F1B161A5B8F00CA3A96 /* CurrentEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentEventViewController.m; sourceTree = "<group>"; };
+		D5CE3F1D161A611E00CA3A96 /* DetailEventDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailEventDescriptionViewController.h; sourceTree = "<group>"; };
+		D5CE3F1E161A611E00CA3A96 /* DetailEventDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailEventDescriptionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +100,14 @@
 				BF5B4299161A3ACB002C67D1 /* LocalBuzzAppDelegate.h */,
 				BF5B429A161A3ACB002C67D1 /* LocalBuzzAppDelegate.m */,
 				BF5B42A2161A3ACB002C67D1 /* MainStoryboard.storyboard */,
-				BF5B42A5161A3ACB002C67D1 /* LocalBuzzFirstViewController.h */,
-				BF5B42A6161A3ACB002C67D1 /* LocalBuzzFirstViewController.m */,
+				D5CE3F1D161A611E00CA3A96 /* DetailEventDescriptionViewController.h */,
+				D5CE3F1E161A611E00CA3A96 /* DetailEventDescriptionViewController.m */,
+				D5CE3F12161A571600CA3A96 /* PastEventViewController.h */,
+				D5CE3F13161A571600CA3A96 /* PastEventViewController.m */,
+				D5CE3F1A161A5B8F00CA3A96 /* CurrentEventViewController.h */,
+				D5CE3F1B161A5B8F00CA3A96 /* CurrentEventViewController.m */,
 				BF5B42A8161A3ACB002C67D1 /* first.png */,
 				BF5B42AA161A3ACB002C67D1 /* first@2x.png */,
-				BF5B42AC161A3ACB002C67D1 /* LocalBuzzSecondViewController.h */,
-				BF5B42AD161A3ACB002C67D1 /* LocalBuzzSecondViewController.m */,
 				BF5B42AF161A3ACB002C67D1 /* second.png */,
 				BF5B42B1161A3ACB002C67D1 /* second@2x.png */,
 				BF5B4291161A3ACB002C67D1 /* Supporting Files */,
@@ -197,8 +202,9 @@
 			files = (
 				BF5B4297161A3ACB002C67D1 /* main.m in Sources */,
 				BF5B429B161A3ACB002C67D1 /* LocalBuzzAppDelegate.m in Sources */,
-				BF5B42A7161A3ACB002C67D1 /* LocalBuzzFirstViewController.m in Sources */,
-				BF5B42AE161A3ACB002C67D1 /* LocalBuzzSecondViewController.m in Sources */,
+				D5CE3F14161A571600CA3A96 /* PastEventViewController.m in Sources */,
+				D5CE3F1C161A5B8F00CA3A96 /* CurrentEventViewController.m in Sources */,
+				D5CE3F1F161A611E00CA3A96 /* DetailEventDescriptionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +320,7 @@
 				BF5B42B7161A3ACB002C67D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
