@@ -13,6 +13,7 @@
 @end
 
 @implementation DetailEventDescriptionViewController
+@synthesize num = _num;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +34,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//NOTE: segue would pass necessary info to this function
+//TODO: determine the member viables here and what are needed to sent from the list view (ie. title)
+- (void)setNum:(int)num
+{
+  _num = num;
 }
 
 @end

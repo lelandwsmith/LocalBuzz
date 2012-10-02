@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PastEventViewController : UITableViewController
+@property (nonatomic, strong) NSArray *pastEventTitles;
 
 @end

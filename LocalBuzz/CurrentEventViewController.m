@@ -1,20 +1,20 @@
 //
-//  PastEventViewController.m
+//  CurrentEventViewController.m
 //  LocalBuzz
 //
 //  Created by Amanda Le on 10/1/12.
 //  Copyright (c) 2012 Vincent Leung. All rights reserved.
 //
 
-#import "PastEventViewController.h"
+#import "CurrentEventViewController.h"
 #import "DetailEventDescriptionViewController.h"
 
-@interface PastEventViewController ()
+@interface CurrentEventViewController ()
 
 @end
 
-@implementation PastEventViewController
-@synthesize pastEventTitles = _pastEventTitles;
+@implementation CurrentEventViewController
+@synthesize currentEventTitles = _currentEventTitles;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,7 +34,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.pastEventTitles = [[NSArray alloc] initWithObjects:@"Past1", @"Past2", @"Past3", @"Past4", @"Past5", @"Past6", @"Past7", @"Past8", @"Past9", @"Past10", @"Past11", @"Past12", @"Past13", @"Past14", nil];
+    self.currentEventTitles = [[NSArray alloc] initWithObjects:@"Current1", @"Current2", @"Current3", nil];
 }
 
 - (void)viewDidUnload
@@ -42,7 +42,7 @@
   [super viewDidUnload];
   // Release any retained subviews of the main view.
   // e.g. self.myOutlet = nil;
-  self.pastEventTitles = nil;
+  self.currentEventTitles = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,30 +55,30 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return 1;
+  // Return the number of sections.
+  return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return [self.pastEventTitles count];
+  // Return the number of rows in the section.
+  return [self.currentEventTitles count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"pastEventTableCell";
+  static NSString *CellIdentifier = @"currentEventTableCell";
   
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  }
   
-    // Configure the cell...
-    cell.textLabel.text = [self.pastEventTitles objectAtIndex:[indexPath row]];
-    
-    return cell;
+  // Configure the cell...
+  cell.textLabel.text = [self.currentEventTitles objectAtIndex:[indexPath row]];
+  
+  return cell;
 }
 
 /*
