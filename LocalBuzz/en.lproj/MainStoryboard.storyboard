@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="gS2-Gx-ZMY">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
@@ -42,15 +42,30 @@
             </objects>
             <point key="canvasLocation" x="653" y="-138"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="VXi-MX-sb1">
+        <!--Navigation Controller-->
+        <scene sceneID="nFy-dN-xiu">
             <objects>
-                <viewController id="Tzf-TL-EU6" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Hvy-sO-DAh">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                <navigationController definesPresentationContext="YES" id="gS2-Gx-ZMY" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="16t-Ip-oFT">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uDX-YL-WZY" kind="relationship" relationship="rootViewController" id="DWN-wt-Es9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="haY-44-AgY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-243" y="548"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="wzE-N5-I9I">
+            <objects>
+                <viewController id="uDX-YL-WZY" customClass="LoginViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="exe-Ob-oUt">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aFT-qg-BOO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HGu-Ra-aRG">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,18 +74,37 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="click:" destination="uDX-YL-WZY" eventType="touchUpInside" id="AgC-Iq-bmR"/>
+                                </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zrH-UV-A7x">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="VxY-Ue-wRv"/>
+                                    <constraint firstAttribute="width" constant="240" id="skf-n2-yvy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="aFT-qg-BOO" secondAttribute="bottom" constant="157" id="CjA-uY-kIo"/>
-                            <constraint firstItem="aFT-qg-BOO" firstAttribute="leading" secondItem="Hvy-sO-DAh" secondAttribute="leading" constant="115" id="QQo-fQ-kza"/>
+                            <constraint firstItem="HGu-Ra-aRG" firstAttribute="top" secondItem="exe-Ob-oUt" secondAttribute="top" constant="230" id="GmD-U6-M77"/>
+                            <constraint firstItem="zrH-UV-A7x" firstAttribute="centerX" secondItem="exe-Ob-oUt" secondAttribute="centerX" type="default" id="LI6-9z-Xmi"/>
+                            <constraint firstItem="zrH-UV-A7x" firstAttribute="top" secondItem="exe-Ob-oUt" secondAttribute="top" constant="58" id="iRa-m2-P1n"/>
+                            <constraint firstItem="HGu-Ra-aRG" firstAttribute="leading" secondItem="exe-Ob-oUt" secondAttribute="leading" constant="117" id="vCO-ir-b5j"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="mix-lQ-82C"/>
+                    <connections>
+                        <outlet property="loginbtn" destination="HGu-Ra-aRG" id="EIn-pw-gs2"/>
+                        <outlet property="textview" destination="zrH-UV-A7x" id="UqA-Vs-qe5"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lWJ-U8-fdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZyR-R0-7gh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="209" y="535"/>
+            <point key="canvasLocation" x="186" y="535"/>
         </scene>
         <!--Local Buzz Second View Controller - Second-->
         <scene sceneID="13">
@@ -140,6 +174,15 @@
         </class>
         <class className="LocalBuzzSecondViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalBuzzSecondViewController.h"/>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="click:" candidateClass="UIButton"/>
+                <relationship kind="action" name="login:"/>
+                <relationship kind="outlet" name="loginbtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="textview" candidateClass="UITextView"/>
+            </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
