@@ -16,7 +16,11 @@ NSString *const FBSessionStateChangedNotification =
     // Override point for customization after application launch.
     return YES;
 }
-							
+
+- (void) closeSession {
+    [FBSession.activeSession closeAndClearTokenInformation];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -37,15 +41,10 @@ NSString *const FBSessionStateChangedNotification =
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBSession.activeSession handleDidBecomeActive];
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-/*
- * Callback for session changes.
- */
+
 - (void)sessionStateChanged:(FBSession *)session
                       state:(FBSessionState) state
                       error:(NSError *)error
@@ -80,11 +79,17 @@ NSString *const FBSessionStateChangedNotification =
     }
 }
 
+
 /*
  * Opens a Facebook session and optionally shows the login UX.
  */
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
-    return [FBSession openActiveSessionWithReadPermissions:nil
+    NSArray *permissions = [[NSArray alloc] initWithObjects:
+                            @"user_location",
+                            @"user_birthday",
+                            @"read_friendlists",
+                            nil];
+    return [FBSession openActiveSessionWithReadPermissions:permissions
                                               allowLoginUI:allowLoginUI
                                          completionHandler:^(FBSession *session,
                                                              FBSessionState state,
@@ -104,6 +109,15 @@ NSString *const FBSessionStateChangedNotification =
          annotation:(id)annotation {
     // attempt to extract a token from the url
     return [FBSession.activeSession handleOpenURL:url];
+}
+
+-(void)applicationWillTerminate:(UIApplication *)application {
+    // FBSample logic
+    // if the app is going away, we close the session if it is open
+    // this is a good idea because things may be hanging off the session, that need
+    // releasing (completion block, etc.) and other components in the app may be awaiting
+    // close notification in order to do cleanup
+    [FBSession.activeSession close];
 }
 
 @end

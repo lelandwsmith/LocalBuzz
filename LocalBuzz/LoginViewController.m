@@ -17,79 +17,117 @@
 
 @synthesize textview ;
 @synthesize loginbtn ;
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    [self updateView];
-    
-    LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    if (!appDelegate.session.isOpen) {
-        // create a fresh session object
-        appDelegate.session = [[FBSession alloc] init];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(sessionStateChanged:)
+     name:FBSessionStateChangedNotification
+     object:nil];
+    // Check the session for a cached token to show the proper authenticated
+    // UI. However, since this is not user intitiated, do not show the login UX.
+    LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate openSessionWithAllowLoginUI:NO];
+
+}
+
+
+
+- (void)sessionStateChanged:(NSNotification*)notification {
+    if (FBSession.activeSession.isOpen) {
+        //NSLog(@"isIN");
+        [self.loginbtn setTitle:@"Logout" forState:UIControlStateNormal];
+        self.textview.hidden = NO;
+        NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults]; 
+        [FBRequestConnection
+         startForMeWithCompletionHandler:^(FBRequestConnection *connection,
+                                           id<FBGraphUser> user,
+                                           NSError *error) {
+             if (!error) {
+                 NSString *userInfo = @"";
+                 
+                 //get user name
+                 userInfo = [userInfo
+                             stringByAppendingString:
+                             [NSString stringWithFormat:@"Name: %@\n\n",
+                              user.name]];
+                 NSString* uname =user.name;
+                 [user_data setObject:uname forKey:@"name"];
+                 //get user birthday
+                 userInfo = [userInfo
+                             stringByAppendingString:
+                             [NSString stringWithFormat:@"Birthday: %@\n\n",
+                              user.birthday]];
+                 NSString* ubirthday =user.birthday;
+                 [user_data setObject:ubirthday forKey:@"birthday"];
+                 //get user location
+                 userInfo = [userInfo
+                             stringByAppendingString:
+                             [NSString stringWithFormat:@"Location: %@\n\n",
+                              [user.location objectForKey:@"name"]]];
+                 NSString* ulocation =[user.location objectForKey:@"name"];
+                 [user_data setObject:ulocation forKey:@"location"];
+                 //get friend-list
+                 FBRequest* friendsRequest = [FBRequest requestForMyFriends];
+                 [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
+                                                               NSDictionary* result,
+                                                               NSError *error) {
+                     NSArray* friends = [result objectForKey:@"data"];
+                     NSMutableArray *friendlist = [[NSMutableArray alloc] init];
+                     NSLog(@"Found: %i friends", friends.count);
+                     for (NSDictionary<FBGraphUser>* friend in friends) {
+                         NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
+                        
+                         friendinfo* temp = [friendinfo alloc];
+                         //NSString *tempS =[NSString stringWithFormat:@""];
+                       // temp->Fid = tempS;
+                        temp->Fid = [[NSString alloc] initWithFormat:(@"%@"),friend.id];
+                        temp->Fname = [[NSString alloc] initWithFormat:(@"%@"), friend.name];
+                         [friendlist addObject:temp];
+                        // NSLog(@"iiii");
+                         
+                         
+                     }
+                     [user_data setObject:friendlist forKey:@"friends"];
+                 }];
+                 
+                 // Display the user info
+                 self.textview.text = userInfo;
+             }
+         }];
+        //store data locally
         
-        // if we don't have a cached token, a call to open here would cause UX for login to
-        // occur; we don't want that to happen unless the user clicks the login button, and so
-        // we check here to make sure we have a token before calling open
-        if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
-            // even though we had a cached token, we need to login to make the session usable
-            [appDelegate.session openWithCompletionHandler:^(FBSession *session,
-                                                             FBSessionState status,
-                                                             NSError *error) {
-                // we recurse here, in order to update buttons and labels
-                [self updateView];
-            }];
-        }
-    }
-}
-
-// FBSample logic
-// main helper method to update the UI to reflect the current state of the session.
-
-
-- (void)updateView {
-    // get the app delegate, so that we can reference the session property
-    LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    if (appDelegate.session.isOpen) {
-        // valid account UI is shown whenever the session is open
-        [self.loginbtn setTitle:@"Log out" forState:UIControlStateNormal];
-        [self.textview setText:[NSString stringWithFormat:@"https://graph.facebook.com/me/friends?access_token=%@",
-                                      appDelegate.session.accessToken]];
+        
+        ////////////
+        self.textview.hidden = NO;
     } else {
-        // login-needed account UI is shown whenever the session is closed
-        [self.loginbtn setTitle:@"Log in" forState:UIControlStateNormal];
-        [self.textview setText:@"Login to create a link to fetch account data"];
+        //NSLog(@"isOUTS");
+        [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
+        self.textview.hidden = YES;
     }
 }
 
-// FBSample logic
-// handler for button click, logs sessions in or out
 -(IBAction)click :(UIButton *)sender{
     // get the app delegate so that we can access the session property
     LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    
-    // this button's job is to flip-flop the session from open to closed
-    if (appDelegate.session.isOpen) {
-        // if a user logs out explicitly, we delete any cached token information, and next
-        // time they run the applicaiton they will be presented with log in UX again; most
-        // users will simply close the app or switch away, without logging out; this will
-        // cause the implicit cached-token login to occur on next launch of the application
-        [appDelegate.session closeAndClearTokenInformation];
-        
+    if (FBSession.activeSession.isOpen) {
+        //NSLog(@"want to log out");
+         [appDelegate closeSession];
     } else {
-        if (appDelegate.session.state != FBSessionStateCreated) {
-            // Create a new, logged out session.
-            appDelegate.session = [[FBSession alloc] init];
-        }
-        
-        // if the session isn't open, let's open it now and present the login UX to the user
-        [appDelegate.session openWithCompletionHandler:^(FBSession *session,
-                                                         FBSessionState status,
-                                                         NSError *error) {
-            // and here we make sure to update our UX according to the new session state
-            [self updateView];
-        }];
+        // The user has initiated a login, so call the openSession method
+        // and show the login UX if necessary.
+        //NSLog(@"want to log in");
+        [appDelegate openSessionWithAllowLoginUI:YES];
     }
+
+
 }
 
 
