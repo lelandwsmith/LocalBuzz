@@ -2,7 +2,7 @@
 
 #import "LoginViewController.h"
 #import "LocalBuzzAppDelegate.h"
-
+#import "AFHTTPClient.h"
 @interface LoginViewController ()
 @property (strong, nonatomic) IBOutlet UITextView *textview;
 @property (strong, nonatomic) IBOutlet UIButton *loginbtn;
@@ -45,61 +45,82 @@
         //NSLog(@"isIN");
         [self.loginbtn setTitle:@"Logout" forState:UIControlStateNormal];
         self.textview.hidden = NO;
-        NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults]; 
+        NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection,
                                            id<FBGraphUser> user,
                                            NSError *error) {
              if (!error) {
-                 NSString *userInfo = @"";
+                 NSString *username = user.name;
+                 NSString *fbId = user.id;
+                 NSString *firstName = user.first_name;
+                 NSString *lastName = user.last_name;
                  
-                 //get user name
-                 userInfo = [userInfo
-                             stringByAppendingString:
-                             [NSString stringWithFormat:@"Name: %@\n\n",
-                              user.name]];
-                 NSString* uname =user.name;
-                 [user_data setObject:uname forKey:@"name"];
-                 //get user birthday
-                 userInfo = [userInfo
-                             stringByAppendingString:
-                             [NSString stringWithFormat:@"Birthday: %@\n\n",
-                              user.birthday]];
-                 NSString* ubirthday =user.birthday;
-                 [user_data setObject:ubirthday forKey:@"birthday"];
-                 //get user location
-                 userInfo = [userInfo
-                             stringByAppendingString:
-                             [NSString stringWithFormat:@"Location: %@\n\n",
-                              [user.location objectForKey:@"name"]]];
-                 NSString* ulocation =[user.location objectForKey:@"name"];
-                 [user_data setObject:ulocation forKey:@"location"];
-                 //get friend-list
-                 FBRequest* friendsRequest = [FBRequest requestForMyFriends];
-                 [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
-                                                               NSDictionary* result,
-                                                               NSError *error) {
-                     NSArray* friends = [result objectForKey:@"data"];
-                     NSMutableArray *friendlist = [[NSMutableArray alloc] init];
-                     NSLog(@"Found: %i friends", friends.count);
-                     for (NSDictionary<FBGraphUser>* friend in friends) {
-                         NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
-                        
-                         friendinfo* temp = [friendinfo alloc];
-                         //NSString *tempS =[NSString stringWithFormat:@""];
-                       // temp->Fid = tempS;
-                        temp->Fid = [[NSString alloc] initWithFormat:(@"%@"),friend.id];
-                        temp->Fname = [[NSString alloc] initWithFormat:(@"%@"), friend.name];
-                         [friendlist addObject:temp];
-                        // NSLog(@"iiii");
-                         
-                         
-                     }
-                     [user_data setObject:friendlist forKey:@"friends"];
+                 NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
+                 AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
+                 NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                         username, @"user[username]",
+                                         firstName, @"user[first_name]",
+                                         lastName, @"user[last_name]",
+                                         fbId, @"user[fb_id]", 
+                                         nil];
+                 [httpClient postPath:@"/users.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                     self.textview.text = responseString;
+                     NSLog(@"Response: %@", responseString);
+                 }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     NSLog(@"%@", [error localizedDescription]);
                  }];
                  
+                 //NSString *userInfo = @"";
+                 
+//                 //get user name
+//                 userInfo = [userInfo
+//                             stringByAppendingString:
+//                             [NSString stringWithFormat:@"Name: %@\n\n",
+//                              user.name]];
+//                 NSString* uname =user.name;
+//                 [user_data setObject:uname forKey:@"name"];
+//                 //get user birthday
+//                 userInfo = [userInfo
+//                             stringByAppendingString:
+//                             [NSString stringWithFormat:@"Birthday: %@\n\n",
+//                              user.birthday]];
+//                 NSString* ubirthday =user.birthday;
+//                 [user_data setObject:ubirthday forKey:@"birthday"];
+//                 //get user location
+//                 userInfo = [userInfo
+//                             stringByAppendingString:
+//                             [NSString stringWithFormat:@"Location: %@\n\n",
+//                              [user.location objectForKey:@"name"]]];
+//                 NSString* ulocation =[user.location objectForKey:@"name"];
+//                 [user_data setObject:ulocation forKey:@"location"];
+//                 //get friend-list
+//                 FBRequest* friendsRequest = [FBRequest requestForMyFriends];
+//                 [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
+//                                                               NSDictionary* result,
+//                                                               NSError *error) {
+//                     NSArray* friends = [result objectForKey:@"data"];
+//                     NSMutableArray *friendlist = [[NSMutableArray alloc] init];
+//                     NSLog(@"Found: %i friends", friends.count);
+//                     for (NSDictionary<FBGraphUser>* friend in friends) {
+//                         NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
+//                        
+//                         friendinfo* temp = [friendinfo alloc];
+//                         //NSString *tempS =[NSString stringWithFormat:@""];
+//                       // temp->Fid = tempS;
+//                        temp->Fid = [[NSString alloc] initWithFormat:(@"%@"),friend.id];
+//                        temp->Fname = [[NSString alloc] initWithFormat:(@"%@"), friend.name];
+//                         [friendlist addObject:temp];
+//                        // NSLog(@"iiii");
+//                         
+//                         
+//                     }
+//                     [user_data setObject:friendlist forKey:@"friends"];
+//                 }];
+                 
                  // Display the user info
-                 self.textview.text = userInfo;
+                 //self.textview.text = userInfo;
              }
          }];
         //store data locally
