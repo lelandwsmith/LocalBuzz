@@ -24,6 +24,7 @@
 		BF2591841636547C006E895E /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2591791636547B006E895E /* AFURLConnectionOperation.m */; };
 		BF2591851636547C006E895E /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BF25917B1636547B006E895E /* AFXMLRequestOperation.m */; };
 		BF2591861636547C006E895E /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = BF25917D1636547B006E895E /* UIImageView+AFNetworking.m */; };
+		BF25918816365A17006E895E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF25918716365A17006E895E /* SystemConfiguration.framework */; };
 		BF5B428B161A3ACB002C67D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5B428A161A3ACB002C67D1 /* UIKit.framework */; };
 		BF5B428D161A3ACB002C67D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5B428C161A3ACB002C67D1 /* Foundation.framework */; };
 		BF5B428F161A3ACB002C67D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5B428E161A3ACB002C67D1 /* CoreGraphics.framework */; };
@@ -72,6 +73,7 @@
 		BF25917B1636547B006E895E /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		BF25917C1636547B006E895E /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		BF25917D1636547B006E895E /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		BF25918716365A17006E895E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BF5B4286161A3ACB002C67D1 /* LocalBuzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalBuzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5B428A161A3ACB002C67D1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BF5B428C161A3ACB002C67D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -97,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF25918816365A17006E895E /* SystemConfiguration.framework in Frameworks */,
 				8FCB0E07161A6EE50026AACB /* Social.framework in Frameworks */,
 				8FCB0E05161A6ED50026AACB /* Accounts.framework in Frameworks */,
 				8FCB0E03161A6ECE0026AACB /* AdSupport.framework in Frameworks */,
@@ -157,6 +160,7 @@
 		BF5B4289161A3ACB002C67D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF25918716365A17006E895E /* SystemConfiguration.framework */,
 				BF25916416364E40006E895E /* FacebookSDK.framework */,
 				8FCB0E06161A6EE50026AACB /* Social.framework */,
 				8FCB0E04161A6ED50026AACB /* Accounts.framework */,
