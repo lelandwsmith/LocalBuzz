@@ -56,7 +56,7 @@
                  NSString *firstName = user.first_name;
                  NSString *lastName = user.last_name;
                  
-                 NSURL *createUserURL = [NSURL URLWithString:@"http://localhost:3000/"];
+                 NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
                  AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
                  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                          username, @"user[username]",
