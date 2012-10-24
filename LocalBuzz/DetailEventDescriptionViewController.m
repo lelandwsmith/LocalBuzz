@@ -82,13 +82,15 @@
 	//self.EventMapView.mapType = MKMapTypeSatellite;
 	//self.EventMapView.mapType = MKMapTypeHybrid;
 	
+	/*
+	// Add pin to some point
 	CLLocationCoordinate2D location;
 	location.latitude = 37.78608;
 	location.longitude = -122.405398;
+	MapViewAnnotation * mapAnnotation = [[MapViewAnnotation alloc] initWithTitle:@"Custom Annotation" coordinate:location];
+	[self.EventMapView addAnnotation:mapAnnotation];
 	
-	//MapViewAnnotation * mapAnnotation = [[MapViewAnnotation alloc] initWithTitle:@"Custom Annotation" coordinate:location];
-	//[self.EventMapView addAnnotation:mapAnnotation];
-	
+	// Draw line here
 	CLLocationCoordinate2D commuterLotCoords[4] = {
 		CLLocationCoordinate2DMake(37.78688, -122.405398),
 		CLLocationCoordinate2DMake(37.785012, -122.406428),
@@ -98,7 +100,7 @@
 	
 	MKPolygon * poly = [MKPolygon polygonWithCoordinates:commuterLotCoords count:4];
 	[self.EventMapView addOverlay:poly];
-	
+	*/
 	
 }
 

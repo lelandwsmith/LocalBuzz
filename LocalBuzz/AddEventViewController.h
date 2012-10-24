@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface AddEventViewController : UIViewController
+@interface AddEventViewController : UIViewController< CLLocationManagerDelegate, MKMapViewDelegate> {
+	
+}
+@property (weak, nonatomic) IBOutlet MKMapView *NewEventMapView;
+@property (weak, nonatomic) CLLocationManager *locationManager;
 
 @end

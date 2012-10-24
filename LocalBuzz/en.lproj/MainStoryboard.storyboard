@@ -199,6 +199,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Event" id="OD0-cq-zwL"/>
+                    <connections>
+                        <outlet property="NewEventMapView" destination="2w8-2b-dE1" id="9Y5-us-hQF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JWI-Dr-UEU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -295,33 +298,13 @@
             <point key="canvasLocation" x="1044" y="449"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="AddEventViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
-        </class>
-        <class className="CurrentEventViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CurrentEventViewController.h"/>
-        </class>
-        <class className="DetailEventDescriptionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailEventDescriptionViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="EventMapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="PastEventViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PastEventViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="U7Z-Kl-VTz"/>
         <segue reference="FUH-fm-Xxl"/>
-        <segue reference="6bz-FV-wFC"/>
     </inferredMetricsTieBreakers>
 </document>
