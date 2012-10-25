@@ -2,37 +2,37 @@
 //  AddEventViewController.m
 //  LocalBuzz
 //
-//  Created by Amanda Le on 10/24/12.
+//  Created by Vincent Leung on 10/24/12.
 //  Copyright (c) 2012 Vincent Leung. All rights reserved.
 //
 
 #import "AddEventViewController.h"
+#import "TimePickerViewController.h"
 
 @interface AddEventViewController ()
 
 @end
 
 @implementation AddEventViewController
+@synthesize titleField;
+@synthesize locationCell;
+@synthesize timeCell;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+- (IBAction)cancelPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)createPressed:(id)sender {
+    
+}
+
+- (IBAction)done:(UIStoryboardSegue *)segue {
+    if ([[segue identifier] isEqualToString:@"SelectTime"]) {
+        TimePickerViewController *timePicker = [segue sourceViewController];
+        NSDate *selectedDate = timePicker.timePicker.date;
+        self.timeCell.detailTextLabel.text = selectedDate.description;
     }
-    return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
