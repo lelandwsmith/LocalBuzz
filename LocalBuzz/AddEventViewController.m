@@ -15,9 +15,9 @@
 @end
 
 @implementation AddEventViewController
-@synthesize titleField;
-@synthesize locationCell;
-@synthesize timeCell;
+//@synthesize titleField;
+//@synthesize locationCell;
+//@synthesize timeCell;
 
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -30,7 +30,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
     NSLog(@"%@", [selectedDate description]);
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            titleField.text, @"event[title]",
+                            self.titleField.text, @"event[title]",
                             [dateFormatter stringFromDate:selectedDate], @"event[time]",
                             nil];
     [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -58,7 +58,7 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        NSDate *selectedDate = [dateFormatter dateFromString:self.timeCell.detailTextLabel.text];
+        selectedDate = [dateFormatter dateFromString:self.timeCell.detailTextLabel.text];
         TimePickerViewController *timePickerController = segue.destinationViewController;
         timePickerController.timePicker.date = selectedDate;
     }

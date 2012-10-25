@@ -7,7 +7,7 @@
 //
 
 #import "PastEventViewController.h"
-#import "DetailEventDescriptionViewController.h"
+#import "EventDetailViewController.h"
 
 @interface PastEventViewController ()
 
@@ -131,13 +131,13 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-  [self performSegueWithIdentifier:@"showDetailEvent" sender:self];
+  [self performSegueWithIdentifier:@"showEventDetail" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-  if ([segue.identifier isEqualToString:@"showDetailEvent"]) {
-    [segue.destinationViewController setNum:100];
+  if ([segue.identifier isEqualToString:@"showEventDetail"]) {
+    //[segue.destinationViewController setNum:100];
   }
 }
 

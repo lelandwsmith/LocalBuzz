@@ -7,15 +7,21 @@
 //
 
 #import "CurrentEventViewController.h"
-#import "DetailEventDescriptionViewController.h"
+#import "EventDetailViewController.h"
 #import "AFHTTPClient.h"
+#import "Event.h"
+#import "EventDataController.h"
 
 @interface CurrentEventViewController ()
 
 @end
 
 @implementation CurrentEventViewController
-@synthesize currentEventTitles = _currentEventTitles;
+
+- (void) awakeFromNib {
+    [super awakeFromNib];
+    self.dataController = [[EventDataController alloc] init];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,14 +44,19 @@
     NSURL *url = [NSURL URLWithString:@"http://localhost:3000"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     [httpClient getPath:@"events.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Response: %@", responseString);
         NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"%@", events);
+        NSEnumerator *enumerator = [events objectEnumerator];
+        id value;
+        while (value = [enumerator nextObject]) {
+            NSLog(@"%@", self);
+            Event *eventToBeAdded = [[Event alloc] initWithDictionary:value];
+            [self.dataController addEventToEventList:eventToBeAdded];
+        }
+        [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
     }];
-    self.currentEventTitles = [[NSArray alloc] initWithObjects:@"Current1", @"Current2", @"Current3", nil];
+    
 }
 
 - (void)viewDidUnload
@@ -53,7 +64,7 @@
   [super viewDidUnload];
   // Release any retained subviews of the main view.
   // e.g. self.myOutlet = nil;
-  self.currentEventTitles = nil;
+  //self.currentEventTitles = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,33 +84,34 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   // Return the number of rows in the section.
-  return [self.currentEventTitles count];
+    NSLog(@"%@", self);
+    return [self.dataController countOfEventList];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *CellIdentifier = @"currentEventTableCell";
+    static NSString *CellIdentifier = @"CurrentEventTableCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  }
-  
-  // Configure the cell...
-  cell.textLabel.text = [self.currentEventTitles objectAtIndex:[indexPath row]];
-  
-  return cell;
+    // Configure the cell...
+    //cell.textLabel.text = [self.currentEventTitles objectAtIndex:[indexPath row]];
+    cell.textLabel.text = [self.dataController objectInEventListAtIndex:[indexPath row]].title;
+    return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
-*/
+
 
 /*
 // Override to support editing the table view.
@@ -142,13 +154,15 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-  [self performSegueWithIdentifier:@"showDetailEvent" sender:self];
+    [self performSegueWithIdentifier:@"ShowEventDetail" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-  if ([segue.identifier isEqualToString:@"showDetailEvent"]) {
-    [segue.destinationViewController setNum:100];
+  if ([segue.identifier isEqualToString:@"ShowEventDetail"]) {
+      EventDetailViewController *eventDetailController = [segue destinationViewController];
+      NSLog(@"%@", eventDetailController.titleLabel.text);
+      eventDetailController.event = [self.dataController objectInEventListAtIndex:[self.tableView indexPathForSelectedRow].row];
   }
 }
 
