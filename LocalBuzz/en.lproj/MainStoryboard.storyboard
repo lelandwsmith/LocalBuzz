@@ -205,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JWI-Dr-UEU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1212" y="-249"/>
+            <point key="canvasLocation" x="1068" y="-292"/>
         </scene>
         <!--Detail Event Description View Controller - Detail-->
         <scene sceneID="ti1-n9-ihz">
@@ -295,9 +295,32 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mW-yj-ACC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1044" y="449"/>
+            <point key="canvasLocation" x="1068" y="465"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="AddEventViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="NewEventMapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="CurrentEventViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CurrentEventViewController.h"/>
+        </class>
+        <class className="DetailEventDescriptionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailEventDescriptionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="EventMapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PastEventViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PastEventViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

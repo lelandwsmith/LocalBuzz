@@ -36,10 +36,11 @@
 	
 	self.locationManager = [[CLLocationManager alloc] init];
 	[self.locationManager setDelegate:self];
-	
 	[self.locationManager setDistanceFilter:kCLDistanceFilterNone];
 	[self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+	[self.locationManager startUpdatingLocation];
 	
+	// Zoom in to current location and show with the blue dot
 	[self.NewEventMapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 	self.NewEventMapView.showsUserLocation = YES;
 	

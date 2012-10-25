@@ -22,6 +22,8 @@
 		BF5B42B0161A3ACB002C67D1 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42AF161A3ACB002C67D1 /* second.png */; };
 		BF5B42B2161A3ACB002C67D1 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42B1161A3ACB002C67D1 /* second@2x.png */; };
 		D551A290163889BE009B0953 /* AddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D551A28F163889BE009B0953 /* AddEventViewController.m */; };
+		D551A2991638D7D9009B0953 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D551A2981638D7D9009B0953 /* libicucore.A.dylib */; };
+		D599170A1639F29200F4A21F /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = D59917091639F29200F4A21F /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
 		D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363D61635756400FE3E1C /* CoreLocation.framework */; };
 		D5C363DB16357A4F00FE3E1C /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */; };
@@ -51,6 +53,9 @@
 		BF5B42B1161A3ACB002C67D1 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		D551A28E163889BE009B0953 /* AddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventViewController.h; sourceTree = "<group>"; };
 		D551A28F163889BE009B0953 /* AddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventViewController.m; sourceTree = "<group>"; };
+		D551A2981638D7D9009B0953 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
+		D59917081639F29200F4A21F /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegexKitLite.h; path = ../RegexKitLite/RegexKitLite.h; sourceTree = "<group>"; };
+		D59917091639F29200F4A21F /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegexKitLite.m; path = ../RegexKitLite/RegexKitLite.m; sourceTree = "<group>"; };
 		D5C363C7163441E600FE3E1C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D5C363D61635756400FE3E1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D5C363D916357A4F00FE3E1C /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
@@ -68,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D551A2991638D7D9009B0953 /* libicucore.A.dylib in Frameworks */,
 				D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */,
 				D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */,
 				BF5B428B161A3ACB002C67D1 /* UIKit.framework in Frameworks */,
@@ -82,6 +88,7 @@
 		BF5B427B161A3ACB002C67D1 = {
 			isa = PBXGroup;
 			children = (
+				D551A2981638D7D9009B0953 /* libicucore.A.dylib */,
 				BF5B4290161A3ACB002C67D1 /* LocalBuzz */,
 				BF5B4289161A3ACB002C67D1 /* Frameworks */,
 				BF5B4287161A3ACB002C67D1 /* Products */,
@@ -124,6 +131,8 @@
 				D5CE3F13161A571600CA3A96 /* PastEventViewController.m */,
 				D5CE3F1A161A5B8F00CA3A96 /* CurrentEventViewController.h */,
 				D5CE3F1B161A5B8F00CA3A96 /* CurrentEventViewController.m */,
+				D59917081639F29200F4A21F /* RegexKitLite.h */,
+				D59917091639F29200F4A21F /* RegexKitLite.m */,
 				BF5B42A8161A3ACB002C67D1 /* first.png */,
 				BF5B42AA161A3ACB002C67D1 /* first@2x.png */,
 				BF5B42AF161A3ACB002C67D1 /* second.png */,
@@ -225,6 +234,7 @@
 				D5CE3F1F161A611E00CA3A96 /* DetailEventDescriptionViewController.m in Sources */,
 				D5C363DB16357A4F00FE3E1C /* MapViewAnnotation.m in Sources */,
 				D551A290163889BE009B0953 /* AddEventViewController.m in Sources */,
+				D599170A1639F29200F4A21F /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
