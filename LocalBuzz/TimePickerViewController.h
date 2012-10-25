@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TimePickerViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
+@property (strong, nonatomic) IBOutlet UIDatePicker *timePicker;
 
 @end

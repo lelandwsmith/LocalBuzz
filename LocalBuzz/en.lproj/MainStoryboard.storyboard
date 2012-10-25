@@ -302,15 +302,16 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xg2-Be-aRk">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xg2-Be-aRk">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="aGB-CT-l0K"/>
                                 </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="372818443.53310698">
                                     <!--2012-10-25 00:40:43 +0000-->
                                 </date>
+                                <locale key="locale" localeIdentifier="en"/>
                                 <timeZone key="timeZone" name="America/Los_Angeles">
-                                    <mutableData key="data">
+                                    <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -328,21 +329,21 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                 </timeZone>
                             </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Xg2-Be-aRk" firstAttribute="trailing" secondItem="VbI-kx-ccQ" secondAttribute="trailing" type="default" id="YNU-oD-CZw"/>
-                            <constraint firstItem="Xg2-Be-aRk" firstAttribute="bottom" secondItem="VbI-kx-ccQ" secondAttribute="bottom" type="default" id="b3R-3r-aus"/>
-                            <constraint firstItem="Xg2-Be-aRk" firstAttribute="leading" secondItem="VbI-kx-ccQ" secondAttribute="leading" type="default" id="b93-7w-T8S"/>
+                            <constraint firstItem="Xg2-Be-aRk" firstAttribute="bottom" secondItem="VbI-kx-ccQ" secondAttribute="bottom" type="default" id="4wN-PD-1yp"/>
+                            <constraint firstItem="Xg2-Be-aRk" firstAttribute="leading" secondItem="VbI-kx-ccQ" secondAttribute="leading" type="default" id="6Do-NC-oZz"/>
+                            <constraint firstItem="Xg2-Be-aRk" firstAttribute="trailing" secondItem="VbI-kx-ccQ" secondAttribute="trailing" type="default" id="pj4-8t-d4s"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Time" id="rXY-JJ-6z3">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="r08-P5-p0G">
                             <connections>
-                                <segue destination="oAO-zC-AQA" kind="unwind" identifier="SelectTime" unwindAction="done:" id="2jT-jQ-1aV"/>
+                                <segue destination="oAO-zC-AQA" kind="unwind" identifier="ReturnTime" unwindAction="done:" id="2jT-jQ-1aV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

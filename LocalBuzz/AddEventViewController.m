@@ -8,9 +8,10 @@
 
 #import "AddEventViewController.h"
 #import "TimePickerViewController.h"
-
-@interface AddEventViewController ()
-
+#import "AFHTTPClient.h"
+@interface AddEventViewController () {
+@private NSDate *selectedDate;
+}
 @end
 
 @implementation AddEventViewController
@@ -23,14 +24,43 @@
 }
 
 - (IBAction)createPressed:(id)sender {
-    
+    NSURL *createUserURL = [NSURL URLWithString:@"http://localhost:3000/"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
+    NSLog(@"%@", [selectedDate description]);
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            titleField.text, @"event[title]",
+                            [dateFormatter stringFromDate:selectedDate], @"event[time]",
+                            nil];
+    [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Response: %@", responseString);
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", [error localizedDescription]);
+    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)done:(UIStoryboardSegue *)segue {
-    if ([[segue identifier] isEqualToString:@"SelectTime"]) {
+    if ([[segue identifier] isEqualToString:@"ReturnTime"]) {
         TimePickerViewController *timePicker = [segue sourceViewController];
-        NSDate *selectedDate = timePicker.timePicker.date;
-        self.timeCell.detailTextLabel.text = selectedDate.description;
+        selectedDate = timePicker.timePicker.date;
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        self.timeCell.detailTextLabel.text = [dateFormatter stringFromDate:selectedDate];
+    }
+}
+
+- (IBAction)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"SelectTime"]) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        NSDate *selectedDate = [dateFormatter dateFromString:self.timeCell.detailTextLabel.text];
+        TimePickerViewController *timePickerController = segue.destinationViewController;
+        timePickerController.timePicker.date = selectedDate;
     }
 }
 
