@@ -7,14 +7,64 @@
 //
 
 #import "LocalBuzzAppDelegate.h"
+//#import "LoginViewController.h"
+#import "CurrentEventViewController.h"
+#import "SettingsViewController.h"
+
+@interface LocalBuzzAppDelegate ()
+
+@property (strong, nonatomic) UINavigationController *navController;
+@property (strong, nonatomic)  UITabBarController *mainViewController;
+@property (strong, nonatomic) LoginViewController* loginViewController;
+@property (strong, nonatomic) SettingsViewController* logoutViewController;
+
+-(void)showLoginView;
+- (void)showLogoutView;
+
+@end
 
 @implementation LocalBuzzAppDelegate
+@synthesize navController = _navController;
+@synthesize mainViewController = _mainViewController;
+@synthesize loginViewController = _loginViewController;
+@synthesize logoutViewController = _logoutViewController;
 NSString *const FBSessionStateChangedNotification =
 @"com.example.Login:FBSessionStateChangedNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                  bundle:nil];
+    self.mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
+
+    self.navController = [[UINavigationController alloc]
+                          initWithRootViewController:self.mainViewController];
+    self.window.rootViewController = self.navController;
+    [self.window makeKeyAndVisible];
+    if (![self openSessionWithAllowLoginUI:NO]) {
+        // No? Display the login page.
+        [self showLoginView];
+    }
     return YES;
+}
+
+- (void)showLoginView
+{
+    UIViewController *topViewController = [self.navController topViewController];
+    UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                          bundle:nil];
+    LoginViewController* loginViewController =
+    [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [topViewController presentModalViewController:loginViewController animated:NO];
+}
+
+-(void)showLogoutView
+{
+    UIViewController *topViewController = [self.navController topViewController];
+    UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                          bundle:nil];
+    SettingsViewController* logoutViewController =
+    [storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+    [topViewController presentModalViewController:logoutViewController animated:NO];
 }
 
 - (void) closeSession {
@@ -50,16 +100,21 @@ NSString *const FBSessionStateChangedNotification =
                       error:(NSError *)error
 {
     switch (state) {
-        case FBSessionStateOpen:
-            if (!error) {
-                // We have a valid session
-                NSLog(@"User session found");
-            }
+        case FBSessionStateOpen:{
+            UIViewController *topViewController = [self.navController topViewController];
+            [topViewController dismissViewControllerAnimated:YES completion:nil];
+            self.loginViewController = nil;
+        }
             break;
         case FBSessionStateClosed:
-        case FBSessionStateClosedLoginFailed:
+        case FBSessionStateClosedLoginFailed:{
+            [self.navController popToRootViewControllerAnimated:NO];
+            
             [FBSession.activeSession closeAndClearTokenInformation];
+            
+            [self showLoginView];
             break;
+        }
         default:
             break;
     }

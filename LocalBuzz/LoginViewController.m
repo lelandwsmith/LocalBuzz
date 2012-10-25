@@ -7,6 +7,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *textview;
 @property (strong, nonatomic) IBOutlet UIButton *loginbtn;
 
+    
 
 - (IBAction)click :(UIButton *)sender;
 - (void)updateView;
@@ -25,6 +26,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
 	// Do any additional setup after loading the view, typically from a nib.
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -45,7 +47,7 @@
         //NSLog(@"isIN");
         [self.loginbtn setTitle:@"Logout" forState:UIControlStateNormal];
         self.textview.hidden = NO;
-        NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
+     //   NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection,
                                            id<FBGraphUser> user,
@@ -129,7 +131,7 @@
         ////////////
         self.textview.hidden = NO;
     } else {
-        //NSLog(@"isOUTS");
+        //NSLog(@"isOUTS1");
         [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
         self.textview.hidden = YES;
     }

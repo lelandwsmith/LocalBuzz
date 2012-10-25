@@ -10,6 +10,7 @@
 		8F02CCBF1620BD5100719F69 /* CurrentEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */; };
 		8F02CCC01620BD5100719F69 /* DetailEventDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBC1620BD5100719F69 /* DetailEventDescriptionViewController.m */; };
 		8F02CCC11620BD5100719F69 /* PastEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBE1620BD5100719F69 /* PastEventViewController.m */; };
+		8F18F7931638BE0A0091458A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F18F7921638BE0A0091458A /* SettingsViewController.m */; };
 		8FCB0E03161A6ECE0026AACB /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E02161A6ECE0026AACB /* AdSupport.framework */; };
 		8FCB0E05161A6ED50026AACB /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E04161A6ED50026AACB /* Accounts.framework */; };
 		8FCB0E07161A6EE50026AACB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E06161A6EE50026AACB /* Social.framework */; };
@@ -42,12 +43,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8F02CCB91620BD5100719F69 /* CurrentEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentEventViewController.h; sourceTree = "<group>"; };
 		8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentEventViewController.m; sourceTree = "<group>"; };
 		8F02CCBB1620BD5100719F69 /* DetailEventDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailEventDescriptionViewController.h; sourceTree = "<group>"; };
 		8F02CCBC1620BD5100719F69 /* DetailEventDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailEventDescriptionViewController.m; sourceTree = "<group>"; };
 		8F02CCBD1620BD5100719F69 /* PastEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastEventViewController.h; sourceTree = "<group>"; };
 		8F02CCBE1620BD5100719F69 /* PastEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastEventViewController.m; sourceTree = "<group>"; };
+		8F18F7911638BE0A0091458A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		8F18F7921638BE0A0091458A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		8F1916F41638B951005EB9D6 /* CurrentEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentEventViewController.h; sourceTree = "<group>"; };
 		8FCB0E02161A6ECE0026AACB /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		8FCB0E04161A6ED50026AACB /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8FCB0E06161A6EE50026AACB /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -175,10 +178,12 @@
 		BF5B4290161A3ACB002C67D1 /* LocalBuzz */ = {
 			isa = PBXGroup;
 			children = (
+				8F18F7911638BE0A0091458A /* SettingsViewController.h */,
+				8F18F7921638BE0A0091458A /* SettingsViewController.m */,
 				BF5B4299161A3ACB002C67D1 /* LocalBuzzAppDelegate.h */,
 				BF5B429A161A3ACB002C67D1 /* LocalBuzzAppDelegate.m */,
 				BF5B42A2161A3ACB002C67D1 /* MainStoryboard.storyboard */,
-				8F02CCB91620BD5100719F69 /* CurrentEventViewController.h */,
+				8F1916F41638B951005EB9D6 /* CurrentEventViewController.h */,
 				8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */,
 				8F02CCBB1620BD5100719F69 /* DetailEventDescriptionViewController.h */,
 				8F02CCBC1620BD5100719F69 /* DetailEventDescriptionViewController.m */,
@@ -295,6 +300,7 @@
 				BF2591841636547C006E895E /* AFURLConnectionOperation.m in Sources */,
 				BF2591851636547C006E895E /* AFXMLRequestOperation.m in Sources */,
 				BF2591861636547C006E895E /* UIImageView+AFNetworking.m in Sources */,
+				8F18F7931638BE0A0091458A /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
