@@ -8,6 +8,7 @@
 
 #import "CurrentEventViewController.h"
 #import "DetailEventDescriptionViewController.h"
+#import "AFHTTPClient.h"
 
 @interface CurrentEventViewController ()
 
@@ -34,6 +35,16 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSURL *url = [NSURL URLWithString:@"http://localhost:3000"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    [httpClient getPath:@"events.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Response: %@", responseString);
+        NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@", events);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", [error localizedDescription]);
+    }];
     self.currentEventTitles = [[NSArray alloc] initWithObjects:@"Current1", @"Current2", @"Current3", nil];
 }
 
