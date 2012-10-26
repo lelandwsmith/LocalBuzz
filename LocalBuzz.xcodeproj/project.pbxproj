@@ -48,6 +48,7 @@
 		BFD323C11639CC9900FE6819 /* EventDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323C01639CC9900FE6819 /* EventDataController.m */; };
 		BFD323CB1639FA7800FE6819 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */; };
 		D599171C163A269200F4A21F /* LocationSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D599171B163A269200F4A21F /* LocationSelectionViewController.m */; };
+		D599173A163A3A9B00F4A21F /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5991739163A3A9B00F4A21F /* MapView.m */; };
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
 		D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363D61635756400FE3E1C /* CoreLocation.framework */; };
 		D5C363DB16357A4F00FE3E1C /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */; };
@@ -122,6 +123,8 @@
 		BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 		D599171A163A269200F4A21F /* LocationSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSelectionViewController.h; sourceTree = "<group>"; };
 		D599171B163A269200F4A21F /* LocationSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSelectionViewController.m; sourceTree = "<group>"; };
+		D5991738163A3A9B00F4A21F /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
+		D5991739163A3A9B00F4A21F /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		D5C363C7163441E600FE3E1C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D5C363D61635756400FE3E1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D5C363D916357A4F00FE3E1C /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
@@ -216,27 +219,18 @@
 		BF5B4290161A3ACB002C67D1 /* LocalBuzz */ = {
 			isa = PBXGroup;
 			children = (
-				8F18F7911638BE0A0091458A /* SettingsViewController.h */,
-				8F18F7921638BE0A0091458A /* SettingsViewController.m */,
-				BFD323BB1639C4F500FE6819 /* Event.h */,
-				BFD323BC1639C4F500FE6819 /* Event.m */,
-				BFD323C91639FA7800FE6819 /* EventDetailViewController.h */,
-				BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */,
-				BFD323BF1639CC9900FE6819 /* EventDataController.h */,
-				BFD323C01639CC9900FE6819 /* EventDataController.m */,
-				BF2591C81638AA74006E895E /* AddEventViewController.h */,
-				BF2591C91638AA74006E895E /* AddEventViewController.m */,
 				BF5B4299161A3ACB002C67D1 /* LocalBuzzAppDelegate.h */,
 				BF5B429A161A3ACB002C67D1 /* LocalBuzzAppDelegate.m */,
 				BF5B42A2161A3ACB002C67D1 /* MainStoryboard.storyboard */,
-				D599171A163A269200F4A21F /* LocationSelectionViewController.h */,
-				D599171B163A269200F4A21F /* LocationSelectionViewController.m */,
-				8F1916F41638B951005EB9D6 /* CurrentEventViewController.h */,
-				8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */,
-				8F02CCBD1620BD5100719F69 /* PastEventViewController.h */,
-				8F02CCBE1620BD5100719F69 /* PastEventViewController.m */,
-				BFD323231638C27F00FE6819 /* TimePickerViewController.h */,
-				BFD323241638C27F00FE6819 /* TimePickerViewController.m */,
+				D5E94074163B20CF00788C15 /* Setting */,
+				D5E94073163B208A00788C15 /* EventNew */,
+				D5E94072163B207400788C15 /* LogIn */,
+				D5E94071163B204400788C15 /* EventList */,
+				D5E94070163B201C00788C15 /* EventDetail */,
+				BFD323BB1639C4F500FE6819 /* Event.h */,
+				BFD323BC1639C4F500FE6819 /* Event.m */,
+				BFD323BF1639CC9900FE6819 /* EventDataController.h */,
+				BFD323C01639CC9900FE6819 /* EventDataController.m */,
 				D5C363D916357A4F00FE3E1C /* MapViewAnnotation.h */,
 				D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */,
 				BF2AE0D2163A08E90098A8C9 /* RegexKitLite.h */,
@@ -245,8 +239,6 @@
 				BF5B42AA161A3ACB002C67D1 /* first@2x.png */,
 				BF5B42AF161A3ACB002C67D1 /* second.png */,
 				BF5B42B1161A3ACB002C67D1 /* second@2x.png */,
-				8FCB0E3F161CAE810026AACB /* LoginViewController.h */,
-				8FCB0E40161CAE810026AACB /* LoginViewController.m */,
 				BF5B4291161A3ACB002C67D1 /* Supporting Files */,
 			);
 			path = LocalBuzz;
@@ -264,6 +256,59 @@
 				BF5B42A0161A3ACB002C67D1 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D5E94070163B201C00788C15 /* EventDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D5991738163A3A9B00F4A21F /* MapView.h */,
+				D5991739163A3A9B00F4A21F /* MapView.m */,
+				BFD323C91639FA7800FE6819 /* EventDetailViewController.h */,
+				BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */,
+			);
+			name = EventDetail;
+			sourceTree = "<group>";
+		};
+		D5E94071163B204400788C15 /* EventList */ = {
+			isa = PBXGroup;
+			children = (
+				8F1916F41638B951005EB9D6 /* CurrentEventViewController.h */,
+				8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */,
+				8F02CCBD1620BD5100719F69 /* PastEventViewController.h */,
+				8F02CCBE1620BD5100719F69 /* PastEventViewController.m */,
+			);
+			name = EventList;
+			sourceTree = "<group>";
+		};
+		D5E94072163B207400788C15 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				8FCB0E3F161CAE810026AACB /* LoginViewController.h */,
+				8FCB0E40161CAE810026AACB /* LoginViewController.m */,
+			);
+			name = LogIn;
+			sourceTree = "<group>";
+		};
+		D5E94073163B208A00788C15 /* EventNew */ = {
+			isa = PBXGroup;
+			children = (
+				BF2591C81638AA74006E895E /* AddEventViewController.h */,
+				BF2591C91638AA74006E895E /* AddEventViewController.m */,
+				D599171A163A269200F4A21F /* LocationSelectionViewController.h */,
+				D599171B163A269200F4A21F /* LocationSelectionViewController.m */,
+				BFD323231638C27F00FE6819 /* TimePickerViewController.h */,
+				BFD323241638C27F00FE6819 /* TimePickerViewController.m */,
+			);
+			name = EventNew;
+			sourceTree = "<group>";
+		};
+		D5E94074163B20CF00788C15 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				8F18F7911638BE0A0091458A /* SettingsViewController.h */,
+				8F18F7921638BE0A0091458A /* SettingsViewController.m */,
+			);
+			name = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,6 +408,7 @@
 				BF2AE138163A176F0098A8C9 /* AFXMLRequestOperation.m in Sources */,
 				BF2AE139163A176F0098A8C9 /* UIImageView+AFNetworking.m in Sources */,
 				D599171C163A269200F4A21F /* LocationSelectionViewController.m in Sources */,
+				D599173A163A3A9B00F4A21F /* MapView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

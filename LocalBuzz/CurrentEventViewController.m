@@ -41,18 +41,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self updateEvents];
-}
-
-- (IBAction)eventCreated:(UIStoryboardSegue *)segue {
-    if ([[segue identifier] isEqualToString:@"EventCreated"]) {
-        [self updateEvents];
-    }
-}
-
-- (void)updateEvents {
-    [self.dataController emptyEventList];
-    NSURL *url = [NSURL URLWithString:@"http://localhost:3000"];
+    NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     [httpClient getPath:@"events.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
