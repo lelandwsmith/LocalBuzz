@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddEventViewController : UITableViewController
+@interface AddEventViewController : UITableViewController <UITextFieldDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITableViewCell *latitudeCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *timeCell;

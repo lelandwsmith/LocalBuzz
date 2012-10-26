@@ -81,5 +81,19 @@
     }
 }
 
+- (void) viewDidLoad {
+    self.titleField.delegate = self;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.tableView addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void) hideKeyboard {
+    [self.titleField resignFirstResponder];
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    return [textField resignFirstResponder];
+}
+
 
 @end
