@@ -21,6 +21,7 @@
 @synthesize locationLabel = _locationLabel;
 @synthesize mapLable = _mapLable;
 
+
 - (void) setEvent:(Event *)event {
     if (_event != event) {
         _event = event;
@@ -28,12 +29,23 @@
     }
 }
 
+- (CLLocationManager *) locationManager {
+    if (_locationManager == nil) {
+        _locationManager = [[CLLocationManager alloc] init];
+        if ([CLLocationManager locationServicesEnabled]) {
+            _locationManager.delegate = self;
+            _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+            _locationManager.distanceFilter = kCLDistanceFilterNone;
+        }
+    }
+    return _locationManager;
+}
+
 - (void) configureView {
 	Event *theEvent = self.event;
 	if (theEvent) {
 		[self setUpMap:theEvent.latitude :theEvent.longitude];
 		
-		NSLog(@"%@", self.titleLabel.text);
 		self.titleLabel.text = theEvent.title;
 		self.descriptionLabel.text = theEvent.detailDescription;
 		
@@ -54,7 +66,8 @@
 	[self.mapLable addSubview:mapView];
 	
 	// Fake the data of the start location
-	CLLocationCoordinate2D startCoordinate = CLLocationCoordinate2DMake([destLat doubleValue], [destLon doubleValue]);
+	CLLocationCoordinate2D startCoordinate = [self.locationManager.location coordinate];
+    NSLog(@"%f, %f", startCoordinate.latitude, startCoordinate.longitude);
 	MapViewAnnotation *startAnnotation = [[MapViewAnnotation alloc] initWithTitle:@"Start" coordinate:startCoordinate];
 	
 	// Fake the data of destination location
@@ -64,9 +77,18 @@
 	[mapView showRouteFrom:startAnnotation to:endAnnotation];
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    [self configureView];
+    [self.locationManager stopUpdatingLocation];
+}
+
+- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"%@", [error localizedDescription]);
+    [self.locationManager stopUpdatingLocation];
+}
 - (void) viewDidLoad {
     [super viewDidLoad];
-    [self configureView];
+    [self.locationManager startUpdatingLocation];
 }
 
 @end

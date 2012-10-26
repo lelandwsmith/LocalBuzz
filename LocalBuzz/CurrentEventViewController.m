@@ -67,7 +67,7 @@
             Event *eventToBeAdded = [[Event alloc] initWithDictionary:value];
             [self.dataController addEventToEventList:eventToBeAdded];
         }
-        NSLog(@"%@", events);
+        NSLog(@"%d", [events count]);
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
