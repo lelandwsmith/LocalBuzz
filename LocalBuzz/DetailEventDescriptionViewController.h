@@ -7,20 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
+#import "MapView.h"
 #import "MapViewAnnotation.h"
 
-@interface DetailEventDescriptionViewController : UIViewController<CLLocationManagerDelegate, MKMapViewDelegate> {
+@interface DetailEventDescriptionViewController : UIViewController{
 	
 }
 @property (nonatomic) int num;
-
-@property (strong, nonatomic) IBOutlet MKMapView *EventMapView;
-@property (weak, nonatomic) CLLocationManager *locationManager;
-@property (weak, nonatomic) NSArray *routes;
-@property (weak, nonatomic) UIImageView *routeView;
-
--(void) showRouteFrom: (MapViewAnnotation*) f to:(MapViewAnnotation*) t;
 
 @end

@@ -257,26 +257,18 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="M6C-1p-dXr">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="190" id="a68-Ps-qmI"/>
-                                        </constraints>
-                                    </mapView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="rLC-qJ-3TC" firstAttribute="trailing" secondItem="wN4-c2-lsU" secondAttribute="trailing" type="default" id="Lqy-PB-mTr"/>
                                     <constraint firstItem="rLC-qJ-3TC" firstAttribute="leading" secondItem="wN4-c2-lsU" secondAttribute="leading" type="default" id="Ppd-9v-WEc"/>
                                     <constraint firstAttribute="bottom" secondItem="rLC-qJ-3TC" secondAttribute="bottom" constant="90" id="Spj-Wi-jV8"/>
-                                    <constraint firstItem="M6C-1p-dXr" firstAttribute="top" secondItem="tfb-dj-OuI" secondAttribute="top" type="default" id="Sq8-FK-MBY"/>
                                     <constraint firstAttribute="bottom" secondItem="d0u-sa-Q4W" secondAttribute="bottom" constant="17" id="U66-KH-MZQ"/>
                                     <constraint firstAttribute="bottom" secondItem="fEY-EW-nRl" secondAttribute="bottom" constant="55" id="ZAP-KZ-aXy"/>
-                                    <constraint firstItem="M6C-1p-dXr" firstAttribute="trailing" secondItem="tfb-dj-OuI" secondAttribute="trailing" type="default" id="ZIm-hf-may"/>
                                     <constraint firstItem="wN4-c2-lsU" firstAttribute="leading" secondItem="tfb-dj-OuI" secondAttribute="leading" constant="23" id="Zfz-Io-tUU"/>
                                     <constraint firstAttribute="trailing" secondItem="d0u-sa-Q4W" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="aJK-t3-vf6"/>
                                     <constraint firstAttribute="bottom" secondItem="wN4-c2-lsU" secondAttribute="bottom" constant="125" id="ad7-Hx-saY"/>
                                     <constraint firstItem="fEY-EW-nRl" firstAttribute="leading" secondItem="tfb-dj-OuI" secondAttribute="leading" constant="22" id="bGc-3B-a0I"/>
-                                    <constraint firstItem="M6C-1p-dXr" firstAttribute="leading" secondItem="tfb-dj-OuI" secondAttribute="leading" type="default" id="zSU-Lc-JqP"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -289,9 +281,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="ZBz-wF-NTH"/>
-                    <connections>
-                        <outlet property="EventMapView" destination="M6C-1p-dXr" id="T0x-hc-1Yc"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mW-yj-ACC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -310,9 +299,6 @@
         </class>
         <class className="DetailEventDescriptionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailEventDescriptionViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="EventMapView" candidateClass="MKMapView"/>
-            </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>

@@ -24,6 +24,8 @@
 		D551A290163889BE009B0953 /* AddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D551A28F163889BE009B0953 /* AddEventViewController.m */; };
 		D551A2991638D7D9009B0953 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D551A2981638D7D9009B0953 /* libicucore.A.dylib */; };
 		D599170A1639F29200F4A21F /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = D59917091639F29200F4A21F /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D5991724163A2C1F00F4A21F /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5991723163A2C1E00F4A21F /* libicucore.dylib */; };
+		D599172B163A2E8500F4A21F /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D599172A163A2E8500F4A21F /* MapView.m */; };
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
 		D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363D61635756400FE3E1C /* CoreLocation.framework */; };
 		D5C363DB16357A4F00FE3E1C /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */; };
@@ -56,6 +58,9 @@
 		D551A2981638D7D9009B0953 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
 		D59917081639F29200F4A21F /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegexKitLite.h; path = ../RegexKitLite/RegexKitLite.h; sourceTree = "<group>"; };
 		D59917091639F29200F4A21F /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegexKitLite.m; path = ../RegexKitLite/RegexKitLite.m; sourceTree = "<group>"; };
+		D5991723163A2C1E00F4A21F /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		D5991729163A2E8500F4A21F /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
+		D599172A163A2E8500F4A21F /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		D5C363C7163441E600FE3E1C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D5C363D61635756400FE3E1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D5C363D916357A4F00FE3E1C /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
@@ -73,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5991724163A2C1F00F4A21F /* libicucore.dylib in Frameworks */,
 				D551A2991638D7D9009B0953 /* libicucore.A.dylib in Frameworks */,
 				D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */,
 				D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */,
@@ -88,7 +94,6 @@
 		BF5B427B161A3ACB002C67D1 = {
 			isa = PBXGroup;
 			children = (
-				D551A2981638D7D9009B0953 /* libicucore.A.dylib */,
 				BF5B4290161A3ACB002C67D1 /* LocalBuzz */,
 				BF5B4289161A3ACB002C67D1 /* Frameworks */,
 				BF5B4287161A3ACB002C67D1 /* Products */,
@@ -106,6 +111,8 @@
 		BF5B4289161A3ACB002C67D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D551A2981638D7D9009B0953 /* libicucore.A.dylib */,
+				D5991723163A2C1E00F4A21F /* libicucore.dylib */,
 				D5C363D61635756400FE3E1C /* CoreLocation.framework */,
 				D5C363C7163441E600FE3E1C /* MapKit.framework */,
 				BF5B428A161A3ACB002C67D1 /* UIKit.framework */,
@@ -123,14 +130,16 @@
 				BF5B42A2161A3ACB002C67D1 /* MainStoryboard.storyboard */,
 				D551A28E163889BE009B0953 /* AddEventViewController.h */,
 				D551A28F163889BE009B0953 /* AddEventViewController.m */,
-				D5CE3F1D161A611E00CA3A96 /* DetailEventDescriptionViewController.h */,
-				D5CE3F1E161A611E00CA3A96 /* DetailEventDescriptionViewController.m */,
 				D5C363D916357A4F00FE3E1C /* MapViewAnnotation.h */,
 				D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */,
 				D5CE3F12161A571600CA3A96 /* PastEventViewController.h */,
 				D5CE3F13161A571600CA3A96 /* PastEventViewController.m */,
 				D5CE3F1A161A5B8F00CA3A96 /* CurrentEventViewController.h */,
 				D5CE3F1B161A5B8F00CA3A96 /* CurrentEventViewController.m */,
+				D5CE3F1D161A611E00CA3A96 /* DetailEventDescriptionViewController.h */,
+				D5CE3F1E161A611E00CA3A96 /* DetailEventDescriptionViewController.m */,
+				D5991729163A2E8500F4A21F /* MapView.h */,
+				D599172A163A2E8500F4A21F /* MapView.m */,
 				D59917081639F29200F4A21F /* RegexKitLite.h */,
 				D59917091639F29200F4A21F /* RegexKitLite.m */,
 				BF5B42A8161A3ACB002C67D1 /* first.png */,
@@ -235,6 +244,7 @@
 				D5C363DB16357A4F00FE3E1C /* MapViewAnnotation.m in Sources */,
 				D551A290163889BE009B0953 /* AddEventViewController.m in Sources */,
 				D599170A1639F29200F4A21F /* RegexKitLite.m in Sources */,
+				D599172B163A2E8500F4A21F /* MapView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
