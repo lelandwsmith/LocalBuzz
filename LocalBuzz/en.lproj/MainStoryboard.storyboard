@@ -627,6 +627,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="descriptionLabel" destination="GQo-TO-VG7" id="GQQ-Wb-3ud"/>
                         <outlet property="locationLabel" destination="jck-g8-3pu" id="bVL-dr-SEB"/>
+                        <outlet property="mapLable" destination="DQQ-pG-xYd" id="Vib-sJ-Ndm"/>
                         <outlet property="timeLabel" destination="ab5-6Z-BNf" id="ESu-6v-hgV"/>
                         <outlet property="titleLabel" destination="9K0-Zr-Khf" id="jR7-hJ-7Qe"/>
                     </connections>
@@ -674,6 +675,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapLable" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
             </relationships>

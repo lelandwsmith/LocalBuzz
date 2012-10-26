@@ -7,25 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <MapKit/MapKit.h>
-//#import <CoreLocation/CoreLocation.h>
 #import "MapView.h"
 #import "MapViewAnnotation.h"
 
 @class Event;
 
-@interface EventDetailViewController : UITableViewController//<CLLocationManagerDelegate, MKMapViewDelegate>
+@interface EventDetailViewController : UITableViewController
 
 @property (nonatomic, strong) Event *event;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
-
-//@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-//@property (weak, nonatomic) CLLocationManager *locationManager;
-//@property (weak, nonatomic) NSArray *routes;
-
-//-(void) showRouteFrom: (MapViewAnnotation*) f to: (MapViewAnnotation*) t;
+@property (weak, nonatomic) IBOutlet UITableViewCell *mapLable;
 
 @end

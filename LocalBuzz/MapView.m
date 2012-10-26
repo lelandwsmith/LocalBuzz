@@ -37,7 +37,7 @@
 	return self;
 }
 
--(void) showRouteFrom: (MapViewAnnotation*) f to:(MapViewAnnotation*) t {
+- (void)showRouteFrom: (MapViewAnnotation*) f to:(MapViewAnnotation*) t {
 	
 	if(routes) {
 		[mapView removeAnnotations:[mapView annotations]];
@@ -54,7 +54,7 @@
 	[self centerMap];
 }
 
--(NSArray*) calculateRoutesFrom:(CLLocationCoordinate2D) f to: (CLLocationCoordinate2D) t {
+- (NSArray*)calculateRoutesFrom:(CLLocationCoordinate2D) f to: (CLLocationCoordinate2D) t {
 	NSString* saddr = [NSString stringWithFormat:@"%f,%f", f.latitude, f.longitude];
 	NSString* daddr = [NSString stringWithFormat:@"%f,%f", t.latitude, t.longitude];
 	
@@ -68,7 +68,7 @@
 }
 
 
--(NSMutableArray *)decodePolyLine: (NSMutableString *)encoded {
+- (NSMutableArray *)decodePolyLine: (NSMutableString *)encoded {
 	[encoded replaceOccurrencesOfString:@"\\\\" withString:@"\\"
 															options:NSLiteralSearch
 																range:NSMakeRange(0, [encoded length])];
@@ -108,7 +108,7 @@
 	return array;
 }
 
--(void) centerMap {
+- (void)centerMap {
 	MKCoordinateRegion region;
 	
 	CLLocationDegrees maxLat = -90;
@@ -135,7 +135,7 @@
 	[mapView setRegion:region animated:YES];
 }
 
--(void) updateRouteView {
+- (void)updateRouteView {
 	CGContextRef context = 	CGBitmapContextCreate(nil,
 																								routeView.frame.size.width,
 																								routeView.frame.size.height,

@@ -10,10 +10,6 @@
 #import "Event.h"
 #import "RegexKitLite.h"
 
-#define MINIMUM_ZOOM_ARC 0.014
-#define ANNOTATION_REGION_PAD_FACTOR 1.15
-#define MAX_DEGREES_ARC 360
-
 @interface EventDetailViewController ()
 
 @end
@@ -23,11 +19,7 @@
 @synthesize descriptionLabel = _descriptionLabel;
 @synthesize timeLabel = _timeLabel;
 @synthesize locationLabel = _locationLabel;
-
-/*@synthesize mapView = _mapView;
-@synthesize locationManager = _locationManager;
-@synthesize routes = _routes;
-*/
+@synthesize mapLable = _mapLable;
 
 - (void) setEvent:(Event *)event {
     if (_event != event) {
@@ -37,27 +29,29 @@
 }
 
 - (void) configureView {
-    Event *theEvent = self.event;
-    if (theEvent) {
-        NSLog(@"%@", self.titleLabel.text);
-        self.titleLabel.text = theEvent.title;
-        self.descriptionLabel.text = theEvent.description;
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        self.timeLabel.text = [dateFormatter stringFromDate:theEvent.time];
-        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSString *latLongString = [numberFormatter stringFromNumber:theEvent.longitude];
-        self.locationLabel.text = [[latLongString stringByAppendingString:@" "] stringByAppendingString:[numberFormatter stringFromNumber:theEvent.latitude]];
-        
-        [self setUpMap];
-    }
+	Event *theEvent = self.event;
+	if (theEvent) {
+		[self setUpMap];
+		
+		NSLog(@"%@", self.titleLabel.text);
+		self.titleLabel.text = theEvent.title;
+		self.descriptionLabel.text = theEvent.description;
+		
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+		self.timeLabel.text = [dateFormatter stringFromDate:theEvent.time];
+		
+		NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+		[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+		NSString *latLongString = [numberFormatter stringFromNumber:theEvent.longitude];
+		self.locationLabel.text = [[latLongString stringByAppendingString:@" "] stringByAppendingString:[numberFormatter stringFromNumber:theEvent.latitude]];
+	}
 }
 
 - (void) setUpMap {
-	MapView* mapView = [[MapView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-	[self.view addSubview:mapView];
+	MapView *mapView = [[MapView alloc] initWithFrame:self.mapLable.bounds];
+	[self.mapLable addSubview:mapView];
 	
 	// Fake the data of the start location
 	CLLocationCoordinate2D startCoordinate = CLLocationCoordinate2DMake(37.78700, -121.40400);
