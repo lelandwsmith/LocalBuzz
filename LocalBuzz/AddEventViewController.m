@@ -11,6 +11,8 @@
 
 @interface AddEventViewController ()
 
+- (void)setUpMap;
+
 @end
 
 @implementation AddEventViewController
@@ -31,6 +33,11 @@
 {
 	[super viewDidLoad];
 	
+	[self setUpMap];
+}
+
+- (void)setUpMap
+{
 	// Set up the map view
 	self.NewEventMapView.delegate = self;
 	
