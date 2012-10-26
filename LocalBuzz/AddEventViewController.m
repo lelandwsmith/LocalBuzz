@@ -8,6 +8,7 @@
 
 #import "AddEventViewController.h"
 #import "TimePickerViewController.h"
+#import "LocationSelectionViewController.h"
 #import "AFHTTPClient.h"
 @interface AddEventViewController () {
 @private NSDate *selectedDate;
@@ -15,9 +16,10 @@
 @end
 
 @implementation AddEventViewController
-//@synthesize titleField;
-//@synthesize locationCell;
-//@synthesize timeCell;
+@synthesize titleField;
+@synthesize latitudeCell;
+@synthesize longitudeCell;
+@synthesize timeCell;
 
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -32,6 +34,10 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             self.titleField.text, @"event[title]",
                             [dateFormatter stringFromDate:selectedDate], @"event[time]",
+                            self.longitudeCell.detailTextLabel.text, @"event[longitude]",
+                            self.latitudeCell.detailTextLabel.text, @"event[latitude]",
+                            0, @"event[public]",
+                            @"Random description", @"event[description]",
                             nil];
     [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -42,7 +48,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)done:(UIStoryboardSegue *)segue {
+- (IBAction)timeSelected:(UIStoryboardSegue *)segue {
     if ([[segue identifier] isEqualToString:@"ReturnTime"]) {
         TimePickerViewController *timePicker = [segue sourceViewController];
         selectedDate = timePicker.timePicker.date;
@@ -50,6 +56,17 @@
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
         self.timeCell.detailTextLabel.text = [dateFormatter stringFromDate:selectedDate];
+    }
+}
+
+- (IBAction)locationSelected:(UIStoryboardSegue *)segue {
+    if ([[segue identifier] isEqualToString:@"ReturnLocation"]) {
+        LocationSelectionViewController *locationSelector = [segue sourceViewController];
+        CLLocationCoordinate2D selectedLatLong = locationSelector.latLong;
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        self.latitudeCell.detailTextLabel.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.latitude]];
+        self.longitudeCell.detailTextLabel.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.longitude]];
     }
 }
 

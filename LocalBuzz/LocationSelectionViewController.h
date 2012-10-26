@@ -13,7 +13,8 @@
 @interface LocationSelectionViewController : UIViewController< CLLocationManagerDelegate, MKMapViewDelegate> {
 	
 }
-@property (weak, nonatomic) IBOutlet MKMapView *NewEventMapView;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) CLLocationManager *locationManager;
+@property (nonatomic) CLLocationCoordinate2D latLong;
 
 @end

@@ -50,7 +50,10 @@
         while (value = [enumerator nextObject]) {
             NSLog(@"%@", self);
             Event *eventToBeAdded = [[Event alloc] initWithDictionary:value];
-            [self.dataController addEventToEventList:eventToBeAdded];
+            //NSLog(@"%@", eventToBeAdded);
+            if (eventToBeAdded != nil) {
+                [self.dataController addEventToEventList:eventToBeAdded];
+            }
         }
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

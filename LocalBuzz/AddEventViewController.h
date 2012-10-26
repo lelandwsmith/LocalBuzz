@@ -10,8 +10,11 @@
 
 @interface AddEventViewController : UITableViewController
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
-@property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *latitudeCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *timeCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *longitudeCell;
 
-- (IBAction)done:(UIStoryboardSegue *)segue;
+- (IBAction)timeSelected:(UIStoryboardSegue *)segue;
+- (IBAction)locationSelected:(UIStoryboardSegue *)segue;
+
 @end

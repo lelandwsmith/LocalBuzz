@@ -11,6 +11,7 @@
 @implementation Event
 
 - (id) initWithDictionary:(NSDictionary *)eventDict {
+    NSLog(@"%@", eventDict);
     self = [super init];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
@@ -21,6 +22,9 @@
         _description = [eventDict objectForKey:@"description"];
         _time = [dateFormatter dateFromString:[eventDict objectForKey:@"time"]];
         _isPublic = NO;
+        if (!_title || !_longitude || !_latitude || !_description || !_time) {
+            return nil;
+        }
         return self;
     }
     return nil;
