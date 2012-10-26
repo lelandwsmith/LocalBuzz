@@ -40,7 +40,6 @@
 - (void) configureView {
     Event *theEvent = self.event;
     if (theEvent) {
-        NSLog(@"%@", self.titleLabel.text);
         self.titleLabel.text = theEvent.title;
         self.descriptionLabel.text = theEvent.detailDescription;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

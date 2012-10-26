@@ -79,11 +79,33 @@
         TimePickerViewController *timePickerController = segue.destinationViewController;
         timePickerController.timePicker.date = selectedDate;
     }
+    if ([[segue identifier] isEqualToString:@"EventCreated"]) {
+        NSURL *createUserURL = [NSURL URLWithString:@"http://localhost:3000/"];
+        AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
+        NSLog(@"%@", [selectedDate description]);
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                self.titleField.text, @"event[title]",
+                                [dateFormatter stringFromDate:selectedDate], @"event[time]",
+                                self.longitudeCell.detailTextLabel.text, @"event[longitude]",
+                                self.latitudeCell.detailTextLabel.text, @"event[latitude]",
+                                0, @"event[public]",
+                                @"Random description", @"event[description]",
+                                nil];
+        [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog(@"Response: %@", responseString);
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@", [error localizedDescription]);
+        }];
+    }
 }
 
 - (void) viewDidLoad {
     self.titleField.delegate = self;
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:tapGestureRecognizer];
 }
 

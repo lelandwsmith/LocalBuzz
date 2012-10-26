@@ -13,4 +13,5 @@
 
 @property (strong, nonatomic) EventDataController *dataController;
 
+-(IBAction)eventCreated:(UIStoryboardSegue *)segue;
 @end

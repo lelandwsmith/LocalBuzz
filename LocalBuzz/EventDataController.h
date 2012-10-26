@@ -17,5 +17,6 @@
 - (NSUInteger) countOfEventList;
 - (Event *)objectInEventListAtIndex:(NSUInteger)index;
 - (void) addEventToEventList:(Event *)event;
+- (void) emptyEventList;
 
 @end

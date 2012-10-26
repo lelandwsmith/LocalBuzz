@@ -41,6 +41,17 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self updateEvents];
+}
+
+- (IBAction)eventCreated:(UIStoryboardSegue *)segue {
+    if ([[segue identifier] isEqualToString:@"EventCreated"]) {
+        [self updateEvents];
+    }
+}
+
+- (void)updateEvents {
+    [self.dataController emptyEventList];
     NSURL *url = [NSURL URLWithString:@"http://localhost:3000"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     [httpClient getPath:@"events.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -49,14 +60,12 @@
         id value;
         while (value = [enumerator nextObject]) {
             Event *eventToBeAdded = [[Event alloc] initWithDictionary:value];
-            //NSLog(@"%@", eventToBeAdded);
             [self.dataController addEventToEventList:eventToBeAdded];
         }
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
     }];
-    
 }
 
 - (void)viewDidUnload
@@ -84,7 +93,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   // Return the number of rows in the section.
-    NSLog(@"%@", self);
     return [self.dataController countOfEventList];
 }
 
@@ -161,7 +169,6 @@
 {
   if ([segue.identifier isEqualToString:@"ShowEventDetail"]) {
       EventDetailViewController *eventDetailController = [segue destinationViewController];
-      NSLog(@"%@", eventDetailController.titleLabel.text);
       eventDetailController.event = [self.dataController objectInEventListAtIndex:[self.tableView indexPathForSelectedRow].row];
   }
 }

@@ -42,4 +42,8 @@
     }
 }
 
+- (void) emptyEventList {
+    [self.eventList removeAllObjects];
+}
+
 @end
