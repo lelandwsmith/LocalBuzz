@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "MapViewAnnotation.h"
+
 @class Event;
 
-@interface EventDetailViewController : UITableViewController
+@interface EventDetailViewController : UITableViewController<CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (nonatomic, strong) Event *event;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -19,5 +22,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) CLLocationManager *locationManager;
+@property (weak, nonatomic) NSArray *routes;
+
+-(void) showRouteFrom: (MapViewAnnotation*) f to: (MapViewAnnotation*) t;
 
 @end

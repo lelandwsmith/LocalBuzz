@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BF2591CA1638AA74006E895E /* AddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2591C91638AA74006E895E /* AddEventViewController.m */; };
+		BF2AE0D4163A08E90098A8C9 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2AE0D3163A08E90098A8C9 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF2AE0D6163A09210098A8C9 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2AE0D5163A09210098A8C9 /* libicucore.A.dylib */; };
 		BF5B428B161A3ACB002C67D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5B428A161A3ACB002C67D1 /* UIKit.framework */; };
 		BF5B428D161A3ACB002C67D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5B428C161A3ACB002C67D1 /* Foundation.framework */; };
 		BF5B428F161A3ACB002C67D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5B428E161A3ACB002C67D1 /* CoreGraphics.framework */; };
@@ -45,6 +47,9 @@
 /* Begin PBXFileReference section */
 		BF2591C81638AA74006E895E /* AddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventViewController.h; sourceTree = "<group>"; };
 		BF2591C91638AA74006E895E /* AddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventViewController.m; sourceTree = "<group>"; };
+		BF2AE0D2163A08E90098A8C9 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegexKitLite.h; path = ../RegexKitLite.h; sourceTree = "<group>"; };
+		BF2AE0D3163A08E90098A8C9 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegexKitLite.m; path = ../RegexKitLite.m; sourceTree = "<group>"; };
+		BF2AE0D5163A09210098A8C9 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
 		BF5B4286161A3ACB002C67D1 /* LocalBuzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalBuzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5B428A161A3ACB002C67D1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BF5B428C161A3ACB002C67D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -105,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2AE0D6163A09210098A8C9 /* libicucore.A.dylib in Frameworks */,
 				D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */,
 				D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */,
 				BF5B428B161A3ACB002C67D1 /* UIKit.framework in Frameworks */,
@@ -137,6 +143,7 @@
 		BF5B4289161A3ACB002C67D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF2AE0D5163A09210098A8C9 /* libicucore.A.dylib */,
 				D5C363D61635756400FE3E1C /* CoreLocation.framework */,
 				D5C363C7163441E600FE3E1C /* MapKit.framework */,
 				BF5B428A161A3ACB002C67D1 /* UIKit.framework */,
@@ -168,6 +175,8 @@
 				D5CE3F13161A571600CA3A96 /* PastEventViewController.m */,
 				D5CE3F1A161A5B8F00CA3A96 /* CurrentEventViewController.h */,
 				D5CE3F1B161A5B8F00CA3A96 /* CurrentEventViewController.m */,
+				BF2AE0D2163A08E90098A8C9 /* RegexKitLite.h */,
+				BF2AE0D3163A08E90098A8C9 /* RegexKitLite.m */,
 				BF5B42A8161A3ACB002C67D1 /* first.png */,
 				BF5B42AA161A3ACB002C67D1 /* first@2x.png */,
 				BF5B42AF161A3ACB002C67D1 /* second.png */,
@@ -307,6 +316,7 @@
 				BFD323BD1639C4F500FE6819 /* Event.m in Sources */,
 				BFD323C11639CC9900FE6819 /* EventDataController.m in Sources */,
 				BFD323CB1639FA7800FE6819 /* EventDetailViewController.m in Sources */,
+				BF2AE0D4163A08E90098A8C9 /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
