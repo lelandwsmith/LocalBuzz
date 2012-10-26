@@ -17,6 +17,7 @@
 @interface DetailEventDescriptionViewController ()
 
 -(NSArray*) calculateRoutesFrom:(CLLocationCoordinate2D) from to: (CLLocationCoordinate2D) to;
+-(void) updateRouteView;
 -(void) centerMap;
 
 @end
@@ -26,6 +27,7 @@
 @synthesize EventMapView = _EventMapView;
 @synthesize locationManager = _locationManager;
 @synthesize routes = _routes;
+@synthesize routeView = _routeView;
 
 
 /*- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
@@ -42,11 +44,6 @@
 	[self.EventMapView addOverlay:routeLine];
 }
 */
-
-
-
-
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -67,9 +64,12 @@
 	[self.locationManager setDelegate:self];
 	[self.locationManager setDistanceFilter:kCLDistanceFilterNone];
 	[self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-	//[self.locationManager startUpdatingLocation];
+	[self.locationManager startUpdatingLocation];
 	
-	//[self.EventMapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+	self.routeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.EventMapView.frame.size.width, self.EventMapView.frame.size.height)];
+	self.routeView.userInteractionEnabled = NO;
+	[self.EventMapView addSubview:self.routeView];
+	
 	//self.EventMapView.showsUserLocation = YES;
 	//self.EventMapView.mapType = MKMapTypeStandard;
 	//self.EventMapView.mapType = MKMapTypeSatellite;
@@ -88,8 +88,9 @@
 	[self.EventMapView addAnnotation:endAnnotation];
 	
 	
-	NSLog(@"...");
+	NSLog(@"routes size is %i", self.routes.count);
 	[self showRouteFrom:startAnnotation to:endAnnotation];
+	NSLog(@"routes size is %i", self.routes.count);
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,23 +106,63 @@
   _num = num;
 }
 
+-(void) showRouteFrom: (MapViewAnnotation*) f to:(MapViewAnnotation*) t
+{
+	if(self.routes) {
+    [self.EventMapView removeAnnotations:[self.EventMapView annotations]];
+	}
+	
+	//[self.EventMapView addAnnotation:f];
+	//[self.EventMapView addAnnotation:t];
+	
+	// Get the route
+	self.routes = [self calculateRoutesFrom:f.coordinate to:t.coordinate];
+	/*
+	 NSInteger numberOfSteps = self.routes.count;
+	 
+	 CLLocationCoordinate2D coordinates[numberOfSteps];
+	 for (NSInteger index = 0; index < numberOfSteps; index++) {
+	 CLLocation *location = [self.routes objectAtIndex:index];
+	 CLLocationCoordinate2D coordinate = location.coordinate;
+	 coordinates[index] = coordinate;
+	 }
+	 MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:coordinates count:numberOfSteps];
+	 [self.EventMapView addOverlay:polyLine];
+	 */
+	
+	// Draw the route
+	[self updateRouteView];
+	// Center the map to show route properly
+	[self centerMap];
+}
+
+-(NSArray*) calculateRoutesFrom:(CLLocationCoordinate2D) f to: (CLLocationCoordinate2D) t
+{
+	NSString* saddr = [NSString stringWithFormat:@"%f,%f", f.latitude, f.longitude];
+	NSString* daddr = [NSString stringWithFormat:@"%f,%f", t.latitude, t.longitude];
+	
+	NSString* apiUrlStr = [NSString stringWithFormat:@"http://maps.google.com/maps?output=dragdir&saddr=%@&daddr=%@", saddr, daddr];
+	NSURL* apiUrl = [NSURL URLWithString:apiUrlStr];
+	
+	NSString *apiResponse = [NSString stringWithContentsOfURL:apiUrl];
+	NSString* encodedPoints = [apiResponse stringByMatching:@"points:\\\"([^\\\"]*)\\\"" capture:1L];
+	
+	return [self decodePolyLine:[encodedPoints mutableCopy]];
+}
+
 - (NSMutableArray *)decodePolyLine: (NSMutableString *)encoded
 {
-	NSLog(@"enter decodePolyLine\n");
-	
 	[encoded replaceOccurrencesOfString:@"\\\\" withString:@"\\" options:NSLiteralSearch range:NSMakeRange(0, [encoded length])];
 	NSInteger len = [encoded length];
 	NSInteger index = 0;
 	NSMutableArray *array = [[NSMutableArray alloc] init];
 	NSInteger lat=0;
 	NSInteger lng=0;
-	while (index < len)
-	{
+	while (index < len) {
 		NSInteger b;
 		NSInteger shift = 0;
 		NSInteger result = 0;
-		do
-		{
+		do {
 			b = [encoded characterAtIndex:index++] - 63;
 			result |= (b & 0x1f) << shift;
 			shift += 5;
@@ -130,8 +171,7 @@
 		lat += dlat;
 		shift = 0;
 		result = 0;
-		do
-		{
+		do {
 			b = [encoded characterAtIndex:index++] - 63;
 			result |= (b & 0x1f) << shift;
 			shift += 5;
@@ -146,34 +186,38 @@
 		[array addObject:loc];
 	}
 	
-	NSLog(@"leave decodePolyLine\n");
-	
 	return array;
-}
-
--(NSArray*) calculateRoutesFrom:(CLLocationCoordinate2D) f to: (CLLocationCoordinate2D) t
-{
-	NSLog(@"enter calculateRoutesFrom\n");
-	
-	NSString* saddr = [NSString stringWithFormat:@"%f,%f", f.latitude, f.longitude];
-	NSString* daddr = [NSString stringWithFormat:@"%f,%f", t.latitude, t.longitude];
-	
-	NSString* apiUrlStr = [NSString stringWithFormat:@"http://maps.google.com/maps?output=dragdir&saddr=%@&daddr=%@", saddr, daddr];
-	NSURL* apiUrl = [NSURL URLWithString:apiUrlStr];
-	
-	NSError* error = nil;
-	
-	NSString *apiResponse = [NSString stringWithContentsOfURL:apiUrl encoding:NSASCIIStringEncoding error:&error];
-	NSString *tmp = @"points:\\\"([^\\\"]*)\\\"";
-	NSString *encodedPoints = [apiResponse stringByMatching:tmp capture:1L];
-	
-	NSLog(@"leave calculateRoutesFrom\n");
-	
-	return [self decodePolyLine:[encodedPoints mutableCopy]];
 }
 
 -(void) centerMap
 {
+	MKCoordinateRegion region;
+	
+	CLLocationDegrees maxLat = -90;
+	CLLocationDegrees maxLon = -180;
+	CLLocationDegrees minLat = 90;
+	CLLocationDegrees minLon = 180;
+	for(int idx = 0; idx < self.routes.count; idx++)
+	{
+		CLLocation* currentLocation = [self.routes objectAtIndex:idx];
+		if(currentLocation.coordinate.latitude > maxLat)
+			maxLat = currentLocation.coordinate.latitude;
+		if(currentLocation.coordinate.latitude < minLat)
+			minLat = currentLocation.coordinate.latitude;
+		if(currentLocation.coordinate.longitude > maxLon)
+			maxLon = currentLocation.coordinate.longitude;
+		if(currentLocation.coordinate.longitude < minLon)
+			minLon = currentLocation.coordinate.longitude;
+	}
+	region.center.latitude     = (maxLat + minLat) / 2;
+	region.center.longitude    = (maxLon + minLon) / 2;
+	region.span.latitudeDelta  = maxLat - minLat;
+	region.span.longitudeDelta = maxLon - minLon;
+	
+	[self.EventMapView setRegion:region animated:YES];
+
+	
+	/*
 	//NSArray *annotations = mapView.annotations;
 	int count = self.routes.count;
 	if ( count == 0) { return; } //bail if no annotations
@@ -218,29 +262,44 @@
 	}
 	
 	[self.EventMapView setRegion:region animated:YES];
+	
+	
+	MKPolyline * routeLine = [MKPolyline polylineWithPoints:points count:count];
+	[self.EventMapView addOverlay:routeLine];
+	*/
 }
 
--(void) showRouteFrom: (MapViewAnnotation*) f to:(MapViewAnnotation*) t
-{
-	if(self.routes) {
-    [self.EventMapView removeAnnotations:[self.EventMapView annotations]];
+-(void) updateRouteView {
+	CGContextRef context = CGBitmapContextCreate(nil,
+																							 self.routeView.frame.size.width,
+																							 self.routeView.frame.size.height,
+																							 8,
+																							 4 * self.routeView.frame.size.width,
+																							 CGColorSpaceCreateDeviceRGB(),
+																							 kCGImageAlphaPremultipliedLast);
+	
+	CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
+	CGContextSetRGBFillColor(context, 0.0, 0.0, 1.0, 1.0);
+	CGContextSetLineWidth(context, 3.0);
+	
+	for(int i = 0; i < self.routes.count; i++) {
+		CLLocation* location = [self.routes objectAtIndex:i];
+		CGPoint point = [self.EventMapView convertCoordinate:location.coordinate toPointToView:self.routeView];
+		
+		if(i == 0) {
+			CGContextMoveToPoint(context, point.x, self.routeView.frame.size.height - point.y);
+		} else {
+			CGContextAddLineToPoint(context, point.x, self.routeView.frame.size.height - point.y);
+		}
 	}
 	
-	//[self.EventMapView addAnnotation:f];
-	//[self.EventMapView addAnnotation:t];
+	CGContextStrokePath(context);
 	
-	self.routes = [self calculateRoutesFrom:f.coordinate to:t.coordinate];
-	[self centerMap];
-	NSInteger numberOfSteps = self.routes.count;
+	CGImageRef image = CGBitmapContextCreateImage(context);
+	UIImage* img = [UIImage imageWithCGImage:image];
 	
-	CLLocationCoordinate2D coordinates[numberOfSteps];
-	for (NSInteger index = 0; index < numberOfSteps; index++) {
-		CLLocation *location = [self.routes objectAtIndex:index];
-		CLLocationCoordinate2D coordinate = location.coordinate;
-		coordinates[index] = coordinate;
-	}
-	MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:coordinates count:numberOfSteps];
-	[self.EventMapView addOverlay:polyLine];
+	self.routeView.image = img;
+	CGContextRelease(context);	
 }
 
 /*
@@ -254,7 +313,20 @@
 }
  */
 
-#pragma mark MKPolyline delegate functions
+#pragma mark mapView delegate functions
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+	self.routeView.hidden = YES;
+}
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+	[self updateRouteView];
+	self.routeView.hidden = NO;
+	[self.routeView setNeedsDisplay];
+}
+
+/*#pragma mark MKPolyline delegate functions
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay
 {
 	MKPolylineView *polylineView = [[MKPolylineView alloc] initWithPolyline:overlay];
@@ -263,6 +335,6 @@
 	polylineView.lineWidth = 3.0;
 	polylineView.lineCap = kCGLineCapSquare;
 	return polylineView;
-}
+}*/
 
 @end

@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet MKMapView *EventMapView;
 @property (weak, nonatomic) CLLocationManager *locationManager;
 @property (weak, nonatomic) NSArray *routes;
+@property (weak, nonatomic) UIImageView *routeView;
 
 -(void) showRouteFrom: (MapViewAnnotation*) f to:(MapViewAnnotation*) t;
 
