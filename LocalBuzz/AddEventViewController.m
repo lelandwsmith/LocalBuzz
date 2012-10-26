@@ -80,11 +80,10 @@
         timePickerController.timePicker.date = selectedDate;
     }
     if ([[segue identifier] isEqualToString:@"EventCreated"]) {
-        NSURL *createUserURL = [NSURL URLWithString:@"http://localhost:3000/"];
+        NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
         AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
-        NSLog(@"%@", [selectedDate description]);
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                 self.titleField.text, @"event[title]",
                                 [dateFormatter stringFromDate:selectedDate], @"event[time]",

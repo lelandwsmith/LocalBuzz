@@ -17,6 +17,7 @@
 @end
 
 @implementation CurrentEventViewController
+@synthesize dataController;
 
 - (void) awakeFromNib {
     [super awakeFromNib];
@@ -41,6 +42,21 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self refreshEvents];
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to refresh"];
+    [refresh addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
+}
+
+- (IBAction)eventCreated:(UIStoryboardSegue *)segue {
+    if ([segue.identifier isEqualToString:@"EventCreated"]) {
+        [self refreshEvents];
+    }
+}
+
+- (void) refreshEvents {
+    [self.dataController emptyEventList];
     NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     [httpClient getPath:@"events.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -51,10 +67,21 @@
             Event *eventToBeAdded = [[Event alloc] initWithDictionary:value];
             [self.dataController addEventToEventList:eventToBeAdded];
         }
+        NSLog(@"%@", events);
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
     }];
+}
+
+- (void)refreshView:(UIRefreshControl *)refresh {
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refreshing events..."];
+    [self refreshEvents];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d, h:mm a"];
+    NSString *lastUpdate = [NSString stringWithFormat:@"Last updated at: %@", [formatter stringFromDate:[NSDate date]]];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:lastUpdate];
+    [refresh endRefreshing];
 }
 
 - (void)viewDidUnload

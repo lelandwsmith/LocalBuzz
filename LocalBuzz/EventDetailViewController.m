@@ -31,7 +31,7 @@
 - (void) configureView {
 	Event *theEvent = self.event;
 	if (theEvent) {
-		[self setUpMap];
+		[self setUpMap:theEvent.latitude :theEvent.longitude];
 		
 		NSLog(@"%@", self.titleLabel.text);
 		self.titleLabel.text = theEvent.title;
@@ -49,16 +49,16 @@
 	}
 }
 
-- (void) setUpMap {
+- (void) setUpMap:(NSNumber *)destLat :(NSNumber *)destLon {
 	MapView *mapView = [[MapView alloc] initWithFrame:self.mapLable.bounds];
 	[self.mapLable addSubview:mapView];
 	
 	// Fake the data of the start location
-	CLLocationCoordinate2D startCoordinate = CLLocationCoordinate2DMake(37.78700, -121.40400);
+	CLLocationCoordinate2D startCoordinate = CLLocationCoordinate2DMake([destLat doubleValue], [destLon doubleValue]);
 	MapViewAnnotation *startAnnotation = [[MapViewAnnotation alloc] initWithTitle:@"Start" coordinate:startCoordinate];
 	
 	// Fake the data of destination location
-	CLLocationCoordinate2D endCoordinate = CLLocationCoordinate2DMake(37.78688, -122.405398);
+	CLLocationCoordinate2D endCoordinate = CLLocationCoordinate2DMake([destLat doubleValue], [destLon doubleValue]);
 	MapViewAnnotation *endAnnotation = [[MapViewAnnotation alloc] initWithTitle:@"Destination" coordinate:endCoordinate];
 	
 	[mapView showRouteFrom:startAnnotation to:endAnnotation];
