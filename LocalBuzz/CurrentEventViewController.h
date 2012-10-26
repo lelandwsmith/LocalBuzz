@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class EventDataController;
 
 @interface CurrentEventViewController : UITableViewController
-@property (nonatomic, strong) NSArray *currentEventTitles;
+
+@property (strong, nonatomic) EventDataController *dataController;
 
 @end
