@@ -8,6 +8,7 @@
         <scene sceneID="15">
             <objects>
                 <tabBarController storyboardIdentifier="TabBar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Vnu-HT-XS8"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
@@ -16,13 +17,13 @@
                     </tabBar>
                     <connections>
                         <segue destination="yFp-P3-jkG" kind="relationship" relationship="viewControllers" id="a6g-sc-bFS"/>
-                        <segue destination="RTS-aB-Yin" kind="relationship" relationship="viewControllers" id="mrB-aT-y7t"/>
                         <segue destination="gm5-zB-Ao6" kind="relationship" relationship="viewControllers" id="dw4-HO-TIM"/>
+                        <segue destination="RTS-aB-Yin" kind="relationship" relationship="viewControllers" id="mrB-aT-y7t"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-606" y="14"/>
+            <point key="canvasLocation" x="-633" y="-130"/>
         </scene>
         <!--Past Event View Controller - Past Events-->
         <scene sceneID="N6B-hg-c3Q">
@@ -200,7 +201,7 @@
         <!--Navigation Controller - Current-->
         <scene sceneID="hNa-WV-Lwa">
             <objects>
-                <navigationController definesPresentationContext="YES" id="yFp-P3-jkG" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="" definesPresentationContext="YES" id="yFp-P3-jkG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Current" id="pre-nH-1mO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Thw-K6-1ff">
                         <autoresizingMask key="autoresizingMask"/>
@@ -586,7 +587,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5e-8N-Kup" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1058" y="473"/>
+            <point key="canvasLocation" x="1374" y="441"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QLF-UK-2FI">
@@ -607,12 +608,65 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="1050" y="-292"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="AddEventViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="done:" candidateClass="UIStoryboardSegue"/>
+                <relationship kind="outlet" name="locationCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="timeCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="titleField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="CurrentEventViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CurrentEventViewController.h"/>
+        </class>
+        <class className="EventDetailViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EventDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="click:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="loginbtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="textview" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PastEventViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PastEventViewController.h"/>
+        </class>
+        <class className="SettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="logoutBtn" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="TimePickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimePickerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="timePicker" candidateClass="UIDatePicker"/>
+            </relationships>
+        </class>
+        <class className="UIStoryboardSegue" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="dtF-dx-EyL"/>
+        <segue reference="h7R-LA-vB5"/>
     </inferredMetricsTieBreakers>
 </document>
