@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
@@ -610,20 +610,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="221"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2LZ-gw-9gw">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="221" id="A9r-VF-zbV"/>
-                                                        <constraint firstAttribute="width" constant="300" id="wEU-iZ-rTN"/>
-                                                    </constraints>
-                                                </mapView>
-                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <constraints>
-                                            <constraint firstItem="2LZ-gw-9gw" firstAttribute="top" secondItem="DQQ-pG-xYd" secondAttribute="top" constant="1" id="3eW-4s-soR"/>
-                                            <constraint firstItem="2LZ-gw-9gw" firstAttribute="centerX" secondItem="DQQ-pG-xYd" secondAttribute="centerX" type="default" id="d5A-V7-sBe"/>
-                                        </constraints>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -639,7 +627,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="descriptionLabel" destination="GQo-TO-VG7" id="GQQ-Wb-3ud"/>
                         <outlet property="locationLabel" destination="jck-g8-3pu" id="bVL-dr-SEB"/>
-                        <outlet property="mapView" destination="2LZ-gw-9gw" id="nHp-NL-sY8"/>
                         <outlet property="timeLabel" destination="ab5-6Z-BNf" id="ESu-6v-hgV"/>
                         <outlet property="titleLabel" destination="9K0-Zr-Khf" id="jR7-hJ-7Qe"/>
                     </connections>
@@ -671,10 +658,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="AddEventViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelPressed:"/>
-                <relationship kind="action" name="createPressed:"/>
                 <relationship kind="action" name="locationSelected:" candidateClass="UIStoryboardSegue"/>
-                <relationship kind="action" name="prepareForSegue:sender:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="action" name="timeSelected:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="outlet" name="latitudeCell" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="longitudeCell" candidateClass="UITableViewCell"/>
@@ -690,7 +674,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
             </relationships>

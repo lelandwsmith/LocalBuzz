@@ -48,6 +48,7 @@
 		BFD323C11639CC9900FE6819 /* EventDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323C01639CC9900FE6819 /* EventDataController.m */; };
 		BFD323CB1639FA7800FE6819 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */; };
 		D599171C163A269200F4A21F /* LocationSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D599171B163A269200F4A21F /* LocationSelectionViewController.m */; };
+		D599173A163A3A9B00F4A21F /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5991739163A3A9B00F4A21F /* MapView.m */; };
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
 		D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363D61635756400FE3E1C /* CoreLocation.framework */; };
 		D5C363DB16357A4F00FE3E1C /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */; };
@@ -122,6 +123,8 @@
 		BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 		D599171A163A269200F4A21F /* LocationSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSelectionViewController.h; sourceTree = "<group>"; };
 		D599171B163A269200F4A21F /* LocationSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSelectionViewController.m; sourceTree = "<group>"; };
+		D5991738163A3A9B00F4A21F /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
+		D5991739163A3A9B00F4A21F /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		D5C363C7163441E600FE3E1C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D5C363D61635756400FE3E1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D5C363D916357A4F00FE3E1C /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
@@ -228,6 +231,8 @@
 				BF2591C91638AA74006E895E /* AddEventViewController.m */,
 				BF5B4299161A3ACB002C67D1 /* LocalBuzzAppDelegate.h */,
 				BF5B429A161A3ACB002C67D1 /* LocalBuzzAppDelegate.m */,
+				D5991738163A3A9B00F4A21F /* MapView.h */,
+				D5991739163A3A9B00F4A21F /* MapView.m */,
 				BF5B42A2161A3ACB002C67D1 /* MainStoryboard.storyboard */,
 				D599171A163A269200F4A21F /* LocationSelectionViewController.h */,
 				D599171B163A269200F4A21F /* LocationSelectionViewController.m */,
@@ -363,6 +368,7 @@
 				BF2AE138163A176F0098A8C9 /* AFXMLRequestOperation.m in Sources */,
 				BF2AE139163A176F0098A8C9 /* UIImageView+AFNetworking.m in Sources */,
 				D599171C163A269200F4A21F /* LocationSelectionViewController.m in Sources */,
+				D599173A163A3A9B00F4A21F /* MapView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
