@@ -14,9 +14,10 @@
 @property (nonatomic, copy) NSNumber *longitude;
 @property (nonatomic, copy) NSNumber *latitude;
 @property (nonatomic, copy) NSDate *time;
-@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *detailDescription;
 @property (nonatomic) BOOL isPublic;
 
 - (id) initWithDictionary:(NSDictionary *)eventDict;
 
+- (BOOL) isEventValid;
 @end

@@ -19,15 +19,15 @@
         _title = [eventDict objectForKey:@"title"];
         _longitude = [eventDict objectForKey:@"longitude"];
         _latitude = [eventDict objectForKey:@"latitude"];
-        _description = [eventDict objectForKey:@"description"];
+        _detailDescription = [eventDict objectForKey:@"description"];
         _time = [dateFormatter dateFromString:[eventDict objectForKey:@"time"]];
         _isPublic = NO;
-        if (!_title || !_longitude || !_latitude || !_description || !_time) {
-            return nil;
-        }
         return self;
     }
     return nil;
 }
 
+- (BOOL) isEventValid {
+    return !([self.title isKindOfClass:[NSNull class]] || [self.longitude isKindOfClass:[NSNull class]] || [self.latitude isKindOfClass:[NSNull class]] || [self.time isKindOfClass:[NSNull class]]);
+}
 @end

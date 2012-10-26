@@ -42,7 +42,7 @@
     if (theEvent) {
         NSLog(@"%@", self.titleLabel.text);
         self.titleLabel.text = theEvent.title;
-        self.descriptionLabel.text = theEvent.description;
+        self.descriptionLabel.text = theEvent.detailDescription;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterShortStyle];

@@ -37,8 +37,9 @@
 }
 
 - (void) addEventToEventList:(Event *)event {
-    [self.eventList addObject:event];
-    NSLog(@"%@", [self.eventList description]);
+    if ([event isEventValid]) {
+        [self.eventList addObject:event];
+    }
 }
 
 @end
