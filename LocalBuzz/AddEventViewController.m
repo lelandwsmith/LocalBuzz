@@ -2,85 +2,96 @@
 //  AddEventViewController.m
 //  LocalBuzz
 //
-//  Created by Amanda Le on 10/24/12.
+//  Created by Vincent Leung on 10/24/12.
 //  Copyright (c) 2012 Vincent Leung. All rights reserved.
 //
 
 #import "AddEventViewController.h"
-#import "MapViewAnnotation.h"
-
-@interface AddEventViewController ()
-
-- (void)setUpMap;
-
+#import "TimePickerViewController.h"
+#import "LocationSelectionViewController.h"
+#import "AFHTTPClient.h"
+@interface AddEventViewController () {
+@private NSDate *selectedDate;
+}
 @end
 
 @implementation AddEventViewController
-@synthesize NewEventMapView = _NewEventMapView;
-@synthesize locationManager = _locationManager;
+@synthesize titleField;
+@synthesize latitudeCell;
+@synthesize longitudeCell;
+@synthesize timeCell;
 
+- (IBAction)cancelPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+- (IBAction)timeSelected:(UIStoryboardSegue *)segue {
+    if ([[segue identifier] isEqualToString:@"ReturnTime"]) {
+        TimePickerViewController *timePicker = [segue sourceViewController];
+        selectedDate = timePicker.timePicker.date;
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        self.timeCell.detailTextLabel.text = [dateFormatter stringFromDate:selectedDate];
     }
-    return self;
 }
 
-- (void)viewDidLoad
-{
-	[super viewDidLoad];
-	
-	[self setUpMap];
+- (IBAction)locationSelected:(UIStoryboardSegue *)segue {
+    if ([[segue identifier] isEqualToString:@"ReturnLocation"]) {
+        LocationSelectionViewController *locationSelector = [segue sourceViewController];
+        CLLocationCoordinate2D selectedLatLong = locationSelector.latLong;
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        self.latitudeCell.detailTextLabel.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.latitude]];
+        self.longitudeCell.detailTextLabel.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.longitude]];
+    }
 }
 
-- (void)setUpMap
-{
-	// Set up the map view
-	self.NewEventMapView.delegate = self;
-	
-	self.locationManager = [[CLLocationManager alloc] init];
-	[self.locationManager setDelegate:self];
-	[self.locationManager setDistanceFilter:kCLDistanceFilterNone];
-	[self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-	[self.locationManager startUpdatingLocation];
-	
-	// Zoom in to current location and show with the blue dot
-	[self.NewEventMapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-	self.NewEventMapView.showsUserLocation = YES;
-	
-	// Attach the recognizer
-	UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-	// User needs to press for 1 sec
-	longPressGestureRecognizer.minimumPressDuration = 1.0;
-	[self.NewEventMapView addGestureRecognizer:longPressGestureRecognizer];
+- (IBAction)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"SelectTime"]) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        selectedDate = [dateFormatter dateFromString:self.timeCell.detailTextLabel.text];
+        TimePickerViewController *timePickerController = segue.destinationViewController;
+        timePickerController.timePicker.date = selectedDate;
+    }
+    if ([[segue identifier] isEqualToString:@"EventCreated"]) {
+        NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
+        AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                self.titleField.text, @"event[title]",
+                                [dateFormatter stringFromDate:selectedDate], @"event[time]",
+                                self.longitudeCell.detailTextLabel.text, @"event[longitude]",
+                                self.latitudeCell.detailTextLabel.text, @"event[latitude]",
+                                0, @"event[public]",
+                                @"Random description", @"event[description]",
+                                nil];
+        [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog(@"Response: %@", responseString);
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@", [error localizedDescription]);
+        }];
+    }
 }
 
-- (void)handleLongPress:(UILongPressGestureRecognizer *) longPressGesture
-{
-	if (longPressGesture.state != UIGestureRecognizerStateBegan)
-		return;
-	
-	// Capture the location tapped on map
-	CGPoint pressPoint = [longPressGesture locationInView:self.NewEventMapView];
-	CLLocationCoordinate2D pressPointCoordinate = [self.NewEventMapView convertPoint:pressPoint toCoordinateFromView:self.NewEventMapView];
-	
-	// Drop pin with the location
-	MapViewAnnotation * annotation = [[MapViewAnnotation alloc] initWithTitle:@"New Event" coordinate:pressPointCoordinate];
-	[self.NewEventMapView addAnnotation:annotation];
-	
-	// Prepare to send to server
-	// NOTE: the following are  lat and lon, type of CLLocationDegrees
-	//pressPointCoordinate.latitude;
-	//pressPointCoordinate.longitude;
+- (void) viewDidLoad {
+    self.titleField.delegate = self;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:tapGestureRecognizer];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) hideKeyboard {
+    [self.titleField resignFirstResponder];
 }
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    return [textField resignFirstResponder];
+}
+
 
 @end

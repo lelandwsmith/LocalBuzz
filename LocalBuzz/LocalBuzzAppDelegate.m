@@ -7,15 +7,53 @@
 //
 
 #import "LocalBuzzAppDelegate.h"
+#import "CurrentEventViewController.h"
+#import "SettingsViewController.h"
+
+@interface LocalBuzzAppDelegate ()
+
+@property (strong, nonatomic) UINavigationController *navController;
+@property (strong, nonatomic)  UITabBarController *mainViewController;
+@property (strong, nonatomic) LoginViewController* loginViewController;
+@property (strong, nonatomic) SettingsViewController* logoutViewController;
+-(void)showLoginView;
+
+@end
 
 @implementation LocalBuzzAppDelegate
-
-@synthesize window;
-
+@synthesize navController = _navController;
+@synthesize mainViewController = _mainViewController;
+@synthesize loginViewController = _loginViewController;
+NSString *const FBSessionStateChangedNotification =
+@"com.example.Login:FBSessionStateChangedNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                  bundle:nil];
+    self.mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
+    self.window.rootViewController = self.mainViewController;
+    [self.window makeKeyAndVisible];
+    if (![self openSessionWithAllowLoginUI:NO]) {
+        // No? Display the login page.
+        [self showLoginView];
+    }
     return YES;
+}
+
+- (void)showLoginView
+{
+    NSLog(@"wiwiwiw");
+    UIViewController *topViewController = [self.navController topViewController];
+    UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                          bundle:nil];
+    LoginViewController* loginViewController =
+    [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    self.window.rootViewController = loginViewController;
+}
+
+
+- (void) closeSession {
+    [FBSession.activeSession closeAndClearTokenInformation];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -38,11 +76,87 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBSession.activeSession handleDidBecomeActive];
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
+
+- (void)sessionStateChanged:(FBSession *)session
+                      state:(FBSessionState) state
+                      error:(NSError *)error
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    switch (state) {
+        case FBSessionStateOpen:{
+            self.window.rootViewController = self.mainViewController;
+            self.loginViewController = nil;
+        }
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:{
+            [self.navController popToRootViewControllerAnimated:NO];
+            
+            [FBSession.activeSession closeAndClearTokenInformation];
+            
+            [self showLoginView];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:FBSessionStateChangedNotification
+     object:session];
+    
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Error"
+                                  message:error.localizedDescription
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+
+/*
+ * Opens a Facebook session and optionally shows the login UX.
+ */
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
+    NSArray *permissions = [[NSArray alloc] initWithObjects:
+                            @"user_location",
+                            @"user_birthday",
+                            @"read_friendlists",
+                            nil];
+    return [FBSession openActiveSessionWithReadPermissions:permissions
+                                              allowLoginUI:allowLoginUI
+                                         completionHandler:^(FBSession *session,
+                                                             FBSessionState state,
+                                                             NSError *error) {
+                                             [self sessionStateChanged:session
+                                                                 state:state
+                                                                 error:error];
+                                         }];
+}
+/*
+ * If we have a valid session at the time of openURL call, we handle
+ * Facebook transitions by passing the url argument to handleOpenURL
+ */
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [FBSession.activeSession handleOpenURL:url];
+}
+
+-(void)applicationWillTerminate:(UIApplication *)application {
+    // FBSample logic
+    // if the app is going away, we close the session if it is open
+    // this is a good idea because things may be hanging off the session, that need
+    // releasing (completion block, etc.) and other components in the app may be awaiting
+    // close notification in order to do cleanup
+    [FBSession.activeSession close];
 }
 
 @end
