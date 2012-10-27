@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8F02CCBF1620BD5100719F69 /* CurrentEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */; };
 		8F02CCC11620BD5100719F69 /* PastEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBE1620BD5100719F69 /* PastEventViewController.m */; };
-		8F18F7931638BE0A0091458A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F18F7921638BE0A0091458A /* SettingsViewController.m */; };
 		8FCB0E03161A6ECE0026AACB /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E02161A6ECE0026AACB /* AdSupport.framework */; };
 		8FCB0E05161A6ED50026AACB /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E04161A6ED50026AACB /* Accounts.framework */; };
 		8FCB0E07161A6EE50026AACB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E06161A6EE50026AACB /* Social.framework */; };
@@ -43,6 +42,10 @@
 		BF5B42AB161A3ACB002C67D1 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42AA161A3ACB002C67D1 /* first@2x.png */; };
 		BF5B42B0161A3ACB002C67D1 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42AF161A3ACB002C67D1 /* second.png */; };
 		BF5B42B2161A3ACB002C67D1 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42B1161A3ACB002C67D1 /* second@2x.png */; };
+		BFB09B8F163C5A03001E2BA6 /* SettingTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = BFB09B8C163C59AF001E2BA6 /* SettingTableViewController.h */; };
+		BFB09B90163C5A03001E2BA6 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB09B8D163C59AF001E2BA6 /* SettingTableViewController.m */; };
+		BFB09B93163C5A35001E2BA6 /* UserInfoTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = BFB09B91163C5A20001E2BA6 /* UserInfoTableViewController.h */; };
+		BFB09B94163C5A35001E2BA6 /* UserInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB09B92163C5A20001E2BA6 /* UserInfoTableViewController.m */; };
 		BFD323251638C27F00FE6819 /* TimePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323241638C27F00FE6819 /* TimePickerViewController.m */; };
 		BFD323BD1639C4F500FE6819 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323BC1639C4F500FE6819 /* Event.m */; };
 		BFD323C11639CC9900FE6819 /* EventDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323C01639CC9900FE6819 /* EventDataController.m */; };
@@ -51,8 +54,6 @@
 		D599173A163A3A9B00F4A21F /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5991739163A3A9B00F4A21F /* MapView.m */; };
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
 		D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363D61635756400FE3E1C /* CoreLocation.framework */; };
-		D5CE3F14161A571600CA3A96 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		D5CE3F1C161A5B8F00CA3A96 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D5E94087163B4A5500788C15 /* DDAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E94086163B4A5500788C15 /* DDAnnotation.m */; };
 		D5E9408B163B4AF100788C15 /* DDAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E9408A163B4AF100788C15 /* DDAnnotationView.m */; };
 		D5E9408D163B4CC500788C15 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5E9408C163B4CC500788C15 /* QuartzCore.framework */; };
@@ -62,8 +63,6 @@
 		8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentEventViewController.m; sourceTree = "<group>"; };
 		8F02CCBD1620BD5100719F69 /* PastEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastEventViewController.h; sourceTree = "<group>"; };
 		8F02CCBE1620BD5100719F69 /* PastEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastEventViewController.m; sourceTree = "<group>"; };
-		8F18F7911638BE0A0091458A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		8F18F7921638BE0A0091458A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		8F1916F41638B951005EB9D6 /* CurrentEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentEventViewController.h; sourceTree = "<group>"; };
 		8FCB0E02161A6ECE0026AACB /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		8FCB0E04161A6ED50026AACB /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -115,6 +114,10 @@
 		BF5B42AA161A3ACB002C67D1 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		BF5B42AF161A3ACB002C67D1 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		BF5B42B1161A3ACB002C67D1 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		BFB09B8C163C59AF001E2BA6 /* SettingTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
+		BFB09B8D163C59AF001E2BA6 /* SettingTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
+		BFB09B91163C5A20001E2BA6 /* UserInfoTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewController.h; sourceTree = "<group>"; };
+		BFB09B92163C5A20001E2BA6 /* UserInfoTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoTableViewController.m; sourceTree = "<group>"; };
 		BFD323231638C27F00FE6819 /* TimePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimePickerViewController.h; sourceTree = "<group>"; };
 		BFD323241638C27F00FE6819 /* TimePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePickerViewController.m; sourceTree = "<group>"; };
 		BFD323BB1639C4F500FE6819 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
@@ -314,8 +317,10 @@
 		D5E94074163B20CF00788C15 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				8F18F7911638BE0A0091458A /* SettingsViewController.h */,
-				8F18F7921638BE0A0091458A /* SettingsViewController.m */,
+				BFB09B91163C5A20001E2BA6 /* UserInfoTableViewController.h */,
+				BFB09B92163C5A20001E2BA6 /* UserInfoTableViewController.m */,
+				BFB09B8C163C59AF001E2BA6 /* SettingTableViewController.h */,
+				BFB09B8D163C59AF001E2BA6 /* SettingTableViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -392,14 +397,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB09B93163C5A35001E2BA6 /* UserInfoTableViewController.h in Sources */,
+				BFB09B94163C5A35001E2BA6 /* UserInfoTableViewController.m in Sources */,
+				BFB09B8F163C5A03001E2BA6 /* SettingTableViewController.h in Sources */,
+				BFB09B90163C5A03001E2BA6 /* SettingTableViewController.m in Sources */,
 				BF5B4297161A3ACB002C67D1 /* main.m in Sources */,
 				BF5B429B161A3ACB002C67D1 /* LocalBuzzAppDelegate.m in Sources */,
 				8FCB0E41161CAE810026AACB /* LoginViewController.m in Sources */,
 				8F02CCBF1620BD5100719F69 /* CurrentEventViewController.m in Sources */,
 				8F02CCC11620BD5100719F69 /* PastEventViewController.m in Sources */,
-				8F18F7931638BE0A0091458A /* SettingsViewController.m in Sources */,
-				D5CE3F14161A571600CA3A96 /* (null) in Sources */,
-				D5CE3F1C161A5B8F00CA3A96 /* (null) in Sources */,
 				BF2591CA1638AA74006E895E /* AddEventViewController.m in Sources */,
 				BFD323251638C27F00FE6819 /* TimePickerViewController.m in Sources */,
 				BFD323BD1639C4F500FE6819 /* Event.m in Sources */,
