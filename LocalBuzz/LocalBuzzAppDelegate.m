@@ -8,14 +8,12 @@
 
 #import "LocalBuzzAppDelegate.h"
 #import "CurrentEventViewController.h"
-#import "SettingsViewController.h"
 
 @interface LocalBuzzAppDelegate ()
 
 @property (strong, nonatomic) UINavigationController *navController;
 @property (strong, nonatomic)  UITabBarController *mainViewController;
 @property (strong, nonatomic) LoginViewController* loginViewController;
-@property (strong, nonatomic) SettingsViewController* logoutViewController;
 -(void)showLoginView;
 
 @end
@@ -25,7 +23,7 @@
 @synthesize mainViewController = _mainViewController;
 @synthesize loginViewController = _loginViewController;
 NSString *const FBSessionStateChangedNotification =
-@"com.example.Login:FBSessionStateChangedNotification";
+@"eecs441.info.vforvincent.Login:FBSessionStateChangedNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
@@ -37,20 +35,18 @@ NSString *const FBSessionStateChangedNotification =
         // No? Display the login page.
         [self showLoginView];
     }
+    [FBProfilePictureView class];
     return YES;
 }
 
 - (void)showLoginView
 {
-    NSLog(@"wiwiwiw");
-    UIViewController *topViewController = [self.navController topViewController];
     UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
                                                           bundle:nil];
     LoginViewController* loginViewController =
     [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    self.window.rootViewController = loginViewController;
+    self.window.rootViewController = (UIViewController*)loginViewController;
 }
-
 
 - (void) closeSession {
     [FBSession.activeSession closeAndClearTokenInformation];
@@ -109,11 +105,12 @@ NSString *const FBSessionStateChangedNotification =
     
     if (error) {
         UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Error"
-                                  message:error.localizedDescription
+                                  initWithTitle:@"Login Failed"
+                                  message:@"Please grant the app the required permission and retry"
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
+        self.session = nil;
         [alertView show];
     }
 }

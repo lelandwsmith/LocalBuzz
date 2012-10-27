@@ -1,5 +1,3 @@
-
-
 #import "LoginViewController.h"
 #import "LocalBuzzAppDelegate.h"
 #import "AFHTTPClient.h"
@@ -7,10 +5,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *textview;
 @property (strong, nonatomic) IBOutlet UIButton *loginbtn;
 
-    
-
 - (IBAction)click :(UIButton *)sender;
-- (void)updateView;
 
 @end
 
@@ -27,14 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
-	// Do any additional setup after loading the view, typically from a nib.
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(sessionStateChanged:)
      name:FBSessionStateChangedNotification
      object:nil];
-    // Check the session for a cached token to show the proper authenticated
-    // UI. However, since this is not user intitiated, do not show the login UX.
     LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate openSessionWithAllowLoginUI:NO];
 
@@ -44,10 +36,9 @@
 
 - (void)sessionStateChanged:(NSNotification*)notification {
     if (FBSession.activeSession.isOpen) {
-        //NSLog(@"isIN");
         [self.loginbtn setTitle:@"Logout" forState:UIControlStateNormal];
         self.textview.hidden = NO;
-     //   NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
+        NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection,
                                            id<FBGraphUser> user,
@@ -57,7 +48,10 @@
                  NSString *fbId = user.id;
                  NSString *firstName = user.first_name;
                  NSString *lastName = user.last_name;
-                 
+                 NSString *location = [user.location objectForKey:@"name"];
+                 [user_data setObject:username forKey:@"name"];
+                 [user_data setObject:location forKey:@"location"];
+                 [user_data setObject:fbId forKey:@"id"];
                  NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
                  AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
                  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -73,7 +67,16 @@
                  }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      NSLog(@"%@", [error localizedDescription]);
                  }];
-                 
+             } else {
+                // NSLog(@"error!!!!!!!login");
+             }
+         }];
+        self.textview.hidden = NO;
+    } else {
+        [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
+        self.textview.hidden = YES;
+    }
+}
                  //NSString *userInfo = @"";
                  
 //                 //get user name
@@ -123,34 +126,15 @@
                  
                  // Display the user info
                  //self.textview.text = userInfo;
-             }
-         }];
-        //store data locally
-        
-        
-        ////////////
-        self.textview.hidden = NO;
-    } else {
-        //NSLog(@"isOUTS1");
-        [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
-        self.textview.hidden = YES;
-    }
-}
+
 
 -(IBAction)click :(UIButton *)sender{
-    // get the app delegate so that we can access the session property
     LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (FBSession.activeSession.isOpen) {
-        //NSLog(@"want to log out");
          [appDelegate closeSession];
     } else {
-        // The user has initiated a login, so call the openSession method
-        // and show the login UX if necessary.
-        //NSLog(@"want to log in");
         [appDelegate openSessionWithAllowLoginUI:YES];
     }
-
-
 }
 
 
@@ -161,7 +145,6 @@
 {
     self.loginbtn = nil;
     self.textview = nil;
-    
     [super viewDidUnload];
 }
 

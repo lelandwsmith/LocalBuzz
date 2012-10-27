@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		8F02CCBF1620BD5100719F69 /* CurrentEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */; };
 		8F02CCC11620BD5100719F69 /* PastEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBE1620BD5100719F69 /* PastEventViewController.m */; };
-		8F18F7931638BE0A0091458A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F18F7921638BE0A0091458A /* SettingsViewController.m */; };
+		8F18F7CF163B360C0091458A /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F18F7CE163B360C0091458A /* SettingTableViewController.m */; };
+		8F18F7D2163B43380091458A /* UserInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F18F7D1163B43380091458A /* UserInfoTableViewController.m */; };
 		8FCB0E03161A6ECE0026AACB /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E02161A6ECE0026AACB /* AdSupport.framework */; };
 		8FCB0E05161A6ED50026AACB /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E04161A6ED50026AACB /* Accounts.framework */; };
 		8FCB0E07161A6EE50026AACB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E06161A6EE50026AACB /* Social.framework */; };
@@ -50,16 +51,18 @@
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
 		D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363D61635756400FE3E1C /* CoreLocation.framework */; };
 		D5C363DB16357A4F00FE3E1C /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */; };
-		D5CE3F14161A571600CA3A96 /* PastEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CE3F13161A571600CA3A96 /* PastEventViewController.m */; };
-		D5CE3F1C161A5B8F00CA3A96 /* CurrentEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CE3F1B161A5B8F00CA3A96 /* CurrentEventViewController.m */; };
+		D5CE3F14161A571600CA3A96 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D5CE3F1C161A5B8F00CA3A96 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentEventViewController.m; sourceTree = "<group>"; };
 		8F02CCBD1620BD5100719F69 /* PastEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastEventViewController.h; sourceTree = "<group>"; };
 		8F02CCBE1620BD5100719F69 /* PastEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastEventViewController.m; sourceTree = "<group>"; };
-		8F18F7911638BE0A0091458A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		8F18F7921638BE0A0091458A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		8F18F7CD163B360C0091458A /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
+		8F18F7CE163B360C0091458A /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
+		8F18F7D0163B43380091458A /* UserInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewController.h; sourceTree = "<group>"; };
+		8F18F7D1163B43380091458A /* UserInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoTableViewController.m; sourceTree = "<group>"; };
 		8F1916F41638B951005EB9D6 /* CurrentEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentEventViewController.h; sourceTree = "<group>"; };
 		8FCB0E02161A6ECE0026AACB /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		8FCB0E04161A6ED50026AACB /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -213,12 +216,12 @@
 		BF5B4290161A3ACB002C67D1 /* LocalBuzz */ = {
 			isa = PBXGroup;
 			children = (
-				8F18F7911638BE0A0091458A /* SettingsViewController.h */,
-				8F18F7921638BE0A0091458A /* SettingsViewController.m */,
 				BFD323BB1639C4F500FE6819 /* Event.h */,
 				BFD323BC1639C4F500FE6819 /* Event.m */,
 				BFD323C91639FA7800FE6819 /* EventDetailViewController.h */,
 				BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */,
+				8F18F7CD163B360C0091458A /* SettingTableViewController.h */,
+				8F18F7CE163B360C0091458A /* SettingTableViewController.m */,
 				BFD323BF1639CC9900FE6819 /* EventDataController.h */,
 				BFD323C01639CC9900FE6819 /* EventDataController.m */,
 				BF2591C81638AA74006E895E /* AddEventViewController.h */,
@@ -226,6 +229,8 @@
 				BF5B4299161A3ACB002C67D1 /* LocalBuzzAppDelegate.h */,
 				BF5B429A161A3ACB002C67D1 /* LocalBuzzAppDelegate.m */,
 				BF5B42A2161A3ACB002C67D1 /* MainStoryboard.storyboard */,
+				8F18F7D0163B43380091458A /* UserInfoTableViewController.h */,
+				8F18F7D1163B43380091458A /* UserInfoTableViewController.m */,
 				8F1916F41638B951005EB9D6 /* CurrentEventViewController.h */,
 				8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */,
 				8F02CCBD1620BD5100719F69 /* PastEventViewController.h */,
@@ -234,10 +239,6 @@
 				BFD323241638C27F00FE6819 /* TimePickerViewController.m */,
 				D5C363D916357A4F00FE3E1C /* MapViewAnnotation.h */,
 				D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */,
-				D5CE3F12161A571600CA3A96 /* PastEventViewController.h */,
-				D5CE3F13161A571600CA3A96 /* PastEventViewController.m */,
-				D5CE3F1A161A5B8F00CA3A96 /* CurrentEventViewController.h */,
-				D5CE3F1B161A5B8F00CA3A96 /* CurrentEventViewController.m */,
 				BF2AE0D2163A08E90098A8C9 /* RegexKitLite.h */,
 				BF2AE0D3163A08E90098A8C9 /* RegexKitLite.m */,
 				BF5B42A8161A3ACB002C67D1 /* first.png */,
@@ -342,9 +343,8 @@
 				8FCB0E41161CAE810026AACB /* LoginViewController.m in Sources */,
 				8F02CCBF1620BD5100719F69 /* CurrentEventViewController.m in Sources */,
 				8F02CCC11620BD5100719F69 /* PastEventViewController.m in Sources */,
-				8F18F7931638BE0A0091458A /* SettingsViewController.m in Sources */,
-				D5CE3F14161A571600CA3A96 /* PastEventViewController.m in Sources */,
-				D5CE3F1C161A5B8F00CA3A96 /* CurrentEventViewController.m in Sources */,
+				D5CE3F14161A571600CA3A96 /* (null) in Sources */,
+				D5CE3F1C161A5B8F00CA3A96 /* (null) in Sources */,
 				D5C363DB16357A4F00FE3E1C /* MapViewAnnotation.m in Sources */,
 				BF2591CA1638AA74006E895E /* AddEventViewController.m in Sources */,
 				BFD323251638C27F00FE6819 /* TimePickerViewController.m in Sources */,
@@ -361,6 +361,8 @@
 				BF2AE137163A176F0098A8C9 /* AFURLConnectionOperation.m in Sources */,
 				BF2AE138163A176F0098A8C9 /* AFXMLRequestOperation.m in Sources */,
 				BF2AE139163A176F0098A8C9 /* UIImageView+AFNetworking.m in Sources */,
+				8F18F7CF163B360C0091458A /* SettingTableViewController.m in Sources */,
+				8F18F7D2163B43380091458A /* UserInfoTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
