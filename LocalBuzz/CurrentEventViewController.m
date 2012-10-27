@@ -70,7 +70,7 @@
 
 - (void) refreshEvents {
     [self.dataController emptyEventList];
-    NSURL *url = [NSURL URLWithString:@"http://localhost.vforvincent.info"];
+    NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     CLLocationCoordinate2D currentCoord = [[self.locationManager location] coordinate];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -85,7 +85,7 @@
             Event *eventToBeAdded = [[Event alloc] initWithDictionary:value];
             [self.dataController addEventToEventList:eventToBeAdded];
         }
-        NSLog(@"%d", [events count]);
+        //NSLog(@"%d", [events count]);
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
@@ -103,8 +103,16 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    [self refreshEvents];
-    NSLog(@"%@", [[locations lastObject] description]);
+    if ([locations count] > 1) {
+        CLLocation *latest = [locations lastObject];
+        CLLocation *secondToLatest = [locations objectAtIndex:([locations count]- 2)];
+        if ([latest distanceFromLocation:secondToLatest] > 10) {
+            [self refreshEvents];
+        }
+    } else if ([locations count] == 1) {
+        [self refreshEvents];
+    }
+    NSLog(@"%d", [locations count]);
     [self.locationManager stopUpdatingLocation];
 }
 
