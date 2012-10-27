@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 @class EventDataController;
 
-@interface CurrentEventViewController : UITableViewController
+@interface CurrentEventViewController : UITableViewController <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) EventDataController *dataController;
-
+@property (strong, nonatomic) CLLocationManager *locationManager;
 -(IBAction)eventCreated:(UIStoryboardSegue *)segue;
 @end

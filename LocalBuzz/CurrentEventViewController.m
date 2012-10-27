@@ -18,6 +18,19 @@
 
 @implementation CurrentEventViewController
 @synthesize dataController;
+@synthesize locationManager = _locationManager;
+
+- (CLLocationManager *) locationManager {
+    if (_locationManager == nil) {
+        _locationManager = [[CLLocationManager alloc] init];
+        if ([CLLocationManager locationServicesEnabled]) {
+            _locationManager.delegate = self;
+            _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+            _locationManager.distanceFilter = kCLDistanceFilterNone;
+        }
+    }
+    return _locationManager;
+}
 
 - (void) awakeFromNib {
     [super awakeFromNib];
@@ -42,7 +55,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self refreshEvents];
+    [self.locationManager startUpdatingLocation];
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
     refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to refresh"];
     [refresh addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
@@ -57,9 +70,14 @@
 
 - (void) refreshEvents {
     [self.dataController emptyEventList];
-    NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
+    NSURL *url = [NSURL URLWithString:@"http://localhost:3000"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    [httpClient getPath:@"events.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    CLLocationCoordinate2D currentCoord = [[self.locationManager location] coordinate];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSNumber numberWithDouble:currentCoord.latitude], @"lat",
+                            [NSNumber numberWithDouble:currentCoord.longitude], @"lng",
+                            nil];
+    [httpClient getPath:@"events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSEnumerator *enumerator = [events objectEnumerator];
         id value;
@@ -75,13 +93,24 @@
 }
 
 - (void)refreshView:(UIRefreshControl *)refresh {
+    [self.locationManager startUpdatingLocation];
     refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refreshing events..."];
-    [self refreshEvents];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMM d, h:mm a"];
     NSString *lastUpdate = [NSString stringWithFormat:@"Last updated at: %@", [formatter stringFromDate:[NSDate date]]];
     refresh.attributedTitle = [[NSAttributedString alloc] initWithString:lastUpdate];
     [refresh endRefreshing];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    [self refreshEvents];
+    NSLog(@"%@", [[locations lastObject] description]);
+    [self.locationManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"%@", [error localizedDescription]);
+    [self.locationManager stopUpdatingLocation];
 }
 
 - (void)viewDidUnload
@@ -186,6 +215,7 @@
   if ([segue.identifier isEqualToString:@"ShowEventDetail"]) {
       EventDetailViewController *eventDetailController = [segue destinationViewController];
       eventDetailController.event = [self.dataController objectInEventListAtIndex:[self.tableView indexPathForSelectedRow].row];
+      eventDetailController.currentCoordinate = [[self.locationManager location] coordinate];
   }
 }
 

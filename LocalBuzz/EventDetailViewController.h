@@ -12,7 +12,7 @@
 
 @class Event;
 
-@interface EventDetailViewController : UITableViewController <CLLocationManagerDelegate>
+@interface EventDetailViewController : UITableViewController
 
 @property (nonatomic, strong) Event *event;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -20,6 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UITableViewCell *mapLable;
-@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic) CLLocationCoordinate2D currentCoordinate;
 
 @end

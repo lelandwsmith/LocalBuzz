@@ -20,6 +20,7 @@
 @synthesize timeLabel = _timeLabel;
 @synthesize locationLabel = _locationLabel;
 @synthesize mapLable = _mapLable;
+@synthesize currentCoordinate = _currentCoordinate;
 
 
 - (void) setEvent:(Event *)event {
@@ -27,18 +28,6 @@
         _event = event;
         [self configureView];
     }
-}
-
-- (CLLocationManager *) locationManager {
-    if (_locationManager == nil) {
-        _locationManager = [[CLLocationManager alloc] init];
-        if ([CLLocationManager locationServicesEnabled]) {
-            _locationManager.delegate = self;
-            _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-            _locationManager.distanceFilter = kCLDistanceFilterNone;
-        }
-    }
-    return _locationManager;
 }
 
 - (void) configureView {
@@ -66,7 +55,7 @@
 	[self.mapLable addSubview:mapView];
 	
 	// Fake the data of the start location
-	CLLocationCoordinate2D startCoordinate = [self.locationManager.location coordinate];
+	CLLocationCoordinate2D startCoordinate = self.currentCoordinate;
     NSLog(@"%f, %f", startCoordinate.latitude, startCoordinate.longitude);
 	MapViewAnnotation *startAnnotation = [[MapViewAnnotation alloc] initWithTitle:@"Start" coordinate:startCoordinate];
 	
@@ -77,18 +66,10 @@
 	[mapView showRouteFrom:startAnnotation to:endAnnotation];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    [self configureView];
-    [self.locationManager stopUpdatingLocation];
-}
 
-- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSLog(@"%@", [error localizedDescription]);
-    [self.locationManager stopUpdatingLocation];
-}
 - (void) viewDidLoad {
     [super viewDidLoad];
-    [self.locationManager startUpdatingLocation];
+    [self configureView];
 }
 
 @end
