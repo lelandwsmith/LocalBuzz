@@ -78,14 +78,15 @@
                             [NSNumber numberWithDouble:currentCoord.longitude], @"lng",
                             nil];
     [httpClient getPath:@"events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:
+                                NSJSONReadingMutableContainers error:nil];
+        NSLog(@"Events count: %d", [events count]);
         NSEnumerator *enumerator = [events objectEnumerator];
         id value;
         while (value = [enumerator nextObject]) {
             Event *eventToBeAdded = [[Event alloc] initWithDictionary:value];
             [self.dataController addEventToEventList:eventToBeAdded];
         }
-        //NSLog(@"%d", [events count]);
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
@@ -112,7 +113,7 @@
     } else if ([locations count] == 1) {
         [self refreshEvents];
     }
-    NSLog(@"%d", [locations count]);
+    NSLog(@"Location count: %d", [locations count]);
     [self.locationManager stopUpdatingLocation];
 }
 

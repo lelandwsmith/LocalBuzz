@@ -71,10 +71,10 @@
 	
 
     // Zoom in to current location and show with the blue dot
-	[self.mapView setUserTrackingMode:MKUserTrackingModeNone];
+	[self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
 	self.mapView.showsUserLocation = YES;
     [self.mapView setCenterCoordinate:location.coordinate animated:YES];
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000);
     [self.mapView setRegion:region];
 	// Attach the recognizer
 	UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];

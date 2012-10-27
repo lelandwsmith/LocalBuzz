@@ -33,7 +33,12 @@
 }
 
 - (Event *)objectInEventListAtIndex:(NSUInteger)index {
-    return [self.eventList objectAtIndex:index];
+    NSLog(@"Event count inside: %d, requested index: %d", [self.eventList count], index);
+    if (index < [self.eventList count]) {
+        return [self.eventList objectAtIndex:index];
+    } else {
+        return nil;
+    }
 }
 
 - (void) addEventToEventList:(Event *)event {
