@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "RegexKitLite.h"
-#import "MapViewAnnotation.h"
+#import "DDAnnotation.h"
+//#import "MapViewAnnotation.h"
 
 @interface MapView : UIView<MKMapViewDelegate> {
 	
@@ -21,6 +22,6 @@
 
 @property (nonatomic, retain) UIColor* lineColor;
 
--(void) showRouteFrom: (MapViewAnnotation*) f to:(MapViewAnnotation*) t;
+-(void) showRouteFrom: (DDAnnotation*) f to:(DDAnnotation*) t;
 
 @end

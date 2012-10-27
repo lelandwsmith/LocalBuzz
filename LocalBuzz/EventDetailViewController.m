@@ -50,18 +50,17 @@
 	}
 }
 
-- (void) setUpMap:(NSNumber *)destLat :(NSNumber *)destLon {
+- (void) setUpMap:(NSNumber *)destLat :(NSNumber *)destLng {
 	MapView *mapView = [[MapView alloc] initWithFrame:self.mapLable.bounds];
 	[self.mapLable addSubview:mapView];
 	
 	// Fake the data of the start location
 	CLLocationCoordinate2D startCoordinate = self.currentCoordinate;
-    NSLog(@"%f, %f", startCoordinate.latitude, startCoordinate.longitude);
-	MapViewAnnotation *startAnnotation = [[MapViewAnnotation alloc] initWithTitle:@"Start" coordinate:startCoordinate];
+	DDAnnotation *startAnnotation = [[DDAnnotation alloc] initWithCoordinate:startCoordinate addressDictionary:nil];
 	
 	// Fake the data of destination location
-	CLLocationCoordinate2D endCoordinate = CLLocationCoordinate2DMake([destLat doubleValue], [destLon doubleValue]);
-	MapViewAnnotation *endAnnotation = [[MapViewAnnotation alloc] initWithTitle:@"Destination" coordinate:endCoordinate];
+	CLLocationCoordinate2D endCoordinate = CLLocationCoordinate2DMake([destLat doubleValue], [destLng doubleValue]);
+	DDAnnotation *endAnnotation = [[DDAnnotation alloc] initWithCoordinate:endCoordinate addressDictionary:nil];
 	
 	[mapView showRouteFrom:startAnnotation to:endAnnotation];
 }

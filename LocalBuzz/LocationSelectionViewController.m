@@ -7,10 +7,12 @@
 //
 
 #import "LocationSelectionViewController.h"
-#import "MapViewAnnotation.h"
+#import "DDAnnotation.h"
+#import "DDAnnotationView.h"
 
 @interface LocationSelectionViewController ()
-
+- (void)setUpMap;
+- (void)coordinateChanged_:(NSNotification *)notification;
 @end
 
 @implementation LocationSelectionViewController
@@ -30,7 +32,27 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	[self setUpMap];
 	
+	
+	
+	/*
+	CLLocationCoordinate2D theCoordinate;
+	theCoordinate.latitude = 37.810000;
+	theCoordinate.longitude = -122.477989;
+	
+	DDAnnotation *annotation = [[DDAnnotation alloc] initWithCoordinate:theCoordinate addressDictionary:nil];
+	annotation.title = @"Drag to Move Pin";
+	annotation.subtitle = [NSString	stringWithFormat:@"%f %f", annotation.coordinate.latitude, annotation.coordinate.longitude];
+	
+	[self.mapView addAnnotation:annotation];
+	 */
+}
+
+
+- (void)setUpMap
+{
+	// Set up the map view
 	self.mapView.delegate = self;
 	
 	self.locationManager = [[CLLocationManager alloc] init];
@@ -39,16 +61,19 @@
 	[self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
 	[self.locationManager startUpdatingLocation];
 	
-	// Zoom in to current location and show with the blue dot
+    // Zoom in to current location and show with the blue dot
 	[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 	self.mapView.showsUserLocation = YES;
 	
 	// Attach the recognizer
 	UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-	// User needs to press for 1 sec
+	// User needs to press for 0.5 sec
 	longPressGestureRecognizer.minimumPressDuration = 0.5;
 	[self.mapView addGestureRecognizer:longPressGestureRecognizer];
+    
+    
 }
+
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *) longPressGesture
 {
@@ -60,14 +85,63 @@
 	CLLocationCoordinate2D pressPointCoordinate = [self.mapView convertPoint:pressPoint toCoordinateFromView:self.mapView];
 	
 	// Drop pin with the location
-	MapViewAnnotation * annotation = [[MapViewAnnotation alloc] initWithTitle:@"New Event" coordinate:pressPointCoordinate];
+	DDAnnotation *annotation = [[DDAnnotation alloc] initWithCoordinate:pressPointCoordinate addressDictionary:nil];
+	annotation.title = @"New Event";
+	annotation.subtitle = [NSString	stringWithFormat:@"%f %f", annotation.coordinate.latitude, annotation.coordinate.longitude];
 	[self.mapView addAnnotation:annotation];
 	
-    self.latLong = pressPointCoordinate;
-	// Prepare to send to server
-	// NOTE: the following are  lat and lon, type of CLLocationDegrees
-	//pressPointCoordinate.latitude;
-	//pressPointCoordinate.longitude;
+	// Return lat and lon
+	self.latLong = pressPointCoordinate;
+}
+
+
+// Override to allow orientations other than the default portrait orientation.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	return YES;
+}
+
+- (void)viewDidUnload {
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+	
+	self.mapView.delegate = nil;
+	self.mapView = nil;
+}
+
+#pragma mark -
+#pragma mark MKMapViewDelegate
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
+	
+	if (oldState == MKAnnotationViewDragStateDragging) {
+		DDAnnotation *annotation = (DDAnnotation *)annotationView.annotation;
+		annotation.subtitle = [NSString	stringWithFormat:@"%f %f", annotation.coordinate.latitude, annotation.coordinate.longitude];
+	}
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+	
+	if ([annotation isKindOfClass:[MKUserLocation class]]) {
+		return nil;
+	}
+	
+	static NSString * const kPinAnnotationIdentifier = @"PinIdentifier";
+	MKAnnotationView *draggablePinView = [self.mapView dequeueReusableAnnotationViewWithIdentifier:kPinAnnotationIdentifier];
+	
+	if (draggablePinView) {
+		draggablePinView.annotation = annotation;
+	} else {
+		// Use class method to create DDAnnotationView (on iOS 3) or built-in draggble MKPinAnnotationView (on iOS 4).
+		draggablePinView = [DDAnnotationView annotationViewWithAnnotation:annotation reuseIdentifier:kPinAnnotationIdentifier mapView:self.mapView];
+		
+		if ([draggablePinView isKindOfClass:[DDAnnotationView class]]) {
+			// draggablePinView is DDAnnotationView on iOS 3.
+		} else {
+			// draggablePinView instance will be built-in draggable MKPinAnnotationView when running on iOS 4.
+		}
+	}
+	
+	return draggablePinView;
 }
 
 - (void)didReceiveMemoryWarning

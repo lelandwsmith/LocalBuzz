@@ -51,9 +51,11 @@
 		D599173A163A3A9B00F4A21F /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5991739163A3A9B00F4A21F /* MapView.m */; };
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
 		D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363D61635756400FE3E1C /* CoreLocation.framework */; };
-		D5C363DB16357A4F00FE3E1C /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */; };
 		D5CE3F14161A571600CA3A96 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D5CE3F1C161A5B8F00CA3A96 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D5E94087163B4A5500788C15 /* DDAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E94086163B4A5500788C15 /* DDAnnotation.m */; };
+		D5E9408B163B4AF100788C15 /* DDAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E9408A163B4AF100788C15 /* DDAnnotationView.m */; };
+		D5E9408D163B4CC500788C15 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5E9408C163B4CC500788C15 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,8 +129,11 @@
 		D5991739163A3A9B00F4A21F /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		D5C363C7163441E600FE3E1C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D5C363D61635756400FE3E1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		D5C363D916357A4F00FE3E1C /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
-		D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotation.m; sourceTree = "<group>"; };
+		D5E94085163B4A5500788C15 /* DDAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAnnotation.h; sourceTree = "<group>"; };
+		D5E94086163B4A5500788C15 /* DDAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAnnotation.m; sourceTree = "<group>"; };
+		D5E94089163B4AF100788C15 /* DDAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAnnotationView.h; sourceTree = "<group>"; };
+		D5E9408A163B4AF100788C15 /* DDAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAnnotationView.m; sourceTree = "<group>"; };
+		D5E9408C163B4CC500788C15 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5E9408D163B4CC500788C15 /* QuartzCore.framework in Frameworks */,
 				BF25918816365A17006E895E /* SystemConfiguration.framework in Frameworks */,
 				8FCB0E07161A6EE50026AACB /* Social.framework in Frameworks */,
 				8FCB0E05161A6ED50026AACB /* Accounts.framework in Frameworks */,
@@ -200,6 +206,7 @@
 		BF5B4289161A3ACB002C67D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D5E9408C163B4CC500788C15 /* QuartzCore.framework */,
 				BF2AE140163A19220098A8C9 /* FacebookSDKResources.bundle */,
 				BF2AE13E163A19160098A8C9 /* FacebookSDK.framework */,
 				BF25918716365A17006E895E /* SystemConfiguration.framework */,
@@ -231,8 +238,8 @@
 				BFD323BC1639C4F500FE6819 /* Event.m */,
 				BFD323BF1639CC9900FE6819 /* EventDataController.h */,
 				BFD323C01639CC9900FE6819 /* EventDataController.m */,
-				D5C363D916357A4F00FE3E1C /* MapViewAnnotation.h */,
-				D5C363DA16357A4F00FE3E1C /* MapViewAnnotation.m */,
+				D5E94085163B4A5500788C15 /* DDAnnotation.h */,
+				D5E94086163B4A5500788C15 /* DDAnnotation.m */,
 				BF2AE0D2163A08E90098A8C9 /* RegexKitLite.h */,
 				BF2AE0D3163A08E90098A8C9 /* RegexKitLite.m */,
 				BF5B42A8161A3ACB002C67D1 /* first.png */,
@@ -296,6 +303,8 @@
 				BF2591C91638AA74006E895E /* AddEventViewController.m */,
 				D599171A163A269200F4A21F /* LocationSelectionViewController.h */,
 				D599171B163A269200F4A21F /* LocationSelectionViewController.m */,
+				D5E94089163B4AF100788C15 /* DDAnnotationView.h */,
+				D5E9408A163B4AF100788C15 /* DDAnnotationView.m */,
 				BFD323231638C27F00FE6819 /* TimePickerViewController.h */,
 				BFD323241638C27F00FE6819 /* TimePickerViewController.m */,
 			);
@@ -391,7 +400,6 @@
 				8F18F7931638BE0A0091458A /* SettingsViewController.m in Sources */,
 				D5CE3F14161A571600CA3A96 /* (null) in Sources */,
 				D5CE3F1C161A5B8F00CA3A96 /* (null) in Sources */,
-				D5C363DB16357A4F00FE3E1C /* MapViewAnnotation.m in Sources */,
 				BF2591CA1638AA74006E895E /* AddEventViewController.m in Sources */,
 				BFD323251638C27F00FE6819 /* TimePickerViewController.m in Sources */,
 				BFD323BD1639C4F500FE6819 /* Event.m in Sources */,
@@ -409,6 +417,8 @@
 				BF2AE139163A176F0098A8C9 /* UIImageView+AFNetworking.m in Sources */,
 				D599171C163A269200F4A21F /* LocationSelectionViewController.m in Sources */,
 				D599173A163A3A9B00F4A21F /* MapView.m in Sources */,
+				D5E94087163B4A5500788C15 /* DDAnnotation.m in Sources */,
+				D5E9408B163B4AF100788C15 /* DDAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

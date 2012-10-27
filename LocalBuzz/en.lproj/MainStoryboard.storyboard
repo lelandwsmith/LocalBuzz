@@ -55,7 +55,13 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Past Events" id="G8e-VV-1ZX"/>
+                    <navigationItem key="navigationItem" title="Past Events" id="G8e-VV-1ZX">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="zvV-lD-dat">
+                            <connections>
+                                <segue destination="apg-Ob-dik" kind="modal" id="jVP-Ee-EgF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UgO-ZM-qrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,7 +80,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HYk-S9-A3n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-527" y="844"/>
+            <point key="canvasLocation" x="1209" y="1300"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="2Jv-IB-xjp">
@@ -123,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDr-nf-xR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="527" y="1366"/>
+            <point key="canvasLocation" x="1719" y="1319"/>
         </scene>
         <!--Navigation Controller - Setting-->
         <scene sceneID="Dnp-d6-wSX">
@@ -139,7 +145,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6TB-NK-Dbr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="881" y="898"/>
+            <point key="canvasLocation" x="-51" y="1482"/>
         </scene>
         <!--Settings View Controller - Settings-->
         <scene sceneID="A0n-hA-bF6">
@@ -179,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sk9-Oa-3XN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1333" y="1203"/>
+            <point key="canvasLocation" x="462" y="1495"/>
         </scene>
         <!--Navigation Controller - Past-->
         <scene sceneID="VWm-Gr-V74">
@@ -325,7 +331,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="aA4-Oj-Lkd" kind="push" identifier="SelectLocation" id="jDt-4q-hgQ"/>
+                                            <segue destination="aA4-Oj-Lkd" kind="push" id="sZ3-ZT-gA6"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" textLabel="b04-8s-mU7" detailTextLabel="mQF-bw-FIa" style="IBUITableViewCellStyleValue1" id="QM5-8E-FIF">
@@ -470,7 +476,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5M-3x-OJz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oAO-zC-AQA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2103" y="-674"/>
+            <point key="canvasLocation" x="2123" y="-286"/>
         </scene>
         <!--Location Selection View Controller-->
         <scene sceneID="fCy-UZ-93f">
@@ -480,14 +486,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="q2u-8h-cVd"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f24-ek-eZy">
+                                <connections>
+                                    <outlet property="delegate" destination="aA4-Oj-Lkd" id="n2A-f6-Lz2"/>
+                                </connections>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="q2u-8h-cVd" firstAttribute="leading" secondItem="Jqu-K4-OFK" secondAttribute="leading" type="default" id="8vH-vc-NFG"/>
-                            <constraint firstItem="q2u-8h-cVd" firstAttribute="bottom" secondItem="Jqu-K4-OFK" secondAttribute="bottom" type="default" id="JAY-ZC-VmD"/>
-                            <constraint firstItem="q2u-8h-cVd" firstAttribute="top" secondItem="Jqu-K4-OFK" secondAttribute="top" type="default" id="hrN-It-5fX"/>
-                            <constraint firstItem="q2u-8h-cVd" firstAttribute="trailing" secondItem="Jqu-K4-OFK" secondAttribute="trailing" type="default" id="mCT-Ud-WiK"/>
+                            <constraint firstItem="f24-ek-eZy" firstAttribute="bottom" secondItem="Jqu-K4-OFK" secondAttribute="bottom" type="default" id="jqt-16-SaZ"/>
+                            <constraint firstItem="f24-ek-eZy" firstAttribute="top" secondItem="Jqu-K4-OFK" secondAttribute="top" type="default" id="pgY-LD-wIy"/>
+                            <constraint firstItem="f24-ek-eZy" firstAttribute="leading" secondItem="Jqu-K4-OFK" secondAttribute="leading" type="default" id="tsT-fD-T98"/>
+                            <constraint firstItem="f24-ek-eZy" firstAttribute="trailing" secondItem="Jqu-K4-OFK" secondAttribute="trailing" type="default" id="wbN-az-gRt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5CU-ms-0GY">
@@ -498,13 +508,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapView" destination="q2u-8h-cVd" id="q4B-kj-Amy"/>
+                        <outlet property="mapView" destination="f24-ek-eZy" id="v47-jH-Px3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fuO-bb-4op" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Wio-OT-ckk" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2115" y="102"/>
+            <point key="canvasLocation" x="2123" y="414"/>
         </scene>
         <!--Event Detail View Controller - Event Detail-->
         <scene sceneID="1Vm-Ii-0dL">
@@ -635,13 +645,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5e-8N-Kup" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1374" y="441"/>
+            <point key="canvasLocation" x="1290" y="473"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QLF-UK-2FI">
             <objects>
                 <navigationController id="apg-Ob-dik" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="hh6-s1-5s2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6M0-IL-HU2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -728,6 +739,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="h7R-LA-vB5"/>
+        <segue reference="jVP-Ee-EgF"/>
+        <segue reference="dtF-dx-EyL"/>
     </inferredMetricsTieBreakers>
 </document>
