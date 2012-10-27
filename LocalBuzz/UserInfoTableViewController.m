@@ -30,7 +30,7 @@
     NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
     NameCell.text=[user_data stringForKey:@"name"];
     LocationCell.text=[user_data stringForKey:@"location"];
-    NSLog(@"id is %@",[user_data stringForKey:@"id"]);
+   // NSLog(@"id is %@",[user_data stringForKey:@"id"]);
     photo.profileID = [user_data stringForKey:@"id"];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

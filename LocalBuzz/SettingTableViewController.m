@@ -14,9 +14,11 @@
 @end
 
 @implementation SettingTableViewController
-@synthesize logoutCell=_logoutCell;
+@synthesize logoutBT=_logoutCell;
 @synthesize UserInfoCell = _UserInfoCell;
 @synthesize UserInfoLabel =_UserInfoLabel;
+@synthesize currentRange = _currentRange;
+@synthesize slider =_slider;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,8 +31,15 @@
 
 - (void)viewDidLoad
 {
-    self.UserInfoLabel.text=@"My Profile";
     [super viewDidLoad];
+    self.UserInfoLabel.text=@"My Profile";
+    NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
+    self.slider.maximumValue = 10;
+    self.slider.minimumValue = 0.5;
+    self.slider.value =[[user_data valueForKey:@"range"] floatValue];
+    int progresAsInt = (int)(self.slider.value +0.5f);
+    NSString *newText = [[NSString alloc] initWithFormat:@"%d miles",progresAsInt];
+    self.currentRange.text = newText;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -45,11 +54,40 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 #pragma mark - Table view data source
 
+- (IBAction)setRange:(id)sender {
+     NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
+    int progresAsInt = (int)(self.slider.value +0.5f);
+    NSString *newText = [[NSString alloc] initWithFormat:@"%d miles",progresAsInt];
+    self.currentRange.text = newText;
+    if(self.slider!=0){
+        [user_data setObject:[NSNumber numberWithFloat:self.slider.value] forKey:@"range"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+
+}
 
 
-
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionName;
+    switch (section)
+    {
+        case 0:
+            sectionName = NSLocalizedString(@"User Information", @"User Information");
+            break;
+        case 1:
+            sectionName = NSLocalizedString(@"Event Search Range", @"Event Search Range");
+            break;
+            // ...
+        default:
+            sectionName = @"";
+            break;
+    }
+    return sectionName;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,7 +139,7 @@
         [Storyboard instantiateViewControllerWithIdentifier:@"userinfo"];
         [self.navigationController pushViewController:detailPage animated:YES];
         return;
-    }else if((indexPath.section== 1)&&(indexPath.row==0)){
+    }else if((indexPath.section== 2)&&(indexPath.row==0)){
         //user click the logout button
         self.tabBarController.selectedIndex = 0;
         [FBSession.activeSession closeAndClearTokenInformation];

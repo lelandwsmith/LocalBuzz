@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingTableViewController : UITableViewController
-@property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *logoutBT;
 @property (weak, nonatomic) IBOutlet UITableViewCell *UserInfoCell;
 @property (weak, nonatomic) IBOutlet UILabel *UserInfoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentRange;
+@property (weak, nonatomic) IBOutlet UISlider *slider;
+
+- (IBAction)setRange:(id)sender;
 @end
