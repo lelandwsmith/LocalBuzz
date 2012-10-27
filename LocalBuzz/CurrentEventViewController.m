@@ -70,7 +70,7 @@
 
 - (void) refreshEvents {
     [self.dataController emptyEventList];
-    NSURL *url = [NSURL URLWithString:@"http://localhost:3000"];
+    NSURL *url = [NSURL URLWithString:@"http://localhost.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     CLLocationCoordinate2D currentCoord = [[self.locationManager location] coordinate];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
