@@ -11,14 +11,22 @@
 #import "DDAnnotationView.h"
 
 @interface LocationSelectionViewController ()
-- (void)setUpMap;
 - (void)coordinateChanged_:(NSNotification *)notification;
 @end
 
 @implementation LocationSelectionViewController
 @synthesize mapView = _mapView;
-@synthesize locationManager = _locationManager;
 @synthesize latLong = _latLong;
+
+- (CLLocationManager *)locationManager {
+    if (_locationManager == nil) {
+        _locationManager = [[CLLocationManager alloc] init];
+        [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        [_locationManager setDistanceFilter:kCLDistanceFilterNone];
+        _locationManager.delegate = self;
+    }
+    return _locationManager;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,9 +40,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	[self setUpMap];
-	
-	
+	[self.locationManager startUpdatingLocation];
 	
 	/*
 	CLLocationCoordinate2D theCoordinate;
@@ -49,29 +55,34 @@
 	 */
 }
 
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    [self setUpMap:[locations lastObject]];
+    [self.locationManager stopUpdatingLocation];
+}
 
-- (void)setUpMap
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"%@", [error localizedDescription]);
+}
+
+- (void)setUpMap:(CLLocation *)location
 {
 	// Set up the map view
 	self.mapView.delegate = self;
 	
-	self.locationManager = [[CLLocationManager alloc] init];
-	[self.locationManager setDelegate:self];
-	[self.locationManager setDistanceFilter:kCLDistanceFilterNone];
-	[self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-	[self.locationManager startUpdatingLocation];
-	
+
     // Zoom in to current location and show with the blue dot
-	[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+	[self.mapView setUserTrackingMode:MKUserTrackingModeNone];
 	self.mapView.showsUserLocation = YES;
-	
+    [self.mapView setCenterCoordinate:location.coordinate animated:YES];
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500);
+    [self.mapView setRegion:region];
 	// Attach the recognizer
 	UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
 	// User needs to press for 0.5 sec
 	longPressGestureRecognizer.minimumPressDuration = 0.5;
 	[self.mapView addGestureRecognizer:longPressGestureRecognizer];
-    
-    
+//    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(37.791, -122.411);
+//    [self.mapView setCenterCoordinate:coordinate];
 }
 
 
@@ -93,7 +104,6 @@
 	// Return lat and lon
 	self.latLong = pressPointCoordinate;
 }
-
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -119,8 +129,11 @@
 	}
 }
 
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    NSLog(@"new location: lat:%f, long%f", userLocation.coordinate.latitude, userLocation.coordinate.longitude);
+}
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-	
 	if ([annotation isKindOfClass:[MKUserLocation class]]) {
 		return nil;
 	}

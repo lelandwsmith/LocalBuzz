@@ -13,7 +13,7 @@
 	
 }
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLLocationCoordinate2D latLong;
 
 @end
