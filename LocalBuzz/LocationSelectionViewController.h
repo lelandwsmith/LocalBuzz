@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import <CoreLocation/CoreLocation.h>
 
-@interface LocationSelectionViewController : UIViewController< CLLocationManagerDelegate, MKMapViewDelegate> {
+@interface LocationSelectionViewController : UIViewController<MKMapViewDelegate, CLLocationManagerDelegate> {
 	
 }
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (retain, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLLocationCoordinate2D latLong;
 

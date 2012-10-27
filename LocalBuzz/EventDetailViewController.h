@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MapView.h"
-#import "MapViewAnnotation.h"
+#import "DDAnnotation.h"
 
 @class Event;
 

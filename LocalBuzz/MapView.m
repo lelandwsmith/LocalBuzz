@@ -37,7 +37,7 @@
 	return self;
 }
 
-- (void)showRouteFrom: (MapViewAnnotation*) f to:(MapViewAnnotation*) t {
+- (void)showRouteFrom: (DDAnnotation*) f to:(DDAnnotation*) t {
 	
 	if(routes) {
 		[mapView removeAnnotations:[mapView annotations]];
