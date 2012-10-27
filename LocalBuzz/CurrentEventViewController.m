@@ -70,12 +70,16 @@
 
 - (void) refreshEvents {
     [self.dataController emptyEventList];
-    NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
+    NSURL *url = [NSURL URLWithString:@"http://localhost:3000"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     CLLocationCoordinate2D currentCoord = [[self.locationManager location] coordinate];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
+    dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             [NSNumber numberWithDouble:currentCoord.latitude], @"lat",
                             [NSNumber numberWithDouble:currentCoord.longitude], @"lng",
+                            [dateFormatter stringFromDate:[NSDate date]], @"time",
                             nil];
     [httpClient getPath:@"events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:

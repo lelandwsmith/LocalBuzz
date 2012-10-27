@@ -17,5 +17,6 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UIDatePicker *timePicker;
 @property (weak, nonatomic) NSDate* timeToDisplay;
 @property (nonatomic) TimePickerMode timepickerMode;
+@property (weak, nonatomic) NSDate *minimumDate;
 
 @end

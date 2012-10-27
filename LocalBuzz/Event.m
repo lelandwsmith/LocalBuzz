@@ -14,6 +14,7 @@
     self = [super init];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+    dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
     if (self) {
         _title = [eventDict objectForKey:@"title"];
         _longitude = [eventDict objectForKey:@"longitude"];

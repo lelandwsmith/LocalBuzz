@@ -63,6 +63,7 @@
         NSLog(@"%@", [startTime description]);
         TimePickerViewController *timePickerController = segue.destinationViewController;
         timePickerController.timeToDisplay = startTime;
+        timePickerController.minimumDate = [[NSDate date] dateByAddingTimeInterval:-300];
         timePickerController.timepickerMode = PickStartTime;
     }
     if ([[segue identifier] isEqualToString:@"SelectEndTime"]) {
@@ -73,6 +74,7 @@
         NSLog(@"%@", [endTime description]);
         TimePickerViewController *timePickerController = segue.destinationViewController;
         timePickerController.timeToDisplay = endTime;
+        timePickerController.minimumDate = startTime;
         timePickerController.timepickerMode = PickEndtime;
     }
     if ([[segue identifier] isEqualToString:@"EventCreated"]) {
