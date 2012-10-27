@@ -19,7 +19,8 @@
         _longitude = [eventDict objectForKey:@"longitude"];
         _latitude = [eventDict objectForKey:@"latitude"];
         _detailDescription = [eventDict objectForKey:@"description"];
-        _time = [dateFormatter dateFromString:[eventDict objectForKey:@"time"]];
+        _startTime = [dateFormatter dateFromString:[eventDict objectForKey:@"start_time"]];
+        _endTime = [dateFormatter dateFromString:[eventDict objectForKey:@"end_time"]];
         _isPublic = NO;
         if ([_detailDescription isKindOfClass:[NSNull class]]) {
             _detailDescription = @"";
@@ -30,6 +31,6 @@
 }
 
 - (BOOL) isEventValid {
-    return !([self.title isKindOfClass:[NSNull class]] || [self.longitude isKindOfClass:[NSNull class]] || [self.latitude isKindOfClass:[NSNull class]] || [self.time isKindOfClass:[NSNull class]]);
+    return !([self.title isKindOfClass:[NSNull class]] || [self.longitude isKindOfClass:[NSNull class]] || [self.latitude isKindOfClass:[NSNull class]] || [self.startTime isKindOfClass:[NSNull class]] || [self.endTime isKindOfClass:[NSNull class]]);
 }
 @end

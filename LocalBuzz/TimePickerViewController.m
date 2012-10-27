@@ -13,5 +13,18 @@
 
 @implementation TimePickerViewController
 @synthesize timePicker;
+@synthesize timeToDisplay = _timeToDisplay;
+@synthesize timepickerMode;
 
+- (NSDate *)timeToDisplay {
+    if (_timeToDisplay == nil) {
+        _timeToDisplay = [NSDate date];
+    }
+    timePicker.minimumDate = [[NSDate date] dateByAddingTimeInterval:-300];
+    return _timeToDisplay;
+}
+
+- (void) viewDidLoad {
+    [self.timePicker setDate:self.timeToDisplay animated:YES];
+}
 @end

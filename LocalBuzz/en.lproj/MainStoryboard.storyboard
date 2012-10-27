@@ -147,7 +147,7 @@
             </objects>
             <point key="canvasLocation" x="741" y="1206"/>
         </scene>
-        <!--Setting Table View Controller-->
+        <!--Setting Table View Controller - Settings-->
         <scene sceneID="UBq-WV-V40">
             <objects>
                 <tableViewController id="ziB-eb-Zse" customClass="SettingTableViewController" sceneMemberID="viewController">
@@ -270,7 +270,7 @@
                             <outlet property="delegate" destination="ziB-eb-Zse" id="5qw-Ox-9Ga"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="X8B-Z2-b8I"/>
+                    <navigationItem key="navigationItem" title="Settings" id="X8B-Z2-b8I"/>
                     <connections>
                         <outlet property="UserInfoCell" destination="afh-nd-a11" id="aRT-Cr-ysP"/>
                         <outlet property="UserInfoLabel" destination="udt-AW-hAN" id="SvU-lL-8Am"/>
@@ -560,13 +560,13 @@
                             <tableViewSection id="Dzs-ts-xcZ">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="TQt-ZQ-IPR" detailTextLabel="RGN-H0-zhv" style="IBUITableViewCellStyleValue1" id="PSl-oE-5y3">
-                                        <rect key="frame" x="0.0" y="186" width="320" height="46"/>
+                                        <rect key="frame" x="0.0" y="186" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="280" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQt-ZQ-IPR">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Start Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQt-ZQ-IPR">
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -580,7 +580,31 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="GVu-rC-aI9" kind="push" identifier="SelectTime" id="CMb-qh-Wt3"/>
+                                            <segue destination="GVu-rC-aI9" kind="push" identifier="SelectStartTime" id="CMb-qh-Wt3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="X3c-fS-OGJ" detailTextLabel="MSV-po-b57" style="IBUITableViewCellStyleValue1" id="x0u-GI-Iao">
+                                        <rect key="frame" x="0.0" y="231" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="End Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3c-fS-OGJ">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSV-po-b57">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="GVu-rC-aI9" kind="push" identifier="SelectEndTime" id="8L0-aj-oU4"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -605,9 +629,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="endTimeCell" destination="x0u-GI-Iao" id="Wny-1A-cBL"/>
                         <outlet property="latitudeCell" destination="SUZ-kD-HOh" id="zeC-9n-x6k"/>
                         <outlet property="longitudeCell" destination="QM5-8E-FIF" id="r9k-11-GYU"/>
-                        <outlet property="timeCell" destination="PSl-oE-5y3" id="lk0-fC-66K"/>
+                        <outlet property="startTimeCell" destination="PSl-oE-5y3" id="hRF-xG-he3"/>
                         <outlet property="titleField" destination="GB1-dp-FIG" id="rva-4y-QjD"/>
                     </connections>
                 </tableViewController>
@@ -628,8 +653,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="aGB-CT-l0K"/>
                                 </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="372818443.53310698">
-                                    <!--2012-10-25 00:40:43 +0000-->
+                                <date key="date" timeIntervalSinceReferenceDate="372816283.53310698">
+                                    <!--2012-10-25 00:04:43 +0000-->
                                 </date>
                                 <locale key="locale" localeIdentifier="en"/>
                                 <timeZone key="timeZone" name="America/Los_Angeles">
@@ -657,9 +682,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Xg2-Be-aRk" firstAttribute="trailing" secondItem="VbI-kx-ccQ" secondAttribute="trailing" type="default" id="4Jb-gr-OPx"/>
                             <constraint firstItem="Xg2-Be-aRk" firstAttribute="bottom" secondItem="VbI-kx-ccQ" secondAttribute="bottom" type="default" id="4wN-PD-1yp"/>
-                            <constraint firstItem="Xg2-Be-aRk" firstAttribute="leading" secondItem="VbI-kx-ccQ" secondAttribute="leading" type="default" id="6Do-NC-oZz"/>
-                            <constraint firstItem="Xg2-Be-aRk" firstAttribute="trailing" secondItem="VbI-kx-ccQ" secondAttribute="trailing" type="default" id="pj4-8t-d4s"/>
+                            <constraint firstItem="Xg2-Be-aRk" firstAttribute="leading" secondItem="VbI-kx-ccQ" secondAttribute="leading" type="default" id="qhL-Tn-vQA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Time" id="rXY-JJ-6z3">
@@ -755,7 +780,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sud-d5-fQb">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Start Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sud-d5-fQb">
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -875,9 +900,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="locationSelected:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="action" name="prepareForSegue:sender:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="action" name="timeSelected:" candidateClass="UIStoryboardSegue"/>
+                <relationship kind="outlet" name="endTimeCell" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="latitudeCell" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="longitudeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="timeCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="startTimeCell" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="titleField" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -899,6 +925,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="FBProfilePictureView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FBProfilePictureView.h"/>
+        </class>
+        <class className="LocationSelectionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocationSelectionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
         </class>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
@@ -949,6 +981,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="jVP-Ee-EgF"/>
         <segue reference="dtF-dx-EyL"/>
+        <segue reference="8L0-aj-oU4"/>
     </inferredMetricsTieBreakers>
 </document>

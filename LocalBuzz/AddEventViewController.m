@@ -11,7 +11,8 @@
 #import "LocationSelectionViewController.h"
 #import "AFHTTPClient.h"
 @interface AddEventViewController () {
-@private NSDate *selectedDate;
+@private NSDate *startTime;
+@private NSDate *endTime;
 }
 @end
 
@@ -19,7 +20,7 @@
 @synthesize titleField;
 @synthesize latitudeCell;
 @synthesize longitudeCell;
-@synthesize timeCell;
+@synthesize startTimeCell;
 
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -28,11 +29,17 @@
 - (IBAction)timeSelected:(UIStoryboardSegue *)segue {
     if ([[segue identifier] isEqualToString:@"ReturnTime"]) {
         TimePickerViewController *timePicker = [segue sourceViewController];
-        selectedDate = timePicker.timePicker.date;
+        NSDate *pickedTime = timePicker.timePicker.date;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        self.timeCell.detailTextLabel.text = [dateFormatter stringFromDate:selectedDate];
+        if (timePicker.timepickerMode == PickStartTime) {
+            startTime = pickedTime;
+            self.startTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:startTime];
+        } else if (timePicker.timepickerMode == PickEndtime) {
+            endTime = pickedTime;
+            self.endTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:endTime];
+        }
     }
 }
 
@@ -48,22 +55,35 @@
 }
 
 - (IBAction)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"SelectTime"]) {
+    if ([[segue identifier] isEqualToString:@"SelectStartTime"]) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        selectedDate = [dateFormatter dateFromString:self.timeCell.detailTextLabel.text];
+        startTime = [dateFormatter dateFromString:self.startTimeCell.detailTextLabel.text];
+        NSLog(@"%@", [startTime description]);
         TimePickerViewController *timePickerController = segue.destinationViewController;
-        timePickerController.timePicker.date = selectedDate;
+        timePickerController.timeToDisplay = startTime;
+        timePickerController.timepickerMode = PickStartTime;
+    }
+    if ([[segue identifier] isEqualToString:@"SelectEndTime"]) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        endTime = [dateFormatter dateFromString:self.endTimeCell.detailTextLabel.text];
+        NSLog(@"%@", [endTime description]);
+        TimePickerViewController *timePickerController = segue.destinationViewController;
+        timePickerController.timeToDisplay = endTime;
+        timePickerController.timepickerMode = PickEndtime;
     }
     if ([[segue identifier] isEqualToString:@"EventCreated"]) {
-        NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
+        NSURL *createUserURL = [NSURL URLWithString:@"http://localhost:3000/"];
         AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                 self.titleField.text, @"event[title]",
-                                [dateFormatter stringFromDate:selectedDate], @"event[time]",
+                                [dateFormatter stringFromDate:startTime], @"event[start_time]",
+                                [dateFormatter stringFromDate:endTime], @"event[end_time]",
                                 self.longitudeCell.detailTextLabel.text, @"event[longitude]",
                                 self.latitudeCell.detailTextLabel.text, @"event[latitude]",
                                 0, @"event[public]",

@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    PickStartTime,
+    PickEndtime
+} TimePickerMode;
+
 @interface TimePickerViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIDatePicker *timePicker;
+@property (weak, nonatomic) NSDate* timeToDisplay;
+@property (nonatomic) TimePickerMode timepickerMode;
 
 @end

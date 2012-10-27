@@ -41,7 +41,7 @@
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 		[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-		self.timeLabel.text = [dateFormatter stringFromDate:theEvent.time];
+		self.timeLabel.text = [dateFormatter stringFromDate:theEvent.startTime];
 		
 		NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 		[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
