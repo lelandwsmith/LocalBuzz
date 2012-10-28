@@ -19,7 +19,6 @@
 @implementation AddEventViewController
 @synthesize titleField;
 @synthesize latitudeCell;
-@synthesize longitudeCell;
 @synthesize startTimeCell;
 
 - (IBAction)cancelPressed:(id)sender {
@@ -49,8 +48,8 @@
         CLLocationCoordinate2D selectedLatLong = locationSelector.latLong;
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        self.latitudeCell.detailTextLabel.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.latitude]];
-        self.longitudeCell.detailTextLabel.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.longitude]];
+       self.lat_label.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.latitude]];
+       self.long_lebal.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.longitude]];
     }
 }
 
@@ -86,9 +85,9 @@
                                 self.titleField.text, @"event[title]",
                                 [dateFormatter stringFromDate:startTime], @"event[start_time]",
                                 [dateFormatter stringFromDate:endTime], @"event[end_time]",
-                                self.longitudeCell.detailTextLabel.text, @"event[longitude]",
-                                self.latitudeCell.detailTextLabel.text, @"event[latitude]",
-                                0, @"event[public]",
+                                self.long_lebal.text, @"event[longitude]",
+                                self.lat_label.text, @"event[latitude]",
+                                self.switcher.isOn, @"event[public]",
                                 @"Random description", @"event[description]",
                                 nil];
         [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -105,6 +104,9 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (IBAction)SwitchChange:(id)sender {
 }
 
 - (void) hideKeyboard {

@@ -117,8 +117,7 @@
 //                        temp->Fid = [[NSString alloc] initWithFormat:(@"%@"),friend.id];
 //                        temp->Fname = [[NSString alloc] initWithFormat:(@"%@"), friend.name];
 //                         [friendlist addObject:temp];
-//                        // NSLog(@"iiii");
-//                         
+//                        // NSLog(@"iiii");//                         
 //                         
 //                     }
 //                     [user_data setObject:friendlist forKey:@"friends"];
