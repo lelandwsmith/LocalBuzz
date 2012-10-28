@@ -87,7 +87,7 @@
                                 [dateFormatter stringFromDate:endTime], @"event[end_time]",
                                 self.long_lebal.text, @"event[longitude]",
                                 self.lat_label.text, @"event[latitude]",
-                                self.switcher.isOn, @"event[public]",
+                                0, @"event[public]",
                                 @"Random description", @"event[description]",
                                 nil];
         [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

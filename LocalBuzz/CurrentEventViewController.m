@@ -81,6 +81,7 @@
                             [NSNumber numberWithDouble:currentCoord.longitude], @"lng",
                             [dateFormatter stringFromDate:[NSDate date]], @"time",
                             nil];
+    NSLog(@"current is %@ |%@",[NSNumber numberWithDouble:currentCoord.latitude],[NSNumber numberWithDouble:currentCoord.longitude]);
     [httpClient getPath:@"events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:
                                 NSJSONReadingMutableContainers error:nil];
