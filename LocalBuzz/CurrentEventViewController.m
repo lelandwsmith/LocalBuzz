@@ -70,7 +70,6 @@
 
 - (void) refreshEvents {
     NSLog(@"%@", [NSTimeZone knownTimeZoneNames]);
-    [self.dataController emptyEventList];
     NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     CLLocationCoordinate2D currentCoord = [[self.locationManager location] coordinate];
@@ -85,6 +84,7 @@
                             nil];
     NSLog(@"current is %@ |%@",[NSNumber numberWithDouble:currentCoord.latitude],[NSNumber numberWithDouble:currentCoord.longitude]);
     [httpClient getPath:@"events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.dataController emptyEventList];
         NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:
                                 NSJSONReadingMutableContainers error:nil];
         NSLog(@"Events count: %d", [events count]);
@@ -95,6 +95,7 @@
             [self.dataController addEventToEventList:eventToBeAdded];
         }
         [self.tableView reloadData];
+        events = nil;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
     }];
