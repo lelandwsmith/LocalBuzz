@@ -81,13 +81,15 @@
         AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+        NSNumber *isPublic = [[NSNumber alloc] initWithBool:self.switcher.isOn];
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                 self.titleField.text, @"event[title]",
                                 [dateFormatter stringFromDate:startTime], @"event[start_time]",
                                 [dateFormatter stringFromDate:endTime], @"event[end_time]",
                                 self.long_lebal.text, @"event[longitude]",
                                 self.lat_label.text, @"event[latitude]",
-                                0, @"event[public]",
+                                isPublic, @"event[public]",
                                 @"Random description", @"event[description]",
                                 nil];
         [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

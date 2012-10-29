@@ -69,13 +69,15 @@
 }
 
 - (void) refreshEvents {
+    NSLog(@"%@", [NSTimeZone knownTimeZoneNames]);
     [self.dataController emptyEventList];
     NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     CLLocationCoordinate2D currentCoord = [[self.locationManager location] coordinate];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
-    dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+    dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+    NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             [NSNumber numberWithDouble:currentCoord.latitude], @"lat",
                             [NSNumber numberWithDouble:currentCoord.longitude], @"lng",
