@@ -54,6 +54,8 @@
 		D599173A163A3A9B00F4A21F /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5991739163A3A9B00F4A21F /* MapView.m */; };
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
 		D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363D61635756400FE3E1C /* CoreLocation.framework */; };
+		D5DA945B1641CDEE006D7819 /* TabBarOrientationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DA945A1641CDEE006D7819 /* TabBarOrientationController.m */; };
+		D5DA945F1641CFB5006D7819 /* NavBarOrientationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DA945E1641CFB5006D7819 /* NavBarOrientationController.m */; };
 		D5E94087163B4A5500788C15 /* DDAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E94086163B4A5500788C15 /* DDAnnotation.m */; };
 		D5E9408B163B4AF100788C15 /* DDAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E9408A163B4AF100788C15 /* DDAnnotationView.m */; };
 		D5E9408D163B4CC500788C15 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5E9408C163B4CC500788C15 /* QuartzCore.framework */; };
@@ -132,6 +134,10 @@
 		D5991739163A3A9B00F4A21F /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		D5C363C7163441E600FE3E1C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D5C363D61635756400FE3E1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D5DA94591641CDEE006D7819 /* TabBarOrientationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarOrientationController.h; sourceTree = "<group>"; };
+		D5DA945A1641CDEE006D7819 /* TabBarOrientationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarOrientationController.m; sourceTree = "<group>"; };
+		D5DA945D1641CFB5006D7819 /* NavBarOrientationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBarOrientationController.h; sourceTree = "<group>"; };
+		D5DA945E1641CFB5006D7819 /* NavBarOrientationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBarOrientationController.m; sourceTree = "<group>"; };
 		D5E94085163B4A5500788C15 /* DDAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAnnotation.h; sourceTree = "<group>"; };
 		D5E94086163B4A5500788C15 /* DDAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAnnotation.m; sourceTree = "<group>"; };
 		D5E94089163B4AF100788C15 /* DDAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAnnotationView.h; sourceTree = "<group>"; };
@@ -232,6 +238,10 @@
 				BF5B4299161A3ACB002C67D1 /* LocalBuzzAppDelegate.h */,
 				BF5B429A161A3ACB002C67D1 /* LocalBuzzAppDelegate.m */,
 				BF5B42A2161A3ACB002C67D1 /* MainStoryboard.storyboard */,
+				D5DA94591641CDEE006D7819 /* TabBarOrientationController.h */,
+				D5DA945A1641CDEE006D7819 /* TabBarOrientationController.m */,
+				D5DA945D1641CFB5006D7819 /* NavBarOrientationController.h */,
+				D5DA945E1641CFB5006D7819 /* NavBarOrientationController.m */,
 				D5E94074163B20CF00788C15 /* Setting */,
 				D5E94073163B208A00788C15 /* EventNew */,
 				D5E94072163B207400788C15 /* LogIn */,
@@ -425,6 +435,8 @@
 				D599173A163A3A9B00F4A21F /* MapView.m in Sources */,
 				D5E94087163B4A5500788C15 /* DDAnnotation.m in Sources */,
 				D5E9408B163B4AF100788C15 /* DDAnnotationView.m in Sources */,
+				D5DA945B1641CDEE006D7819 /* TabBarOrientationController.m in Sources */,
+				D5DA945F1641CFB5006D7819 /* NavBarOrientationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

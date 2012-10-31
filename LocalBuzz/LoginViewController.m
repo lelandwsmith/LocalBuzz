@@ -147,14 +147,16 @@
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAutorotate
 {
-    // Return YES for supported orientations
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
-        return YES;
-    }
+	return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+	NSUInteger orientations = UIInterfaceOrientationMaskPortrait;
+	orientations |= UIInterfaceOrientationMaskAll;
+	return orientations;
 }
 
 #pragma mark -
