@@ -12,7 +12,7 @@
 @interface LocalBuzzAppDelegate ()
 
 @property (strong, nonatomic) UINavigationController *navController;
-@property (strong, nonatomic)  UITabBarController *mainViewController;
+@property (strong, nonatomic) UITabBarController *mainViewController;
 @property (strong, nonatomic) LoginViewController* loginViewController;
 -(void)showLoginView;
 
@@ -22,6 +22,7 @@
 @synthesize navController = _navController;
 @synthesize mainViewController = _mainViewController;
 @synthesize loginViewController = _loginViewController;
+@synthesize session = _session;
 NSString *const FBSessionStateChangedNotification =
 @"eecs441.info.vforvincent.Login:FBSessionStateChangedNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

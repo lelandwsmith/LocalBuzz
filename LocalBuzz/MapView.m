@@ -18,19 +18,25 @@
 @end
 
 @implementation MapView
-@synthesize lineColor;
+
+@synthesize mapView = _mapView;
+@synthesize routeView = _routeView;
+@synthesize routes = _routes;
+@synthesize lineColor = _lineColor;
 
 - (id)initWithFrame:(CGRect)frame
 {
 	self = [super initWithFrame:frame];
 	if (self) {
-		mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-		mapView.showsUserLocation = YES;
-		[mapView setDelegate:self];
-		[self addSubview:mapView];
-		routeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mapView.frame.size.width, mapView.frame.size.height)];
-		routeView.userInteractionEnabled = NO;
-		[mapView addSubview:routeView];
+		self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake
+										(0, 0, frame.size.width, frame.size.height)];
+		self.mapView.showsUserLocation = YES;
+		[self.mapView setDelegate:self];
+		[self addSubview:self.mapView];
+		self.routeView = [[UIImageView alloc] initWithFrame:CGRectMake
+											(0, 0, self.mapView.frame.size.width, self.mapView.frame.size.height)];
+		self.routeView.userInteractionEnabled = NO;
+		[self.mapView addSubview:self.routeView];
 		
 		self.lineColor = [UIColor redColor];
 	}
@@ -39,15 +45,15 @@
 
 - (void)showRouteFrom: (DDAnnotation*) f to:(DDAnnotation*) t {
 	
-	if(routes) {
-		[mapView removeAnnotations:[mapView annotations]];
+	if(self.routes) {
+		[self.mapView removeAnnotations:[self.mapView annotations]];
 	}
 	
-	[mapView addAnnotation:f];
-	[mapView addAnnotation:t];
+	[self.mapView addAnnotation:f];
+	[self.mapView addAnnotation:t];
 	
 	// Get the route
-	routes = [self calculateRoutesFrom:f.coordinate to:t.coordinate];
+	self.routes = [self calculateRoutesFrom:f.coordinate to:t.coordinate];
 	// Draw the route
 	[self updateRouteView];
 	// Center the route in map
@@ -60,7 +66,7 @@
 	
 	NSString* apiUrlStr = [NSString stringWithFormat:@"http://maps.google.com/maps?output=dragdir&saddr=%@&daddr=%@", saddr, daddr];
 	NSURL* apiUrl = [NSURL URLWithString:apiUrlStr];
-	//NSLog(@"api url: %@", apiUrl);
+
 	NSString *apiResponse = [NSString stringWithContentsOfURL:apiUrl encoding:NSASCIIStringEncoding error:nil];
 	NSString* encodedPoints = [apiResponse stringByMatching:@"points:\\\"([^\\\"]*)\\\"" capture:1L];
 	
@@ -101,23 +107,56 @@
 		NSNumber *longitude = [[NSNumber alloc] initWithFloat:lng * 1e-5];
 		printf("[%f,", [latitude doubleValue]);
 		printf("%f]", [longitude doubleValue]);
-		CLLocation *loc = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
+		CLLocation *loc = [[CLLocation alloc] initWithLatitude:[latitude floatValue]
+																								 longitude:[longitude floatValue]];
 		[array addObject:loc];
 	}
 	
 	return array;
 }
 
-- (void)centerMap {
+- (void)updateRouteView
+{
+	CGContextRef context = 	CGBitmapContextCreate
+	(nil, self.routeView.frame.size.width, self.routeView.frame.size.height, 8,
+	 4 * self.routeView.frame.size.width, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaPremultipliedLast);
+	
+	CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+	CGContextSetRGBFillColor(context, 0.0, 0.0, 1.0, 1.0);
+	CGContextSetLineWidth(context, 3.0);
+	
+	for(int i = 0; i < self.routes.count; i++) {
+		CLLocation* location = [self.routes objectAtIndex:i];
+		CGPoint point = [self.mapView convertCoordinate:location.coordinate toPointToView:self.routeView];
+		
+		if(i == 0) {
+			CGContextMoveToPoint(context, point.x, self.routeView.frame.size.height - point.y);
+		} else {
+			CGContextAddLineToPoint(context, point.x, self.routeView.frame.size.height - point.y);
+		}
+	}
+	
+	CGContextStrokePath(context);
+	
+	CGImageRef image = CGBitmapContextCreateImage(context);
+	UIImage* img = [UIImage imageWithCGImage:image];
+	
+	self.routeView.image = img;
+	CGContextRelease(context);
+	
+}
+
+- (void)centerMap
+{
 	MKCoordinateRegion region;
 	
 	CLLocationDegrees maxLat = -90;
 	CLLocationDegrees maxLon = -180;
 	CLLocationDegrees minLat = 90;
 	CLLocationDegrees minLon = 180;
-	for(int idx = 0; idx < routes.count; idx++)
+	for(int idx = 0; idx < self.routes.count; idx++)
 	{
-		CLLocation* currentLocation = [routes objectAtIndex:idx];
+		CLLocation* currentLocation = [self.routes objectAtIndex:idx];
 		if(currentLocation.coordinate.latitude > maxLat)
 			maxLat = currentLocation.coordinate.latitude;
 		if(currentLocation.coordinate.latitude < minLat)
@@ -132,54 +171,20 @@
 	region.span.latitudeDelta  = maxLat - minLat;
 	region.span.longitudeDelta = maxLon - minLon;
 	
-	[mapView setRegion:region animated:YES];
-}
-
-- (void)updateRouteView {
-	CGContextRef context = 	CGBitmapContextCreate(nil,
-																								routeView.frame.size.width,
-																								routeView.frame.size.height,
-																								8,
-																								4 * routeView.frame.size.width,
-																								CGColorSpaceCreateDeviceRGB(),
-																								kCGImageAlphaPremultipliedLast);
-	
-	CGContextSetStrokeColorWithColor(context, lineColor.CGColor);
-	CGContextSetRGBFillColor(context, 0.0, 0.0, 1.0, 1.0);
-	CGContextSetLineWidth(context, 3.0);
-	
-	for(int i = 0; i < routes.count; i++) {
-		CLLocation* location = [routes objectAtIndex:i];
-		CGPoint point = [mapView convertCoordinate:location.coordinate toPointToView:routeView];
-		
-		if(i == 0) {
-			CGContextMoveToPoint(context, point.x, routeView.frame.size.height - point.y);
-		} else {
-			CGContextAddLineToPoint(context, point.x, routeView.frame.size.height - point.y);
-		}
-	}
-	
-	CGContextStrokePath(context);
-	
-	CGImageRef image = CGBitmapContextCreateImage(context);
-	UIImage* img = [UIImage imageWithCGImage:image];
-	
-	routeView.image = img;
-	CGContextRelease(context);
-	
+	[self.mapView setRegion:region animated:YES];
 }
 
 #pragma mark mapView delegate functions
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
-	routeView.hidden = YES;
+	self.routeView.hidden = YES;
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
 	[self updateRouteView];
-	routeView.hidden = NO;
-	[routeView setNeedsDisplay];
+	self.routeView.hidden = NO;
+	[self.routeView setNeedsDisplay];
 }
 
 /*

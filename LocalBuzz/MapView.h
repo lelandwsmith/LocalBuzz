@@ -10,16 +10,14 @@
 #import <MapKit/MapKit.h>
 #import "RegexKitLite.h"
 #import "DDAnnotation.h"
-//#import "MapViewAnnotation.h"
 
 @interface MapView : UIView<MKMapViewDelegate> {
-	
-	MKMapView* mapView;
-	UIImageView* routeView;
-	NSArray* routes;
-	UIColor* lineColor;
+
 }
 
+@property (nonatomic, retain) MKMapView* mapView;
+@property (nonatomic, retain) UIImageView* routeView;
+@property (nonatomic, retain) NSArray* routes;
 @property (nonatomic, retain) UIColor* lineColor;
 
 -(void) showRouteFrom: (DDAnnotation*) f to:(DDAnnotation*) t;

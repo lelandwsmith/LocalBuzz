@@ -12,14 +12,16 @@
 
 @class Event;
 
-@interface EventDetailViewController : UITableViewController
+@interface EventDetailViewController : UITableViewController {
+	
+}
 
 @property (nonatomic, strong) Event *event;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (weak, nonatomic) IBOutlet UITableViewCell *mapLable;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *locationLabel;
+@property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, weak) IBOutlet UITableViewCell *mapLable;
 @property (nonatomic) CLLocationCoordinate2D currentCoordinate;
 
 @end

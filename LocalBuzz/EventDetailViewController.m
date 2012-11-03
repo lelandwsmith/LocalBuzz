@@ -15,10 +15,11 @@
 @end
 
 @implementation EventDetailViewController
+//@synthesize event = _event;
 @synthesize titleLabel = _titleLabel;
-@synthesize descriptionLabel = _descriptionLabel;
 @synthesize timeLabel = _timeLabel;
 @synthesize locationLabel = _locationLabel;
+@synthesize descriptionLabel = _descriptionLabel;
 @synthesize mapLable = _mapLable;
 @synthesize currentCoordinate = _currentCoordinate;
 
@@ -54,11 +55,11 @@
 	MapView *mapView = [[MapView alloc] initWithFrame:self.mapLable.bounds];
 	[self.mapLable addSubview:mapView];
 	
-	// Fake the data of the start location
+	// Get the start location
 	CLLocationCoordinate2D startCoordinate = self.currentCoordinate;
 	DDAnnotation *startAnnotation = [[DDAnnotation alloc] initWithCoordinate:startCoordinate addressDictionary:nil];
 	
-	// Fake the data of destination location
+	// Get the destination location
 	CLLocationCoordinate2D endCoordinate = CLLocationCoordinate2DMake([destLat doubleValue], [destLng doubleValue]);
 	DDAnnotation *endAnnotation = [[DDAnnotation alloc] initWithCoordinate:endCoordinate addressDictionary:nil];
 	
@@ -69,6 +70,18 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self configureView];
+}
+
+- (void)viewDidUnload
+{
+	[super viewDidUnload];
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return YES;
 }
 
 @end

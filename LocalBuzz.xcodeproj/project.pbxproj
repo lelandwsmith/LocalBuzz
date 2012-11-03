@@ -38,10 +38,6 @@
 		BF5B429F161A3ACB002C67D1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B429E161A3ACB002C67D1 /* Default@2x.png */; };
 		BF5B42A1161A3ACB002C67D1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42A0161A3ACB002C67D1 /* Default-568h@2x.png */; };
 		BF5B42A4161A3ACB002C67D1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42A2161A3ACB002C67D1 /* MainStoryboard.storyboard */; };
-		BF5B42A9161A3ACB002C67D1 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42A8161A3ACB002C67D1 /* first.png */; };
-		BF5B42AB161A3ACB002C67D1 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42AA161A3ACB002C67D1 /* first@2x.png */; };
-		BF5B42B0161A3ACB002C67D1 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42AF161A3ACB002C67D1 /* second.png */; };
-		BF5B42B2161A3ACB002C67D1 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42B1161A3ACB002C67D1 /* second@2x.png */; };
 		BFB09B8F163C5A03001E2BA6 /* SettingTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = BFB09B8C163C59AF001E2BA6 /* SettingTableViewController.h */; };
 		BFB09B90163C5A03001E2BA6 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB09B8D163C59AF001E2BA6 /* SettingTableViewController.m */; };
 		BFB09B93163C5A35001E2BA6 /* UserInfoTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = BFB09B91163C5A20001E2BA6 /* UserInfoTableViewController.h */; };
@@ -112,10 +108,6 @@
 		BF5B429E161A3ACB002C67D1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BF5B42A0161A3ACB002C67D1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BF5B42A3161A3ACB002C67D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		BF5B42A8161A3ACB002C67D1 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
-		BF5B42AA161A3ACB002C67D1 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		BF5B42AF161A3ACB002C67D1 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
-		BF5B42B1161A3ACB002C67D1 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		BFB09B8C163C59AF001E2BA6 /* SettingTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		BFB09B8D163C59AF001E2BA6 /* SettingTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
 		BFB09B91163C5A20001E2BA6 /* UserInfoTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewController.h; sourceTree = "<group>"; };
@@ -223,8 +215,8 @@
 				8FCB0E04161A6ED50026AACB /* Accounts.framework */,
 				8FCB0E02161A6ECE0026AACB /* AdSupport.framework */,
 				BF2AE0D5163A09210098A8C9 /* libicucore.A.dylib */,
-				D5C363D61635756400FE3E1C /* CoreLocation.framework */,
 				D5C363C7163441E600FE3E1C /* MapKit.framework */,
+				D5C363D61635756400FE3E1C /* CoreLocation.framework */,
 				BF5B428A161A3ACB002C67D1 /* UIKit.framework */,
 				BF5B428C161A3ACB002C67D1 /* Foundation.framework */,
 				BF5B428E161A3ACB002C67D1 /* CoreGraphics.framework */,
@@ -255,10 +247,6 @@
 				D5E94086163B4A5500788C15 /* DDAnnotation.m */,
 				BF2AE0D2163A08E90098A8C9 /* RegexKitLite.h */,
 				BF2AE0D3163A08E90098A8C9 /* RegexKitLite.m */,
-				BF5B42A8161A3ACB002C67D1 /* first.png */,
-				BF5B42AA161A3ACB002C67D1 /* first@2x.png */,
-				BF5B42AF161A3ACB002C67D1 /* second.png */,
-				BF5B42B1161A3ACB002C67D1 /* second@2x.png */,
 				BF5B4291161A3ACB002C67D1 /* Supporting Files */,
 			);
 			path = LocalBuzz;
@@ -392,10 +380,6 @@
 				BF5B429F161A3ACB002C67D1 /* Default@2x.png in Resources */,
 				BF5B42A1161A3ACB002C67D1 /* Default-568h@2x.png in Resources */,
 				BF5B42A4161A3ACB002C67D1 /* MainStoryboard.storyboard in Resources */,
-				BF5B42A9161A3ACB002C67D1 /* first.png in Resources */,
-				BF5B42AB161A3ACB002C67D1 /* first@2x.png in Resources */,
-				BF5B42B0161A3ACB002C67D1 /* second.png in Resources */,
-				BF5B42B2161A3ACB002C67D1 /* second@2x.png in Resources */,
 				BF2AE141163A19220098A8C9 /* FacebookSDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
