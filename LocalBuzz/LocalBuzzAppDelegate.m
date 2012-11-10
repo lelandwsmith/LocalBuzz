@@ -31,7 +31,9 @@ NSString *const FBSessionStateChangedNotification =
     self.mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
     self.window.rootViewController = self.mainViewController;
     [self.window makeKeyAndVisible];
-    if (![self openSessionWithAllowLoginUI:NO]) {
+    //NSLog(@"didFinishWith#3");
+    //if (![self openSessionWithAllowLoginUI:NO]) {
+    if(![self.session isOpen]){
         // No? Display the login page.
         [self showLoginView];
     }
@@ -85,12 +87,28 @@ NSString *const FBSessionStateChangedNotification =
 {
     switch (state) {
         case FBSessionStateOpen:{
+            NSLog(@"trace");
+            //if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+               // NSLog(@"seesion loaded!");
             self.window.rootViewController = self.mainViewController;
-            self.loginViewController = nil;
+                self.loginViewController = nil;//}else{
+                    //NSLog(@"%d",FBSession.activeSession.state);
+                //}
         }
             break;
         case FBSessionStateClosed:
+            NSLog(@"close not failed");
+            [self.navController popToRootViewControllerAnimated:NO];
+            
+            [FBSession.activeSession closeAndClearTokenInformation];
+            
+            [self showLoginView];
+            if(error){
+               [self openSessionWithAllowLoginUI:YES];
+            }
+            break;
         case FBSessionStateClosedLoginFailed:{
+            NSLog(@" login failed");
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -107,14 +125,30 @@ NSString *const FBSessionStateChangedNotification =
      object:session];
     
     if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc]
+
+        NSLog(@"error reauthu#4");
+        if( [session isOpen]){
+            NSLog(@"is open");
+        }else{
+            NSLog(@"not open");
+        }
+      //  [self openSessionWithAllowLoginUI:YES];
+        
+        
+        
+        /*UIAlertView *alertView = [[UIAlertView alloc]
                                   initWithTitle:@"Login Failed"
                                   message:@"Please grant the app the required permission and retry"
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
         self.session = nil;
-        [alertView show];
+        [alertView show];*/
+      //  [self.navController popToRootViewControllerAnimated:NO];
+        
+       // [FBSession.activeSession closeAndClearTokenInformation];
+      ////
+       // [self showLoginView];
     }
 }
 
@@ -123,6 +157,7 @@ NSString *const FBSessionStateChangedNotification =
  * Opens a Facebook session and optionally shows the login UX.
  */
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
+    NSLog(@"hjehehehehehehhe");
     NSArray *permissions = [[NSArray alloc] initWithObjects:
                             @"user_location",
                             @"user_birthday",
@@ -133,6 +168,13 @@ NSString *const FBSessionStateChangedNotification =
                                          completionHandler:^(FBSession *session,
                                                              FBSessionState state,
                                                              NSError *error) {
+                                             if (state == FBSessionStateClosedLoginFailed || state == FBSessionStateCreatedOpening) {
+                                                 
+                                                 // If so, just send them round the loop again
+                                                 [[FBSession activeSession] closeAndClearTokenInformation];
+                                                 [FBSession setActiveSession:nil];
+                                                 //FB_CreateNewSession();
+                                             }
                                              [self sessionStateChanged:session
                                                                  state:state
                                                                  error:error];

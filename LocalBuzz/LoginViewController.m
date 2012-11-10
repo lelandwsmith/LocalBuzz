@@ -21,14 +21,16 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"run !!!!!");
     [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(sessionStateChanged:)
      name:FBSessionStateChangedNotification
      object:nil];
-    LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate openSessionWithAllowLoginUI:NO];
+   // LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    //NSLog(@"viewDIdLoad place#2");
+   // [appDelegate openSessionWithAllowLoginUI:NO];
 
 }
 
@@ -132,6 +134,7 @@
     if (FBSession.activeSession.isOpen) {
          [appDelegate closeSession];
     } else {
+        NSLog(@"hit bottom#1");
         [appDelegate openSessionWithAllowLoginUI:YES];
     }
 }
