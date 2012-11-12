@@ -47,6 +47,10 @@
 		BFD323C11639CC9900FE6819 /* EventDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323C01639CC9900FE6819 /* EventDataController.m */; };
 		BFD323CB1639FA7800FE6819 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */; };
 		D569DDA31651B4A6009D9678 /* PostedEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D569DDA21651B4A6009D9678 /* PostedEventViewController.m */; };
+		D569DDAE1651BDAA009D9678 /* glyphish-icons.zip in Resources */ = {isa = PBXBuildFile; fileRef = D569DDAD1651BDAA009D9678 /* glyphish-icons.zip */; };
+		D569DDB11651BDD4009D9678 /* 30_vector_icons_df.zip in Resources */ = {isa = PBXBuildFile; fileRef = D569DDB01651BDD4009D9678 /* 30_vector_icons_df.zip */; };
+		D569DDB31651BE0E009D9678 /* MGImageUtilities-master.zip in Resources */ = {isa = PBXBuildFile; fileRef = D569DDB21651BE0E009D9678 /* MGImageUtilities-master.zip */; };
+		D569DDB51651BE18009D9678 /* MBProgressHUD-master.zip in Resources */ = {isa = PBXBuildFile; fileRef = D569DDB41651BE18009D9678 /* MBProgressHUD-master.zip */; };
 		D599171C163A269200F4A21F /* LocationSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D599171B163A269200F4A21F /* LocationSelectionViewController.m */; };
 		D599173A163A3A9B00F4A21F /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5991739163A3A9B00F4A21F /* MapView.m */; };
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
@@ -126,6 +130,10 @@
 		BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 		D569DDA11651B4A6009D9678 /* PostedEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostedEventViewController.h; sourceTree = "<group>"; };
 		D569DDA21651B4A6009D9678 /* PostedEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostedEventViewController.m; sourceTree = "<group>"; };
+		D569DDAD1651BDAA009D9678 /* glyphish-icons.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "glyphish-icons.zip"; sourceTree = "<group>"; };
+		D569DDB01651BDD4009D9678 /* 30_vector_icons_df.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = 30_vector_icons_df.zip; sourceTree = "<group>"; };
+		D569DDB21651BE0E009D9678 /* MGImageUtilities-master.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "MGImageUtilities-master.zip"; sourceTree = "<group>"; };
+		D569DDB41651BE18009D9678 /* MBProgressHUD-master.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "MBProgressHUD-master.zip"; sourceTree = "<group>"; };
 		D599171A163A269200F4A21F /* LocationSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSelectionViewController.h; sourceTree = "<group>"; };
 		D599171B163A269200F4A21F /* LocationSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSelectionViewController.m; sourceTree = "<group>"; };
 		D5991738163A3A9B00F4A21F /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
@@ -267,6 +275,10 @@
 		BF5B4291161A3ACB002C67D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D569DDB41651BE18009D9678 /* MBProgressHUD-master.zip */,
+				D569DDB21651BE0E009D9678 /* MGImageUtilities-master.zip */,
+				D569DDB01651BDD4009D9678 /* 30_vector_icons_df.zip */,
+				D569DDAD1651BDAA009D9678 /* glyphish-icons.zip */,
 				BF5B4292161A3ACB002C67D1 /* LocalBuzz-Info.plist */,
 				BF5B4293161A3ACB002C67D1 /* InfoPlist.strings */,
 				BF5B4296161A3ACB002C67D1 /* main.m */,
@@ -398,6 +410,10 @@
 				D5DC95AE164B383500CCCB53 /* 19-gear.png in Resources */,
 				D5DC95B0164B398000CCCB53 /* 28-star.png in Resources */,
 				D5DC95B2164B39D500CCCB53 /* 73-radar.png in Resources */,
+				D569DDAE1651BDAA009D9678 /* glyphish-icons.zip in Resources */,
+				D569DDB11651BDD4009D9678 /* 30_vector_icons_df.zip in Resources */,
+				D569DDB31651BE0E009D9678 /* MGImageUtilities-master.zip in Resources */,
+				D569DDB51651BE18009D9678 /* MBProgressHUD-master.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
