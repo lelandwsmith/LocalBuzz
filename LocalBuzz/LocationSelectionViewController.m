@@ -18,8 +18,6 @@
 @synthesize mapView = _mapView;
 @synthesize locationManager = _locationManager;
 @synthesize latLong = _latLong;
-@synthesize geoCoder = _geoCoder;
-@synthesize address = _address;
 
 - (CLLocationManager *)locationManager {
     if (_locationManager == nil) {
@@ -92,29 +90,6 @@
 	
 	// Return lat and lon
 	self.latLong = pressPointCoordinate;
-}
-
-- (IBAction)geoCodeLocation:(UIBarButtonItem *)sender
-{
-	NSLog(@"enter geoCodeLocation");
-	
-	CLLocation *loc = [[CLLocation alloc] initWithLatitude:self.latLong.latitude longitude:self.latLong.longitude];
-	//Geocoding Block
-	[self.geoCoder reverseGeocodeLocation: loc completionHandler:^(NSArray *placemarks, NSError *error) {
-		
-		//Get nearby address
-		CLPlacemark *placemark = [placemarks objectAtIndex:0];
-		
-		//String to hold address
-		self.address = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-		
-		//Print the location to console
-		NSLog(@"I am currently at %@", self.address);
-		//NSLog(@" %@", placemark.addressDictionary);
-		
-		//Set the label text to current location
-		//self.location.detailTextLabel.text = locatedAt;
-	}];
 }
 
 // Override to allow orientations other than the default portrait orientation.

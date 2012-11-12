@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *latitudeCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *startTimeCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *endTimeCell;
-//@property (weak, nonatomic) IBOutlet CLGeocoder *geoCoder;
 @property (weak, nonatomic) IBOutlet UITableViewCell *location;
 @property (weak, nonatomic) IBOutlet UISwitch *switcher;
 

@@ -24,7 +24,6 @@
 @synthesize latitudeCell = _latitudeCell;
 @synthesize startTimeCell = _startTimeCell;
 @synthesize endTimeCell = _endTimeCell;
-//@synthesize geoCoder = _geoCoder;
 @synthesize location = _location;
 @synthesize switcher = _switcher;
 
@@ -53,12 +52,24 @@
     if ([[segue identifier] isEqualToString:@"ReturnLocation"]) {
 			locationSelector = [segue sourceViewController];
 			CLLocationCoordinate2D selectedLatLong = locationSelector.latLong;
+			CLLocation *loc = [[CLLocation alloc] initWithLatitude:selectedLatLong.latitude longitude:selectedLatLong.longitude];
 			
-			NSLog(@"Address: %@", locationSelector.address);
-			self.location.detailTextLabel.text = locationSelector.address;
+			CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 			
-			//self.lat_label.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.latitude]];
-			//self.long_label.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.longitude]];
+			//Geocoding Block
+			[geocoder reverseGeocodeLocation: loc completionHandler:^(NSArray *placemarks, NSError *error) {
+         //Get nearby address
+         CLPlacemark *placemark = [placemarks objectAtIndex:0];
+         
+         //String to hold address
+         NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+				 
+         //Print the location to console
+         NSLog(@"I am currently at %@",locatedAt);
+         
+         //Set the label text to current location
+         [self.location.detailTextLabel setText:locatedAt];
+			 }];
     }
 }
 
@@ -121,7 +132,6 @@
 }
 
 - (void) viewDidUnload {
-	//[self setGeoCoder:nil];
 	[super viewDidUnload];
 }
 
