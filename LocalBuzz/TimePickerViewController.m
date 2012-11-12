@@ -16,6 +16,7 @@
 @synthesize timeToDisplay = _timeToDisplay;
 @synthesize timepickerMode;
 @synthesize minimumDate;
+
 - (NSDate *)timeToDisplay {
     if (_timeToDisplay == nil) {
         _timeToDisplay = [NSDate date];

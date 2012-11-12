@@ -11,12 +11,15 @@
 #import "DDAnnotationView.h"
 
 @interface LocationSelectionViewController ()
-- (void)coordinateChanged_:(NSNotification *)notification;
+
 @end
 
 @implementation LocationSelectionViewController
 @synthesize mapView = _mapView;
+@synthesize locationManager = _locationManager;
 @synthesize latLong = _latLong;
+@synthesize geoCoder = _geoCoder;
+@synthesize address = _address;
 
 - (CLLocationManager *)locationManager {
     if (_locationManager == nil) {
@@ -41,18 +44,6 @@
 {
 	[super viewDidLoad];
 	[self.locationManager startUpdatingLocation];
-	
-	/*
-	CLLocationCoordinate2D theCoordinate;
-	theCoordinate.latitude = 37.810000;
-	theCoordinate.longitude = -122.477989;
-	
-	DDAnnotation *annotation = [[DDAnnotation alloc] initWithCoordinate:theCoordinate addressDictionary:nil];
-	annotation.title = @"Drag to Move Pin";
-	annotation.subtitle = [NSString	stringWithFormat:@"%f %f", annotation.coordinate.latitude, annotation.coordinate.longitude];
-	
-	[self.mapView addAnnotation:annotation];
-	 */
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -68,21 +59,19 @@
 {
 	// Set up the map view
 	self.mapView.delegate = self;
-	
 
-    // Zoom in to current location and show with the blue dot
+	// Zoom in to current location and show with the blue dot
 	[self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
 	self.mapView.showsUserLocation = YES;
-    [self.mapView setCenterCoordinate:location.coordinate animated:YES];
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000);
-    [self.mapView setRegion:region];
+	[self.mapView setCenterCoordinate:location.coordinate animated:YES];
+	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000);
+	[self.mapView setRegion:region];
+	
 	// Attach the recognizer
 	UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
 	// User needs to press for 0.5 sec
 	longPressGestureRecognizer.minimumPressDuration = 0.5;
 	[self.mapView addGestureRecognizer:longPressGestureRecognizer];
-//    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(37.791, -122.411);
-//    [self.mapView setCenterCoordinate:coordinate];
 }
 
 
@@ -103,6 +92,29 @@
 	
 	// Return lat and lon
 	self.latLong = pressPointCoordinate;
+}
+
+- (IBAction)geoCodeLocation:(UIBarButtonItem *)sender
+{
+	NSLog(@"enter geoCodeLocation");
+	
+	CLLocation *loc = [[CLLocation alloc] initWithLatitude:self.latLong.latitude longitude:self.latLong.longitude];
+	//Geocoding Block
+	[self.geoCoder reverseGeocodeLocation: loc completionHandler:^(NSArray *placemarks, NSError *error) {
+		
+		//Get nearby address
+		CLPlacemark *placemark = [placemarks objectAtIndex:0];
+		
+		//String to hold address
+		self.address = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+		
+		//Print the location to console
+		NSLog(@"I am currently at %@", self.address);
+		//NSLog(@" %@", placemark.addressDictionary);
+		
+		//Set the label text to current location
+		//self.location.detailTextLabel.text = locatedAt;
+	}];
 }
 
 // Override to allow orientations other than the default portrait orientation.

@@ -20,55 +20,61 @@
 @synthesize dataController;
 @synthesize locationManager = _locationManager;
 
-- (CLLocationManager *) locationManager {
-    if (_locationManager == nil) {
-        _locationManager = [[CLLocationManager alloc] init];
-        if ([CLLocationManager locationServicesEnabled]) {
-            _locationManager.delegate = self;
-            _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-            _locationManager.distanceFilter = kCLDistanceFilterNone;
-        }
-    }
-    return _locationManager;
+- (CLLocationManager *) locationManager
+{
+	if (_locationManager == nil) {
+		_locationManager = [[CLLocationManager alloc] init];
+		if ([CLLocationManager locationServicesEnabled]) {
+			_locationManager.delegate = self;
+			_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+			_locationManager.distanceFilter = kCLDistanceFilterNone;
+		}
+	}
+	return _locationManager;
 }
 
-- (void) awakeFromNib {
-    [super awakeFromNib];
-    self.dataController = [[EventDataController alloc] init];
+- (void) awakeFromNib
+{
+	[super awakeFromNib];
+	self.dataController = [[EventDataController alloc] init];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+	self = [super initWithStyle:style];
+	if (self) {
+		// Custom initialization
+	}
+	return self;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+	[super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.locationManager startUpdatingLocation];
-    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to refresh"];
-    [refresh addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = refresh;
+	// Uncomment the following line to preserve selection between presentations.
+	// self.clearsSelectionOnViewWillAppear = NO;
+
+	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	[self.locationManager startUpdatingLocation];
+	UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+	refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to refresh"];
+	[refresh addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
+	self.refreshControl = refresh;
+
+	//self.view.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:202.0f/255.0f blue:84.0f/255.0f alpha:1.0f];
 }
 
-- (IBAction)eventCreated:(UIStoryboardSegue *)segue {
-    if ([segue.identifier isEqualToString:@"EventCreated"]) {
-        [self refreshEvents];
-    }
+- (IBAction)eventCreated:(UIStoryboardSegue *)segue
+{
+	if ([segue.identifier isEqualToString:@"EventCreated"]) {
+		[self refreshEvents];
+	}
 }
 
-- (void) refreshEvents {
+- (void) refreshEvents
+{
     NSLog(@"%@", [NSTimeZone knownTimeZoneNames]);
     NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -101,7 +107,8 @@
     }];
 }
 
-- (void)refreshView:(UIRefreshControl *)refresh {
+- (void)refreshView:(UIRefreshControl *)refresh
+{
     [self.locationManager startUpdatingLocation];
     refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refreshing events..."];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -111,7 +118,8 @@
     [refresh endRefreshing];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
     if ([locations count] > 1) {
         CLLocation *latest = [locations lastObject];
         CLLocation *secondToLatest = [locations objectAtIndex:([locations count]- 2)];
@@ -125,7 +133,8 @@
     [self.locationManager stopUpdatingLocation];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
     NSLog(@"%@", [error localizedDescription]);
     [self.locationManager stopUpdatingLocation];
 }

@@ -10,16 +10,23 @@
 #import "TimePickerViewController.h"
 #import "LocationSelectionViewController.h"
 #import "AFHTTPClient.h"
-@interface AddEventViewController () {
-@private NSDate *startTime;
-@private NSDate *endTime;
+
+@interface AddEventViewController ()
+{
+	@private NSDate *startTime;
+	@private NSDate *endTime;
+	@private LocationSelectionViewController *locationSelector;
 }
 @end
 
 @implementation AddEventViewController
-@synthesize titleField;
-@synthesize latitudeCell;
-@synthesize startTimeCell;
+@synthesize titleField = _titleField;
+@synthesize latitudeCell = _latitudeCell;
+@synthesize startTimeCell = _startTimeCell;
+@synthesize endTimeCell = _endTimeCell;
+//@synthesize geoCoder = _geoCoder;
+@synthesize location = _location;
+@synthesize switcher = _switcher;
 
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -44,12 +51,14 @@
 
 - (IBAction)locationSelected:(UIStoryboardSegue *)segue {
     if ([[segue identifier] isEqualToString:@"ReturnLocation"]) {
-        LocationSelectionViewController *locationSelector = [segue sourceViewController];
-        CLLocationCoordinate2D selectedLatLong = locationSelector.latLong;
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-       self.lat_label.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.latitude]];
-       self.long_lebal.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.longitude]];
+			locationSelector = [segue sourceViewController];
+			CLLocationCoordinate2D selectedLatLong = locationSelector.latLong;
+			
+			NSLog(@"Address: %@", locationSelector.address);
+			self.location.detailTextLabel.text = locationSelector.address;
+			
+			//self.lat_label.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.latitude]];
+			//self.long_label.text = [formatter stringFromNumber:[NSNumber numberWithDouble:selectedLatLong.longitude]];
     }
 }
 
@@ -87,8 +96,8 @@
                                 self.titleField.text, @"event[title]",
                                 [dateFormatter stringFromDate:startTime], @"event[start_time]",
                                 [dateFormatter stringFromDate:endTime], @"event[end_time]",
-                                self.long_lebal.text, @"event[longitude]",
-                                self.lat_label.text, @"event[latitude]",
+                                [[NSNumber numberWithDouble:locationSelector.latLong.longitude] stringValue], @"event[longitude]",
+                                [[NSNumber numberWithDouble:locationSelector.latLong.latitude] stringValue], @"event[latitude]",
                                 isPublic, @"event[public]",
                                 @"Random description", @"event[description]",
                                 nil];
@@ -102,10 +111,18 @@
 }
 
 - (void) viewDidLoad {
-    self.titleField.delegate = self;
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    tapGestureRecognizer.cancelsTouchesInView = NO;
-    [self.tableView addGestureRecognizer:tapGestureRecognizer];
+	// for converting lat lon to address
+	[super viewDidLoad];
+	
+	self.titleField.delegate = self;
+	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+	tapGestureRecognizer.cancelsTouchesInView = NO;
+	[self.tableView addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void) viewDidUnload {
+	//[self setGeoCoder:nil];
+	[super viewDidUnload];
 }
 
 - (IBAction)SwitchChange:(id)sender {

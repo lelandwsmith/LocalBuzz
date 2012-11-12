@@ -15,5 +15,9 @@
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLLocationCoordinate2D latLong;
+@property (nonatomic) CLGeocoder *geoCoder;
+@property (nonatomic) NSString *address;
+
+- (IBAction)geoCodeLocation:(UIBarButtonItem *)sender;
 
 @end
