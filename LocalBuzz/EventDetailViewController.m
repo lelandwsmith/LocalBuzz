@@ -15,7 +15,6 @@
 @end
 
 @implementation EventDetailViewController
-//@synthesize event = _event;
 @synthesize titleLabel = _titleLabel;
 @synthesize timeLabel = _timeLabel;
 @synthesize locationLabel = _locationLabel;
@@ -44,10 +43,24 @@
 		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 		self.timeLabel.text = [dateFormatter stringFromDate:theEvent.startTime];
 		
-		NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-		[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-		NSString *latLongString = [numberFormatter stringFromNumber:theEvent.longitude];
-		self.locationLabel.text = [[latLongString stringByAppendingString:@" "] stringByAppendingString:[numberFormatter stringFromNumber:theEvent.latitude]];
+		CLLocation *loc = [[CLLocation alloc] initWithLatitude:[theEvent.latitude doubleValue] longitude:[theEvent.longitude doubleValue]];
+		CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+		
+		//Geocoding Block
+		[geocoder reverseGeocodeLocation: loc completionHandler:^(NSArray *placemarks, NSError *error) {
+			//Get nearby address
+			CLPlacemark *placemark = [placemarks objectAtIndex:0];
+			
+			//String to hold address
+			NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+			
+			//Print the location to console
+			NSLog(@"I am currently at %@",locatedAt);
+			
+			//Set the label text to current location
+			[self.locationLabel setText:locatedAt];
+		}];
+		
 	}
 }
 
