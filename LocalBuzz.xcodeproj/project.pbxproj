@@ -46,6 +46,7 @@
 		BFD323BD1639C4F500FE6819 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323BC1639C4F500FE6819 /* Event.m */; };
 		BFD323C11639CC9900FE6819 /* EventDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323C01639CC9900FE6819 /* EventDataController.m */; };
 		BFD323CB1639FA7800FE6819 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */; };
+		D569DDA31651B4A6009D9678 /* PostedEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D569DDA21651B4A6009D9678 /* PostedEventViewController.m */; };
 		D599171C163A269200F4A21F /* LocationSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D599171B163A269200F4A21F /* LocationSelectionViewController.m */; };
 		D599173A163A3A9B00F4A21F /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5991739163A3A9B00F4A21F /* MapView.m */; };
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
@@ -123,6 +124,8 @@
 		BFD323C01639CC9900FE6819 /* EventDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDataController.m; sourceTree = "<group>"; };
 		BFD323C91639FA7800FE6819 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
 		BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		D569DDA11651B4A6009D9678 /* PostedEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostedEventViewController.h; sourceTree = "<group>"; };
+		D569DDA21651B4A6009D9678 /* PostedEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostedEventViewController.m; sourceTree = "<group>"; };
 		D599171A163A269200F4A21F /* LocationSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSelectionViewController.h; sourceTree = "<group>"; };
 		D599171B163A269200F4A21F /* LocationSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSelectionViewController.m; sourceTree = "<group>"; };
 		D5991738163A3A9B00F4A21F /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
@@ -328,6 +331,8 @@
 				BFB09B92163C5A20001E2BA6 /* UserInfoTableViewController.m */,
 				BFB09B8C163C59AF001E2BA6 /* SettingTableViewController.h */,
 				BFB09B8D163C59AF001E2BA6 /* SettingTableViewController.m */,
+				D569DDA11651B4A6009D9678 /* PostedEventViewController.h */,
+				D569DDA21651B4A6009D9678 /* PostedEventViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 				D5E9408B163B4AF100788C15 /* DDAnnotationView.m in Sources */,
 				D5DA945B1641CDEE006D7819 /* TabBarOrientationController.m in Sources */,
 				D5DA945F1641CFB5006D7819 /* NavBarOrientationController.m in Sources */,
+				D569DDA31651B4A6009D9678 /* PostedEventViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

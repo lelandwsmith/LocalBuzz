@@ -23,7 +23,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-633" y="-130"/>
+            <point key="canvasLocation" x="-701" y="482"/>
         </scene>
         <!--Past Event View Controller - Past Events-->
         <scene sceneID="N6B-hg-c3Q">
@@ -62,7 +62,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UgO-ZM-qrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="194" y="533"/>
+            <point key="canvasLocation" x="472" y="477"/>
         </scene>
         <!--Nav Bar Orientation Controller-->
         <scene sceneID="M0y-rT-mKy">
@@ -77,7 +77,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HYk-S9-A3n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-549" y="1288"/>
+            <point key="canvasLocation" x="-38" y="1996"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="2Jv-IB-xjp">
@@ -115,7 +115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDr-nf-xR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-111" y="1288"/>
+            <point key="canvasLocation" x="472" y="1996"/>
         </scene>
         <!--Navigation Controller - Setting-->
         <scene sceneID="Dnp-d6-wSX">
@@ -131,9 +131,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6TB-NK-Dbr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="741" y="1206"/>
+            <point key="canvasLocation" x="-38" y="1242"/>
         </scene>
-        <!--Setting Table View Controller - Settings-->
+        <!--Setting Table View Controller - Setting-->
         <scene sceneID="UBq-WV-V40">
             <objects>
                 <tableViewController id="ziB-eb-Zse" customClass="SettingTableViewController" sceneMemberID="viewController">
@@ -177,6 +177,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="UKu-YZ-w0L" kind="push" id="Du9-Lu-raj"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -256,7 +259,7 @@
                             <outlet property="delegate" destination="ziB-eb-Zse" id="5qw-Ox-9Ga"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="X8B-Z2-b8I"/>
+                    <navigationItem key="navigationItem" title="Setting" id="X8B-Z2-b8I"/>
                     <connections>
                         <outlet property="UserInfoCell" destination="afh-nd-a11" id="aRT-Cr-ysP"/>
                         <outlet property="UserInfoLabel" destination="udt-AW-hAN" id="SvU-lL-8Am"/>
@@ -269,7 +272,44 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPm-sv-DOj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1344" y="1234"/>
+            <point key="canvasLocation" x="472" y="1242"/>
+        </scene>
+        <!--Table View Controller - My Events-->
+        <scene sceneID="4KL-fG-p9M">
+            <objects>
+                <tableViewController id="UKu-YZ-w0L" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RHP-Y9-mnO">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostedEventTableCell" textLabel="KwS-fw-7Sx" style="IBUITableViewCellStyleDefault" id="ZMu-z5-gqs">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-fw-7Sx">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="UKu-YZ-w0L" id="Pax-gk-1xu"/>
+                            <outlet property="delegate" destination="UKu-YZ-w0L" id="RTs-TR-Mbh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="My Events" id="hNZ-Jn-vIb"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iOl-mc-1tj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1050" y="1242"/>
         </scene>
         <!--User Info Table View Controller-->
         <scene sceneID="f7p-oX-XYY">
@@ -371,7 +411,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BfB-As-jBQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1712" y="1234"/>
+            <point key="canvasLocation" x="2118" y="1242"/>
         </scene>
         <!--Navigation Controller - Past-->
         <scene sceneID="VWm-Gr-V74">
@@ -388,7 +428,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="taJ-jU-Ni7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-304" y="533"/>
+            <point key="canvasLocation" x="-38" y="477"/>
         </scene>
         <!--Navigation Controller - Current-->
         <scene sceneID="hNa-WV-Lwa">
@@ -414,7 +454,7 @@
             </objects>
             <point key="canvasLocation" x="-38" y="-292"/>
         </scene>
-        <!--Current Event View Controller - Current Event-->
+        <!--Current Event View Controller - Current Events-->
         <scene sceneID="6XY-t6-6vN">
             <objects>
                 <tableViewController storyboardIdentifier="CurrentEventViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9GI-T0-qBf" customClass="CurrentEventViewController" sceneMemberID="viewController">
@@ -448,7 +488,7 @@
                             <outlet property="delegate" destination="9GI-T0-qBf" id="b2s-Us-AEz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Current Event" id="d86-8f-1tM">
+                    <navigationItem key="navigationItem" title="Current Events" id="d86-8f-1tM">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Hvf-Wo-Tfb">
                             <connections>
                                 <segue destination="apg-Ob-dik" kind="modal" identifier="" modalTransitionStyle="flipHorizontal" id="9wB-Vh-eDv"/>
@@ -460,7 +500,7 @@
             </objects>
             <point key="canvasLocation" x="472" y="-292"/>
         </scene>
-        <!--Add Event View Controller - Create Event-->
+        <!--Add Event View Controller - Create-->
         <scene sceneID="1pQ-ot-5Kf">
             <objects>
                 <tableViewController id="ZhV-ML-Qci" customClass="AddEventViewController" sceneMemberID="viewController">
@@ -617,7 +657,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Create Event" id="ZuQ-Oc-cK8">
+                    <navigationItem key="navigationItem" title="Create" id="ZuQ-Oc-cK8">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="ZtV-nW-xSE">
                             <connections>
                                 <action selector="cancelPressed:" destination="ZhV-ML-Qci" id="LmS-BU-dow"/>
@@ -705,7 +745,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2123" y="-286"/>
         </scene>
-        <!--Location Selection View Controller-->
+        <!--Location Selection View Controller - Location-->
         <scene sceneID="fCy-UZ-93f">
             <objects>
                 <viewController id="aA4-Oj-Lkd" customClass="LocationSelectionViewController" sceneMemberID="viewController">
@@ -727,7 +767,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstItem="f24-ek-eZy" firstAttribute="trailing" secondItem="Jqu-K4-OFK" secondAttribute="trailing" type="default" id="wbN-az-gRt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="5CU-ms-0GY">
+                    <navigationItem key="navigationItem" title="Location" id="5CU-ms-0GY">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="uXa-tl-CRJ">
                             <connections>
                                 <action selector="geoCodeLocation:" destination="aA4-Oj-Lkd" id="QQh-lG-BOK"/>
@@ -742,9 +782,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fuO-bb-4op" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Wio-OT-ckk" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2123" y="414"/>
+            <point key="canvasLocation" x="2123" y="477"/>
         </scene>
-        <!--Event Detail View Controller - Event Detail-->
+        <!--Event Detail View Controller - Detail-->
         <scene sceneID="1Vm-Ii-0dL">
             <objects>
                 <tableViewController storyboardIdentifier="eventDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="45J-PM-k0b" customClass="EventDetailViewController" sceneMemberID="viewController">
@@ -860,7 +900,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="45J-PM-k0b" id="qMM-Ka-2SQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Event Detail" id="075-bY-6Hq">
+                    <navigationItem key="navigationItem" title="Detail" id="075-bY-6Hq">
                         <barButtonItem key="rightBarButtonItem" title="Join" id="92S-uN-ZgW"/>
                     </navigationItem>
                     <connections>
@@ -873,7 +913,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5e-8N-Kup" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1290" y="473"/>
+            <point key="canvasLocation" x="1050" y="477"/>
         </scene>
         <!--Nav Bar Orientation Controller-->
         <scene sceneID="QLF-UK-2FI">
@@ -936,7 +976,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="LocationSelectionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LocationSelectionViewController.h"/>
             <relationships>
-                <relationship kind="action" name="geoCodeLocation:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
             </relationships>
         </class>
@@ -996,6 +1035,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="CMb-qh-Wt3"/>
-        <segue reference="jVP-Ee-EgF"/>
+        <segue reference="9wB-Vh-eDv"/>
     </inferredMetricsTieBreakers>
 </document>
