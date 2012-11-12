@@ -87,17 +87,19 @@ NSString *const FBSessionStateChangedNotification =
 {
     switch (state) {
         case FBSessionStateOpen:{
-            NSLog(@"trace");
-            //if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-               // NSLog(@"seesion loaded!");
+            NSLog(@"state == FBSessionSateOpen");
+
+//[FBRequest requestWithGraphPath:@"me/permissions" andDelegate:self];
+            [FBRequest requestWithGraphPath:@"me/permissions" parameters:nil HTTPMethod:nil];
+            if(!error){
+                NSLog(@"state == open && no error");
+            }
             self.window.rootViewController = self.mainViewController;
-                self.loginViewController = nil;//}else{
-                    //NSLog(@"%d",FBSession.activeSession.state);
-                //}
+            self.loginViewController = nil;
         }
             break;
-        case FBSessionStateClosed:
-            NSLog(@"close not failed");
+        case FBSessionStateClosed:{
+            NSLog(@"state == FBSessionStateClosed");
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -106,9 +108,10 @@ NSString *const FBSessionStateChangedNotification =
             if(error){
                [self openSessionWithAllowLoginUI:YES];
             }
+        }
             break;
         case FBSessionStateClosedLoginFailed:{
-            NSLog(@" login failed");
+            NSLog(@"state == FBSessionStateClosedLoginFailed");
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -126,11 +129,11 @@ NSString *const FBSessionStateChangedNotification =
     
     if (error) {
 
-        NSLog(@"error reauthu#4");
+        NSLog(@"into error block");
         if( [session isOpen]){
-            NSLog(@"is open");
+            NSLog(@"session is open");
         }else{
-            NSLog(@"not open");
+            NSLog(@"session is not open");
         }
       //  [self openSessionWithAllowLoginUI:YES];
         
@@ -157,7 +160,7 @@ NSString *const FBSessionStateChangedNotification =
  * Opens a Facebook session and optionally shows the login UX.
  */
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
-    NSLog(@"hjehehehehehehhe");
+    NSLog(@"openSessionWithAllowLoginUI is called");
     NSArray *permissions = [[NSArray alloc] initWithObjects:
                             @"user_location",
                             @"user_birthday",

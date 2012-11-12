@@ -21,7 +21,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"run !!!!!");
+    NSLog(@"run the login view");
     [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -45,6 +45,8 @@
          startForMeWithCompletionHandler:^(FBRequestConnection *connection,
                                            id<FBGraphUser> user,
                                            NSError *error) {
+             NSLog(@"getting user data");
+
              if (!error) {
                  NSString *username = user.name;
                  NSString *fbId = user.id;
@@ -67,7 +69,7 @@
                      self.textview.text = responseString;
                      NSLog(@"Response: %@", responseString);
                  }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     NSLog(@"%@", [error localizedDescription]);
+                     NSLog(@"afherror  %@", [error localizedDescription]);
                  }];
              } else {
                 // NSLog(@"error!!!!!!!login");
