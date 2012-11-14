@@ -9,6 +9,7 @@
 #import "LocalBuzzAppDelegate.h"
 #import "CurrentEventViewController.h"
 
+
 @interface LocalBuzzAppDelegate ()
 
 @property (strong, nonatomic) UINavigationController *navController;
@@ -27,12 +28,17 @@ NSString *const FBSessionStateChangedNotification =
 @"eecs441.info.vforvincent.Login:FBSessionStateChangedNotification";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //[FBRequest requestWithGraphPath:@"me/permissions" parameters:nil HTTPMethod:nil].session.permissions;
+   // NSLog(@"original permission is %@",[FBRequest requestWithGraphPath:@"me/permissions" parameters:nil HTTPMethod:nil].session.permissions);
+  //  NSLog(@"original expire date is %@",self.session.expirationDate);
     UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
                                                   bundle:nil];
     self.mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
     self.window.rootViewController = self.mainViewController;
     [self.window makeKeyAndVisible];
-    if (![self openSessionWithAllowLoginUI:NO]) {
+    //NSLog(@"didFinishWith#3");
+    //if (![self openSessionWithAllowLoginUI:NO]) {
+    if(![self.session isOpen]){
         // No? Display the login page.
         [self showLoginView];
     }
@@ -84,14 +90,47 @@ NSString *const FBSessionStateChangedNotification =
                       state:(FBSessionState) state
                       error:(NSError *)error
 {
+    ACAccountStore *accountStore;
+    ACAccountType *accountTypeFB;
+    if ((accountStore = [[ACAccountStore alloc] init]) &&
+        (accountTypeFB = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook] ) ){
+        
+        NSArray *fbAccounts = [accountStore accountsWithAccountType:accountTypeFB];
+        id account;
+        if (fbAccounts && [fbAccounts count] > 0 &&
+            (account = [fbAccounts objectAtIndex:0])){
+            
+            [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
+                //we don't actually need to inspect renewResult or error.
+                if (error){
+                    
+                }
+            }];
+        }
+    }
     switch (state) {
         case FBSessionStateOpen:{
+           // NSLog(@"state == FBSessionSateOpen");
+            //NSLog(@"expire date is %@",session.expirationDate);
+           // NSLog(@"original permission is %@",[FBRequest requestWithGraphPath:@"me/permissions" parameters:nil HTTPMethod:nil].session.permissions);
             self.window.rootViewController = self.mainViewController;
             self.loginViewController = nil;
         }
             break;
-        case FBSessionStateClosed:
+        case FBSessionStateClosed:{
+            //NSLog(@"state == FBSessionStateClosed");
+            [self.navController popToRootViewControllerAnimated:NO];
+            
+            [FBSession.activeSession closeAndClearTokenInformation];
+            
+            [self showLoginView];
+            if(error){
+               [self openSessionWithAllowLoginUI:YES];
+            }
+        }
+            break;
         case FBSessionStateClosedLoginFailed:{
+            //NSLog(@"state == FBSessionStateClosedLoginFailed");
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -108,14 +147,25 @@ NSString *const FBSessionStateChangedNotification =
      object:session];
     
     if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc]
+
+
+      //  [self openSessionWithAllowLoginUI:YES];
+        
+        
+        
+        /*UIAlertView *alertView = [[UIAlertView alloc]
                                   initWithTitle:@"Login Failed"
                                   message:@"Please grant the app the required permission and retry"
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
         self.session = nil;
-        [alertView show];
+        [alertView show];*/
+      //  [self.navController popToRootViewControllerAnimated:NO];
+        
+       // [FBSession.activeSession closeAndClearTokenInformation];
+      ////
+       // [self showLoginView];
     }
 }
 
@@ -124,16 +174,28 @@ NSString *const FBSessionStateChangedNotification =
  * Opens a Facebook session and optionally shows the login UX.
  */
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
+    //NSLog(@"openSessionWithAllowLoginUI is called");
     NSArray *permissions = [[NSArray alloc] initWithObjects:
                             @"user_location",
                             @"user_birthday",
                             @"read_friendlists",
                             nil];
+    //NSLog(@"permission0 is %@",self.session.permissions);
     return [FBSession openActiveSessionWithReadPermissions:permissions
                                               allowLoginUI:allowLoginUI
                                          completionHandler:^(FBSession *session,
                                                              FBSessionState state,
                                                              NSError *error) {
+                                             //NSLog(@"permission1 is %@",session.permissions);
+
+                                             if (state == FBSessionStateClosedLoginFailed || state == FBSessionStateCreatedOpening) {
+                                                 
+                                                 // If so, just send them round the loop again
+                                                 [[FBSession activeSession] closeAndClearTokenInformation];
+                                                 [FBSession setActiveSession:nil];
+                                                 //FB_CreateNewSession();
+                                             }
+                                                                                          //NSLog(@"permission2 is %@",session.permissions);
                                              [self sessionStateChanged:session
                                                                  state:state
                                                                  error:error];
