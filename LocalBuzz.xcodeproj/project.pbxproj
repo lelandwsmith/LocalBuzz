@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8F02CCBF1620BD5100719F69 /* CurrentEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */; };
 		8F02CCC11620BD5100719F69 /* PastEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBE1620BD5100719F69 /* PastEventViewController.m */; };
+		8F989577165340AE00578961 /* LocalBuzzTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F989576165340AE00578961 /* LocalBuzzTableCell.xib */; };
+		8F98957B1653458700578961 /* LocalBuzzTableCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F98957A1653458700578961 /* LocalBuzzTableCellController.m */; };
+		8F98957D1653588B00578961 /* button_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F98957C1653588B00578961 /* button_play.png */; };
 		8FCB0E03161A6ECE0026AACB /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E02161A6ECE0026AACB /* AdSupport.framework */; };
 		8FCB0E05161A6ED50026AACB /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E04161A6ED50026AACB /* Accounts.framework */; };
 		8FCB0E07161A6EE50026AACB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FCB0E06161A6EE50026AACB /* Social.framework */; };
@@ -70,6 +73,10 @@
 		8F02CCBD1620BD5100719F69 /* PastEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastEventViewController.h; sourceTree = "<group>"; };
 		8F02CCBE1620BD5100719F69 /* PastEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastEventViewController.m; sourceTree = "<group>"; };
 		8F1916F41638B951005EB9D6 /* CurrentEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentEventViewController.h; sourceTree = "<group>"; };
+		8F989576165340AE00578961 /* LocalBuzzTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalBuzzTableCell.xib; sourceTree = "<group>"; };
+		8F9895791653458700578961 /* LocalBuzzTableCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalBuzzTableCellController.h; sourceTree = "<group>"; };
+		8F98957A1653458700578961 /* LocalBuzzTableCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalBuzzTableCellController.m; sourceTree = "<group>"; };
+		8F98957C1653588B00578961 /* button_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_play.png; sourceTree = "<group>"; };
 		8FCB0E02161A6ECE0026AACB /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		8FCB0E04161A6ED50026AACB /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8FCB0E06161A6EE50026AACB /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -207,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				D5DC95B1164B39D500CCCB53 /* 73-radar.png */,
+				8F98957C1653588B00578961 /* button_play.png */,
 				D5DC95AF164B398000CCCB53 /* 28-star.png */,
 				D5DC95AD164B383500CCCB53 /* 19-gear.png */,
 				BF2AE11D163A176F0098A8C9 /* AFNetworking */,
@@ -308,6 +316,9 @@
 				8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */,
 				8F02CCBD1620BD5100719F69 /* PastEventViewController.h */,
 				8F02CCBE1620BD5100719F69 /* PastEventViewController.m */,
+				8F989576165340AE00578961 /* LocalBuzzTableCell.xib */,
+				8F9895791653458700578961 /* LocalBuzzTableCellController.h */,
+				8F98957A1653458700578961 /* LocalBuzzTableCellController.m */,
 			);
 			name = EventList;
 			sourceTree = "<group>";
@@ -414,6 +425,8 @@
 				D569DDB11651BDD4009D9678 /* 30_vector_icons_df.zip in Resources */,
 				D569DDB31651BE0E009D9678 /* MGImageUtilities-master.zip in Resources */,
 				D569DDB51651BE18009D9678 /* MBProgressHUD-master.zip in Resources */,
+				8F989577165340AE00578961 /* LocalBuzzTableCell.xib in Resources */,
+				8F98957D1653588B00578961 /* button_play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +468,7 @@
 				D5DA945B1641CDEE006D7819 /* TabBarOrientationController.m in Sources */,
 				D5DA945F1641CFB5006D7819 /* NavBarOrientationController.m in Sources */,
 				D569DDA31651B4A6009D9678 /* PostedEventViewController.m in Sources */,
+				8F98957B1653458700578961 /* LocalBuzzTableCellController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
