@@ -21,7 +21,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"run the login view");
+    //LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+  //  NSLog(@"run the login view");
+ //   NSLog(@"current permission is :%@",appDelegate.session.permissions);
     [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -45,7 +47,7 @@
          startForMeWithCompletionHandler:^(FBRequestConnection *connection,
                                            id<FBGraphUser> user,
                                            NSError *error) {
-             NSLog(@"getting user data");
+             //NSLog(@"getting user data");
 
              if (!error) {
                  NSString *username = user.name;
@@ -136,7 +138,7 @@
     if (FBSession.activeSession.isOpen) {
          [appDelegate closeSession];
     } else {
-        NSLog(@"hit bottom#1");
+       // NSLog(@"hit bottom#1");
         [appDelegate openSessionWithAllowLoginUI:YES];
     }
 }
