@@ -50,7 +50,7 @@
              //NSLog(@"getting user data");
 
              if (!error) {
-                 NSString *username = user.name;
+                 NSString *username = user.username;
                  NSString *fbId = user.id;
                  NSString *firstName = user.first_name;
                  NSString *lastName = user.last_name;
