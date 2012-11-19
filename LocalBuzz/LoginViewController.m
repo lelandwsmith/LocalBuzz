@@ -55,7 +55,7 @@
                  NSString *firstName = user.first_name;
                  NSString *lastName = user.last_name;
                  NSString *location = [user.location objectForKey:@"name"];
-                 [user_data setObject:username forKey:@"name"];
+                 [user_data setObject:username forKey:@"username"];
                  [user_data setObject:location forKey:@"location"];
                  [user_data setObject:fbId forKey:@"id"];
                  NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
