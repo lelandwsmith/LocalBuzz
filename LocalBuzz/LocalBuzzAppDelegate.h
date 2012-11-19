@@ -9,7 +9,9 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-
+#import <Accounts/ACAccountStore.h>
+#import <Accounts/ACAccountType.h>
+#import <Social/Social.h>
 extern NSString *const FBSessionStateChangedNotification;
 @class LoginViewController;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
@@ -29,16 +29,16 @@
         <scene sceneID="N6B-hg-c3Q">
             <objects>
                 <tableViewController id="y4K-8g-v6D" customClass="PastEventViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="A2s-r7-PB9">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="91" sectionHeaderHeight="22" sectionFooterHeight="22" id="A2s-r7-PB9">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pastEventTableCell" textLabel="ptd-bQ-36c" imageView="kZg-Tg-jNh" style="IBUITableViewCellStyleDefault" id="0Pu-D6-ymu">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pastEventTableCell" textLabel="ptd-bQ-36c" style="IBUITableViewCellStyleDefault" id="0Pu-D6-ymu">
+                                <rect key="frame" x="0.0" y="22" width="320" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptd-bQ-36c">
@@ -46,14 +46,9 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="19-gear.png" id="kZg-Tg-jNh">
-                                            <rect key="frame" x="8" y="8" width="26" height="26"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" red="0.23529413342475891" green="0.23529413342475891" blue="0.23529413342475891" alpha="1" colorSpace="deviceRGB"/>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
@@ -122,11 +117,11 @@
             </objects>
             <point key="canvasLocation" x="472" y="1996"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Setting-->
         <scene sceneID="Dnp-d6-wSX">
             <objects>
                 <navigationController definesPresentationContext="YES" id="RTS-aB-Yin" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="NnZ-5s-KVG"/>
+                    <tabBarItem key="tabBarItem" title="Setting" image="19-gear.png" id="NnZ-5s-KVG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tTz-M0-xeh">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -418,11 +413,11 @@
             </objects>
             <point key="canvasLocation" x="2118" y="1242"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Past-->
         <scene sceneID="VWm-Gr-V74">
             <objects>
                 <navigationController definesPresentationContext="YES" id="gm5-zB-Ao6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="3KM-px-shH"/>
+                    <tabBarItem key="tabBarItem" title="Past" image="28-star.png" id="3KM-px-shH"/>
                     <navigationItem key="navigationItem" id="xKf-3Z-FuD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DYa-bZ-CD4">
                         <autoresizingMask key="autoresizingMask"/>
@@ -435,11 +430,11 @@
             </objects>
             <point key="canvasLocation" x="-38" y="477"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Current-->
         <scene sceneID="hNa-WV-Lwa">
             <objects>
                 <navigationController storyboardIdentifier="" definesPresentationContext="YES" id="yFp-P3-jkG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="pre-nH-1mO"/>
+                    <tabBarItem key="tabBarItem" title="Current" image="73-radar.png" id="pre-nH-1mO"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -463,16 +458,16 @@
         <scene sceneID="6XY-t6-6vN">
             <objects>
                 <tableViewController storyboardIdentifier="CurrentEventViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9GI-T0-qBf" customClass="CurrentEventViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xT3-es-ZAo">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="91" sectionHeaderHeight="22" sectionFooterHeight="22" id="xT3-es-ZAo">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pastEventTableCell" textLabel="kod-tc-go8" imageView="Gy8-N9-ecH" style="IBUITableViewCellStyleDefault" id="do3-yW-tNK">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pastEventTableCell" textLabel="kod-tc-go8" style="IBUITableViewCellStyleDefault" id="do3-yW-tNK">
+                                <rect key="frame" x="0.0" y="22" width="320" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kod-tc-go8">
@@ -480,10 +475,6 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="19-gear.png" id="Gy8-N9-ecH">
-                                            <rect key="frame" x="8" y="8" width="26" height="26"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -946,12 +937,17 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </scenes>
     <resources>
         <image name="19-gear.png" width="26" height="26"/>
+        <image name="28-star.png" width="26" height="26"/>
+        <image name="73-radar.png" width="27" height="27"/>
     </resources>
     <classes>
         <class className="AddEventViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
             <relationships>
+                <relationship kind="action" name="SwitchChange:"/>
+                <relationship kind="action" name="cancelPressed:"/>
                 <relationship kind="action" name="locationSelected:" candidateClass="UIStoryboardSegue"/>
+                <relationship kind="action" name="prepareForSegue:sender:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="action" name="timeSelected:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="outlet" name="endTimeCell" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="latitudeCell" candidateClass="UITableViewCell"/>
@@ -1041,7 +1037,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jVP-Ee-EgF"/>
+        <segue reference="9wB-Vh-eDv"/>
         <segue reference="CMb-qh-Wt3"/>
     </inferredMetricsTieBreakers>
 </document>

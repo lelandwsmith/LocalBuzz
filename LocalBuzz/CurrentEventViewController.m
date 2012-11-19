@@ -11,6 +11,7 @@
 #import "AFHTTPClient.h"
 #import "Event.h"
 #import "EventDataController.h"
+#import "LocalBuzzTableCellController.h"
 
 @interface CurrentEventViewController ()
 
@@ -191,18 +192,39 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CurrentEventTableCell";
+
+    static NSString *TableIdentifier = @"LocalBuzzTableCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    LocalBuzzTableCellController *cell = (LocalBuzzTableCellController *)[tableView dequeueReusableCellWithIdentifier:TableIdentifier];
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LocalBuzzTableCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
-  
-    // Configure the cell...
-    //cell.textLabel.text = [self.currentEventTitles objectAtIndex:[indexPath row]];
-    cell.textLabel.text = [self.dataController objectInEventListAtIndex:[indexPath row]].title;
-    return cell;
+    
+    cell.nameLabel.text = [self.dataController objectInEventListAtIndex:[indexPath row]].title;
+    cell.StatusImage.image = [UIImage imageNamed:@"73-radar.png"];
+    cell.CategoryImage.image = [UIImage imageNamed:@"73-radar.png"];
+    NSDate* end =[self.dataController objectInEventListAtIndex:[indexPath row]].endTime;
+    NSDate* start =[self.dataController objectInEventListAtIndex:[indexPath row]].startTime;
+    NSDate* now = [[NSDate alloc] init];
+    if([start compare:now]==NSOrderedDescending){
+        cell.timeLabel.text = @"to be determined";
+    }else{
+        cell.StatusImage.image = [UIImage imageNamed:@"button_play.png"];
+        NSTimeInterval distanceBetweenDates = [end timeIntervalSinceNow];
+        double secondsInAnHour = 3600;
+        NSInteger hoursBetweenDates = distanceBetweenDates / secondsInAnHour;
+        if(hoursBetweenDates >= 24){
+            NSInteger remainingDays = hoursBetweenDates/24;
+            hoursBetweenDates = hoursBetweenDates - remainingDays*24;
+            cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d D %d H",remainingDays,hoursBetweenDates ];
+        }else{
+            cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d H",hoursBetweenDates ];
+        }
+
+    }
+        return cell;
 }
 
 
