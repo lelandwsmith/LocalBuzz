@@ -20,8 +20,9 @@
 @synthesize locationLabel = _locationLabel;
 @synthesize descriptionLabel = _descriptionLabel;
 @synthesize mapLable = _mapLable;
+@synthesize numOfLines =_numOfLines;
 @synthesize currentCoordinate = _currentCoordinate;
-
+@synthesize locationTitle = _locationTitle;
 
 - (void) setEvent:(Event *)event {
     if (_event != event) {
@@ -53,15 +54,40 @@
 			
 			//String to hold address
 			NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-			
-			//Print the location to console
-			NSLog(@"I am currently at %@",locatedAt);
-			
+            NSLog(@"at %@",locatedAt);
 			//Set the label text to current location
-			[self.locationLabel setText:locatedAt];
+            NSLog(@"size of string is %d",locatedAt.length);
+            self.numOfLines = locatedAt.length/20+1;
+            NSLog(@"numOFline %d",self.numOfLines);
+            [self.locationLabel setNumberOfLines:self.numOfLines];
+            CGSize maximumLabelSize = CGSizeMake(198,self.numOfLines*21);
+            
+            CGSize expectedLabelSize = [locatedAt sizeWithFont:self.locationLabel.font constrainedToSize:maximumLabelSize lineBreakMode:self.locationLabel.lineBreakMode];
+            //adjust the label the the new height.
+            CGRect newFrame = self.locationLabel.frame;
+            [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows]
+                             withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadData];
+            newFrame.size.height = expectedLabelSize.height;
+            self.locationLabel.frame = newFrame;
+            [self.locationTitle setFrame:CGRectMake(10, ((self.numOfLines - 1 )*21+23)/2, 94, 21)];
+            [self.locationLabel setText:locatedAt];
 		}];
 		
 	}
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"calllllllłł");
+    if((indexPath.section==0)&&(indexPath.row==2)){
+        NSLog(@"@@@@@@@@@@");
+        if(self.numOfLines>1){
+            return ((self.numOfLines - 1 )*21+44);
+        }
+    }else if(indexPath.section==5){
+        NSLog(@"!!!!!!!!@");
+        return 75;
+    }
+    return 75;
 }
 
 - (void) setUpMap:(NSNumber *)destLat :(NSNumber *)destLng {
@@ -81,6 +107,7 @@
 
 
 - (void) viewDidLoad {
+    self.tableView.delegate = self;
     [super viewDidLoad];
     [self configureView];
 }

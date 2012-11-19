@@ -10,6 +10,10 @@
 
 @implementation LocalBuzzTableCellController
 
+@synthesize nameLabel = _nameLabel;
+@synthesize timeLabel = _timeLabel;
+@synthesize StatusImage = _StatusImage;
+@synthesize CategoryImage = _CategoryImage;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

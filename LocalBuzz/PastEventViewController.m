@@ -37,7 +37,7 @@
  
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	self.pastEventTitles = [[NSArray alloc] initWithObjects:@"Past1", @"Past2", @"Past3", @"Past4", @"Past5", @"Past6", @"Past7", @"Past8", @"Past9", @"Past10", @"Past11", @"Past12", @"Past13", @"Past14", nil];
+	self.pastEventTitles = [[NSArray alloc] initWithObjects:@"Past1", @"Past2", @"Past3", @"Past4", @"Past5", nil];
 }
 
 - (void)viewDidUnload
