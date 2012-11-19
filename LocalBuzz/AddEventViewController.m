@@ -21,12 +21,16 @@
 
 @implementation AddEventViewController
 @synthesize titleField = _titleField;
+@synthesize LocationCell = _LocationCell;
+@synthesize LocationLabel = _LocationLabel;
+@synthesize LocationTitle = _LocationTitle;
 @synthesize latitudeCell = _latitudeCell;
 @synthesize startTimeCell = _startTimeCell;
 @synthesize endTimeCell = _endTimeCell;
 @synthesize location = _location;
 @synthesize switcher = _switcher;
-
+@synthesize categoryID =_categoryID;
+@synthesize DescriptText = _DescriptText;
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -66,13 +70,33 @@
 				 
          //Print the location to console
          NSLog(@"I am currently at %@",locatedAt);
-         
+         NSLog(@"size of string is %d",locatedAt.length);
+         self.numOfLines = locatedAt.length/19+1;
+         NSLog(@"numOFline %d",self.numOfLines);
+         [self.LocationLabel setNumberOfLines:self.numOfLines];
+         CGSize maximumLabelSize = CGSizeMake(180,self.numOfLines*21);
+         CGSize expectedLabelSize = [locatedAt sizeWithFont:self.LocationLabel.font constrainedToSize:maximumLabelSize lineBreakMode:self.LocationLabel.lineBreakMode];
+         //adjust the label the the new height.
+         CGRect newFrame = self.LocationLabel.frame;
+         [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows]
+                                      withRowAnimation:UITableViewRowAnimationNone];
+          newFrame.size.height = expectedLabelSize.height;
+          self.LocationLabel.frame = newFrame;
+          [self.LocationTitle setFrame:CGRectMake(10, ((self.numOfLines - 1 )*21+23)/2, 75, 21)];
+          [self.LocationLabel setText:locatedAt];
          //Set the label text to current location
-         [self.location.detailTextLabel setText:locatedAt];
+         //[self.location.detailTextLabel setText:locatedAt];
 			 }];
     }
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if((indexPath.section==1)&&(indexPath.row==0)){
+        if(self.numOfLines>1){
+            return ((self.numOfLines - 1 )*21+44);
+        }
+    }
+    return 44;
+}
 - (IBAction)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"SelectStartTime"]) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -120,11 +144,25 @@
         }];
     }
 }
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
+{
+    [self.DescriptText setText:@""];
+    [self.DescriptText setTextColor:[UIColor blueColor]];
+    return YES;
+}
 
+-(void)textViewChange{
+    [self textViewShouldBeginEditing:self.DescriptText];
+}
 - (void) viewDidLoad {
-	// for converting lat lon to address
-	[super viewDidLoad];
-	
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textViewChange)
+                                                 name:UITextViewTextDidBeginEditingNotification
+                                               object:self.DescriptText];
+    
+	self.categoryID = 1;
+    [self.DescriptText setTextColor:[UIColor lightGrayColor]];
 	self.titleField.delegate = self;
 	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
 	tapGestureRecognizer.cancelsTouchesInView = NO;
@@ -134,17 +172,38 @@
 - (void) viewDidUnload {
 	[super viewDidUnload];
 }
+- (IBAction)leftClickCategory:(id)sender {
+    self.categoryID--;
+    if(self.categoryID<0){
+        self.categoryID+=5;
+    }
+    [self.categoryLabel setText:[NSString stringWithFormat:@"Category #%d",self.categoryID]];
+}
+- (IBAction)rightClickCategory:(id)sender {
+    self.categoryID++;
+    if(self.categoryID>4){
+        self.categoryID-=5;
+    }
+    [self.categoryLabel setText:[NSString stringWithFormat:@"Category #%d",self.categoryID]];
+}
+
+
+
 
 - (IBAction)SwitchChange:(id)sender {
 }
 
 - (void) hideKeyboard {
     [self.titleField resignFirstResponder];
+    [self.DescriptText resignFirstResponder];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     return [textField resignFirstResponder];
 }
+
+
+
 
 
 @end

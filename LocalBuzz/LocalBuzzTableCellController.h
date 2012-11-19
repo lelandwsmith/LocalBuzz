@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface LocalBuzzTableCellController : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *CategoryImage;
+@property (nonatomic, weak) IBOutlet UIImageView *StatusImage;
 
 @end

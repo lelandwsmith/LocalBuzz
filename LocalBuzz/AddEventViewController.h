@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-
 @interface AddEventViewController : UITableViewController <UITextFieldDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITableViewCell *latitudeCell;
@@ -16,8 +15,16 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *endTimeCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *location;
 @property (weak, nonatomic) IBOutlet UISwitch *switcher;
-
+@property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
+@property (nonatomic) NSInteger categoryID;
+@property (weak, nonatomic) IBOutlet UITextView *DescriptText;
+@property (weak, nonatomic) IBOutlet UITableViewCell *LocationCell;
+@property (weak, nonatomic) IBOutlet UILabel *LocationTitle;
+@property (weak, nonatomic) IBOutlet UILabel *LocationLabel;
+@property (nonatomic) NSInteger numOfLines;
+@property (weak, nonatomic) IBOutlet UILabel *description;
 - (IBAction)timeSelected:(UIStoryboardSegue *)segue;
 - (IBAction)locationSelected:(UIStoryboardSegue *)segue;
+- (void)textViewChange;
 
 @end
