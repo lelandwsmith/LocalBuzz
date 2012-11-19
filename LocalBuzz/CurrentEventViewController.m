@@ -69,6 +69,7 @@
 	[item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
 	[item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
 	
+	[[UIBarButtonItem appearance] setTintColor:[[UIColor alloc]initWithRed:227.0/255.0 green:110.0/255.0 blue:81.0/255.0 alpha:0.3]];
 	
 	[super viewDidLoad];
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];

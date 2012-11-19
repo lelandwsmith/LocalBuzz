@@ -767,11 +767,13 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Create" id="ZuQ-Oc-cK8">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="ZtV-nW-xSE">
+                            <color key="tintColor" red="0.88775510199999996" green="0.36818879500000001" blue="0.1025644161" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancelPressed:" destination="ZhV-ML-Qci" id="LmS-BU-dow"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Create" id="Tkh-Z7-5Tq">
+                            <color key="tintColor" red="0.88775510204081631" green="0.3681887949882201" blue="0.10256441612280418" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="crt-ka-LXo" kind="unwind" identifier="EventCreated" unwindAction="eventCreated:" id="cGM-UT-K3U"/>
                             </connections>
@@ -845,6 +847,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" title="Time" id="rXY-JJ-6z3">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="r08-P5-p0G">
+                            <color key="tintColor" red="0.88775510199999996" green="0.36818879500000001" blue="0.1025644161" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="oAO-zC-AQA" kind="unwind" identifier="ReturnTime" unwindAction="timeSelected:" id="QXd-iF-iGz"/>
                             </connections>
@@ -883,6 +886,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" title="Location" id="5CU-ms-0GY">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="uXa-tl-CRJ">
+                            <color key="tintColor" red="0.88775510204081631" green="0.3681887949882201" blue="0.10256441612280418" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="geoCodeLocation:" destination="aA4-Oj-Lkd" id="QQh-lG-BOK"/>
                                 <segue destination="Wio-OT-ckk" kind="unwind" identifier="ReturnLocation" unwindAction="locationSelected:" id="4DT-r2-ITe"/>
@@ -1027,7 +1031,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Detail" id="075-bY-6Hq">
-                        <barButtonItem key="rightBarButtonItem" title="Join" id="92S-uN-ZgW"/>
+                        <barButtonItem key="rightBarButtonItem" title="Join" id="92S-uN-ZgW">
+                            <color key="tintColor" red="0.88775510199999996" green="0.36818879500000001" blue="0.1025644161" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="LocationCell" destination="jku-ZB-h9i" id="FCj-kU-cDN"/>
@@ -1075,6 +1081,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="AddEventViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelPressed:"/>
                 <relationship kind="action" name="locationSelected:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="action" name="timeSelected:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="outlet" name="DescriptText" candidateClass="UITextView"/>
