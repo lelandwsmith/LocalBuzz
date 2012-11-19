@@ -26,4 +26,5 @@
 @property (nonatomic) CLLocationCoordinate2D currentCoordinate;
 @property (weak, nonatomic) IBOutlet UITableViewCell *LocationCell;
 @property (nonatomic) NSInteger  numOfLines;
+@property (nonatomic) NSString*  locatedAt;
 @end
