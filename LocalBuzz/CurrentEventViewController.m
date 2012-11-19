@@ -50,7 +50,29 @@
 
 - (void)viewDidLoad
 {
+	
+	/*
+	UIImage *selectedImage0 = [UIImage imageNamed:@"HomeDB.png"];
+	UIImage *unselectedImage0 = [UIImage imageNamed:@"HomeLB.png"];
+	
+	UIImage *selectedImage1 = [UIImage imageNamed:@"BuildingsDB.png"];
+	UIImage *unselectedImage1 = [UIImage imageNamed:@"BuildingsLB.png"];
+	
+	UIImage *selectedImage2 = [UIImage imageNamed:@"InformationDB.png"];
+	UIImage *unselectedImage2 = [UIImage imageNamed:@"InformationLB.png"];
+	
+	UITabBar *tabBar = self.tabBarController.tabBar;
+	UITabBarItem *item0 = [tabBar.items objectAtIndex:0];
+	UITabBarItem *item1 = [tabBar.items objectAtIndex:1];
+	UITabBarItem *item2 = [tabBar.items objectAtIndex:2];
+	
+	[item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselectedImage0];
+	[item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
+	[item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
+	*/
 	[super viewDidLoad];
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
+	[self.tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabbar.png"]];
 
 	// Uncomment the following line to preserve selection between presentations.
 	// self.clearsSelectionOnViewWillAppear = NO;

@@ -31,21 +31,24 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    self.UserInfoLabel.text=@"My Profile";
-    NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
-    self.slider.maximumValue = 10;
-    self.slider.minimumValue = 0.5;
-    self.slider.value =[[user_data valueForKey:@"range"] floatValue];
-    int progresAsInt = (int)(self.slider.value +0.5f);
-    NSString *newText = [[NSString alloc] initWithFormat:@"%d miles",progresAsInt];
-    self.currentRange.text = newText;
+	[super viewDidLoad];
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
+	//[self.tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabbar.png"]];
+	
+	self.UserInfoLabel.text=@"My Profile";
+	NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
+	self.slider.maximumValue = 10;
+	self.slider.minimumValue = 0.5;
+	self.slider.value =[[user_data valueForKey:@"range"] floatValue];
+	int progresAsInt = (int)(self.slider.value +0.5f);
+	NSString *newText = [[NSString alloc] initWithFormat:@"%d miles",progresAsInt];
+	self.currentRange.text = newText;
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+	// Uncomment the following line to preserve selection between presentations.
+	// self.clearsSelectionOnViewWillAppear = NO;
  
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+	// self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning

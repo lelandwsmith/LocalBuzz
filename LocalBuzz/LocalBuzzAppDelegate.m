@@ -8,36 +8,44 @@
 
 #import "LocalBuzzAppDelegate.h"
 #import "CurrentEventViewController.h"
+#import "TabBarOrientationController.h"
+#import "NavBarOrientationController.h"
 
 @interface LocalBuzzAppDelegate ()
 
-@property (strong, nonatomic) UINavigationController *navController;
-@property (strong, nonatomic) UITabBarController *mainViewController;
+@property (strong, nonatomic) NavBarOrientationController *navController;
+@property (strong, nonatomic) TabBarOrientationController *mainViewController;
 @property (strong, nonatomic) LoginViewController* loginViewController;
 -(void)showLoginView;
 
 @end
 
 @implementation LocalBuzzAppDelegate
+@synthesize window = _window;
 @synthesize navController = _navController;
 @synthesize mainViewController = _mainViewController;
 @synthesize loginViewController = _loginViewController;
 @synthesize session = _session;
 NSString *const FBSessionStateChangedNotification =
 @"eecs441.info.vforvincent.Login:FBSessionStateChangedNotification";
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
-                                                  bundle:nil];
-    self.mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
-    self.window.rootViewController = self.mainViewController;
-    [self.window makeKeyAndVisible];
-    if (![self openSessionWithAllowLoginUI:NO]) {
-        // No? Display the login page.
-        [self showLoginView];
-    }
-    [FBProfilePictureView class];
-    return YES;
+	UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+	
+	self.mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
+	self.window.rootViewController = self.mainViewController;
+	[self.window makeKeyAndVisible];
+	if (![self openSessionWithAllowLoginUI:NO]) {
+		// No? Display the login page.
+		[self showLoginView];
+	}
+	[FBProfilePictureView class];
+	
+	//[[[self mainViewController] tabBar] setBackgroundImage:[UIImage imageNamed:@"background"]];
+	//[[[self navController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"bar1.png"] forBarMetrics:UIBarMetricsDefault];
+	
+	return YES;
 }
 
 - (void)showLoginView

@@ -124,6 +124,7 @@
 - (void) viewDidLoad {
 	// for converting lat lon to address
 	[super viewDidLoad];
+	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
 	
 	self.titleField.delegate = self;
 	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];

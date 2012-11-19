@@ -46,6 +46,9 @@
 		BFD323BD1639C4F500FE6819 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323BC1639C4F500FE6819 /* Event.m */; };
 		BFD323C11639CC9900FE6819 /* EventDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323C01639CC9900FE6819 /* EventDataController.m */; };
 		BFD323CB1639FA7800FE6819 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */; };
+		D520832F1654776C0043F92E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D520832E1654776C0043F92E /* Icon.png */; };
+		D55D80A11659B08C00ACB021 /* tabbar.png in Resources */ = {isa = PBXBuildFile; fileRef = D55D80A01659B08C00ACB021 /* tabbar.png */; };
+		D55D80A31659B11B00ACB021 /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = D55D80A21659B11B00ACB021 /* navbar.png */; };
 		D569DDA31651B4A6009D9678 /* PostedEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D569DDA21651B4A6009D9678 /* PostedEventViewController.m */; };
 		D569DDAE1651BDAA009D9678 /* glyphish-icons.zip in Resources */ = {isa = PBXBuildFile; fileRef = D569DDAD1651BDAA009D9678 /* glyphish-icons.zip */; };
 		D569DDB11651BDD4009D9678 /* 30_vector_icons_df.zip in Resources */ = {isa = PBXBuildFile; fileRef = D569DDB01651BDD4009D9678 /* 30_vector_icons_df.zip */; };
@@ -128,6 +131,9 @@
 		BFD323C01639CC9900FE6819 /* EventDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDataController.m; sourceTree = "<group>"; };
 		BFD323C91639FA7800FE6819 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
 		BFD323CA1639FA7800FE6819 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		D520832E1654776C0043F92E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		D55D80A01659B08C00ACB021 /* tabbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar.png; sourceTree = "<group>"; };
+		D55D80A21659B11B00ACB021 /* navbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar.png; sourceTree = "<group>"; };
 		D569DDA11651B4A6009D9678 /* PostedEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostedEventViewController.h; sourceTree = "<group>"; };
 		D569DDA21651B4A6009D9678 /* PostedEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostedEventViewController.m; sourceTree = "<group>"; };
 		D569DDAD1651BDAA009D9678 /* glyphish-icons.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "glyphish-icons.zip"; sourceTree = "<group>"; };
@@ -206,9 +212,7 @@
 		BF5B427B161A3ACB002C67D1 = {
 			isa = PBXGroup;
 			children = (
-				D5DC95B1164B39D500CCCB53 /* 73-radar.png */,
-				D5DC95AF164B398000CCCB53 /* 28-star.png */,
-				D5DC95AD164B383500CCCB53 /* 19-gear.png */,
+				D58BFD0916574F67008878D9 /* Images */,
 				BF2AE11D163A176F0098A8C9 /* AFNetworking */,
 				BF5B4290161A3ACB002C67D1 /* LocalBuzz */,
 				BF5B4289161A3ACB002C67D1 /* Frameworks */,
@@ -288,6 +292,19 @@
 				BF5B42A0161A3ACB002C67D1 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D58BFD0916574F67008878D9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D520832E1654776C0043F92E /* Icon.png */,
+				D55D80A21659B11B00ACB021 /* navbar.png */,
+				D55D80A01659B08C00ACB021 /* tabbar.png */,
+				D5DC95B1164B39D500CCCB53 /* 73-radar.png */,
+				D5DC95AF164B398000CCCB53 /* 28-star.png */,
+				D5DC95AD164B383500CCCB53 /* 19-gear.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		D5E94070163B201C00788C15 /* EventDetail */ = {
@@ -414,6 +431,9 @@
 				D569DDB11651BDD4009D9678 /* 30_vector_icons_df.zip in Resources */,
 				D569DDB31651BE0E009D9678 /* MGImageUtilities-master.zip in Resources */,
 				D569DDB51651BE18009D9678 /* MBProgressHUD-master.zip in Resources */,
+				D520832F1654776C0043F92E /* Icon.png in Resources */,
+				D55D80A11659B08C00ACB021 /* tabbar.png in Resources */,
+				D55D80A31659B11B00ACB021 /* navbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
