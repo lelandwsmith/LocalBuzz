@@ -51,6 +51,25 @@
 
 - (void)viewDidLoad
 {
+	UIImage *selectedImage0 = [UIImage imageNamed:@"73-radar-select.png"];
+	UIImage *unselectedImage0 = [UIImage imageNamed:@"73-radar.png"];
+	
+	UIImage *selectedImage1 = [UIImage imageNamed:@"28-star-select.png"];
+	UIImage *unselectedImage1 = [UIImage imageNamed:@"28-star.png"];
+	
+	UIImage *selectedImage2 = [UIImage imageNamed:@"19-gear-select.png"];
+	UIImage *unselectedImage2 = [UIImage imageNamed:@"19-gear.png"];
+	
+	UITabBar *tabBar = self.tabBarController.tabBar;
+	UITabBarItem *item0 = [tabBar.items objectAtIndex:0];
+	UITabBarItem *item1 = [tabBar.items objectAtIndex:1];
+	UITabBarItem *item2 = [tabBar.items objectAtIndex:2];
+	
+	[item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselectedImage0];
+	[item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
+	[item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
+	
+	
 	[super viewDidLoad];
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
 	[self.tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tabbar.png"]];
