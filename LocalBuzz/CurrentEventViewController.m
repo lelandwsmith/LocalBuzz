@@ -7,6 +7,7 @@
 //
 
 #import "CurrentEventViewController.h"
+#import "LocalBuzzAppDelegate.h"
 #import "EventDetailViewController.h"
 #import "AFHTTPClient.h"
 #import "Event.h"
@@ -31,6 +32,10 @@
 		}
 	}
 	return _locationManager;
+}
+
+- (LocalBuzzAppDelegate *) appDelegate {
+    return (LocalBuzzAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 - (void) awakeFromNib
@@ -62,8 +67,16 @@
 	refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to refresh"];
 	[refresh addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
 	self.refreshControl = refresh;
-
 	//self.view.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:202.0f/255.0f blue:84.0f/255.0f alpha:1.0f];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if ([[self appDelegate] connectToXMPP]) {
+        NSLog(@"Connected");
+    } else {
+        NSLog(@"Not connected");
+    }
 }
 
 - (IBAction)eventCreated:(UIStoryboardSegue *)segue
@@ -75,14 +88,12 @@
 
 - (void) refreshEvents
 {
-    NSLog(@"%@", [NSTimeZone knownTimeZoneNames]);
     NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     CLLocationCoordinate2D currentCoord = [[self.locationManager location] coordinate];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
     dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-    NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             [NSNumber numberWithDouble:currentCoord.latitude], @"lat",
                             [NSNumber numberWithDouble:currentCoord.longitude], @"lng",
@@ -93,7 +104,6 @@
         [self.dataController emptyEventList];
         NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:
                                 NSJSONReadingMutableContainers error:nil];
-        NSLog(@"Events count: %d", [events count]);
         NSEnumerator *enumerator = [events objectEnumerator];
         id value;
         while (value = [enumerator nextObject]) {
@@ -129,7 +139,6 @@
     } else if ([locations count] == 1) {
         [self refreshEvents];
     }
-    NSLog(@"Location count: %d", [locations count]);
     [self.locationManager stopUpdatingLocation];
 }
 

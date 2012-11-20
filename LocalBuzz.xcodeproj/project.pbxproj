@@ -93,6 +93,7 @@
 		BF5B429F161A3ACB002C67D1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B429E161A3ACB002C67D1 /* Default@2x.png */; };
 		BF5B42A1161A3ACB002C67D1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42A0161A3ACB002C67D1 /* Default-568h@2x.png */; };
 		BF5B42A4161A3ACB002C67D1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5B42A2161A3ACB002C67D1 /* MainStoryboard.storyboard */; };
+		BF6A3CDF165AFD9800E7D5F8 /* ChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6A3CDE165AFD9800E7D5F8 /* ChatRoomViewController.m */; };
 		BFB09B8F163C5A03001E2BA6 /* SettingTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = BFB09B8C163C59AF001E2BA6 /* SettingTableViewController.h */; };
 		BFB09B90163C5A03001E2BA6 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB09B8D163C59AF001E2BA6 /* SettingTableViewController.m */; };
 		BFB09B93163C5A35001E2BA6 /* UserInfoTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = BFB09B91163C5A20001E2BA6 /* UserInfoTableViewController.h */; };
@@ -287,6 +288,8 @@
 		BF5B429E161A3ACB002C67D1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BF5B42A0161A3ACB002C67D1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BF5B42A3161A3ACB002C67D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		BF6A3CDD165AFD9800E7D5F8 /* ChatRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRoomViewController.h; sourceTree = "<group>"; };
+		BF6A3CDE165AFD9800E7D5F8 /* ChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRoomViewController.m; sourceTree = "<group>"; };
 		BFB09B8C163C59AF001E2BA6 /* SettingTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		BFB09B8D163C59AF001E2BA6 /* SettingTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
 		BFB09B91163C5A20001E2BA6 /* UserInfoTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewController.h; sourceTree = "<group>"; };
@@ -754,6 +757,7 @@
 				D5DA945A1641CDEE006D7819 /* TabBarOrientationController.m */,
 				D5DA945D1641CFB5006D7819 /* NavBarOrientationController.h */,
 				D5DA945E1641CFB5006D7819 /* NavBarOrientationController.m */,
+				BF6A3CE2165AFDAD00E7D5F8 /* ChatRoom */,
 				D5E94074163B20CF00788C15 /* Setting */,
 				D5E94073163B208A00788C15 /* EventNew */,
 				D5E94072163B207400788C15 /* LogIn */,
@@ -788,6 +792,15 @@
 				BF5B42A0161A3ACB002C67D1 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF6A3CE2165AFDAD00E7D5F8 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				BF6A3CDD165AFD9800E7D5F8 /* ChatRoomViewController.h */,
+				BF6A3CDE165AFD9800E7D5F8 /* ChatRoomViewController.m */,
+			);
+			name = ChatRoom;
 			sourceTree = "<group>";
 		};
 		D5E94070163B201C00788C15 /* EventDetail */ = {
@@ -1005,6 +1018,7 @@
 				BF49F60B1659C39700326E5D /* NSDate+XMPPDateTimeProfiles.m in Sources */,
 				BF49F60C1659C39700326E5D /* XMPPDateTimeProfiles.m in Sources */,
 				BF49F60D1659C39700326E5D /* XMPPElement+Delay.m in Sources */,
+				BF6A3CDF165AFD9800E7D5F8 /* ChatRoomViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

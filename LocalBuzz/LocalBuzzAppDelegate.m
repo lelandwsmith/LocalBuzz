@@ -94,7 +94,7 @@ NSString *const FBSessionStateChangedNotification =
 }
 
 - (void) setupStream {
-    NSAssert(self.xmppStream == nil, @"Method setupStream invoked multiple times");
+    //NSAssert(self.xmppStream == nil, @"Method setupStream invoked multiple times");
 
 #if !TARGET_IPHONE_SIMULATOR
     {
@@ -103,6 +103,7 @@ NSString *const FBSessionStateChangedNotification =
 #endif
     [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [self.xmppStream setHostName:@"localbuzz.vforvincent.info"];
+    NSLog(@"%@, %d", self.xmppStream.hostName, self.xmppStream.hostPort);
     allowSelfSignedCertificate = NO;
     allowSSLHostNameMismatch = NO;
 }
@@ -130,7 +131,7 @@ NSString *const FBSessionStateChangedNotification =
     if (username == nil) {
         return NO;
     }
-    [self.xmppStream setMyJID:[XMPPJID jidWithString:username]];
+    self.xmppStream.myJID = [XMPPJID jidWithUser:username domain:self.xmppStream.hostName resource:nil];
     NSError *error = nil;
     if (![self.xmppStream connect:&error]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error connecting"
@@ -402,11 +403,14 @@ NSString *const FBSessionStateChangedNotification =
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
 {
-    self.xmppStream.myJID = [XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"username"]];
+    NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
+    NSLog(@"username: %@", username);
+    self.xmppStream.myJID = [XMPPJID jidWithUser:username domain:self.xmppStream.hostName resource:nil];
     NSError *registerError = nil;
     if (![self.xmppStream registerWithPassword:@"test" error:&registerError]) {
         NSLog(@"Register error: %@", registerError.localizedDescription);
     }
+    [self disconnectFromXMPP];
     [self connectToXMPP];
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }
