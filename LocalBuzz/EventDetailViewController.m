@@ -20,9 +20,10 @@
 @synthesize locationLabel = _locationLabel;
 @synthesize descriptionLabel = _descriptionLabel;
 @synthesize mapLable = _mapLable;
+@synthesize numOfLines =_numOfLines;
 @synthesize currentCoordinate = _currentCoordinate;
-
-
+@synthesize locationTitle = _locationTitle;
+@synthesize locatedAt =_locatedAt;
 - (void) setEvent:(Event *)event {
     if (_event != event) {
         _event = event;
@@ -52,16 +53,42 @@
 			CLPlacemark *placemark = [placemarks objectAtIndex:0];
 			
 			//String to hold address
-			NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-			
-			//Print the location to console
-			NSLog(@"I am currently at %@",locatedAt);
+			self.locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
 			
 			//Set the label text to current location
-			[self.locationLabel setText:locatedAt];
+     	self.numOfLines = self.locatedAt.length/25+1;
+
+			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
 		}];
-		
 	}
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if((indexPath.section==0)&&(indexPath.row==2)){
+        if(self.numOfLines>1){
+					[self.LocationCell.detailTextLabel setNumberOfLines:self.numOfLines];
+					[self.LocationCell.detailTextLabel setText:self.locatedAt];
+					return ((self.numOfLines - 1 )*21+44);
+        }
+    }
+    return 44;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell_%d_%d",indexPath.section,indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        NSLog(@"reconstruct for section #%d, row #%d",indexPath.section,indexPath.row);
+        
+        cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        if((indexPath.row==2)&&(self.numOfLines>1)){
+            NSLog(@"calling");
+
+        }
+        //cell.reuseIdentifier = CellIdentifier;
+    }
+    //config the cell
+    return cell;
 }
 
 - (void) setUpMap:(NSNumber *)destLat :(NSNumber *)destLng {

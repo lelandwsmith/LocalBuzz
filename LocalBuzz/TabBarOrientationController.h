@@ -10,4 +10,6 @@
 
 @interface TabBarOrientationController : UITabBarController
 
+@property(nonatomic, retain) UITabBar *tabBar1;
+
 @end

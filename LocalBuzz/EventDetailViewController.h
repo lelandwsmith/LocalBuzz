@@ -16,6 +16,7 @@
 	
 }
 
+@property (weak, nonatomic) IBOutlet UILabel *locationTitle;
 @property (nonatomic, strong) Event *event;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
@@ -23,5 +24,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, weak) IBOutlet UITableViewCell *mapLable;
 @property (nonatomic) CLLocationCoordinate2D currentCoordinate;
-
+@property (weak, nonatomic) IBOutlet UITableViewCell *LocationCell;
+@property (nonatomic) NSInteger  numOfLines;
+@property (nonatomic) NSString*  locatedAt;
 @end

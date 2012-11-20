@@ -207,6 +207,7 @@ NSString *const FBSessionStateChangedNotification =
            // NSLog(@"state == FBSessionSateOpen");
             //NSLog(@"expire date is %@",session.expirationDate);
            // NSLog(@"original permission is %@",[FBRequest requestWithGraphPath:@"me/permissions" parameters:nil HTTPMethod:nil].session.permissions);
+            NSLog(@"here");
             self.window.rootViewController = self.mainViewController;
             self.loginViewController = nil;
         }
