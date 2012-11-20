@@ -10,6 +10,11 @@
 #import "TimePickerViewController.h"
 #import "LocationSelectionViewController.h"
 #import "AFHTTPClient.h"
+#import <QuartzCore/QuartzCore.h>
+
+#define FONT_SIZE 14.0f
+#define CELL_CONTENT_WIDTH 320.0f
+#define CELL_CONTENT_MARGIN 10.0f
 
 @interface AddEventViewController ()
 {
@@ -31,6 +36,8 @@
 @synthesize switcher = _switcher;
 @synthesize categoryID =_categoryID;
 @synthesize DescriptText = _DescriptText;
+@synthesize address = _address;
+
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -53,70 +60,61 @@
 }
 
 - (IBAction)locationSelected:(UIStoryboardSegue *)segue {
-    if ([[segue identifier] isEqualToString:@"ReturnLocation"]) {
-			locationSelector = [segue sourceViewController];
-			CLLocationCoordinate2D selectedLatLong = locationSelector.latLong;
-			CLLocation *loc = [[CLLocation alloc] initWithLatitude:selectedLatLong.latitude longitude:selectedLatLong.longitude];
-			
-			CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-			
-			//Geocoding Block
-        [geocoder reverseGeocodeLocation: loc completionHandler:^(NSArray *placemarks, NSError *error) {
-            //Get nearby address
-            CLPlacemark *placemark = [placemarks objectAtIndex:0];
-            
-            //String to hold address
-            NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-            
-            //Print the location to console
-            NSLog(@"I am currently at %@",locatedAt);
-            NSLog(@"size of string is %d",locatedAt.length);
-            self.numOfLines = locatedAt.length/19+1;
-            NSLog(@"numOFline %d",self.numOfLines);
-            [self.LocationLabel setNumberOfLines:self.numOfLines];
-            CGSize maximumLabelSize = CGSizeMake(180,self.numOfLines*21);
-            CGSize expectedLabelSize = [locatedAt sizeWithFont:self.LocationLabel.font constrainedToSize:maximumLabelSize lineBreakMode:self.LocationLabel.lineBreakMode];
-            //adjust the label the the new height.
-            CGRect tmpFrame = self.LocationLabel.frame;
-            
-            tmpFrame.size.height = expectedLabelSize.height;
-            self.LocationLabel.frame = tmpFrame;
-            [self.LocationTitle setFrame:CGRectMake(10, 43, 75, 21)];
-            NSInteger x = ((self.numOfLines - 1 )*21+23)/2;
-            NSLog(@"x is %d",x);
-            [self.LocationCell setNeedsDisplay];
-            [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows]
-                                  withRowAnimation:UITableViewRowAnimationNone];
-            
-            [self.LocationLabel setText:locatedAt];
-         //Set the label text to current location
-         //[self.location.detailTextLabel setText:locatedAt];
-			 }];
-    }
+	if ([[segue identifier] isEqualToString:@"ReturnLocation"]) {
+		locationSelector = [segue sourceViewController];
+		CLLocationCoordinate2D selectedLatLong = locationSelector.latLong;
+		CLLocation *loc = [[CLLocation alloc] initWithLatitude:selectedLatLong.latitude longitude:selectedLatLong.longitude];
+		
+		CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+		
+		//Geocoding Block
+		[geocoder reverseGeocodeLocation: loc completionHandler:^(NSArray *placemarks, NSError *error) {
+			//Get nearby address
+			CLPlacemark *placemark = [placemarks objectAtIndex:0];
+		
+			//String to hold address
+			self.address = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+		
+			//Print the location to console
+			NSLog(@"size of string is %d",self.address.length);
+			self.numOfLines = self.address.length/25+1;
+		
+			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationNone];
+			NSLog(@"numOFline %d",self.numOfLines);
+		}];
+	}
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if((indexPath.section==1)&&(indexPath.row==0)){
-        if(self.numOfLines>1){
-            NSLog(@"height is %d",((self.numOfLines - 1 )*21+44));
-            return ((self.numOfLines - 1 )*21+44);
-        }
-    }else if(indexPath.section==5){
-        return 75;
-    }
-    return 44;
+	if((indexPath.section == 1) && (indexPath.row == 0)){
+  	if(self.numOfLines > 1){
+			[self.LocationCell.detailTextLabel setNumberOfLines:self.numOfLines];
+			[self.LocationCell.detailTextLabel setText:self.address];
+					
+			return ((self.numOfLines - 1 )*21+44);
+		}
+	}
+	else if(indexPath.section == 5){
+		return 75;
+	}
+	return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell_%d_%d",indexPath.section,indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-         NSLog(@"reconstruct for section #%d, row #%d",indexPath.section,indexPath.row);
-        
-        cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-        //cell.reuseIdentifier = CellIdentifier;
-    }
-    //config the cell
-    return cell;
+	NSString *CellIdentifier = [NSString stringWithFormat:@"Cell_%d_%d",indexPath.section,indexPath.row];
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	
+	if (cell == nil) {
+		NSLog(@"reconstruct for section #%d, row #%d",indexPath.section,indexPath.row);
+		cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+			//cell.reuseIdentifier = CellIdentifier;
+	}
+	
+	//config the cell
+	//if (indexPath.section == 1 && self.numOfLines > 1) {
+		//[self.LocationTitle setFrame:CGRectMake(10, 43, 75, 21)];
+	//}
+	
+	return cell;
 }
 
 - (IBAction)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

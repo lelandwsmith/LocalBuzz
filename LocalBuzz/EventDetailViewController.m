@@ -54,33 +54,20 @@
 			
 			//String to hold address
 			self.locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-            NSLog(@"at %@",self.locatedAt);
+			
 			//Set the label text to current location
-            NSLog(@"size of string is %d",self.locatedAt.length);
-            self.numOfLines = self.locatedAt.length/20+1;
-            NSLog(@"numOFline %d",self.numOfLines);
+     	self.numOfLines = self.locatedAt.length/25+1;
 
-            [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows]
-                             withRowAnimation:UITableViewRowAnimationNone];
-            [self.locationLabel setNumberOfLines:self.numOfLines];
-            CGSize maximumLabelSize = CGSizeMake(198,self.numOfLines*21);
-            
-            CGSize expectedLabelSize = [self.locatedAt sizeWithFont:self.locationLabel.font constrainedToSize:maximumLabelSize lineBreakMode:self.locationLabel.lineBreakMode];
-            //adjust the label the the new height.
-            CGRect newFrame = self.locationLabel.frame;
-            newFrame.size.height = expectedLabelSize.height;
-            self.locationLabel.frame=newFrame;
-            [self.locationTitle setFrame:CGRectMake(10, ((self.numOfLines - 1 )*21+23)/2, 94, 21)];
-            [self.locationLabel setText:self.locatedAt];
-
+			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
 		}];
-		
 	}
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if((indexPath.section==0)&&(indexPath.row==2)){
         if(self.numOfLines>1){
-            return ((self.numOfLines - 1 )*21+44);
+					[self.LocationCell.detailTextLabel setNumberOfLines:self.numOfLines];
+					[self.LocationCell.detailTextLabel setText:self.locatedAt];
+					return ((self.numOfLines - 1 )*21+44);
         }
     }
     return 44;

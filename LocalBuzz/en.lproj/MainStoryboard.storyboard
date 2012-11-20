@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
@@ -538,38 +538,26 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Event Location" id="gPW-Ph-lmF">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="Cell_1_0" rowHeight="44" id="SUZ-kD-HOh">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="Cell_1_0" textLabel="KSp-X0-SIK" detailTextLabel="B8K-gj-ZdP" rowHeight="44" style="IBUITableViewCellStyleValue1" id="SUZ-kD-HOh">
                                         <rect key="frame" x="0.0" y="138" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEv-Q3-uIn">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="75" id="v8p-Gs-dsT"/>
-                                                    </constraints>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Location" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSp-X0-SIK">
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4c-pO-YMc">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="180" id="fhd-ib-wRh"/>
-                                                    </constraints>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8K-gj-ZdP">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.14117647707462311" green="0.36078432202339172" blue="0.87450987100601196" alpha="1" colorSpace="deviceRGB"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <constraints>
-                                            <constraint firstItem="a4c-pO-YMc" firstAttribute="leading" secondItem="SUZ-kD-HOh" secondAttribute="leading" constant="100" id="FLn-wb-ULP"/>
-                                            <constraint firstItem="qEv-Q3-uIn" firstAttribute="leading" secondItem="SUZ-kD-HOh" secondAttribute="leading" constant="20" type="default" id="PVw-TM-T3W"/>
-                                            <constraint firstItem="qEv-Q3-uIn" firstAttribute="top" secondItem="SUZ-kD-HOh" secondAttribute="top" constant="12" id="Yn3-Ua-yDq"/>
-                                            <constraint firstItem="a4c-pO-YMc" firstAttribute="baseline" secondItem="qEv-Q3-uIn" secondAttribute="baseline" type="default" id="kHM-Dq-566"/>
-                                        </constraints>
                                         <connections>
                                             <segue destination="aA4-Oj-Lkd" kind="push" id="Rs5-ho-ujy"/>
                                         </connections>
@@ -778,13 +766,10 @@
                     <connections>
                         <outlet property="DescriptText" destination="0Ey-Sc-f0S" id="eFy-KE-3yG"/>
                         <outlet property="LocationCell" destination="SUZ-kD-HOh" id="EHy-Il-8Qx"/>
-                        <outlet property="LocationLabel" destination="a4c-pO-YMc" id="6up-C9-VpM"/>
-                        <outlet property="LocationTitle" destination="qEv-Q3-uIn" id="mTU-bP-uN6"/>
                         <outlet property="categoryLabel" destination="rFd-19-RvB" id="JGE-6z-Wdv"/>
                         <outlet property="endTimeCell" destination="x0u-GI-Iao" id="Wny-1A-cBL"/>
                         <outlet property="latitudeCell" destination="SUZ-kD-HOh" id="zeC-9n-x6k"/>
                         <outlet property="location" destination="SUZ-kD-HOh" id="zod-8I-Jkn"/>
-                        <outlet property="locationCell" destination="a4c-pO-YMc" id="O2a-29-kpA"/>
                         <outlet property="startTimeCell" destination="PSl-oE-5y3" id="hRF-xG-he3"/>
                         <outlet property="switcher" destination="C6F-pM-E02" id="V5E-r6-dh7"/>
                         <outlet property="titleField" destination="GB1-dp-FIG" id="rva-4y-QjD"/>
@@ -949,38 +934,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell_0_2" id="jku-ZB-h9i">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell_0_2" textLabel="Dcf-K6-kOq" detailTextLabel="js4-bi-mTZ" style="IBUITableViewCellStyleValue1" id="jku-ZB-h9i">
                                         <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="keu-sE-H3t">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="94" id="xca-mB-3gt"/>
-                                                    </constraints>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dcf-K6-kOq">
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tW8-kJ-gQU">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="198" id="vbM-pc-uAk"/>
-                                                    </constraints>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="js4-bi-mTZ">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.17254902422428131" green="0.25490197539329529" blue="0.42352944612503052" alpha="1" colorSpace="deviceRGB"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <constraints>
-                                            <constraint firstItem="keu-sE-H3t" firstAttribute="top" secondItem="jku-ZB-h9i" secondAttribute="top" constant="11" id="5do-6l-MK6"/>
-                                            <constraint firstItem="tW8-kJ-gQU" firstAttribute="baseline" secondItem="keu-sE-H3t" secondAttribute="baseline" type="default" id="71C-z2-vRp"/>
-                                            <constraint firstItem="keu-sE-H3t" firstAttribute="leading" secondItem="jku-ZB-h9i" secondAttribute="leading" constant="20" type="default" id="WEe-xc-Quf"/>
-                                            <constraint firstAttribute="trailing" secondItem="tW8-kJ-gQU" secondAttribute="trailing" constant="20" type="default" id="rhw-8a-tSU"/>
-                                        </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell_0_3" textLabel="Qw0-9V-x8p" detailTextLabel="GQo-TO-VG7" style="IBUITableViewCellStyleValue1" id="rqm-h0-lx6">
                                         <rect key="frame" x="0.0" y="143" width="320" height="45"/>
@@ -1030,9 +1003,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="LocationCell" destination="jku-ZB-h9i" id="FCj-kU-cDN"/>
                         <outlet property="descriptionLabel" destination="GQo-TO-VG7" id="GQQ-Wb-3ud"/>
-                        <outlet property="locationCell" destination="tW8-kJ-gQU" id="5O1-X0-ILl"/>
-                        <outlet property="locationLabel" destination="tW8-kJ-gQU" id="An6-1z-jxd"/>
-                        <outlet property="locationTitle" destination="keu-sE-H3t" id="MLQ-aA-Vhg"/>
                         <outlet property="mapLable" destination="DQQ-pG-xYd" id="Vib-sJ-Ndm"/>
                         <outlet property="timeLabel" destination="ab5-6Z-BNf" id="ESu-6v-hgV"/>
                         <outlet property="titleLabel" destination="9K0-Zr-Khf" id="jR7-hJ-7Qe"/>
@@ -1177,6 +1147,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="9wB-Vh-eDv"/>
-        <segue reference="8L0-aj-oU4"/>
+        <segue reference="CMb-qh-Wt3"/>
     </inferredMetricsTieBreakers>
 </document>

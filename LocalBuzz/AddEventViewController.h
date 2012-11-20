@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *LocationLabel;
 @property (nonatomic) NSInteger numOfLines;
 @property (weak, nonatomic) IBOutlet UILabel *description;
+@property (nonatomic) NSString *address;
 - (IBAction)timeSelected:(UIStoryboardSegue *)segue;
 - (IBAction)locationSelected:(UIStoryboardSegue *)segue;
 - (void)textViewChange;
