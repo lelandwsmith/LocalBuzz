@@ -23,7 +23,7 @@
 @synthesize numOfLines =_numOfLines;
 @synthesize currentCoordinate = _currentCoordinate;
 @synthesize locationTitle = _locationTitle;
-
+@synthesize locatedAt =_locatedAt;
 - (void) setEvent:(Event *)event {
     if (_event != event) {
         _event = event;
@@ -53,41 +53,42 @@
 			CLPlacemark *placemark = [placemarks objectAtIndex:0];
 			
 			//String to hold address
-			NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-            NSLog(@"at %@",locatedAt);
+			self.locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+			
 			//Set the label text to current location
-            NSLog(@"size of string is %d",locatedAt.length);
-            self.numOfLines = locatedAt.length/20+1;
-            NSLog(@"numOFline %d",self.numOfLines);
-            [self.locationLabel setNumberOfLines:self.numOfLines];
-            CGSize maximumLabelSize = CGSizeMake(198,self.numOfLines*21);
-            
-            CGSize expectedLabelSize = [locatedAt sizeWithFont:self.locationLabel.font constrainedToSize:maximumLabelSize lineBreakMode:self.locationLabel.lineBreakMode];
-            //adjust the label the the new height.
-            CGRect newFrame = self.locationLabel.frame;
-            [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows]
-                             withRowAnimation:UITableViewRowAnimationNone];
-            [self.tableView reloadData];
-            newFrame.size.height = expectedLabelSize.height;
-            self.locationLabel.frame = newFrame;
-            [self.locationTitle setFrame:CGRectMake(10, ((self.numOfLines - 1 )*21+23)/2, 94, 21)];
-            [self.locationLabel setText:locatedAt];
+     	self.numOfLines = self.locatedAt.length/25+1;
+
+			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
 		}];
-		
 	}
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"calllllllłł");
     if((indexPath.section==0)&&(indexPath.row==2)){
-        NSLog(@"@@@@@@@@@@");
         if(self.numOfLines>1){
-            return ((self.numOfLines - 1 )*21+44);
+					[self.LocationCell.detailTextLabel setNumberOfLines:self.numOfLines];
+					[self.LocationCell.detailTextLabel setText:self.locatedAt];
+					return ((self.numOfLines - 1 )*21+44);
         }
-    }else if(indexPath.section==5){
-        NSLog(@"!!!!!!!!@");
-        return 75;
     }
-    return 75;
+    return 44;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell_%d_%d",indexPath.section,indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        NSLog(@"reconstruct for section #%d, row #%d",indexPath.section,indexPath.row);
+        
+        cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        if((indexPath.row==2)&&(self.numOfLines>1)){
+            NSLog(@"calling");
+
+        }
+        //cell.reuseIdentifier = CellIdentifier;
+    }
+    //config the cell
+    return cell;
 }
 
 - (void) setUpMap:(NSNumber *)destLat :(NSNumber *)destLng {
@@ -107,7 +108,6 @@
 
 
 - (void) viewDidLoad {
-    self.tableView.delegate = self;
     [super viewDidLoad];
     [self configureView];
 }
