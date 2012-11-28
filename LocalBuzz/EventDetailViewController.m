@@ -9,6 +9,7 @@
 #import "EventDetailViewController.h"
 #import "Event.h"
 #import "RegexKitLite.h"
+#import "ChatRoomViewController.h"
 
 @interface EventDetailViewController ()
 
@@ -124,4 +125,10 @@
 	return YES;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ShowChatRoom"]) {
+        ChatRoomViewController *chatRoomViewController = [segue destinationViewController];
+        chatRoomViewController.hidesBottomBarWhenPushed = YES;
+    }
+}
 @end
