@@ -47,6 +47,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [self.messageList addGestureRecognizer:gestureRecognizer];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,8 +75,8 @@
 	}
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	[textField resignFirstResponder];
+- (BOOL) hideKeyboard {
+    [self.messageInput resignFirstResponder];
 	[UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
 	self.toolbar.frame = CGRectMake(0, 372, 320, 44);
