@@ -48,11 +48,9 @@
     NSString *message = self.messageInput.text;
     if(![message isEqualToString:@""])
 	{
-		[self.messages addObject:message];
-		[self.messageList reloadData];
-		NSUInteger index = [self.messages count] - 1;
-        [self.messageList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.eventChatRoom sendMessage:message];
 		self.messageInput.text = @"";
+        
 	}
     
 }
@@ -171,12 +169,15 @@
 		label = (UILabel *)[[cell.contentView viewWithTag:0] viewWithTag:2];
 	}
 	
-	NSString *text = [self.messages objectAtIndex:indexPath.row];
+	XMPPMessage *message = [self.messages objectAtIndex:indexPath.row];
+    NSString *text = [[message elementForName:@"body"] stringValue];
 	CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:NSLineBreakByWordWrapping];
 	
 	UIImage *balloon;
-	
-	if(indexPath.row % 2 == 0)
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *fromOccupant = [[message attributeForName:@"from"] stringValue];
+    NSString *fromUser = [[XMPPJID jidWithString:fromOccupant] resource];
+	if([username isEqualToString:fromUser])
 	{
 		balloonView.frame = CGRectMake(320.0f - (size.width + 28.0f), 2.0f, size.width + 28.0f, size.height + 15.0f);
 		balloon = [[UIImage imageNamed:@"green.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:15];
@@ -197,7 +198,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSString *body = [self.messages objectAtIndex:indexPath.row];
+	XMPPMessage *message = [self.messages objectAtIndex:indexPath.row];
+    NSString *body = [[message elementForName:@"body"] stringValue];
 	CGSize size = [body sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(240.0, 480.0) lineBreakMode:NSLineBreakByWordWrapping];
 	return size.height + 15;
 }
@@ -225,7 +227,10 @@
 
 - (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
+    [self.messages addObject:message];
+    [self.messageList reloadData];
+    NSUInteger index = [self.messages count] - 1;
+    [self.messageList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 @end
