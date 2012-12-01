@@ -97,6 +97,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [self.eventChatRoom leaveRoom];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notif {
@@ -218,7 +219,6 @@
 
 - (void)xmppRoomDidJoin:(XMPPRoom *)sender {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    NSLog(@"%d", [self.eventChatRoom isJoined]);
 }
 
 - (void)xmppRoomDidCreate:(XMPPRoom *)sender {
