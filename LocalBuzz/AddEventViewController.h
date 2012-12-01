@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-@interface AddEventViewController : UITableViewController <UITextFieldDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
+#import "XMPPFramework.h"
+@interface AddEventViewController : UITableViewController <UITextFieldDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, XMPPRoomDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITableViewCell *latitudeCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *startTimeCell;

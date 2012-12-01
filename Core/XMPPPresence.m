@@ -55,6 +55,10 @@
 	return [[XMPPPresence alloc] initWithType:type to:to];
 }
 
++ (XMPPPresence *)presenceWithType:(NSString *)type from:(XMPPJID *)from to:(XMPPJID *)to {
+    return [[XMPPPresence alloc] initWithType:type from:from to:to];
+}
+
 - (id)init
 {
 	self = [super initWithName:@"presence"];
@@ -72,6 +76,22 @@
 	{
 		if (type)
 			[self addAttributeWithName:@"type" stringValue:type];
+		
+		if (to)
+			[self addAttributeWithName:@"to" stringValue:[to description]];
+	}
+	return self;
+}
+
+- (id)initWithType:(NSString *)type from:(XMPPJID *)from to:(XMPPJID *)to
+{
+	if ((self = [super initWithName:@"presence"]))
+	{
+		if (type)
+			[self addAttributeWithName:@"type" stringValue:type];
+        
+        if (from)
+            [self addAttributeWithName:@"from" stringValue:[from description]];
 		
 		if (to)
 			[self addAttributeWithName:@"to" stringValue:[to description]];

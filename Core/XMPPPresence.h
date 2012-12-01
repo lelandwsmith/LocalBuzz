@@ -19,10 +19,12 @@
 + (XMPPPresence *)presence;
 + (XMPPPresence *)presenceWithType:(NSString *)type;
 + (XMPPPresence *)presenceWithType:(NSString *)type to:(XMPPJID *)to;
++ (XMPPPresence *)presenceWithType:(NSString *)type from:(XMPPJID *)from to:(XMPPJID *)to;
 
 - (id)init;
 - (id)initWithType:(NSString *)type;
 - (id)initWithType:(NSString *)type to:(XMPPJID *)to;
+- (id)initWithType:(NSString *)type from:(XMPPJID *)from to:(XMPPJID *)to;
 
 - (NSString *)type;
 

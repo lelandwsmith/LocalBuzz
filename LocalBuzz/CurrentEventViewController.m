@@ -95,11 +95,6 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([[self appDelegate] connectToXMPP]) {
-        NSLog(@"Connected");
-    } else {
-        NSLog(@"Not connected");
-    }
 }
 
 - (IBAction)eventCreated:(UIStoryboardSegue *)segue

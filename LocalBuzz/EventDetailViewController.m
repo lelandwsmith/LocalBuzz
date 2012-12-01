@@ -129,6 +129,7 @@
     if ([segue.identifier isEqualToString:@"ShowChatRoom"]) {
         ChatRoomViewController *chatRoomViewController = [segue destinationViewController];
         chatRoomViewController.hidesBottomBarWhenPushed = YES;
+        chatRoomViewController.eventId = self.event.eventId;
     }
 }
 @end

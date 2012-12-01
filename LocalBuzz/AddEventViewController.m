@@ -10,6 +10,8 @@
 #import "TimePickerViewController.h"
 #import "LocationSelectionViewController.h"
 #import "AFHTTPClient.h"
+#import "XMPPFramework.h"
+#import "LocalBuzzAppDelegate.h"
 
 @interface AddEventViewController ()
 {
@@ -158,14 +160,33 @@
 															@"Random description", @"event[description]",
 														nil];
 		[httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-			NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-				NSLog(@"Response: %@", responseString);
-		}failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSDictionary *newEvent = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSNumber *newEventId = [newEvent objectForKey:@"id"];
+            [self createEventChatRoom:newEventId];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 			NSLog(@"%@", [error localizedDescription]);
 		}];
 	}
 }
 
+- (void)createEventChatRoom:(NSNumber *)eventId {
+    NSString *roomJIDUser = [@"event_" stringByAppendingString:[eventId stringValue]];
+    XMPPRoomHybridStorage *roomStorage = [XMPPRoomHybridStorage sharedInstance];
+    NSString *roomDomain = [@"conference." stringByAppendingString:[[self xmppStream] hostName]];
+    XMPPJID *roomJID = [XMPPJID jidWithUser:roomJIDUser domain:roomDomain resource:nil];
+    XMPPRoom *chatRoom = [[XMPPRoom alloc] initWithRoomStorage:roomStorage jid:roomJID];
+    [chatRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    [chatRoom activate:[self xmppStream]];
+    [chatRoom joinRoomUsingNickname:@"owner" fromJID:[[self xmppStream] myJID] history:nil];
+}
+
+- (LocalBuzzAppDelegate *)appDelegate {
+    return (LocalBuzzAppDelegate *) [[UIApplication sharedApplication] delegate];
+}
+
+- (XMPPStream *) xmppStream {
+    return [self appDelegate].xmppStream;
+}
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView
 {
 	[self.DescriptText setText:@""];
@@ -191,6 +212,7 @@
 	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
 	tapGestureRecognizer.cancelsTouchesInView = NO;
 	[self.tableView addGestureRecognizer:tapGestureRecognizer];
+    
 }
 
 - (void) viewDidUnload
@@ -229,5 +251,17 @@
 {
 	return [textField resignFirstResponder];
 }
+
+/////////////////////
+#pragma mark XMPPRoomDelegate
+/////////////////////
+- (void)xmppRoomDidCreate:(XMPPRoom *)sender {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+}
+
+- (void)xmppRoomDidJoin:(XMPPRoom *)sender {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+}
+
 
 @end

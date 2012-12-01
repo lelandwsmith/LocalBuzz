@@ -8,18 +8,7 @@
 
 #import "LocalBuzzAppDelegate.h"
 #import "CurrentEventViewController.h"
-#import "XMPP.h"
-#import "XMPPUserCoreDataStorageObject.h"
 #import <CFNetwork/CFNetwork.h>
-
-#import "DDLog.h"
-#import "DDTTYLogger.h"
-
-#if DEBUG
-    static const int ddLogLevel = LOG_LEVEL_VERBOSE;
-#else
-    static const int ddLogLevel = LOG_LEVEL_INFO;
-#endif
 
 @interface LocalBuzzAppDelegate ()
 
@@ -27,12 +16,6 @@
 @property (strong, nonatomic) UITabBarController *mainViewController;
 @property (strong, nonatomic) LoginViewController* loginViewController;
 -(void)showLoginView;
-
--(void) setupStream;
--(void)tearDownStream;
-
--(void)goOnline;
--(void)goOffline;
 @end
 
 @implementation LocalBuzzAppDelegate
@@ -40,28 +23,27 @@
 @synthesize mainViewController = _mainViewController;
 @synthesize loginViewController = _loginViewController;
 @synthesize session = _session;
-NSString *const FBSessionStateChangedNotification =
-@"eecs441.info.vforvincent.Login:FBSessionStateChangedNotification";
+@synthesize xmppStream = _xmppStream;
 
-- (XMPPStream *)xmppStream {
-    if (_xmppStream == nil) {
-        _xmppStream = [[XMPPStream alloc] init];
+NSString *const FBSessionStateChangedNotification = @"eecs441.info.vforvincent.Login:FBSessionStateChangedNotification";
+NSString *const kHostName = @"localbuzz.vforvincent.info";
+
+- (id)init {
+    if (self = [super init]) {
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+        self.xmppStream = [[XMPPStream alloc] init];
+        self.xmppStream.hostName = kHostName;
+        [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     }
-    return _xmppStream;
+    return self;
 }
 
-- (XMPPRosterCoreDataStorage *)xmppRosterStorage {
-    if (_xmppRosterStorage == nil) {
-        _xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
-    }
-    return _xmppRosterStorage;
-}
+/////////////////
+#pragma mark UIApplicationDelegate
+/////////////////
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    
-    [self setupStream];
     //[FBRequest requestWithGraphPath:@"me/permissions" parameters:nil HTTPMethod:nil].session.permissions;
    // NSLog(@"original permission is %@",[FBRequest requestWithGraphPath:@"me/permissions" parameters:nil HTTPMethod:nil].session.permissions);
   //  NSLog(@"original expire date is %@",self.session.expirationDate);
@@ -77,6 +59,15 @@ NSString *const FBSessionStateChangedNotification =
         [self showLoginView];
     }
     [FBProfilePictureView class];
+    
+    //register user on XMPP
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    XMPPJID *jid = [XMPPJID jidWithUser:username domain:self.xmppStream.hostName resource:nil];
+    self.xmppStream.myJID = jid;
+    NSError *error;
+    if (![self.xmppStream connect:&error]) {
+        NSLog(@"%@", error.localizedDescription);
+    }
     return YES;
 }
 
@@ -91,66 +82,6 @@ NSString *const FBSessionStateChangedNotification =
 
 - (void) closeSession {
     [FBSession.activeSession closeAndClearTokenInformation];
-}
-
-- (void) setupStream {
-    //NSAssert(self.xmppStream == nil, @"Method setupStream invoked multiple times");
-
-#if !TARGET_IPHONE_SIMULATOR
-    {
-        self.xmppStream.enableBackgroundingOnSocket = YES;
-    }
-#endif
-    [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
-    [self.xmppStream setHostName:@"localbuzz.vforvincent.info"];
-    NSLog(@"%@, %d", self.xmppStream.hostName, self.xmppStream.hostPort);
-    allowSelfSignedCertificate = NO;
-    allowSSLHostNameMismatch = NO;
-}
-
-- (void) tearDownStream {
-    [self.xmppStream removeDelegate:self];
-    [self.xmppStream disconnect];
-}
-
-- (void) goOnline {
-    XMPPPresence *presence = [XMPPPresence presence];
-    [self.xmppStream sendElement:presence];
-}
-
-- (void) goOffline {
-    XMPPPresence *presence = [XMPPPresence presenceWithType:@"unavailable"];
-    [self.xmppStream sendElement:presence];
-}
-
-- (BOOL)connectToXMPP {
-    if (![self.xmppStream isDisconnected]) {
-        return YES;
-    }
-    NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
-    if (username == nil) {
-        return NO;
-    }
-    self.xmppStream.myJID = [XMPPJID jidWithUser:username domain:self.xmppStream.hostName resource:nil];
-    NSError *error = nil;
-    if (![self.xmppStream connect:&error]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error connecting"
-		                                                    message:@"See console for error details."
-		                                                   delegate:nil
-		                                          cancelButtonTitle:@"Ok"
-		                                          otherButtonTitles:nil];
-		[alertView show];
-        
-		DDLogError(@"Error connecting: %@", error);
-        
-		return NO;
-    }
-    return YES;
-}
-
-- (void)disconnectFromXMPP {
-    [self goOffline];
-    [self.xmppStream disconnect];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -179,6 +110,31 @@ NSString *const FBSessionStateChangedNotification =
     [FBSession.activeSession handleDidBecomeActive];
 }
 
+/*
+ * If we have a valid session at the time of openURL call, we handle
+ * Facebook transitions by passing the url argument to handleOpenURL
+ */
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [FBSession.activeSession handleOpenURL:url];
+}
+
+-(void)applicationWillTerminate:(UIApplication *)application {
+    // FBSample logic
+    // if the app is going away, we close the session if it is open
+    // this is a good idea because things may be hanging off the session, that need
+    // releasing (completion block, etc.) and other components in the app may be awaiting
+    // close notification in order to do cleanup
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [FBSession.activeSession close];
+}
+
+///////////////////////
+#pragma mark Facebook authentication
+//////////////////////////
 
 - (void)sessionStateChanged:(FBSession *)session
                       state:(FBSessionState) state
@@ -296,192 +252,39 @@ NSString *const FBSessionStateChangedNotification =
                                                                  error:error];
                                          }];
 }
-/*
- * If we have a valid session at the time of openURL call, we handle
- * Facebook transitions by passing the url argument to handleOpenURL
- */
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-    // attempt to extract a token from the url
-    return [FBSession.activeSession handleOpenURL:url];
-}
 
--(void)applicationWillTerminate:(UIApplication *)application {
-    // FBSample logic
-    // if the app is going away, we close the session if it is open
-    // this is a good idea because things may be hanging off the session, that need
-    // releasing (completion block, etc.) and other components in the app may be awaiting
-    // close notification in order to do cleanup
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [FBSession.activeSession close];
-}
+//////////////////////
+#pragma mark XMPPStreamDelegate
+//////////////////////
 
-
-- (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket
-{
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-}
-
-- (void)xmppStream:(XMPPStream *)sender willSecureWithSettings:(NSMutableDictionary *)settings
-{
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	
-	if (allowSelfSignedCertificate)
-	{
-		[settings setObject:[NSNumber numberWithBool:YES] forKey:(NSString *)kCFStreamSSLAllowsAnyRoot];
-	}
-	
-	if (allowSSLHostNameMismatch)
-	{
-		[settings setObject:[NSNull null] forKey:(NSString *)kCFStreamSSLPeerName];
-	}
-	else
-	{
-		// Google does things incorrectly (does not conform to RFC).
-		// Because so many people ask questions about this (assume xmpp framework is broken),
-		// I've explicitly added code that shows how other xmpp clients "do the right thing"
-		// when connecting to a google server (gmail, or google apps for domains).
-		
-		NSString *expectedCertName = nil;
-		
-		NSString *serverDomain = self.xmppStream.hostName;
-		NSString *virtualDomain = [self.xmppStream.myJID domain];
-		
-		if ([serverDomain isEqualToString:@"talk.google.com"])
-		{
-			if ([virtualDomain isEqualToString:@"gmail.com"])
-			{
-				expectedCertName = virtualDomain;
-			}
-			else
-			{
-				expectedCertName = serverDomain;
-			}
-		}
-		else if (serverDomain == nil)
-		{
-			expectedCertName = virtualDomain;
-		}
-		else
-		{
-			expectedCertName = serverDomain;
-		}
-		
-		if (expectedCertName)
-		{
-			[settings setObject:expectedCertName forKey:(NSString *)kCFStreamSSLPeerName];
-		}
-	}
-}
-
-- (void)xmppStreamDidSecure:(XMPPStream *)sender
-{
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-}
-
-- (void)xmppStreamDidConnect:(XMPPStream *)sender
-{
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	
-	isXMPPConnected = YES;
-	
-	NSError *error = nil;
-	
-	if (![self.xmppStream authenticateWithPassword:@"test" error:&error])
-	{
-		DDLogError(@"Error authenticating: %@", error);
-	}
-}
-
-- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
-{
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	
-	[self goOnline];
-}
-
-- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
-{
-    NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
-    NSLog(@"username: %@", username);
-    self.xmppStream.myJID = [XMPPJID jidWithUser:username domain:self.xmppStream.hostName resource:nil];
-    NSError *registerError = nil;
-    if (![self.xmppStream registerWithPassword:@"test" error:&registerError]) {
-        NSLog(@"Register error: %@", registerError.localizedDescription);
-    }
-    [self disconnectFromXMPP];
-    [self connectToXMPP];
+- (void) xmppStreamDidConnect:(XMPPStream *)sender {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    NSError *error;
+    if (![self.xmppStream authenticateWithPassword:@"test" error:&error]) {
+        NSLog(@"%@", error.localizedDescription);
+    }
 }
 
-- (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
-{
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	
-	return NO;
+- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(DDXMLElement *)error {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    NSError *registerError;
+    if (![self.xmppStream registerWithPassword:@"test" error:&registerError]) {
+        NSLog(@"%@", registerError.localizedDescription);
+    }
+}
+- (void)xmppStreamDidRegister:(XMPPStream *)sender {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    NSError *error;
+    if (![self.xmppStream authenticateWithPassword:@"test" error:&error]) {
+        NSLog(@"%@", error.localizedDescription);
+    }
+    [self.xmppStream removeDelegate:self delegateQueue:dispatch_get_main_queue()];
 }
 
-- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
-{
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-	// A simple example of inbound message handling.
-    
-	if ([message isChatMessageWithBody])
-	{
-		XMPPUserCoreDataStorageObject *user = [self.xmppRosterStorage userForJID:[message from]
-		                                                         xmppStream:self.xmppStream
-		                                               managedObjectContext:[self managedObjectContext_roster]];
-		
-		NSString *body = [[message elementForName:@"body"] stringValue];
-		NSString *displayName = [user displayName];
-        
-		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
-		{
-			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
-                                                                message:body
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-			[alertView show];
-		}
-		else
-		{
-			// We are not active, so use a local notification instead
-			UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-			localNotification.alertAction = @"Ok";
-			localNotification.alertBody = [NSString stringWithFormat:@"From: %@\n\n%@",displayName,body];
-            
-			[[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
-		}
-	}
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    [self.xmppStream removeDelegate:self delegateQueue:dispatch_get_main_queue()];
 }
 
-- (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
-{
-	DDLogVerbose(@"%@: %@ - %@", THIS_FILE, THIS_METHOD, [presence fromStr]);
-}
-
-- (void)xmppStream:(XMPPStream *)sender didReceiveError:(id)error
-{
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-}
-
-- (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error
-{
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	
-	if (!isXMPPConnected)
-	{
-		DDLogError(@"Unable to connect to server. Check xmppStream.hostName");
-	}
-}
-
-
-- (NSManagedObjectContext *)managedObjectContext_roster {
-    return [self.xmppRosterStorage mainThreadManagedObjectContext];
-}
 
 @end

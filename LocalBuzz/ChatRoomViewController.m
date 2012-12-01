@@ -7,17 +7,41 @@
 //
 
 #import "ChatRoomViewController.h"
+#import "LocalBuzzAppDelegate.h"
 
 @interface ChatRoomViewController ()
 @end
 
 @implementation ChatRoomViewController
 
+- (XMPPRoomHybridStorage *) xmppRoomStorage {
+    if (_xmppRoomStorage == nil) {
+        _xmppRoomStorage = [XMPPRoomHybridStorage sharedInstance];
+    }
+    return _xmppRoomStorage;
+}
+
+- (XMPPRoom *) eventChatRoom {
+    if (_eventChatRoom == nil) {
+        _eventChatRoom = [[XMPPRoom alloc] initWithRoomStorage:self.xmppRoomStorage jid:self.roomJID dispatchQueue:dispatch_get_main_queue()];
+    }
+    return _eventChatRoom;
+}
+
 - (NSMutableArray *)messages {
     if (_messages == nil) {
         _messages = [[NSMutableArray alloc] init];
     }
     return _messages;
+}
+
+- (XMPPJID *)roomJID {
+    if (_roomJID == nil) {
+        NSString *roomJIDString = [@"event_" stringByAppendingString:[self.eventId stringValue]];
+        NSString *roomDomain = [@"conference." stringByAppendingString:[self xmppStream].hostName];
+        _roomJID = [XMPPJID jidWithUser:roomJIDString domain:roomDomain resource:nil];
+    }
+    return _roomJID;
 }
 
 - (IBAction)sendMessage:(id)sender {
@@ -28,7 +52,6 @@
 		[self.messageList reloadData];
 		NSUInteger index = [self.messages count] - 1;
         [self.messageList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-		
 		self.messageInput.text = @"";
 	}
     
@@ -43,6 +66,19 @@
     return self;
 }
 
+- (LocalBuzzAppDelegate *) appDelegate {
+    LocalBuzzAppDelegate *appDelegate = (LocalBuzzAppDelegate *) [[UIApplication sharedApplication] delegate];
+    return appDelegate;
+}
+
+- (XMPPStream *) xmppStream {
+    return [self appDelegate].xmppStream;
+}
+
+////////////////////////////
+#pragma View Cycle
+////////////////////////////
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,6 +86,10 @@
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.messageList addGestureRecognizer:gestureRecognizer];
+    NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    [self.eventChatRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    [self.eventChatRoom activate:[self appDelegate].xmppStream];
+    [self.eventChatRoom joinRoomUsingNickname:nickname fromJID:[[self xmppStream] myJID] history:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -91,6 +131,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+///////////////////
+#pragma mark UITableViewDelegate
+///////////////////
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -152,7 +196,6 @@
 
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *body = [self.messages objectAtIndex:indexPath.row];
 	CGSize size = [body sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(240.0, 480.0) lineBreakMode:NSLineBreakByWordWrapping];
@@ -167,6 +210,22 @@
     return 1;
 }
 
+//////////////////
+#pragma mark XMPPRoomDelegate
+//////////////////
 
+- (void)xmppRoomDidJoin:(XMPPRoom *)sender {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    NSLog(@"%d", [self.eventChatRoom isJoined]);
+}
+
+- (void)xmppRoomDidCreate:(XMPPRoom *)sender {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
+}
 
 @end
