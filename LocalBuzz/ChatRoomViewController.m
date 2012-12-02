@@ -141,7 +141,6 @@
 	
 	UIImageView *balloonView;
 	UILabel *label;
-	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -162,7 +161,10 @@
 		message.tag = 0;
 		[message addSubview:balloonView];
 		[message addSubview:label];
+        
+        
 		[cell.contentView addSubview:message];
+
 	}
 	else
 	{
@@ -171,14 +173,18 @@
 	}
 	
 	XMPPMessage *message = [self.messages objectAtIndex:indexPath.row];
-    NSString *text = [[message elementForName:@"body"] stringValue];
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *fromOccupant = [[message attributeForName:@"from"] stringValue];
+    NSString *fromUsername = [[XMPPJID jidWithString:fromOccupant] resource];
+
+    NSString *text = [self displayMessage:message];
 	CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:NSLineBreakByWordWrapping];
 	
 	UIImage *balloon;
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-    NSString *fromOccupant = [[message attributeForName:@"from"] stringValue];
-    NSString *fromUser = [[XMPPJID jidWithString:fromOccupant] resource];
-	if([username isEqualToString:fromUser])
+
+    
+	if([username isEqualToString:fromUsername])
 	{
 		balloonView.frame = CGRectMake(320.0f - (size.width + 28.0f), 2.0f, size.width + 28.0f, size.height + 15.0f);
 		balloon = [[UIImage imageNamed:@"green.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:15];
@@ -200,8 +206,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	XMPPMessage *message = [self.messages objectAtIndex:indexPath.row];
-    NSString *body = [[message elementForName:@"body"] stringValue];
-	CGSize size = [body sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(240.0, 480.0) lineBreakMode:NSLineBreakByWordWrapping];
+    NSString *text = [self displayMessage:message];
+	CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(240.0, 480.0) lineBreakMode:NSLineBreakByWordWrapping];
 	return size.height + 15;
 }
 
@@ -211,6 +217,15 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
+}
+
+///////////////////
+#pragma mark Private Helper
+///////////////////
+- (NSString *)displayMessage:(XMPPMessage *)message {
+    NSString *fromUsername = [[XMPPJID jidWithString:[[message attributeForName:@"from"] stringValue]] resource];
+    NSString *text = [[fromUsername stringByAppendingString:@"\r"] stringByAppendingString:[[message elementForName:@"body"] stringValue]];
+    return text;
 }
 
 //////////////////
