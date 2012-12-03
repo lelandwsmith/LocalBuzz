@@ -157,7 +157,7 @@
 														[[NSNumber numberWithDouble:locationSelector.latLong.longitude] stringValue], @"event[longitude]",
 														[[NSNumber numberWithDouble:locationSelector.latLong.latitude] stringValue], @"event[latitude]",
 														isPublic, @"event[public]",
-															@"Random description", @"event[description]",
+															self.DescriptText.text, @"event[description]",
 														nil];
 		[httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *newEvent = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];

@@ -69,6 +69,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
         NSLog(@"%@", error.localizedDescription);
     }
     return YES;
+
 }
 
 - (void)showLoginView

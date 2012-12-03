@@ -116,7 +116,9 @@
                             [NSNumber numberWithDouble:currentCoord.latitude], @"lat",
                             [NSNumber numberWithDouble:currentCoord.longitude], @"lng",
                             [dateFormatter stringFromDate:[NSDate date]], @"time",
+                            [[NSUserDefaults standardUserDefaults] valueForKey:@"range"], @"range",
                             nil];
+    NSLog(@"%@", params);
     NSLog(@"current is %@ |%@",[NSNumber numberWithDouble:currentCoord.latitude],[NSNumber numberWithDouble:currentCoord.longitude]);
     [httpClient getPath:@"events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.dataController emptyEventList];
