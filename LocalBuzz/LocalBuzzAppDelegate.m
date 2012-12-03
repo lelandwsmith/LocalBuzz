@@ -60,7 +60,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
     self.xmppStream.myJID = jid;
     NSError *error;
     if (![self.xmppStream connect:&error]) {
-        NSLog(@"%@", error.localizedDescription);
+      //  NSLog(@"%@", error.localizedDescription);
     }
     return YES;
 
@@ -153,11 +153,13 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
     }
     switch (state) {
         case FBSessionStateOpen:{
+            NSLog(@"FBSessionStateOpen");
             self.window.rootViewController = self.mainViewController;
             self.loginViewController = nil;
         }
             break;
         case FBSessionStateClosed:{
+            NSLog(@"FBSessionStateClosed");
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -169,6 +171,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
         }
             break;
         case FBSessionStateClosedLoginFailed:{
+            NSLog(@"FBSessionStateClosedLoginFailed");
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -177,6 +180,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
             break;
         }
         default:
+            NSLog(@"XXXXXXXXXXXXX");
             break;
     }
     
@@ -229,7 +233,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSError *error;
     if (![self.xmppStream authenticateWithPassword:@"test" error:&error]) {
-        NSLog(@"%@", error.localizedDescription);
+       // NSLog(@"%@", error.localizedDescription);
     }
 }
 
@@ -237,14 +241,14 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSError *registerError;
     if (![self.xmppStream registerWithPassword:@"test" error:&registerError]) {
-        NSLog(@"%@", registerError.localizedDescription);
+       // NSLog(@"%@", registerError.localizedDescription);
     }
 }
 - (void)xmppStreamDidRegister:(XMPPStream *)sender {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSError *error;
     if (![self.xmppStream authenticateWithPassword:@"test" error:&error]) {
-        NSLog(@"%@", error.localizedDescription);
+      //  NSLog(@"%@", error.localizedDescription);
     }
     [self.xmppStream removeDelegate:self delegateQueue:dispatch_get_main_queue()];
 }

@@ -145,7 +145,16 @@
     }else if((indexPath.section== 2)&&(indexPath.row==0)){
         //user click the logout button
         self.tabBarController.selectedIndex = 0;
+        bool notchange = false;
+        if(FBSession.activeSession.isOpen==NO){
+            notchange = true;
+        }
         [FBSession.activeSession closeAndClearTokenInformation];
+        if((FBSession.activeSession.isOpen==NO)&&notchange){
+            LocalBuzzAppDelegate *appDelegate =(LocalBuzzAppDelegate *) [[UIApplication sharedApplication]delegate];
+            [appDelegate showLoginView];
+
+        }
         return;
     } else {
         return;

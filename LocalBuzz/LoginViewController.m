@@ -23,6 +23,10 @@
     //LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
   //  NSLog(@"run the login view");
  //   NSLog(@"current permission is :%@",appDelegate.session.permissions);
+    [loginbtn setImage:
+     [UIImage imageNamed:@"LoginWithFacebookNormal@2x.png"]
+                 forState:UIControlStateNormal];
+ 
     [self.spinner stopAnimating];
     [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter]
@@ -40,7 +44,6 @@
 
 - (void)sessionStateChanged:(NSNotification*)notification {
     if (FBSession.activeSession.isOpen) {
-        [self.loginbtn setTitle:@"Logout" forState:UIControlStateNormal];
         NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection,
@@ -70,7 +73,7 @@
                      [user_data setObject:[user objectForKey:@"id"] forKey:@"id"];
                      [user_data setObject:[[firstName stringByAppendingString:@" "] stringByAppendingString:lastName]  forKey:@"full_name"];
                  }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     NSLog(@"afherror  %@", [error localizedDescription]);
+                    // NSLog(@"afherror  %@", [error localizedDescription]);
                  }];
              } else {
                 // NSLog(@"error!!!!!!!login");
@@ -132,7 +135,7 @@
 
 -(IBAction)click :(UIButton *)sender{
     [self.spinner startAnimating];
-    LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    LocalBuzzAppDelegate *appDelegate =(LocalBuzzAppDelegate *) [[UIApplication sharedApplication]delegate];
     [appDelegate openSessionWithAllowLoginUI:YES];
 
 

@@ -91,6 +91,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mcs-EH-hb3">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="8c5-yT-Q6s"/>
+                                    <constraint firstAttribute="width" constant="260" id="Nne-6Q-zqJ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -103,17 +107,20 @@
                                     <action selector="click:" destination="zHO-XL-MuT" eventType="touchUpInside" id="SvS-JB-j7T"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pCJ-77-8vK"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Mcs-EH-hb3" secondAttribute="bottom" constant="151" id="4st-Ua-TNu"/>
-                            <constraint firstItem="Mcs-EH-hb3" firstAttribute="leading" secondItem="Zi0-jj-azr" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="LX8-ey-OHg"/>
-                            <constraint firstAttribute="trailing" secondItem="Mcs-EH-hb3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="hg7-il-Ytf"/>
+                            <constraint firstAttribute="bottom" secondItem="pCJ-77-8vK" secondAttribute="bottom" constant="117" id="EKN-Du-BIL"/>
+                            <constraint firstAttribute="bottom" secondItem="Mcs-EH-hb3" secondAttribute="bottom" constant="157" id="Gb4-H8-BMc"/>
+                            <constraint firstItem="Mcs-EH-hb3" firstAttribute="centerX" secondItem="Zi0-jj-azr" secondAttribute="centerX" type="default" id="QKa-Wk-L8X"/>
+                            <constraint firstItem="pCJ-77-8vK" firstAttribute="centerX" secondItem="Mcs-EH-hb3" secondAttribute="centerX" type="default" id="XXs-qm-YPY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="s4y-8e-WMN"/>
                     <connections>
                         <outlet property="loginbtn" destination="Mcs-EH-hb3" id="hKb-oD-bh2"/>
+                        <outlet property="spinner" destination="pCJ-77-8vK" id="VA1-B1-enY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDr-nf-xR4" userLabel="First Responder" sceneMemberID="firstResponder"/>

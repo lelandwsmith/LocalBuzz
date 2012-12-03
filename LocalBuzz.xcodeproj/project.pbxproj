@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8F02CCBF1620BD5100719F69 /* CurrentEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBA1620BD5100719F69 /* CurrentEventViewController.m */; };
 		8F02CCC11620BD5100719F69 /* PastEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F02CCBE1620BD5100719F69 /* PastEventViewController.m */; };
+		8F971D97166D62C800D780F5 /* LoginWithFacebookNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F971D96166D62C800D780F5 /* LoginWithFacebookNormal@2x.png */; };
 		8F98957D1653588B00578961 /* button_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F98957C1653588B00578961 /* button_play.png */; };
 		8F98958E1654796F00578961 /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F98958C1654796F00578961 /* left.png */; };
 		8F98958F1654796F00578961 /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F98958D1654796F00578961 /* right.png */; };
@@ -153,6 +154,7 @@
 		8F02CCBD1620BD5100719F69 /* PastEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastEventViewController.h; sourceTree = "<group>"; };
 		8F02CCBE1620BD5100719F69 /* PastEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastEventViewController.m; sourceTree = "<group>"; };
 		8F1916F41638B951005EB9D6 /* CurrentEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentEventViewController.h; sourceTree = "<group>"; };
+		8F971D96166D62C800D780F5 /* LoginWithFacebookNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginWithFacebookNormal@2x.png"; sourceTree = "<group>"; };
 		8F98957C1653588B00578961 /* button_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_play.png; sourceTree = "<group>"; };
 		8F98957E16546BDA00578961 /* UIDropDownMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIDropDownMenu.h; sourceTree = "<group>"; };
 		8F98957F16546BDA00578961 /* UIDropDownMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIDropDownMenu.m; sourceTree = "<group>"; };
@@ -790,6 +792,7 @@
 				D5DC95AD164B383500CCCB53 /* 19-gear.png */,
 				D5A57DC61659CF6600D40C6F /* 19-gear-select.png */,
 				D5DC95AF164B398000CCCB53 /* 28-star.png */,
+				8F971D96166D62C800D780F5 /* LoginWithFacebookNormal@2x.png */,
 				D5A57DC41659CF5D00D40C6F /* 28-star-select.png */,
 				D5DC95B1164B39D500CCCB53 /* 73-radar.png */,
 				D5A57DC21659CF2900D40C6F /* 73-radar-select.png */,
@@ -1092,6 +1095,7 @@
 				D5A57DC71659CF6600D40C6F /* 19-gear-select.png in Resources */,
 				BFCB1EFF1665BADC00F63829 /* green.png in Resources */,
 				BFCB1F001665BADC00F63829 /* grey.png in Resources */,
+				8F971D97166D62C800D780F5 /* LoginWithFacebookNormal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
