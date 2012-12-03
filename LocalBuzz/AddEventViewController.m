@@ -77,8 +77,8 @@
 			//Print the location to console
 			NSLog(@"size of string is %d",self.address.length);
 			self.numOfLines = self.address.length/25+1;
-		
-			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationNone];
+			
+			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationAutomatic];
 			NSLog(@"numOFline %d",self.numOfLines);
 		}];
 	}

@@ -1043,12 +1043,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="AddEventViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
             <relationships>
-                <relationship kind="action" name="SwitchChange:"/>
-                <relationship kind="action" name="cancelPressed:"/>
-                <relationship kind="action" name="leftClickCategory:"/>
                 <relationship kind="action" name="locationSelected:" candidateClass="UIStoryboardSegue"/>
-                <relationship kind="action" name="prepareForSegue:sender:" candidateClass="UIStoryboardSegue"/>
-                <relationship kind="action" name="rightClickCategory:"/>
                 <relationship kind="action" name="timeSelected:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="outlet" name="DescriptText" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="LocationCell" candidateClass="UITableViewCell"/>
