@@ -20,6 +20,8 @@ extern NSString *const FBSessionStateChangedNotification;
 
 @interface LocalBuzzAppDelegate : UIResponder <UIApplicationDelegate, XMPPStreamDelegate>
 
+@property ACAccountStore *accountStore;
+@property ACAccountType *accountTypeFB;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) FBSession *session;
 @property (strong, nonatomic) XMPPStream *xmppStream;

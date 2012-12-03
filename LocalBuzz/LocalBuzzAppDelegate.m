@@ -44,19 +44,13 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //[FBRequest requestWithGraphPath:@"me/permissions" parameters:nil HTTPMethod:nil].session.permissions;
-   // NSLog(@"original permission is %@",[FBRequest requestWithGraphPath:@"me/permissions" parameters:nil HTTPMethod:nil].session.permissions);
-  //  NSLog(@"original expire date is %@",self.session.expirationDate);
     UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
                                                   bundle:nil];
     self.mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
     self.window.rootViewController = self.mainViewController;
     [self.window makeKeyAndVisible];
-    //NSLog(@"didFinishWith#3");
-    //if (![self openSessionWithAllowLoginUI:NO]) {
-    if(![self.session isOpen]){
-        // No? Display the login page.
-        [self showLoginView];
+    if((![self.session isOpen])&&((FBSession.activeSession.state != FBSessionStateCreatedTokenLoaded))){
+                     [self showLoginView]; 
     }
     [FBProfilePictureView class];
     
@@ -141,17 +135,15 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
                       state:(FBSessionState) state
                       error:(NSError *)error
 {
-    ACAccountStore *accountStore;
-    ACAccountType *accountTypeFB;
-    if ((accountStore = [[ACAccountStore alloc] init]) &&
-        (accountTypeFB = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook] ) ){
+   if ((self.accountStore = [[ACAccountStore alloc] init]) &&
+        (self.accountTypeFB = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook] ) ){
         
-        NSArray *fbAccounts = [accountStore accountsWithAccountType:accountTypeFB];
+        NSArray *fbAccounts = [self.accountStore accountsWithAccountType:self.accountTypeFB];
         id account;
         if (fbAccounts && [fbAccounts count] > 0 &&
             (account = [fbAccounts objectAtIndex:0])){
             
-            [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
+            [self.accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
                 //we don't actually need to inspect renewResult or error.
                 if (error){
                     
@@ -161,16 +153,11 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
     }
     switch (state) {
         case FBSessionStateOpen:{
-           // NSLog(@"state == FBSessionSateOpen");
-            //NSLog(@"expire date is %@",session.expirationDate);
-           // NSLog(@"original permission is %@",[FBRequest requestWithGraphPath:@"me/permissions" parameters:nil HTTPMethod:nil].session.permissions);
-            NSLog(@"here");
             self.window.rootViewController = self.mainViewController;
             self.loginViewController = nil;
         }
             break;
         case FBSessionStateClosed:{
-            //NSLog(@"state == FBSessionStateClosed");
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -182,7 +169,6 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
         }
             break;
         case FBSessionStateClosedLoginFailed:{
-            //NSLog(@"state == FBSessionStateClosedLoginFailed");
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -200,24 +186,6 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
     
     if (error) {
 
-
-      //  [self openSessionWithAllowLoginUI:YES];
-        
-        
-        
-        /*UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Login Failed"
-                                  message:@"Please grant the app the required permission and retry"
-                                  delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-        self.session = nil;
-        [alertView show];*/
-      //  [self.navController popToRootViewControllerAnimated:NO];
-        
-       // [FBSession.activeSession closeAndClearTokenInformation];
-      ////
-       // [self showLoginView];
     }
 }
 
@@ -226,13 +194,12 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
  * Opens a Facebook session and optionally shows the login UX.
  */
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
-    //NSLog(@"openSessionWithAllowLoginUI is called");
+    NSLog(@"openSessionWithAllowLoginUI is called");
     NSArray *permissions = [[NSArray alloc] initWithObjects:
                             @"user_location",
                             @"user_birthday",
                             @"read_friendlists",
                             nil];
-    //NSLog(@"permission0 is %@",self.session.permissions);
     return [FBSession openActiveSessionWithReadPermissions:permissions
                                               allowLoginUI:allowLoginUI
                                          completionHandler:^(FBSession *session,
@@ -247,7 +214,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
                                                  [FBSession setActiveSession:nil];
                                                  //FB_CreateNewSession();
                                              }
-                                                                                          //NSLog(@"permission2 is %@",session.permissions);
+                                                                                          
                                              [self sessionStateChanged:session
                                                                  state:state
                                                                  error:error];

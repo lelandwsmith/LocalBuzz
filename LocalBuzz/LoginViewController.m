@@ -2,7 +2,6 @@
 #import "LocalBuzzAppDelegate.h"
 #import "AFHTTPClient.h"
 @interface LoginViewController ()
-@property (strong, nonatomic) IBOutlet UITextView *textview;
 @property (strong, nonatomic) IBOutlet UIButton *loginbtn;
 
 - (IBAction)click :(UIButton *)sender;
@@ -11,7 +10,7 @@
 
 @implementation LoginViewController
 
-@synthesize textview ;
+@synthesize spinner;
 @synthesize loginbtn ;
 - (void)didReceiveMemoryWarning
 {
@@ -24,6 +23,7 @@
     //LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
   //  NSLog(@"run the login view");
  //   NSLog(@"current permission is :%@",appDelegate.session.permissions);
+    [self.spinner stopAnimating];
     [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -41,7 +41,6 @@
 - (void)sessionStateChanged:(NSNotification*)notification {
     if (FBSession.activeSession.isOpen) {
         [self.loginbtn setTitle:@"Logout" forState:UIControlStateNormal];
-        self.textview.hidden = NO;
         NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection,
@@ -68,7 +67,6 @@
                                          nil];
                  [httpClient postPath:@"/users.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                     self.textview.text = responseString;
                      NSLog(@"Response: %@", responseString);
                  }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      NSLog(@"afherror  %@", [error localizedDescription]);
@@ -77,10 +75,8 @@
                 // NSLog(@"error!!!!!!!login");
              }
          }];
-        self.textview.hidden = NO;
     } else {
         [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
-        self.textview.hidden = YES;
     }
 }
                  //NSString *userInfo = @"";
@@ -134,13 +130,11 @@
 
 
 -(IBAction)click :(UIButton *)sender{
+    [self.spinner startAnimating];
     LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    if (FBSession.activeSession.isOpen) {
-         [appDelegate closeSession];
-    } else {
-       // NSLog(@"hit bottom#1");
-        [appDelegate openSessionWithAllowLoginUI:YES];
-    }
+    [appDelegate openSessionWithAllowLoginUI:YES];
+
+
 }
 
 
@@ -150,7 +144,7 @@
 - (void)viewDidUnload
 {
     self.loginbtn = nil;
-    self.textview = nil;
+    self.spinner = nil;
     [super viewDidUnload];
 }
 
