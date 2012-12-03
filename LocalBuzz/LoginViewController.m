@@ -68,6 +68,7 @@
                  [httpClient postPath:@"/users.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      NSDictionary *user = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                      [user_data setObject:[user objectForKey:@"id"] forKey:@"id"];
+                     [user_data setObject:[[firstName stringByAppendingString:@" "] stringByAppendingString:lastName]  forKey:@"full_name"];
                  }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      NSLog(@"afherror  %@", [error localizedDescription]);
                  }];
