@@ -17,6 +17,8 @@ extern NSString *const FBSessionStateChangedNotification;
 
 @interface LocalBuzzAppDelegate : UIResponder <UIApplicationDelegate>
 
+@property ACAccountStore *accountStore;
+@property ACAccountType *accountTypeFB;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) FBSession *session;
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
