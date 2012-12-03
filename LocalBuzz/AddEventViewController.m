@@ -150,6 +150,12 @@
 		[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
 		[dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
 		NSNumber *isPublic = [[NSNumber alloc] initWithBool:self.switcher.isOn];
+        NSString *eventDescription;
+        if ([self.DescriptText.text isEqualToString:@"Tap to edit"]) {
+            eventDescription = @"";
+        } else {
+            eventDescription = self.DescriptText.text;
+        }
 		NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
 														self.titleField.text, @"event[title]",
 														[dateFormatter stringFromDate:startTime], @"event[start_time]",
@@ -157,7 +163,7 @@
 														[[NSNumber numberWithDouble:locationSelector.latLong.longitude] stringValue], @"event[longitude]",
 														[[NSNumber numberWithDouble:locationSelector.latLong.latitude] stringValue], @"event[latitude]",
 														isPublic, @"event[public]",
-															self.DescriptText.text, @"event[description]",
+															eventDescription, @"event[description]",
 														nil];
 		[httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *newEvent = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
