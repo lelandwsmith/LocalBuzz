@@ -31,7 +31,7 @@
     NameCell.text=[user_data stringForKey:@"name"];
     LocationCell.text=[user_data stringForKey:@"location"];
    // NSLog(@"id is %@",[user_data stringForKey:@"id"]);
-    photo.profileID = [user_data stringForKey:@"id"];
+    photo.profileID = [user_data stringForKey:@"fb_id"];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
