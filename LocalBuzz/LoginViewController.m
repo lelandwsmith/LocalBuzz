@@ -12,72 +12,72 @@
 
 @synthesize spinner;
 @synthesize loginbtn ;
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
+- (void)didReceiveMemoryWarning {
+	[super didReceiveMemoryWarning];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    //LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-  //  NSLog(@"run the login view");
- //   NSLog(@"current permission is :%@",appDelegate.session.permissions);
-    [self.spinner stopAnimating];
-    [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(sessionStateChanged:)
-     name:FBSessionStateChangedNotification
-     object:nil];
-   // LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    //NSLog(@"viewDIdLoad place#2");
-   // [appDelegate openSessionWithAllowLoginUI:NO];
-
+	[super viewDidLoad];
+	//LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+  //NSLog(@"run the login view");
+	//NSLog(@"current permission is :%@",appDelegate.session.permissions);
+	[self.spinner stopAnimating];
+	[self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
+	[[NSNotificationCenter defaultCenter]
+	addObserver:self
+	selector:@selector(sessionStateChanged:)
+	name:FBSessionStateChangedNotification
+	object:nil];
+	//LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+	//NSLog(@"viewDIdLoad place#2");
+	//[appDelegate openSessionWithAllowLoginUI:NO];
+	
+	// Set up the background image
+	UIGraphicsBeginImageContext(self.view.frame.size);
+	[[UIImage imageNamed:@"logo-background.png"] drawInRect:self.view.bounds];
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	self.view.backgroundColor = [UIColor colorWithPatternImage:image];
 }
-
-
 
 - (void)sessionStateChanged:(NSNotification*)notification {
-    if (FBSession.activeSession.isOpen) {
-        [self.loginbtn setTitle:@"Logout" forState:UIControlStateNormal];
-        NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
-        [FBRequestConnection
-         startForMeWithCompletionHandler:^(FBRequestConnection *connection,
-                                           id<FBGraphUser> user,
-                                           NSError *error) {
-             //NSLog(@"getting user data");
-
-             if (!error) {
-                 NSString *username = user.username;
-                 NSString *fbId = user.id;
-                 NSString *firstName = user.first_name;
-                 NSString *lastName = user.last_name;
-                 NSString *location = [user.location objectForKey:@"name"];
-                 [user_data setObject:username forKey:@"username"];
-                 [user_data setObject:location forKey:@"location"];
-                 [user_data setObject:fbId forKey:@"fb_id"];
-                 NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
-                 AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
-                 NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         username, @"user[username]",
-                                         firstName, @"user[first_name]",
-                                         lastName, @"user[last_name]",
-                                         fbId, @"user[fb_id]", 
-                                         nil];
-                 [httpClient postPath:@"/users.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                     NSDictionary *user = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                     [user_data setObject:[user objectForKey:@"id"] forKey:@"id"];
-                 }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     NSLog(@"afherror  %@", [error localizedDescription]);
-                 }];
-             } else {
-                // NSLog(@"error!!!!!!!login");
-             }
-         }];
-    } else {
-        [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
-    }
+	if (FBSession.activeSession.isOpen) {
+		[self.loginbtn setTitle:@"Logout" forState:UIControlStateNormal];
+		NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
+		[FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> user, NSError *error) {
+			//NSLog(@"getting user data");
+			if (!error) {
+				NSString *username = user.username;
+				NSString *fbId = user.id;
+				NSString *firstName = user.first_name;
+				NSString *lastName = user.last_name;
+				NSString *location = [user.location objectForKey:@"name"];
+				[user_data setObject:username forKey:@"username"];
+				[user_data setObject:location forKey:@"location"];
+				[user_data setObject:fbId forKey:@"fb_id"];
+				NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
+				AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
+				NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+																username, @"user[username]",
+																firstName, @"user[first_name]",
+																lastName, @"user[last_name]",
+																fbId, @"user[fb_id]",
+																nil];
+				[httpClient postPath:@"/users.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+					NSDictionary *user = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+					[user_data setObject:[user objectForKey:@"id"] forKey:@"id"];
+				}failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+					NSLog(@"afherror  %@", [error localizedDescription]);
+				}];
+			} else {
+				// NSLog(@"error!!!!!!!login");
+			}
+		}];
+	} else {
+		[self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
+	}
 }
                  //NSString *userInfo = @"";
                  
@@ -129,32 +129,25 @@
                  //self.textview.text = userInfo;
 
 
--(IBAction)click :(UIButton *)sender{
-    [self.spinner startAnimating];
-    LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    [appDelegate openSessionWithAllowLoginUI:YES];
-
-
+-(IBAction)click :(UIButton *)sender {
+	[self.spinner startAnimating];
+	LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+	[appDelegate openSessionWithAllowLoginUI:YES];
 }
-
-
 
 #pragma mark Template generated code
 
-- (void)viewDidUnload
-{
-    self.loginbtn = nil;
-    self.spinner = nil;
-    [super viewDidUnload];
+- (void)viewDidUnload {
+	self.loginbtn = nil;
+	self.spinner = nil;
+	[super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotate
-{
+- (BOOL)shouldAutorotate {
 	return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
-{
+- (NSUInteger)supportedInterfaceOrientations {
 	NSUInteger orientations = UIInterfaceOrientationMaskPortrait;
 	orientations |= UIInterfaceOrientationMaskAll;
 	return orientations;

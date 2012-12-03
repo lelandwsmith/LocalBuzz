@@ -37,14 +37,14 @@
 
 - (BOOL)shouldAutorotate
 {
-	return YES;
+	return NO;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+/*- (NSUInteger)supportedInterfaceOrientations
 {
 	NSUInteger orientations = UIInterfaceOrientationMaskPortrait;
 	orientations |= UIInterfaceOrientationMaskAll;
 	return orientations;
-}
+}*/
 
 @end

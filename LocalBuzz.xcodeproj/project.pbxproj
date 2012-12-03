@@ -138,6 +138,7 @@
 		D5A57DC71659CF6600D40C6F /* 19-gear-select.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A57DC61659CF6600D40C6F /* 19-gear-select.png */; };
 		D5C363C8163441E600FE3E1C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363C7163441E600FE3E1C /* MapKit.framework */; };
 		D5C363D71635756400FE3E1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C363D61635756400FE3E1C /* CoreLocation.framework */; };
+		D5D44C08166D636B0024321D /* logo-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D5D44C07166D636B0024321D /* logo-background.png */; };
 		D5DA945B1641CDEE006D7819 /* TabBarOrientationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DA945A1641CDEE006D7819 /* TabBarOrientationController.m */; };
 		D5DA945F1641CFB5006D7819 /* NavBarOrientationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DA945E1641CFB5006D7819 /* NavBarOrientationController.m */; };
 		D5DC95AE164B383500CCCB53 /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DC95AD164B383500CCCB53 /* 19-gear.png */; };
@@ -387,6 +388,7 @@
 		D5A57DC61659CF6600D40C6F /* 19-gear-select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear-select.png"; sourceTree = "<group>"; };
 		D5C363C7163441E600FE3E1C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D5C363D61635756400FE3E1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D5D44C07166D636B0024321D /* logo-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-background.png"; sourceTree = "<group>"; };
 		D5DA94591641CDEE006D7819 /* TabBarOrientationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarOrientationController.h; sourceTree = "<group>"; };
 		D5DA945A1641CDEE006D7819 /* TabBarOrientationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarOrientationController.m; sourceTree = "<group>"; };
 		D5DA945D1641CFB5006D7819 /* NavBarOrientationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBarOrientationController.h; sourceTree = "<group>"; };
@@ -784,6 +786,7 @@
 				BFCB1EFD1665BADC00F63829 /* green.png */,
 				BFCB1EFE1665BADC00F63829 /* grey.png */,
 				8F98958D1654796F00578961 /* right.png */,
+				D5D44C07166D636B0024321D /* logo-background.png */,
 				D55D80B81659B92800ACB021 /* navbar.png */,
 				D55D80B91659B92800ACB021 /* tabbar.png */,
 				D5A57DBF1659C54B00D40C6F /* 10-medical.png */,
@@ -1092,6 +1095,7 @@
 				D5A57DC71659CF6600D40C6F /* 19-gear-select.png in Resources */,
 				BFCB1EFF1665BADC00F63829 /* green.png in Resources */,
 				BFCB1F001665BADC00F63829 /* grey.png in Resources */,
+				D5D44C08166D636B0024321D /* logo-background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

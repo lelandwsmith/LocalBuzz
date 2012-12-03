@@ -56,6 +56,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
     
     //register user on XMPP
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+	NSLog(@"%@", username);
     XMPPJID *jid = [XMPPJID jidWithUser:username domain:self.xmppStream.hostName resource:nil];
     self.xmppStream.myJID = jid;
     NSError *error;
