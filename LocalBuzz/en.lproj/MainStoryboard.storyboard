@@ -277,10 +277,10 @@
             </objects>
             <point key="canvasLocation" x="472" y="1242"/>
         </scene>
-        <!--Table View Controller - My Events-->
+        <!--Posted Event View Controller - My Events-->
         <scene sceneID="4KL-fG-p9M">
             <objects>
-                <tableViewController id="UKu-YZ-w0L" sceneMemberID="viewController">
+                <tableViewController id="UKu-YZ-w0L" customClass="PostedEventViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RHP-Y9-mnO">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1161,7 +1161,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="click:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="loginbtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="textview" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
@@ -1172,6 +1172,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="PastEventViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PastEventViewController.h"/>
+        </class>
+        <class className="PostedEventViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PostedEventViewController.h"/>
         </class>
         <class className="SettingTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingTableViewController.h"/>

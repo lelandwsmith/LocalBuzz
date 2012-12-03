@@ -56,8 +56,8 @@
                  NSString *location = [user.location objectForKey:@"name"];
                  [user_data setObject:username forKey:@"username"];
                  [user_data setObject:location forKey:@"location"];
-                 [user_data setObject:fbId forKey:@"id"];
-                 NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
+                 [user_data setObject:fbId forKey:@"fb_id"];
+                 NSURL *createUserURL = [NSURL URLWithString:@"http://localhost:3000/"];
                  AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
                  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                          username, @"user[username]",
@@ -66,8 +66,8 @@
                                          fbId, @"user[fb_id]", 
                                          nil];
                  [httpClient postPath:@"/users.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                     NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                     NSLog(@"Response: %@", responseString);
+                     NSDictionary *user = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                     [user_data setObject:[user objectForKey:@"id"] forKey:@"id"];
                  }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      NSLog(@"afherror  %@", [error localizedDescription]);
                  }];

@@ -144,7 +144,7 @@
 		timePickerController.timepickerMode = PickEndtime;
 	}
 	if ([[segue identifier] isEqualToString:@"EventCreated"]) {
-		NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
+		NSURL *createUserURL = [NSURL URLWithString:@"http://localhost:3000/"];
 		AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 		[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
@@ -157,14 +157,15 @@
             eventDescription = self.DescriptText.text;
         }
 		NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-														self.titleField.text, @"event[title]",
-														[dateFormatter stringFromDate:startTime], @"event[start_time]",
-														[dateFormatter stringFromDate:endTime], @"event[end_time]",
-														[[NSNumber numberWithDouble:locationSelector.latLong.longitude] stringValue], @"event[longitude]",
-														[[NSNumber numberWithDouble:locationSelector.latLong.latitude] stringValue], @"event[latitude]",
-														isPublic, @"event[public]",
-															eventDescription, @"event[description]",
-														nil];
+                                self.titleField.text, @"event[title]",
+                                [dateFormatter stringFromDate:startTime], @"event[start_time]",
+                                [dateFormatter stringFromDate:endTime], @"event[end_time]",
+                                [[NSNumber numberWithDouble:locationSelector.latLong.longitude] stringValue], @"event[longitude]",
+                                [[NSNumber numberWithDouble:locationSelector.latLong.latitude] stringValue], @"event[latitude]",
+                                isPublic, @"event[public]",
+                                eventDescription, @"event[description]",
+                                [[NSUserDefaults standardUserDefaults] objectForKey:@"id"], @"event[owner]",
+                                nil];
 		[httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *newEvent = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSNumber *newEventId = [newEvent objectForKey:@"id"];
