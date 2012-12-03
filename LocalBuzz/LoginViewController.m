@@ -57,7 +57,7 @@
                  [user_data setObject:username forKey:@"username"];
                  [user_data setObject:location forKey:@"location"];
                  [user_data setObject:fbId forKey:@"fb_id"];
-                 NSURL *createUserURL = [NSURL URLWithString:@"http://localhost:3000/"];
+                 NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
                  AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
                  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                          username, @"user[username]",

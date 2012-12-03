@@ -86,7 +86,7 @@
 
 - (void) refreshEvents
 {
-    NSURL *url = [NSURL URLWithString:@"http://localhost:3000"];
+    NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             [[NSUserDefaults standardUserDefaults] objectForKey:@"id"], @"owner",
