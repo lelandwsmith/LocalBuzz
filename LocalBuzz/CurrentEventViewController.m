@@ -7,7 +7,6 @@
 //
 
 #import "CurrentEventViewController.h"
-#import "LocalBuzzAppDelegate.h"
 #import "EventDetailViewController.h"
 #import "AFHTTPClient.h"
 #import "Event.h"
@@ -22,6 +21,8 @@
 @synthesize dataController;
 @synthesize locationManager = _locationManager;
 
+#define kGetCurrentEvents 0
+
 - (CLLocationManager *) locationManager
 {
 	if (_locationManager == nil) {
@@ -33,10 +34,6 @@
 		}
 	}
 	return _locationManager;
-}
-
-- (LocalBuzzAppDelegate *) appDelegate {
-    return (LocalBuzzAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 - (void) awakeFromNib
@@ -117,6 +114,7 @@
                             [NSNumber numberWithDouble:currentCoord.longitude], @"lng",
                             [dateFormatter stringFromDate:[NSDate date]], @"time",
                             [[NSUserDefaults standardUserDefaults] valueForKey:@"range"], @"range",
+                            [NSNumber numberWithInteger:kGetCurrentEvents], @"past",
                             nil];
     NSLog(@"%@", params);
     NSLog(@"current is %@ |%@",[NSNumber numberWithDouble:currentCoord.latitude],[NSNumber numberWithDouble:currentCoord.longitude]);
@@ -219,14 +217,18 @@
     }else{
         cell.StatusImage.image = [UIImage imageNamed:@"button_play.png"];
         NSTimeInterval distanceBetweenDates = [end timeIntervalSinceNow];
-        double secondsInAnHour = 3600;
-        NSInteger hoursBetweenDates = distanceBetweenDates / secondsInAnHour;
-        if(hoursBetweenDates >= 24){
-            NSInteger remainingDays = hoursBetweenDates/24;
-            hoursBetweenDates = hoursBetweenDates - remainingDays*24;
-            cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d D %d H",remainingDays,hoursBetweenDates ];
-        }else{
-            cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d H",hoursBetweenDates ];
+        if (distanceBetweenDates < 0) {
+            cell.timeLabel.text = @"ended";
+        } else {
+            double secondsInAnHour = 3600;
+            NSInteger hoursBetweenDates = distanceBetweenDates / secondsInAnHour;
+            if(hoursBetweenDates >= 24){
+                NSInteger remainingDays = hoursBetweenDates/24;
+                hoursBetweenDates = hoursBetweenDates - remainingDays*24;
+                cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d D %d H",remainingDays,hoursBetweenDates ];
+            }else{
+                cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d H",hoursBetweenDates ];
+            }
         }
 
     }

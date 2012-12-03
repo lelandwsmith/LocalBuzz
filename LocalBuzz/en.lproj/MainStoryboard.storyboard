@@ -49,13 +49,16 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="45J-PM-k0b" kind="push" identifier="ShowPastEventDetail" id="tgi-4Y-IWJ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Past Events" id="G8e-VV-1ZX">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="zvV-lD-dat">
                             <connections>
-                                <segue destination="apg-Ob-dik" kind="modal" id="jVP-Ee-EgF"/>
+                                <segue destination="apg-Ob-dik" kind="modal" identifier="" id="jVP-Ee-EgF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1088,7 +1091,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2J-NZ-f25" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1050" y="-292"/>
+            <point key="canvasLocation" x="1172" y="-268"/>
         </scene>
     </scenes>
     <resources>
@@ -1208,7 +1211,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9wB-Vh-eDv"/>
+        <segue reference="jVP-Ee-EgF"/>
+        <segue reference="tgi-4Y-IWJ"/>
         <segue reference="CMb-qh-Wt3"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "EventDataController.h"
 
-@interface PastEventViewController : UITableViewController
-@property (nonatomic, strong) NSArray *pastEventTitles;
+@interface PastEventViewController : UITableViewController <CLLocationManagerDelegate>
+@property (strong, nonatomic) EventDataController *dataController;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
