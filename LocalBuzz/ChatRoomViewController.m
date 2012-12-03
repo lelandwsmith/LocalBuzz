@@ -84,7 +84,7 @@
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.messageList addGestureRecognizer:gestureRecognizer];
-    NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:@"full_name"];
     [self.eventChatRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [self.eventChatRoom activate:[self appDelegate].xmppStream];
     [self.eventChatRoom joinRoomUsingNickname:nickname fromJID:[[self xmppStream] myJID] history:nil];
@@ -174,7 +174,7 @@
 	
 	XMPPMessage *message = [self.messages objectAtIndex:indexPath.row];
     
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"full_name"];
     NSString *fromOccupant = [[message attributeForName:@"from"] stringValue];
     NSString *fromUsername = [[XMPPJID jidWithString:fromOccupant] resource];
 
