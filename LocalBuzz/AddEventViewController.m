@@ -12,6 +12,8 @@
 #import "AFHTTPClient.h"
 #import "XMPPFramework.h"
 #import "LocalBuzzAppDelegate.h"
+#import "AddEventRootViewController.h"
+#import "MyEventDetailViewController.h"
 
 @interface AddEventViewController ()
 {
@@ -34,6 +36,22 @@
 @synthesize categoryID =_categoryID;
 @synthesize DescriptText = _DescriptText;
 @synthesize address = _address;
+
+- (Event *)eventToBeEdited {
+    if (_eventToBeEdited == nil) {
+        AddEventRootViewController *rootVC = (AddEventRootViewController *) self.navigationController;
+        _eventToBeEdited = rootVC.eventToBeEdited;
+    }
+    return _eventToBeEdited;
+}
+
+- (NSInteger)createOrEdit {
+    AddEventRootViewController *rootVC = (AddEventRootViewController *) self.navigationController;
+    _createOrEdit = rootVC.createOrEdit;
+    return _createOrEdit;
+}
+
+
 
 - (IBAction)cancelPressed:(id)sender
 {
@@ -66,26 +84,29 @@
 		CLLocationCoordinate2D selectedLatLong = locationSelector.latLong;
 		CLLocation *loc = [[CLLocation alloc] initWithLatitude:selectedLatLong.latitude longitude:selectedLatLong.longitude];
 		
-		CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-		
-		//Geocoding Block
-		[geocoder reverseGeocodeLocation: loc completionHandler:^(NSArray *placemarks, NSError *error) {
-			//Get nearby address
-			CLPlacemark *placemark = [placemarks objectAtIndex:0];
-		
-			//String to hold address
-			self.address = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-		
-			//Print the location to console
-			NSLog(@"size of string is %d",self.address.length);
-			self.numOfLines = self.address.length/25+1;
-		
-			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationNone];
-			NSLog(@"numOFline %d",self.numOfLines);
-		}];
+		[self showAddress:loc];
 	}
 }
 
+- (void)showAddress:(CLLocation *)location {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    
+    //Geocoding Block
+    [geocoder reverseGeocodeLocation: location completionHandler:^(NSArray *placemarks, NSError *error) {
+        //Get nearby address
+        CLPlacemark *placemark = [placemarks objectAtIndex:0];
+		
+        //String to hold address
+        self.address = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+		
+        //Print the location to console
+        NSLog(@"size of string is %d",self.address.length);
+        self.numOfLines = self.address.length/25+1;
+		
+        [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForSelectedRows] withRowAnimation:UITableViewRowAnimationNone];
+        NSLog(@"numOFline %d",self.numOfLines);
+    }];
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if((indexPath.section == 1) && (indexPath.row == 0)){
@@ -143,37 +164,6 @@
 		timePickerController.minimumDate = startTime;
 		timePickerController.timepickerMode = PickEndtime;
 	}
-	if ([[segue identifier] isEqualToString:@"EventCreated"]) {
-		NSURL *createUserURL = [NSURL URLWithString:@"http://localbuzz.vforvincent.info/"];
-		AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
-		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
-		[dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-		NSNumber *isPublic = [[NSNumber alloc] initWithBool:self.switcher.isOn];
-        NSString *eventDescription;
-        if ([self.DescriptText.text isEqualToString:@"Tap to edit"]) {
-            eventDescription = @"";
-        } else {
-            eventDescription = self.DescriptText.text;
-        }
-		NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                self.titleField.text, @"event[title]",
-                                [dateFormatter stringFromDate:startTime], @"event[start_time]",
-                                [dateFormatter stringFromDate:endTime], @"event[end_time]",
-                                [[NSNumber numberWithDouble:locationSelector.latLong.longitude] stringValue], @"event[longitude]",
-                                [[NSNumber numberWithDouble:locationSelector.latLong.latitude] stringValue], @"event[latitude]",
-                                isPublic, @"event[public]",
-                                eventDescription, @"event[description]",
-                                [[NSUserDefaults standardUserDefaults] objectForKey:@"id"], @"event[owner]",
-                                nil];
-		[httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSDictionary *newEvent = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSNumber *newEventId = [newEvent objectForKey:@"id"];
-            [self createEventChatRoom:newEventId];
-        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-			NSLog(@"%@", [error localizedDescription]);
-		}];
-	}
 }
 
 - (void)createEventChatRoom:(NSNumber *)eventId {
@@ -219,7 +209,29 @@
 	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
 	tapGestureRecognizer.cancelsTouchesInView = NO;
 	[self.tableView addGestureRecognizer:tapGestureRecognizer];
-    
+    if (self.createOrEdit == kEditEvent) {
+        [self loadEvent];
+        self.title = @"Edit";
+    }
+    AddEventRootViewController *rootVC = (AddEventRootViewController *)self.navigationController;
+    self.addEventDelegate = rootVC.delegatingVC;
+}
+
+- (void)loadEvent {
+    self.titleField.text = self.eventToBeEdited.title;
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:[self.eventToBeEdited.latitude doubleValue] longitude:[self.eventToBeEdited.longitude doubleValue]];
+    [self showAddress:location];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    self.startTimeCell.detailTextLabel.text = [formatter stringFromDate:self.eventToBeEdited.startTime];
+    startTime = self.eventToBeEdited.startTime;
+    self.endTimeCell.detailTextLabel.text = [formatter stringFromDate:self.eventToBeEdited.endTime];
+    endTime = self.eventToBeEdited.endTime;
+    self.switcher.on = self.eventToBeEdited.isPublic;
+    NSLog(@"Event public: %d", self.eventToBeEdited.isPublic);
+    NSLog(@"Public: %d", self.switcher.on);
+    self.DescriptText.text = self.eventToBeEdited.detailDescription;
 }
 
 - (void) viewDidUnload
@@ -247,6 +259,64 @@
 
 - (IBAction)SwitchChange:(id)sender
 {}
+
+- (IBAction)savePressed:(id)sender {
+    NSURL *createUserURL = [NSURL URLWithString:@"http://localhost:3000/"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:createUserURL];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    NSNumber *isPublic = [[NSNumber alloc] initWithBool:self.switcher.isOn];
+    NSString *eventDescription;
+    if ([self.DescriptText.text isEqualToString:@"Tap to edit"]) {
+        eventDescription = @"";
+    } else {
+        eventDescription = self.DescriptText.text;
+    }
+    NSDictionary *params;
+    if (self.createOrEdit == kCreateEvent) {
+        params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                self.titleField.text, @"event[title]",
+                                [dateFormatter stringFromDate:startTime], @"event[start_time]",
+                                [dateFormatter stringFromDate:endTime], @"event[end_time]",
+                                [[NSNumber numberWithDouble:locationSelector.latLong.longitude] stringValue], @"event[longitude]",
+                                [[NSNumber numberWithDouble:locationSelector.latLong.latitude] stringValue], @"event[latitude]",
+                                isPublic, @"event[public]",
+                                eventDescription, @"event[description]",
+                                [[NSUserDefaults standardUserDefaults] objectForKey:@"id"], @"event[owner]",
+                                nil];
+        [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *newEvent = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSNumber *newEventId = [newEvent objectForKey:@"id"];
+            [self createEventChatRoom:newEventId];
+            [[self addEventDelegate] addEventViewController:self didCreatedEvent:[[Event alloc] initWithDictionary:newEvent]];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+			NSLog(@"%@", [error localizedDescription]);
+		}];
+    } else if (self.createOrEdit == kEditEvent) {
+        params = [NSDictionary dictionaryWithObjectsAndKeys:
+                  self.titleField.text, @"event[title]",
+                  [dateFormatter stringFromDate:startTime], @"event[start_time]",
+                  [dateFormatter stringFromDate:endTime], @"event[end_time]",
+                  [self.eventToBeEdited.longitude stringValue], @"event[longitude]",
+                  [self.eventToBeEdited.latitude stringValue], @"event[latitude]",
+                  isPublic, @"event[public]",
+                  eventDescription, @"event[description]",
+                  [[NSUserDefaults standardUserDefaults] objectForKey:@"id"], @"event[owner]",
+                  nil];
+        NSLog(@"%@", params);
+        NSString *putPath = [[@"/events/" stringByAppendingString:[self.eventToBeEdited.eventId stringValue]] stringByAppendingString:@".json"];
+        [httpClient putPath:putPath parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *response = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            Event *editedEvent = [[Event alloc] initWithDictionary:response];
+            [[self addEventDelegate] addEventViewController:self didEditedEvent:editedEvent];
+            NSLog(@"%@", response);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@", error.localizedDescription);
+        }];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void) hideKeyboard
 {

@@ -13,5 +13,6 @@
 @interface PostedEventViewController : UITableViewController
 
 @property (strong, nonatomic) EventDataController *dataController;
+- (void)refreshEvents;
 
 @end

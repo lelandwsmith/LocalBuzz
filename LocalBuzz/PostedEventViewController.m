@@ -112,6 +112,7 @@
 - (void)refreshView:(UIRefreshControl *)refresh
 {
     refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refreshing events..."];
+    [self refreshEvents];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMM d, h:mm a"];
     NSString *lastUpdate = [NSString stringWithFormat:@"Last updated at: %@", [formatter stringFromDate:[NSDate date]]];
@@ -205,21 +206,6 @@
  }
  */
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 #pragma mark - Table view delegate
 
@@ -232,12 +218,12 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-    //[self performSegueWithIdentifier:@"ShowEventDetail" sender:self];
+    [self performSegueWithIdentifier:@"ShowMyEventDetail" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"ShowEventDetail"]) {
+    if ([segue.identifier isEqualToString:@"ShowMyEventDetail"]) {
         EventDetailViewController *eventDetailController = [segue destinationViewController];
         eventDetailController.event = [self.dataController objectInEventListAtIndex:[self.tableView indexPathForSelectedRow].row];
     }

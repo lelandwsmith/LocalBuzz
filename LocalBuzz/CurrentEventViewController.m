@@ -12,7 +12,8 @@
 #import "Event.h"
 #import "EventDataController.h"
 #import "LocalBuzzTableCellController.h"
-
+#import "AddEventViewController.h"
+#import "AddEventRootViewController.h"
 @interface CurrentEventViewController ()
 
 @end
@@ -294,7 +295,18 @@
       EventDetailViewController *eventDetailController = [segue destinationViewController];
       eventDetailController.event = [self.dataController objectInEventListAtIndex:[self.tableView indexPathForSelectedRow].row];
       eventDetailController.currentCoordinate = [[self.locationManager location] coordinate];
+  } else if ([segue.identifier isEqualToString:@"CreateEvent"]) {
+      AddEventRootViewController *rootVC = [segue destinationViewController];
+      rootVC.createOrEdit = kCreateEvent;
+      rootVC.delegatingVC = self;
   }
+}
+
+//////////////
+#pragma mark - AddEventDelegate
+/////////////
+- (void)addEventViewController:(AddEventViewController *)addEventViewController didCreatedEvent:(Event *)event {
+    [self refreshEvents];
 }
 
 @end

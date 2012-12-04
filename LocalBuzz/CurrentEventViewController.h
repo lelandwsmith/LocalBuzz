@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "AddEventViewController.h"
 @class EventDataController;
 
-@interface CurrentEventViewController : UITableViewController <CLLocationManagerDelegate>
+@interface CurrentEventViewController : UITableViewController <CLLocationManagerDelegate, AddEventDelegate>
 
 @property (strong, nonatomic) EventDataController *dataController;
 @property (strong, nonatomic) CLLocationManager *locationManager;

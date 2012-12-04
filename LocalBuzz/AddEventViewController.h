@@ -9,7 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "XMPPFramework.h"
+#import "Event.h"
+@class AddEventViewController;
+@protocol AddEventDelegate <NSObject>
+- (void)addEventViewController:(AddEventViewController *)addEventViewController
+                didEditedEvent:(Event *)event;
+- (void)addEventViewController:(AddEventViewController *)addEventViewController
+               didCreatedEvent:(Event *)event;
+@end
+
 @interface AddEventViewController : UITableViewController <UITextFieldDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, XMPPRoomDelegate>
+@property (weak, nonatomic) id<AddEventDelegate> addEventDelegate;
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITableViewCell *latitudeCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *startTimeCell;
@@ -28,5 +38,8 @@
 - (IBAction)timeSelected:(UIStoryboardSegue *)segue;
 - (IBAction)locationSelected:(UIStoryboardSegue *)segue;
 - (void)textViewChange;
+@property (nonatomic) NSInteger createOrEdit;
+@property (weak, nonatomic) Event *eventToBeEdited;
 
 @end
+
