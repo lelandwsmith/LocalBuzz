@@ -200,11 +200,12 @@
 - (void) viewDidLoad
 {
     eventCategory = [NSDictionary dictionaryWithObjectsAndKeys:
-                     @"Leisure", [NSNumber numberWithInt:0],
-                     @"Academic", [NSNumber numberWithInt:1],
-                     @"Work", [NSNumber numberWithInt:2],
-                     @"Charity", [NSNumber numberWithInt:3],
-                     @"Other", [NSNumber numberWithInt:4],
+                     @"Entertainment", [NSNumber numberWithInt:0],
+                     @"Sport", [NSNumber numberWithInteger:1],
+                     @"Academic", [NSNumber numberWithInt:2],
+                     @"Work", [NSNumber numberWithInt:3],
+                     @"Charity", [NSNumber numberWithInt:4],
+                     @"Other", [NSNumber numberWithInt:5],
                      nil];
 	[super viewDidLoad];
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
@@ -254,9 +255,9 @@
 - (IBAction)leftClickCategory:(id)sender
 {
 	self.categoryID--;
-    self.categoryID %= 5;
+    self.categoryID %= 6;
     if (self.categoryID < 0) {
-        self.categoryID += 5;
+        self.categoryID += 6;
     }
 	[self.categoryLabel setText:[eventCategory objectForKey:[NSNumber numberWithInteger:self.categoryID]]];
     NSLog(@"%d", self.categoryID);
@@ -265,7 +266,7 @@
 - (IBAction)rightClickCategory:(id)sender
 {
 	self.categoryID++;
-    self.categoryID %= 5;
+    self.categoryID %= 6;
 	[self.categoryLabel setText:[eventCategory objectForKey:[NSNumber numberWithInteger:self.categoryID]]];
     NSLog(@"%d", self.categoryID);
 }
