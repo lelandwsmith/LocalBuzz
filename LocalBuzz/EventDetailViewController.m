@@ -25,6 +25,8 @@
 @synthesize currentCoordinate = _currentCoordinate;
 @synthesize locationTitle = _locationTitle;
 @synthesize locatedAt =_locatedAt;
+@synthesize descript_text = _descript_text;
+@synthesize numOfLines_descript = _numOfLines_descript;
 
 - (void) setEvent:(Event *)event {
     if (_event != event) {
@@ -39,7 +41,7 @@
 		[self setUpMap:theEvent.latitude :theEvent.longitude];
 		
 		self.titleLabel.text = theEvent.title;
-		self.descriptionLabel.text = theEvent.detailDescription;
+		self.descript_text = theEvent.detailDescription;
 		
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 		[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -58,7 +60,8 @@
 			self.locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
 			
 			//Set the label text to current location
-     	self.numOfLines = self.locatedAt.length/25+1;
+            self.numOfLines = self.locatedAt.length/25+1;
+            self.numOfLines_descript = self.descript_text.length/25+1;
 
 			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
 		}];
@@ -74,6 +77,13 @@
 			return ((self.numOfLines - 1 )*21+44);
 		}
 	}
+    else if((indexPath.section==0)&&(indexPath.row==3)) {
+        if(self.numOfLines_descript>1){
+			[self.descriptCell.detailTextLabel setNumberOfLines:self.numOfLines_descript];
+			[self.descriptCell.detailTextLabel setText:self.descript_text];
+			return ((self.numOfLines_descript - 1 )*21+44);
+		}
+    }
 	// Mapview cell height
 	else if(indexPath.section == 1)
 		return 224;
