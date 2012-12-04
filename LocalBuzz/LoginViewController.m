@@ -27,7 +27,7 @@
 	
 	// Set up the background image
 	UIGraphicsBeginImageContext(self.view.frame.size);
-	[[UIImage imageNamed:@"logo-background.png"] drawInRect:self.view.bounds];
+	[[UIImage imageNamed:@"background_logo.png"] drawInRect:self.view.bounds];
 	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	self.view.backgroundColor = [UIColor colorWithPatternImage:image];
