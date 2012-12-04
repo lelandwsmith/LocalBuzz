@@ -24,6 +24,7 @@
         _startTime = [dateFormatter dateFromString:[eventDict objectForKey:@"start_time"]];
         _endTime = [dateFormatter dateFromString:[eventDict objectForKey:@"end_time"]];
         _isPublic = [(NSNumber *)[eventDict objectForKey:@"public"] boolValue];
+        _category = [eventDict objectForKey:@"category"];
         if ([_detailDescription isKindOfClass:[NSNull class]]) {
             _detailDescription = @"";
         }

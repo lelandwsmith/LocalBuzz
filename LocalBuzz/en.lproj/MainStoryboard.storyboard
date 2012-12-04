@@ -673,9 +673,9 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category #1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFd-19-RvB">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Leisure" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFd-19-RvB">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="135" id="Dg9-Ve-zIM"/>
+                                                        <constraint firstAttribute="width" constant="124" id="3H1-Fe-9Ea"/>
                                                         <constraint firstAttribute="height" constant="31" id="THV-pX-p6x"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -720,12 +720,12 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="T8b-B3-NI6" firstAttribute="leading" secondItem="LAY-1h-Tsv" secondAttribute="leading" constant="262" id="Q7A-F9-qFJ"/>
+                                            <constraint firstItem="rFd-19-RvB" firstAttribute="centerX" secondItem="LAY-1h-Tsv" secondAttribute="centerX" type="default" id="1mm-mf-Cis"/>
                                             <constraint firstItem="T8b-B3-NI6" firstAttribute="centerY" secondItem="LAY-1h-Tsv" secondAttribute="centerY" type="default" id="Tmk-x9-Ncm"/>
+                                            <constraint firstItem="T8b-B3-NI6" firstAttribute="leading" secondItem="LAY-1h-Tsv" secondAttribute="leading" constant="262" id="Y76-rS-Dxt"/>
                                             <constraint firstItem="ySe-Sv-fKN" firstAttribute="top" secondItem="LAY-1h-Tsv" secondAttribute="top" constant="-8" id="dK0-aG-uiv"/>
-                                            <constraint firstItem="rFd-19-RvB" firstAttribute="top" secondItem="LAY-1h-Tsv" secondAttribute="top" constant="9" id="uUJ-mi-g6Y"/>
+                                            <constraint firstItem="rFd-19-RvB" firstAttribute="top" secondItem="LAY-1h-Tsv" secondAttribute="top" constant="7" id="rUo-zm-02g"/>
                                             <constraint firstItem="ySe-Sv-fKN" firstAttribute="leading" secondItem="LAY-1h-Tsv" secondAttribute="leading" constant="-6" id="wX2-2P-aj4"/>
-                                            <constraint firstItem="rFd-19-RvB" firstAttribute="leading" secondItem="LAY-1h-Tsv" secondAttribute="leading" constant="106" id="x9Z-8b-sZt"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -1259,7 +1259,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lQ-t3-TcK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1538" y="1756"/>
+            <point key="canvasLocation" x="1552" y="1370"/>
         </scene>
     </scenes>
     <resources>
@@ -1397,8 +1397,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tgi-4Y-IWJ"/>
-        <segue reference="9wB-Vh-eDv"/>
+        <segue reference="DbQ-AW-Ak0"/>
         <segue reference="CMb-qh-Wt3"/>
+        <segue reference="tgi-4Y-IWJ"/>
     </inferredMetricsTieBreakers>
 </document>
