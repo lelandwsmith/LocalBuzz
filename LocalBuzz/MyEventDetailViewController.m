@@ -143,7 +143,7 @@
 }
 
 - (void)deleteEvent {
-    NSURL *host = [NSURL URLWithString:@"http://localhost:3000"];
+    NSURL *host = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:host];
     NSString *deletePath = [@"/events/" stringByAppendingString:[self.event.eventId stringValue]];
     [httpClient deletePath:deletePath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
