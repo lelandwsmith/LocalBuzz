@@ -19,6 +19,8 @@
 		8FCB0E41161CAE810026AACB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FCB0E40161CAE810026AACB /* LoginViewController.m */; };
 		BF25918816365A17006E895E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF25918716365A17006E895E /* SystemConfiguration.framework */; };
 		BF2591CA1638AA74006E895E /* AddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2591C91638AA74006E895E /* AddEventViewController.m */; };
+		BF2AD785166D5EB800DA01F6 /* MyEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2AD784166D5EB800DA01F6 /* MyEventDetailViewController.m */; };
+		BF2AD796166D874400DA01F6 /* AddEventRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2AD795166D874400DA01F6 /* AddEventRootViewController.m */; };
 		BF2AE0D4163A08E90098A8C9 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2AE0D3163A08E90098A8C9 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BF2AE0D6163A09210098A8C9 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2AE0D5163A09210098A8C9 /* libicucore.A.dylib */; };
 		BF2AE131163A176F0098A8C9 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2AE11F163A176F0098A8C9 /* AFHTTPClient.m */; };
@@ -170,6 +172,10 @@
 		BF25918716365A17006E895E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BF2591C81638AA74006E895E /* AddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventViewController.h; sourceTree = "<group>"; };
 		BF2591C91638AA74006E895E /* AddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventViewController.m; sourceTree = "<group>"; };
+		BF2AD783166D5EB800DA01F6 /* MyEventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventDetailViewController.h; sourceTree = "<group>"; };
+		BF2AD784166D5EB800DA01F6 /* MyEventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEventDetailViewController.m; sourceTree = "<group>"; };
+		BF2AD794166D874400DA01F6 /* AddEventRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventRootViewController.h; sourceTree = "<group>"; };
+		BF2AD795166D874400DA01F6 /* AddEventRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventRootViewController.m; sourceTree = "<group>"; };
 		BF2AE0D2163A08E90098A8C9 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegexKitLite.h; path = ../RegexKitLite.h; sourceTree = "<group>"; };
 		BF2AE0D3163A08E90098A8C9 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegexKitLite.m; path = ../RegexKitLite.m; sourceTree = "<group>"; };
 		BF2AE0D5163A09210098A8C9 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
@@ -1005,6 +1011,8 @@
 				D5E9408A163B4AF100788C15 /* DDAnnotationView.m */,
 				BFD323231638C27F00FE6819 /* TimePickerViewController.h */,
 				BFD323241638C27F00FE6819 /* TimePickerViewController.m */,
+				BF2AD794166D874400DA01F6 /* AddEventRootViewController.h */,
+				BF2AD795166D874400DA01F6 /* AddEventRootViewController.m */,
 			);
 			name = EventNew;
 			sourceTree = "<group>";
@@ -1018,6 +1026,8 @@
 				BFB09B8D163C59AF001E2BA6 /* SettingTableViewController.m */,
 				D569DDA11651B4A6009D9678 /* PostedEventViewController.h */,
 				D569DDA21651B4A6009D9678 /* PostedEventViewController.m */,
+				BF2AD783166D5EB800DA01F6 /* MyEventDetailViewController.h */,
+				BF2AD784166D5EB800DA01F6 /* MyEventDetailViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1209,6 +1219,8 @@
 				BFCB1F30166713AD00F63829 /* XMPPMessage+XEP0045.m in Sources */,
 				BFCB1F31166713AD00F63829 /* XMPPMUC.m in Sources */,
 				BFCB1F32166713AD00F63829 /* XMPPRoom.m in Sources */,
+				BF2AD785166D5EB800DA01F6 /* MyEventDetailViewController.m in Sources */,
+				BF2AD796166D874400DA01F6 /* AddEventRootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

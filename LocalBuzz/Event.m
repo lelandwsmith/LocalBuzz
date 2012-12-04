@@ -23,7 +23,7 @@
         _detailDescription = [eventDict objectForKey:@"description"];
         _startTime = [dateFormatter dateFromString:[eventDict objectForKey:@"start_time"]];
         _endTime = [dateFormatter dateFromString:[eventDict objectForKey:@"end_time"]];
-        _isPublic = NO;
+        _isPublic = [(NSNumber *)[eventDict objectForKey:@"public"] boolValue];
         if ([_detailDescription isKindOfClass:[NSNull class]]) {
             _detailDescription = @"";
         }

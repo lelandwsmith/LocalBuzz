@@ -111,12 +111,13 @@
 
 - (void)refreshView:(UIRefreshControl *)refresh
 {
-	refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refreshing events..."];
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"MMM d, h:mm a"];
-	NSString *lastUpdate = [NSString stringWithFormat:@"Last updated at: %@", [formatter stringFromDate:[NSDate date]]];
-	refresh.attributedTitle = [[NSAttributedString alloc] initWithString:lastUpdate];
-	[refresh endRefreshing];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refreshing events..."];
+    [self refreshEvents];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d, h:mm a"];
+    NSString *lastUpdate = [NSString stringWithFormat:@"Last updated at: %@", [formatter stringFromDate:[NSDate date]]];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:lastUpdate];
+    [refresh endRefreshing];
 }
 
 - (void)viewDidUnload
@@ -205,42 +206,27 @@
  }
  */
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	// Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-	 // ...
-	 // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 */
-	//[self performSegueWithIdentifier:@"ShowEventDetail" sender:self];
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     */
+    [self performSegueWithIdentifier:@"ShowMyEventDetail" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	if ([segue.identifier isEqualToString:@"ShowEventDetail"]) {
-		EventDetailViewController *eventDetailController = [segue destinationViewController];
-		eventDetailController.event = [self.dataController objectInEventListAtIndex:[self.tableView indexPathForSelectedRow].row];
-	}
+    if ([segue.identifier isEqualToString:@"ShowMyEventDetail"]) {
+        EventDetailViewController *eventDetailController = [segue destinationViewController];
+        eventDetailController.event = [self.dataController objectInEventListAtIndex:[self.tableView indexPathForSelectedRow].row];
+    }
 }
 
 @end
