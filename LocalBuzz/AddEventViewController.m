@@ -241,7 +241,8 @@
     NSLog(@"Event public: %d", self.eventToBeEdited.isPublic);
     NSLog(@"Public: %d", self.switcher.on);
     self.DescriptText.text = self.eventToBeEdited.detailDescription;
-    self.categoryLabel.text = [eventCategory objectForKey:self.eventToBeEdited.category];
+    self.categoryID = [self.eventToBeEdited.category integerValue];
+    self.categoryLabel.text = [eventCategory objectForKey:[NSNumber numberWithInteger:self.categoryID]];
     NSLog(@"Category: %@", [eventCategory objectForKey:self.eventToBeEdited.category]);
 }
 

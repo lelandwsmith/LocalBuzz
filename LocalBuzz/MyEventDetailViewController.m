@@ -47,7 +47,7 @@
 - (void) configureView {
 	Event *theEvent = self.event;
 	if (theEvent) {
-		[self setUpMap:theEvent.latitude :theEvent.longitude];
+
 		
 		self.titleLabel.text = theEvent.title;
 		self.descriptionLabel.text = theEvent.detailDescription;
@@ -72,6 +72,7 @@
             self.numOfLines = self.locatedAt.length/25+1;
             
 			[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+            [self setUpMap:self.event.latitude :self.event.longitude];
 		}];
 	}
 }
