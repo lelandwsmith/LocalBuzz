@@ -27,8 +27,9 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (strong, nonatomic) XMPPStream *xmppStream;
 
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
-- (void)closeSession;
+- (void) closeSession;
 - (void)showLoginView;
 - (void)getFriendUid;
+- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
 
 @end
