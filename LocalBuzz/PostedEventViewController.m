@@ -161,12 +161,14 @@
         }
 	}
 	else {
-		cell.StatusImage.image = [UIImage imageNamed:@"button_play.png"];
+        
+        cell.StatusImage.image = [UIImage imageNamed:@"button_stop.png"];
 		NSTimeInterval distanceBetweenDates = [end timeIntervalSinceNow];
 		if (distanceBetweenDates < 0) {
 			cell.timeLabel.text = @"ended";
 		}
 		else {
+            cell.StatusImage.image = [UIImage imageNamed:@"button_play.png"];
 			double secondsInAnHour = 3600;
 			NSInteger hoursBetweenDates = distanceBetweenDates / secondsInAnHour;
 			if(hoursBetweenDates >= 24){
