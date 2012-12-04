@@ -30,5 +30,7 @@ extern NSString *const FBSessionStateChangedNotification;
 - (void)closeSession;
 - (void)showLoginView;
 - (void)getFriendUid;
-
+- (void)sessionStateChanged:(FBSession *)session
+                      state:(FBSessionState) state
+                      error:(NSError *)error;
 @end

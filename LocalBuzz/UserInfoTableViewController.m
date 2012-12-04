@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     NSUserDefaults *user_data = [NSUserDefaults standardUserDefaults];
-    NameCell.text=[user_data stringForKey:@"name"];
+    NameCell.text=[user_data stringForKey:@"full_name"];
     LocationCell.text=[user_data stringForKey:@"location"];
    // NSLog(@"id is %@",[user_data stringForKey:@"id"]);
     photo.profileID = [user_data stringForKey:@"fb_id"];

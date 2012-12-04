@@ -164,7 +164,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
         }
             break;
         case FBSessionStateClosed:{
-            
+            NSLog(@"FBSessionStateClosed");
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -176,7 +176,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
         }
             break;
         case FBSessionStateClosedLoginFailed:{
-            
+            NSLog(@"FBSessionStateClosedLoginFailed");
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
