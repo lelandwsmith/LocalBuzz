@@ -127,6 +127,8 @@
 		D56034DB166D9AA400AB9D37 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D56034DA166D9AA400AB9D37 /* Default.png */; };
 		D56034DD166D9AAA00AB9D37 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D56034DC166D9AAA00AB9D37 /* Default@2x.png */; };
 		D56034DF166D9ABA00AB9D37 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D56034DE166D9ABA00AB9D37 /* Default-568h@2x.png */; };
+		D56034EC166DA0CD00AB9D37 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D56034EB166DA0CD00AB9D37 /* icon.png */; };
+		D56034EE166DA1A500AB9D37 /* icon-large.png in Resources */ = {isa = PBXBuildFile; fileRef = D56034ED166DA1A500AB9D37 /* icon-large.png */; };
 		D569DDA31651B4A6009D9678 /* PostedEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D569DDA21651B4A6009D9678 /* PostedEventViewController.m */; };
 		D569DDAE1651BDAA009D9678 /* glyphish-icons.zip in Resources */ = {isa = PBXBuildFile; fileRef = D569DDAD1651BDAA009D9678 /* glyphish-icons.zip */; };
 		D569DDB11651BDD4009D9678 /* 30_vector_icons_df.zip in Resources */ = {isa = PBXBuildFile; fileRef = D569DDB01651BDD4009D9678 /* 30_vector_icons_df.zip */; };
@@ -374,6 +376,8 @@
 		D56034DA166D9AA400AB9D37 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D56034DC166D9AAA00AB9D37 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D56034DE166D9ABA00AB9D37 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D56034EB166DA0CD00AB9D37 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		D56034ED166DA1A500AB9D37 /* icon-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-large.png"; sourceTree = "<group>"; };
 		D569DDA11651B4A6009D9678 /* PostedEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostedEventViewController.h; sourceTree = "<group>"; };
 		D569DDA21651B4A6009D9678 /* PostedEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostedEventViewController.m; sourceTree = "<group>"; };
 		D569DDAD1651BDAA009D9678 /* glyphish-icons.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "glyphish-icons.zip"; sourceTree = "<group>"; };
@@ -788,6 +792,8 @@
 				8F98958D1654796F00578961 /* right.png */,
 				D55D80B81659B92800ACB021 /* navbar.png */,
 				D55D80B91659B92800ACB021 /* tabbar.png */,
+				D56034EB166DA0CD00AB9D37 /* icon.png */,
+				D56034ED166DA1A500AB9D37 /* icon-large.png */,
 				8F971D96166D62C800D780F5 /* LoginWithFacebookNormal@2x.png */,
 				D56034D8166D9A9A00AB9D37 /* background_logo.png */,
 				D56034DE166D9ABA00AB9D37 /* Default-568h@2x.png */,
@@ -1096,6 +1102,8 @@
 				D56034DB166D9AA400AB9D37 /* Default.png in Resources */,
 				D56034DD166D9AAA00AB9D37 /* Default@2x.png in Resources */,
 				D56034DF166D9ABA00AB9D37 /* Default-568h@2x.png in Resources */,
+				D56034EC166DA0CD00AB9D37 /* icon.png in Resources */,
+				D56034EE166DA1A500AB9D37 /* icon-large.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
