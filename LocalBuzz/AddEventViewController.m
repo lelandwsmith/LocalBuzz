@@ -20,6 +20,7 @@
 	@private NSDate *startTime;
 	@private NSDate *endTime;
 	@private LocationSelectionViewController *locationSelector;
+    @private NSDictionary *eventCategory;
 }
 @end
 
@@ -36,6 +37,8 @@
 @synthesize categoryID =_categoryID;
 @synthesize DescriptText = _DescriptText;
 @synthesize address = _address;
+@synthesize categoryLabel = _categoryLabel;
+
 
 - (Event *)eventToBeEdited {
     if (_eventToBeEdited == nil) {
@@ -50,8 +53,6 @@
     _createOrEdit = rootVC.createOrEdit;
     return _createOrEdit;
 }
-
-
 
 - (IBAction)cancelPressed:(id)sender
 {
@@ -198,6 +199,13 @@
 
 - (void) viewDidLoad
 {
+    eventCategory = [NSDictionary dictionaryWithObjectsAndKeys:
+                     @"Leisure", [NSNumber numberWithInt:1],
+                     @"Academic", [NSNumber numberWithInt:2],
+                     @"Work", [NSNumber numberWithInt:3],
+                     @"Charity", [NSNumber numberWithInt:4],
+                     @"Other", [NSNumber numberWithInt:5],
+                     nil];
 	[super viewDidLoad];
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChange) name:UITextViewTextDidBeginEditingNotification object:self.DescriptText];
@@ -215,6 +223,7 @@
     }
     AddEventRootViewController *rootVC = (AddEventRootViewController *)self.navigationController;
     self.addEventDelegate = rootVC.delegatingVC;
+    
 }
 
 - (void)loadEvent {
@@ -232,6 +241,8 @@
     NSLog(@"Event public: %d", self.eventToBeEdited.isPublic);
     NSLog(@"Public: %d", self.switcher.on);
     self.DescriptText.text = self.eventToBeEdited.detailDescription;
+    self.categoryLabel.text = [eventCategory objectForKey:self.eventToBeEdited.category];
+    NSLog(@"Category: %@", [eventCategory objectForKey:self.eventToBeEdited.category]);
 }
 
 - (void) viewDidUnload
@@ -245,16 +256,16 @@
 	if(self.categoryID<0) {
 		self.categoryID+=5;
 	}
-	[self.categoryLabel setText:[NSString stringWithFormat:@"Category #%d",self.categoryID]];
+	[self.categoryLabel setText:[eventCategory objectForKey:[NSNumber numberWithInteger:self.categoryID]]];
 }
 
 - (IBAction)rightClickCategory:(id)sender
 {
 	self.categoryID++;
-	if(self.categoryID>4) {
+	if(self.categoryID>5) {
 		self.categoryID-=5;
 	}
-	[self.categoryLabel setText:[NSString stringWithFormat:@"Category #%d",self.categoryID]];
+	[self.categoryLabel setText:[eventCategory objectForKey:[NSNumber numberWithInteger:self.categoryID]]];
 }
 
 - (IBAction)SwitchChange:(id)sender
@@ -284,6 +295,7 @@
                                 isPublic, @"event[public]",
                                 eventDescription, @"event[description]",
                                 [[NSUserDefaults standardUserDefaults] objectForKey:@"id"], @"event[owner]",
+                                [NSNumber numberWithInteger:self.categoryID], @"event[category]",
                                 nil];
         [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *newEvent = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -303,6 +315,7 @@
                   isPublic, @"event[public]",
                   eventDescription, @"event[description]",
                   [[NSUserDefaults standardUserDefaults] objectForKey:@"id"], @"event[owner]",
+                  [NSNumber numberWithInteger:self.categoryID], @"event[category]",
                   nil];
         NSLog(@"%@", params);
         NSString *putPath = [[@"/events/" stringByAppendingString:[self.eventToBeEdited.eventId stringValue]] stringByAppendingString:@".json"];
