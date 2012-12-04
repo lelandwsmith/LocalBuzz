@@ -146,8 +146,19 @@
 	NSDate* end =[self.dataController objectInEventListAtIndex:[indexPath row]].endTime;
 	NSDate* start =[self.dataController objectInEventListAtIndex:[indexPath row]].startTime;
 	NSDate* now = [[NSDate alloc] init];
-	if([start compare:now]==NSOrderedDescending) {
-		cell.timeLabel.text = @"to be determined";
+	if([start compare:now]==NSOrderedDescending){
+        NSTimeInterval distanceBetweenDates = [start timeIntervalSinceNow];
+        cell.StatusImage.image = [UIImage imageNamed:@"button_pause.png"];
+        double secondsInAnHour = 3600;
+        NSInteger hoursBetweenDates = distanceBetweenDates / secondsInAnHour;
+        if(hoursBetweenDates >= 24){
+            NSInteger remainingDays = hoursBetweenDates/24;
+            hoursBetweenDates = hoursBetweenDates - remainingDays*24;
+            cell.timeLabel.text = [NSString stringWithFormat:@"starts in %d D %d H",remainingDays,hoursBetweenDates ];
+        }
+        else {
+            cell.timeLabel.text = [NSString stringWithFormat:@"starts in %d H",hoursBetweenDates ];
+        }
 	}
 	else {
 		cell.StatusImage.image = [UIImage imageNamed:@"button_play.png"];
@@ -158,7 +169,7 @@
 		else {
 			double secondsInAnHour = 3600;
 			NSInteger hoursBetweenDates = distanceBetweenDates / secondsInAnHour;
-			if(hoursBetweenDates >= 24) {
+			if(hoursBetweenDates >= 24){
 				NSInteger remainingDays = hoursBetweenDates/24;
 				hoursBetweenDates = hoursBetweenDates - remainingDays*24;
 				cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d D %d H",remainingDays,hoursBetweenDates ];

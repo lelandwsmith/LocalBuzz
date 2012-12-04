@@ -206,6 +206,7 @@
 	NSDate* now = [[NSDate alloc] init];
 	if([start compare:now]==NSOrderedDescending){
         NSTimeInterval distanceBetweenDates = [start timeIntervalSinceNow];
+        cell.StatusImage.image = [UIImage imageNamed:@"button_pause.png"];
         double secondsInAnHour = 3600;
         NSInteger hoursBetweenDates = distanceBetweenDates / secondsInAnHour;
         if(hoursBetweenDates >= 24){
