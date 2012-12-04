@@ -25,6 +25,9 @@
 @property (nonatomic, weak) IBOutlet UITableViewCell *mapLable;
 @property (nonatomic) CLLocationCoordinate2D currentCoordinate;
 @property (weak, nonatomic) IBOutlet UITableViewCell *LocationCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *descriptCell;
 @property (nonatomic) NSInteger  numOfLines;
 @property (nonatomic) NSString*  locatedAt;
+@property (nonatomic) NSInteger  numOfLines_descript;
+@property (nonatomic) NSString*  descript_text;
 @end

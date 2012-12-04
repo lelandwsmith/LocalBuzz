@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
@@ -771,7 +771,7 @@
                                 <action selector="cancelPressed:" destination="ZhV-ML-Qci" id="LmS-BU-dow"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="Tkh-Z7-5Tq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Tkh-Z7-5Tq">
                             <connections>
                                 <action selector="savePressed:" destination="ZhV-ML-Qci" id="lPQ-i2-RxP"/>
                             </connections>
@@ -1074,6 +1074,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationItem>
                     <connections>
                         <outlet property="LocationCell" destination="jku-ZB-h9i" id="FCj-kU-cDN"/>
+                        <outlet property="descriptCell" destination="rqm-h0-lx6" id="ISO-zi-hIb"/>
                         <outlet property="descriptionLabel" destination="GQo-TO-VG7" id="GQQ-Wb-3ud"/>
                         <outlet property="mapLable" destination="DQQ-pG-xYd" id="Vib-sJ-Ndm"/>
                         <outlet property="timeLabel" destination="ab5-6Z-BNf" id="ESu-6v-hgV"/>
@@ -1310,6 +1311,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EventDetailViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="LocationCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="descriptCell" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="locationTitle" candidateClass="UILabel"/>
@@ -1317,9 +1319,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
             </relationships>
-        </class>
-        <class className="FBProfilePictureView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FBProfilePictureView.h"/>
         </class>
         <class className="LocationSelectionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LocationSelectionViewController.h"/>
@@ -1398,8 +1397,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="h7R-LA-vB5"/>
-        <segue reference="9wB-Vh-eDv"/>
-        <segue reference="8L0-aj-oU4"/>
+        <segue reference="DbQ-AW-Ak0"/>
+        <segue reference="CMb-qh-Wt3"/>
+        <segue reference="tgi-4Y-IWJ"/>
     </inferredMetricsTieBreakers>
 </document>
