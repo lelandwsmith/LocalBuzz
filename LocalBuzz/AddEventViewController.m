@@ -210,7 +210,8 @@
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChange) name:UITextViewTextDidBeginEditingNotification object:self.DescriptText];
     
-	self.categoryID = 1;
+	self.categoryID = 0;
+    [self.categoryLabel setText:[eventCategory objectForKey:[NSNumber numberWithInteger:self.categoryID]]];
 	[self.DescriptText setTextColor:[UIColor lightGrayColor]];
 	self.titleField.delegate = self;
 	self.tableView.delegate = self;

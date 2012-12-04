@@ -80,9 +80,9 @@
     else if((indexPath.section==0)&&(indexPath.row==3)) {
         if(self.numOfLines_descript>1){
 			[self.descriptCell.detailTextLabel setNumberOfLines:self.numOfLines_descript];
-			[self.descriptCell.detailTextLabel setText:self.descript_text];
 			return ((self.numOfLines_descript - 1 )*21+44);
 		}
+        [self.descriptCell.detailTextLabel setText:self.descript_text];
     }
 	// Mapview cell height
 	else if(indexPath.section == 1)
