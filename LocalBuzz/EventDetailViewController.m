@@ -25,6 +25,7 @@
 @synthesize currentCoordinate = _currentCoordinate;
 @synthesize locationTitle = _locationTitle;
 @synthesize locatedAt =_locatedAt;
+
 - (void) setEvent:(Event *)event {
     if (_event != event) {
         _event = event;
@@ -63,6 +64,7 @@
 		}];
 	}
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	// Address cell needs resize
 	if((indexPath.section==0)&&(indexPath.row==2)) {
@@ -112,21 +114,18 @@
 	[mapView showRouteFrom:startAnnotation to:endAnnotation];
 }
 
-
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self configureView];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
 	[super viewDidUnload];
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
 }
 

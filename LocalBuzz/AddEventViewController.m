@@ -63,8 +63,6 @@
 		CLLocation *loc = [[CLLocation alloc] initWithLatitude:selectedLatLong.latitude longitude:selectedLatLong.longitude];
 		
 		CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-		
-		//Geocoding Block
 		[geocoder reverseGeocodeLocation: loc completionHandler:^(NSArray *placemarks, NSError *error) {
 			//Get nearby address
 			CLPlacemark *placemark = [placemarks objectAtIndex:0];
