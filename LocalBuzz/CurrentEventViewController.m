@@ -119,13 +119,24 @@
 		id value;
 		while (value = [enumerator nextObject]) {
 			Event *eventToBeAdded = [[Event alloc] initWithDictionary:value];
-			[self.dataController addEventToEventList:eventToBeAdded];
+            if (eventToBeAdded.isPublic ||
+                (!eventToBeAdded.isPublic && [self isFriendWithOwner:eventToBeAdded.ownerFbId]) ||
+                [[eventToBeAdded.ownerFbId stringValue] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"fb_id"]]) {
+                [self.dataController addEventToEventList:eventToBeAdded];
+            }
 		}
 		[self.tableView reloadData];
 		events = nil;
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		NSLog(@"%@", [error localizedDescription]);
 	}];
+}
+
+- (BOOL)isFriendWithOwner:(NSNumber *)ownerFbId {
+    NSLog(@"%@", ownerFbId);
+    NSSet *friendList = [[NSSet alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"friend_list"]];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:ownerFbId, @"uid", nil];
+    return [friendList containsObject:dict];
 }
 
 - (void)refreshView:(UIRefreshControl *)refresh {

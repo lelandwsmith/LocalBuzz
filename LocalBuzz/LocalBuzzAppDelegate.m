@@ -173,7 +173,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
 }
 
 - (void)getFriendUid {
-	NSString *query = @"SELECT uid, name, is_app_user FROM user WHERE uid IN "
+	NSString *query = @"SELECT uid FROM user WHERE uid IN "
 	@"(SELECT uid2 FROM friend WHERE uid1=me()) AND is_app_user=1";
 	// Set up the query parameter
 	NSDictionary *queryParam = [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
@@ -184,7 +184,9 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
 													NSLog(@"Errorwowowowow: %@", [error localizedDescription]);
 												}
 												else {
-													NSLog(@"Result: %@", result);
+                                                    NSArray *friendList = [result objectForKey:@"data"];
+                                                    [[NSUserDefaults standardUserDefaults] setObject:friendList forKey:@"friend_list"];
+													NSLog(@"Result: %@", [result objectForKey:@"data"]);
 												}
 	}];
 }
