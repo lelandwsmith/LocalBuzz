@@ -25,6 +25,7 @@
         _endTime = [dateFormatter dateFromString:[eventDict objectForKey:@"end_time"]];
         _isPublic = [(NSNumber *)[eventDict objectForKey:@"public"] boolValue];
         _category = [eventDict objectForKey:@"category"];
+        _ownerFbId = [eventDict objectForKey:@"owner"];
         if ([_detailDescription isKindOfClass:[NSNull class]]) {
             _detailDescription = @"";
         }

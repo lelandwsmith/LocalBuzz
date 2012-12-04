@@ -18,6 +18,7 @@
 @property (nonatomic, copy) NSString *detailDescription;
 @property (nonatomic) BOOL isPublic;
 @property (nonatomic, copy) NSNumber *category;
+@property (nonatomic, copy) NSNumber *ownerFbId;
 - (id) initWithDictionary:(NSDictionary *)eventDict;
 
 - (BOOL) isEventValid;

@@ -223,7 +223,6 @@
     }
     AddEventRootViewController *rootVC = (AddEventRootViewController *)self.navigationController;
     self.addEventDelegate = rootVC.delegatingVC;
-    
 }
 
 - (void)loadEvent {
@@ -295,7 +294,7 @@
                                 [[NSNumber numberWithDouble:locationSelector.latLong.latitude] stringValue], @"event[latitude]",
                                 isPublic, @"event[public]",
                                 eventDescription, @"event[description]",
-                                [[NSUserDefaults standardUserDefaults] objectForKey:@"id"], @"event[owner]",
+                                [[NSUserDefaults standardUserDefaults] objectForKey:@"fb_id"], @"event[owner]",
                                 [NSNumber numberWithInteger:self.categoryID], @"event[category]",
                                 nil];
         [httpClient postPath:@"/events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -315,7 +314,7 @@
                   self.eventToBeEdited.latitude, @"event[latitude]",
                   isPublic, @"event[public]",
                   eventDescription, @"event[description]",
-                  [[NSUserDefaults standardUserDefaults] objectForKey:@"id"], @"event[owner]",
+                  [[NSUserDefaults standardUserDefaults] objectForKey:@"fb_id"], @"event[owner]",
                   [NSNumber numberWithInteger:self.categoryID], @"event[category]",
                   nil];
         NSLog(@"%@", params);
