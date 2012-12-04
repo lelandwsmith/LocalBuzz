@@ -20,13 +20,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-  //  NSLog(@"run the login view");
- //   NSLog(@"current permission is :%@",appDelegate.session.permissions);
     [loginbtn setImage:
      [UIImage imageNamed:@"LoginWithFacebookNormal@2x.png"]
-                 forState:UIControlStateNormal];
- 
+                 forState:UIControlStateNormal]; 
     [self.spinner stopAnimating];
     [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter]
@@ -34,10 +30,6 @@
      selector:@selector(sessionStateChanged:)
      name:FBSessionStateChangedNotification
      object:nil];
-   // LocalBuzzAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    //NSLog(@"viewDIdLoad place#2");
-   // [appDelegate openSessionWithAllowLoginUI:NO];
-
 }
 
 
@@ -49,8 +41,6 @@
          startForMeWithCompletionHandler:^(FBRequestConnection *connection,
                                            id<FBGraphUser> user,
                                            NSError *error) {
-             //NSLog(@"getting user data");
-
              if (!error) {
                  NSString *username = user.username;
                  NSString *fbId = user.id;
@@ -74,11 +64,12 @@
                      [user_data setObject:[[firstName stringByAppendingString:@" "] stringByAppendingString:lastName]  forKey:@"full_name"];
                  }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     // NSLog(@"afherror  %@", [error localizedDescription]);
-                 }];
+                 }];                 
              } else {
                 // NSLog(@"error!!!!!!!login");
              }
          }];
+        
     } else {
         [self.loginbtn setTitle:@"Login" forState:UIControlStateNormal];
     }

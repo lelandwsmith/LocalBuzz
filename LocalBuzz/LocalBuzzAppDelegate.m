@@ -50,7 +50,12 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
     self.window.rootViewController = self.mainViewController;
     [self.window makeKeyAndVisible];
     if((![self.session isOpen])&&((FBSession.activeSession.state != FBSessionStateCreatedTokenLoaded))){
-                     [self showLoginView]; 
+        [self showLoginView]; 
+    }else{
+        [FBSession.activeSession openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+            //NSLog(@"Finished opening login session, with state: %d", status);
+        }];
+        [self getFriendUid];
     }
     [FBProfilePictureView class];
     
@@ -153,13 +158,13 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
     }
     switch (state) {
         case FBSessionStateOpen:{
-            NSLog(@"FBSessionStateOpen");
+            [self getFriendUid];
             self.window.rootViewController = self.mainViewController;
             self.loginViewController = nil;
         }
             break;
         case FBSessionStateClosed:{
-            NSLog(@"FBSessionStateClosed");
+            
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -171,7 +176,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
         }
             break;
         case FBSessionStateClosedLoginFailed:{
-            NSLog(@"FBSessionStateClosedLoginFailed");
+            
             [self.navController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
@@ -180,7 +185,7 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
             break;
         }
         default:
-            NSLog(@"XXXXXXXXXXXXX");
+         
             break;
     }
     
@@ -193,7 +198,27 @@ NSString *const kHostName = @"localbuzz.vforvincent.info";
     }
 }
 
-
+- (void)getFriendUid{
+    NSString *query =
+    @"SELECT uid, name, is_app_user FROM user WHERE uid IN "
+    @"(SELECT uid2 FROM friend WHERE uid1=me()) AND is_app_user=1";
+    // Set up the query parameter
+    NSDictionary *queryParam =
+    [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
+    // Make the API request that uses FQL
+    [FBRequestConnection startWithGraphPath:@"/fql"
+                                 parameters:queryParam
+                                 HTTPMethod:@"GET"
+                          completionHandler:^(FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error) {
+                              if (error) {
+                                  NSLog(@"Errorwowowowow: %@", [error localizedDescription]);
+                              } else {
+                                  NSLog(@"Result: %@", result);
+                              }
+                          }];
+}
 /*
  * Opens a Facebook session and optionally shows the login UX.
  */

@@ -27,7 +27,8 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (strong, nonatomic) XMPPStream *xmppStream;
 
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
-- (void) closeSession;
-- (void) showLoginView;
+- (void)closeSession;
+- (void)showLoginView;
+- (void)getFriendUid;
 
 @end
