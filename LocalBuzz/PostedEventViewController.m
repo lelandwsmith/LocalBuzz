@@ -84,7 +84,7 @@
 	NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
 	AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-													[[NSUserDefaults standardUserDefaults] objectForKey:@"id"], @"owner",
+													[[NSUserDefaults standardUserDefaults] objectForKey:@"fb_id"], @"owner",
 													nil];
 	NSLog(@"%@", params);
 	[httpClient getPath:@"events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -168,6 +168,10 @@
 			}
 		}
 	}
+    NSInteger cid;
+    cid = [self.dataController objectInEventListAtIndex:[indexPath row]].category.integerValue;
+    NSString *pictureName = [NSString stringWithFormat:@"category%d.png", cid];
+    cell.CategoryImage.image = [UIImage imageNamed:pictureName];
 	return cell;
 }
 
