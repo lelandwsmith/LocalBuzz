@@ -24,27 +24,22 @@
 @synthesize routes = _routes;
 @synthesize lineColor = _lineColor;
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
-		self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake
-										(0, 0, frame.size.width, frame.size.height)];
+		self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake (0, 0, frame.size.width, frame.size.height)];
 		self.mapView.showsUserLocation = YES;
 		[self.mapView setDelegate:self];
 		[self addSubview:self.mapView];
-		self.routeView = [[UIImageView alloc] initWithFrame:CGRectMake
-											(0, 0, self.mapView.frame.size.width, self.mapView.frame.size.height)];
+		self.routeView = [[UIImageView alloc] initWithFrame:CGRectMake (0, 0, self.mapView.frame.size.width, self.mapView.frame.size.height)];
 		self.routeView.userInteractionEnabled = NO;
 		[self.mapView addSubview:self.routeView];
-		
 		self.lineColor = [UIColor redColor];
 	}
 	return self;
 }
 
 - (void)showRouteFrom: (DDAnnotation*) f to:(DDAnnotation*) t {
-	
 	if(self.routes) {
 		[self.mapView removeAnnotations:[self.mapView annotations]];
 	}
@@ -73,11 +68,10 @@
 	return [self decodePolyLine:[encodedPoints mutableCopy]];
 }
 
-
 - (NSMutableArray *)decodePolyLine: (NSMutableString *)encoded {
 	[encoded replaceOccurrencesOfString:@"\\\\" withString:@"\\"
 															options:NSLiteralSearch
-																range:NSMakeRange(0, [encoded length])];
+															range:NSMakeRange(0, [encoded length])];
 	NSInteger len = [encoded length];
 	NSInteger index = 0;
 	NSMutableArray *array = [[NSMutableArray alloc] init];
@@ -111,12 +105,10 @@
 																								 longitude:[longitude floatValue]];
 		[array addObject:loc];
 	}
-	
 	return array;
 }
 
-- (void)updateRouteView
-{
+- (void)updateRouteView {
 	CGContextRef context = 	CGBitmapContextCreate
 	(nil, self.routeView.frame.size.width, self.routeView.frame.size.height, 8,
 	 4 * self.routeView.frame.size.width, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaPremultipliedLast);
@@ -143,19 +135,16 @@
 	
 	self.routeView.image = img;
 	CGContextRelease(context);
-	
 }
 
-- (void)centerMap
-{
+- (void)centerMap {
 	MKCoordinateRegion region;
 	
 	CLLocationDegrees maxLat = -90;
 	CLLocationDegrees maxLon = -180;
 	CLLocationDegrees minLat = 90;
 	CLLocationDegrees minLon = 180;
-	for(int idx = 0; idx < self.routes.count; idx++)
-	{
+	for(int idx = 0; idx < self.routes.count; idx++) {
 		CLLocation* currentLocation = [self.routes objectAtIndex:idx];
 		if(currentLocation.coordinate.latitude > maxLat)
 			maxLat = currentLocation.coordinate.latitude;
@@ -175,13 +164,11 @@
 }
 
 #pragma mark mapView delegate functions
-- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
-{
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
 	self.routeView.hidden = YES;
 }
 
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
-{
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
 	[self updateRouteView];
 	self.routeView.hidden = NO;
 	[self.routeView setNeedsDisplay];

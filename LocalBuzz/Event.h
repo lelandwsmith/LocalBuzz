@@ -17,7 +17,7 @@
 @property (nonatomic, copy) NSDate *endTime;
 @property (nonatomic, copy) NSString *detailDescription;
 @property (nonatomic) BOOL isPublic;
-
+@property (nonatomic, copy) NSNumber *category;
 - (id) initWithDictionary:(NSDictionary *)eventDict;
 
 - (BOOL) isEventValid;

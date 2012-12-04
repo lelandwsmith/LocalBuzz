@@ -25,6 +25,7 @@
 @synthesize currentCoordinate = _currentCoordinate;
 @synthesize locationTitle = _locationTitle;
 @synthesize locatedAt =_locatedAt;
+
 - (void) setEvent:(Event *)event {
     if (_event != event) {
         _event = event;
@@ -63,15 +64,21 @@
 		}];
 	}
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if((indexPath.section==0)&&(indexPath.row==2)){
-        if(self.numOfLines>1){
-					[self.LocationCell.detailTextLabel setNumberOfLines:self.numOfLines];
-					[self.LocationCell.detailTextLabel setText:self.locatedAt];
-					return ((self.numOfLines - 1 )*21+44);
-        }
-    }
-    return 44;
+	// Address cell needs resize
+	if((indexPath.section==0)&&(indexPath.row==2)) {
+		if(self.numOfLines>1){
+			[self.LocationCell.detailTextLabel setNumberOfLines:self.numOfLines];
+			[self.LocationCell.detailTextLabel setText:self.locatedAt];
+			return ((self.numOfLines - 1 )*21+44);
+		}
+	}
+	// Mapview cell height
+	else if(indexPath.section == 1)
+		return 224;
+	// Regular cell height
+	return 44;
 }
 
 
@@ -107,21 +114,18 @@
 	[mapView showRouteFrom:startAnnotation to:endAnnotation];
 }
 
-
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self configureView];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
 	[super viewDidUnload];
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
 }
 

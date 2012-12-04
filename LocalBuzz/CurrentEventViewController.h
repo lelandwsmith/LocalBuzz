@@ -11,8 +11,8 @@
 @class EventDataController;
 
 @interface CurrentEventViewController : UITableViewController <CLLocationManagerDelegate>
-
 @property (strong, nonatomic) EventDataController *dataController;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 -(IBAction)eventCreated:(UIStoryboardSegue *)segue;
+
 @end

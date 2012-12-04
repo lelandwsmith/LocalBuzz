@@ -17,7 +17,8 @@
 				<string>logo_57x57.png</string>
 				<string>logo.png</string>
 				<string>Screen-Shot-2012-11-14-at-7.50.22-PM.png</string>
-				<string>Icon.png</string>
+				<string>icon.png</string>
+				<string>icon-large.png</string>
 			</array>
 		</dict>
 	</dict>
@@ -54,22 +55,23 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<false/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackTranslucent</string>
 	<key>UIStatusBarTintParameters</key>
 	<dict>
 		<key>UINavigationBar</key>
 		<dict>
 			<key>Style</key>
-			<string>UIBarStyleDefault</string>
+			<string>UIBarStyleBlack</string>
 			<key>Translucent</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 </dict>
 </plist>

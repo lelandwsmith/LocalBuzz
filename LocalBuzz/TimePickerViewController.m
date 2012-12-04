@@ -18,14 +18,15 @@
 @synthesize minimumDate;
 
 - (NSDate *)timeToDisplay {
-    if (_timeToDisplay == nil) {
-        _timeToDisplay = [NSDate date];
-    }
-    return _timeToDisplay;
+	if (_timeToDisplay == nil) {
+		_timeToDisplay = [NSDate date];
+	}
+	return _timeToDisplay;
 }
 
 - (void) viewDidLoad {
-    [self.timePicker setDate:self.timeToDisplay animated:YES];
-    self.timePicker.minimumDate = self.minimumDate;
+	[self.timePicker setDate:self.timeToDisplay animated:YES];
+	self.timePicker.minimumDate = self.minimumDate;
 }
+
 @end
