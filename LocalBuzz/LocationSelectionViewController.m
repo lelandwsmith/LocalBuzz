@@ -20,26 +20,24 @@
 @synthesize latLong = _latLong;
 
 - (CLLocationManager *)locationManager {
-    if (_locationManager == nil) {
-        _locationManager = [[CLLocationManager alloc] init];
-        [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-        [_locationManager setDistanceFilter:kCLDistanceFilterNone];
-        _locationManager.delegate = self;
-    }
-    return _locationManager;
+	if (_locationManager == nil) {
+		_locationManager = [[CLLocationManager alloc] init];
+		[_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+		[_locationManager setDistanceFilter:kCLDistanceFilterNone];
+		_locationManager.delegate = self;
+	}
+	return _locationManager;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	if (self) {
+		// Custom initialization
+	}
+	return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
 	[super viewDidLoad];
 	[self.locationManager startUpdatingLocation];
 }
@@ -53,8 +51,7 @@
     NSLog(@"%@", [error localizedDescription]);
 }
 
-- (void)setUpMap:(CLLocation *)location
-{
+- (void)setUpMap:(CLLocation *)location {
 	// Set up the map view
 	self.mapView.delegate = self;
 
@@ -72,9 +69,7 @@
 	[self.mapView addGestureRecognizer:longPressGestureRecognizer];
 }
 
-
-- (void)handleLongPress:(UILongPressGestureRecognizer *) longPressGesture
-{
+- (void)handleLongPress:(UILongPressGestureRecognizer *) longPressGesture {
 	if (longPressGesture.state != UIGestureRecognizerStateBegan)
 		return;
 	
@@ -144,8 +139,7 @@
 	return draggablePinView;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

@@ -13,8 +13,7 @@
 #import "XMPPFramework.h"
 #import "LocalBuzzAppDelegate.h"
 
-@interface AddEventViewController ()
-{
+@interface AddEventViewController () {
 	@private NSDate *startTime;
 	@private NSDate *endTime;
 	@private LocationSelectionViewController *locationSelector;
@@ -35,13 +34,11 @@
 @synthesize DescriptText = _DescriptText;
 @synthesize address = _address;
 
-- (IBAction)cancelPressed:(id)sender
-{
+- (IBAction)cancelPressed:(id)sender {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)timeSelected:(UIStoryboardSegue *)segue
-{
+- (IBAction)timeSelected:(UIStoryboardSegue *)segue {
 	if ([[segue identifier] isEqualToString:@"ReturnTime"]) {
 		TimePickerViewController *timePicker = [segue sourceViewController];
 		NSDate *pickedTime = timePicker.timePicker.date;
@@ -59,8 +56,7 @@
 	}
 }
 
-- (IBAction)locationSelected:(UIStoryboardSegue *)segue
-{
+- (IBAction)locationSelected:(UIStoryboardSegue *)segue {
 	if ([[segue identifier] isEqualToString:@"ReturnLocation"]) {
 		locationSelector = [segue sourceViewController];
 		CLLocationCoordinate2D selectedLatLong = locationSelector.latLong;
@@ -86,23 +82,21 @@
 	}
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if((indexPath.section == 1) && (indexPath.row == 0)){
-  	if(self.numOfLines > 1){
+  	if(self.numOfLines > 1) {
 			[self.LocationCell.detailTextLabel setNumberOfLines:self.numOfLines];
 			[self.LocationCell.detailTextLabel setText:self.address];
 			return ((self.numOfLines - 1 )*21+44);
 		}
 	}
-	else if(indexPath.section == 5){
+	else if(indexPath.section == 5) {
 		return 75;
 	}
 	return 44;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *CellIdentifier = [NSString stringWithFormat:@"Cell_%d_%d",indexPath.section,indexPath.row];
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
@@ -119,8 +113,7 @@
 	return cell;
 }
 
-- (IBAction)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (IBAction)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	if ([[segue identifier] isEqualToString:@"SelectStartTime"]) {
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 		[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -177,14 +170,14 @@
 }
 
 - (void)createEventChatRoom:(NSNumber *)eventId {
-    NSString *roomJIDUser = [@"event_" stringByAppendingString:[eventId stringValue]];
-    XMPPRoomHybridStorage *roomStorage = [XMPPRoomHybridStorage sharedInstance];
-    NSString *roomDomain = [@"conference." stringByAppendingString:[[self xmppStream] hostName]];
-    XMPPJID *roomJID = [XMPPJID jidWithUser:roomJIDUser domain:roomDomain resource:nil];
-    XMPPRoom *chatRoom = [[XMPPRoom alloc] initWithRoomStorage:roomStorage jid:roomJID];
-    [chatRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
-    [chatRoom activate:[self xmppStream]];
-    [chatRoom joinRoomUsingNickname:@"owner" fromJID:[[self xmppStream] myJID] history:nil];
+	NSString *roomJIDUser = [@"event_" stringByAppendingString:[eventId stringValue]];
+	XMPPRoomHybridStorage *roomStorage = [XMPPRoomHybridStorage sharedInstance];
+	NSString *roomDomain = [@"conference." stringByAppendingString:[[self xmppStream] hostName]];
+	XMPPJID *roomJID = [XMPPJID jidWithUser:roomJIDUser domain:roomDomain resource:nil];
+	XMPPRoom *chatRoom = [[XMPPRoom alloc] initWithRoomStorage:roomStorage jid:roomJID];
+	[chatRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+	[chatRoom activate:[self xmppStream]];
+	[chatRoom joinRoomUsingNickname:@"owner" fromJID:[[self xmppStream] myJID] history:nil];
 }
 
 - (LocalBuzzAppDelegate *)appDelegate {
@@ -194,20 +187,18 @@
 - (XMPPStream *) xmppStream {
     return [self appDelegate].xmppStream;
 }
-- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
-{
+
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView {
 	[self.DescriptText setText:@""];
 	[self.DescriptText setTextColor:[UIColor blueColor]];
 	return YES;
 }
 
--(void)textViewChange
-{
+-(void)textViewChange {
 	[self textViewShouldBeginEditing:self.DescriptText];
 }
 
-- (void) viewDidLoad
-{
+- (void) viewDidLoad {
 	[super viewDidLoad];
 	[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChange) name:UITextViewTextDidBeginEditingNotification object:self.DescriptText];
@@ -219,16 +210,13 @@
 	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
 	tapGestureRecognizer.cancelsTouchesInView = NO;
 	[self.tableView addGestureRecognizer:tapGestureRecognizer];
-    
 }
 
-- (void) viewDidUnload
-{
+- (void) viewDidUnload {
 	[super viewDidUnload];
 }
 
-- (IBAction)leftClickCategory:(id)sender
-{
+- (IBAction)leftClickCategory:(id)sender {
 	self.categoryID--;
 	if(self.categoryID<0) {
 		self.categoryID+=5;
@@ -236,8 +224,7 @@
 	[self.categoryLabel setText:[NSString stringWithFormat:@"Category #%d",self.categoryID]];
 }
 
-- (IBAction)rightClickCategory:(id)sender
-{
+- (IBAction)rightClickCategory:(id)sender {
 	self.categoryID++;
 	if(self.categoryID>4) {
 		self.categoryID-=5;
@@ -245,17 +232,14 @@
 	[self.categoryLabel setText:[NSString stringWithFormat:@"Category #%d",self.categoryID]];
 }
 
-- (IBAction)SwitchChange:(id)sender
-{}
+- (IBAction)SwitchChange:(id)sender {}
 
-- (void) hideKeyboard
-{
+- (void) hideKeyboard {
 	[self.titleField resignFirstResponder];
 	[self.DescriptText resignFirstResponder];
 }
 
-- (BOOL) textFieldShouldReturn:(UITextField *)textField
-{
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
 	return [textField resignFirstResponder];
 }
 
@@ -269,6 +253,5 @@
 - (void)xmppRoomDidJoin:(XMPPRoom *)sender {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }
-
 
 @end
