@@ -219,11 +219,11 @@
 	 // Pass the selected object to the new view controller.
 	 [self.navigationController pushViewController:detailViewController animated:YES];
 	 */
-	//[self performSegueWithIdentifier:@"ShowEventDetail" sender:self];
+	[self performSegueWithIdentifier:@"ShowMyEventDetail" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	if ([segue.identifier isEqualToString:@"ShowEventDetail"]) {
+	if ([segue.identifier isEqualToString:@"ShowMyEventDetail"]) {
 		EventDetailViewController *eventDetailController = [segue destinationViewController];
 		eventDetailController.event = [self.dataController objectInEventListAtIndex:[self.tableView indexPathForSelectedRow].row];
 	}
