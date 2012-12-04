@@ -673,7 +673,7 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Leisure" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFd-19-RvB">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Entertainment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFd-19-RvB">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="124" id="3H1-Fe-9Ea"/>
                                                         <constraint firstAttribute="height" constant="31" id="THV-pX-p6x"/>
@@ -1259,7 +1259,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lQ-t3-TcK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1552" y="1370"/>
+            <point key="canvasLocation" x="1562" y="1242"/>
         </scene>
     </scenes>
     <resources>
@@ -1277,7 +1277,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="AddEventViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddEventViewController.h"/>
             <relationships>
+                <relationship kind="action" name="SwitchChange:"/>
+                <relationship kind="action" name="cancelPressed:"/>
+                <relationship kind="action" name="leftClickCategory:"/>
                 <relationship kind="action" name="locationSelected:" candidateClass="UIStoryboardSegue"/>
+                <relationship kind="action" name="prepareForSegue:sender:" candidateClass="UIStoryboardSegue"/>
+                <relationship kind="action" name="rightClickCategory:"/>
+                <relationship kind="action" name="savePressed:"/>
                 <relationship kind="action" name="timeSelected:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="outlet" name="DescriptText" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="LocationCell" candidateClass="UITableViewCell"/>
