@@ -49,13 +49,16 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="45J-PM-k0b" kind="push" identifier="ShowPastEventDetail" id="tgi-4Y-IWJ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Past Events" id="G8e-VV-1ZX">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="zvV-lD-dat">
                             <connections>
-                                <segue destination="apg-Ob-dik" kind="modal" id="jVP-Ee-EgF"/>
+                                <segue destination="apg-Ob-dik" kind="modal" identifier="" id="jVP-Ee-EgF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -88,8 +91,12 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mcs-EH-hb3">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="8c5-yT-Q6s"/>
+                                    <constraint firstAttribute="width" constant="260" id="Nne-6Q-zqJ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Button" image="LoginWithFacebookNormal@2x.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -100,17 +107,20 @@
                                     <action selector="click:" destination="zHO-XL-MuT" eventType="touchUpInside" id="SvS-JB-j7T"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pCJ-77-8vK"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Mcs-EH-hb3" secondAttribute="bottom" constant="151" id="4st-Ua-TNu"/>
-                            <constraint firstItem="Mcs-EH-hb3" firstAttribute="leading" secondItem="Zi0-jj-azr" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="LX8-ey-OHg"/>
-                            <constraint firstAttribute="trailing" secondItem="Mcs-EH-hb3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="hg7-il-Ytf"/>
+                            <constraint firstItem="pCJ-77-8vK" firstAttribute="centerX" secondItem="Zi0-jj-azr" secondAttribute="centerX" type="default" id="8SB-Y5-JLh"/>
+                            <constraint firstAttribute="bottom" secondItem="pCJ-77-8vK" secondAttribute="bottom" constant="144" id="GEy-7W-b5N"/>
+                            <constraint firstItem="pCJ-77-8vK" firstAttribute="centerX" secondItem="Mcs-EH-hb3" secondAttribute="centerX" type="default" id="XXs-qm-YPY"/>
+                            <constraint firstAttribute="bottom" secondItem="Mcs-EH-hb3" secondAttribute="bottom" constant="75" id="cej-xS-DwC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="s4y-8e-WMN"/>
                     <connections>
                         <outlet property="loginbtn" destination="Mcs-EH-hb3" id="hKb-oD-bh2"/>
+                        <outlet property="spinner" destination="pCJ-77-8vK" id="VA1-B1-enY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDr-nf-xR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -274,20 +284,20 @@
             </objects>
             <point key="canvasLocation" x="472" y="1242"/>
         </scene>
-        <!--Table View Controller - My Events-->
+        <!--Posted Event View Controller - My Events-->
         <scene sceneID="4KL-fG-p9M">
             <objects>
-                <tableViewController id="UKu-YZ-w0L" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RHP-Y9-mnO">
+                <tableViewController id="UKu-YZ-w0L" customClass="PostedEventViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="91" sectionHeaderHeight="22" sectionFooterHeight="22" id="RHP-Y9-mnO">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostedEventTableCell" textLabel="KwS-fw-7Sx" style="IBUITableViewCellStyleDefault" id="ZMu-z5-gqs">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostedEventTableCell" textLabel="KwS-fw-7Sx" rowHeight="91" style="IBUITableViewCellStyleDefault" id="ZMu-z5-gqs">
+                                <rect key="frame" x="0.0" y="22" width="320" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-fw-7Sx">
@@ -881,6 +891,61 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2123" y="477"/>
         </scene>
+        <!--Chat Room View Controller - Chat-->
+        <scene sceneID="gvc-QG-FNI">
+            <objects>
+                <viewController id="UP9-IC-cFc" customClass="ChatRoomViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J6c-cH-JYW">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aF7-W7-Rab">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="UP9-IC-cFc" id="3Gt-lG-ktK"/>
+                                    <outlet property="delegate" destination="UP9-IC-cFc" id="OH9-k5-PcD"/>
+                                </connections>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pW-41-pjf">
+                                <items>
+                                    <barButtonItem style="plain" id="56a-sp-pUZ">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="nD5-4c-JFD">
+                                            <rect key="frame" x="12" y="7" width="237" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </barButtonItem>
+                                    <barButtonItem title="Send" id="4Te-ff-K1x">
+                                        <connections>
+                                            <action selector="sendMessage:" destination="UP9-IC-cFc" id="Pmu-oD-Aaz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aF7-W7-Rab" firstAttribute="leading" secondItem="J6c-cH-JYW" secondAttribute="leading" type="default" id="3B8-jx-UaX"/>
+                            <constraint firstItem="6pW-41-pjf" firstAttribute="leading" secondItem="J6c-cH-JYW" secondAttribute="leading" type="default" id="9rl-bn-6sS"/>
+                            <constraint firstItem="aF7-W7-Rab" firstAttribute="bottom" secondItem="6pW-41-pjf" secondAttribute="top" type="default" id="A7w-ke-Kdc"/>
+                            <constraint firstItem="aF7-W7-Rab" firstAttribute="trailing" secondItem="J6c-cH-JYW" secondAttribute="trailing" type="default" id="ERE-fD-F2N"/>
+                            <constraint firstItem="6pW-41-pjf" firstAttribute="trailing" secondItem="J6c-cH-JYW" secondAttribute="trailing" type="default" id="QkI-Xd-gcl"/>
+                            <constraint firstItem="aF7-W7-Rab" firstAttribute="top" secondItem="J6c-cH-JYW" secondAttribute="top" type="default" id="SCf-SF-Jpr"/>
+                            <constraint firstItem="6pW-41-pjf" firstAttribute="bottom" secondItem="J6c-cH-JYW" secondAttribute="bottom" type="default" id="goS-Sx-byc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chat" id="DUV-if-2Qa"/>
+                    <connections>
+                        <outlet property="messageInput" destination="nD5-4c-JFD" id="b1F-Ay-3rZ"/>
+                        <outlet property="messageList" destination="aF7-W7-Rab" id="ftw-eu-emB"/>
+                        <outlet property="toolbar" destination="6pW-41-pjf" id="qgs-f9-aOw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Rd-BV-465" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1557" y="477"/>
+        </scene>
         <!--Event Detail View Controller - Detail-->
         <scene sceneID="1Vm-Ii-0dL">
             <objects>
@@ -998,7 +1063,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Detail" id="075-bY-6Hq">
-                        <barButtonItem key="rightBarButtonItem" title="Join" id="92S-uN-ZgW"/>
+                        <barButtonItem key="rightBarButtonItem" title="Join" id="92S-uN-ZgW">
+                            <connections>
+                                <segue destination="UP9-IC-cFc" kind="push" identifier="ShowChatRoom" id="m6d-3Z-wNV"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="LocationCell" destination="jku-ZB-h9i" id="FCj-kU-cDN"/>
@@ -1029,13 +1098,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2J-NZ-f25" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1050" y="-292"/>
+            <point key="canvasLocation" x="1172" y="-268"/>
         </scene>
     </scenes>
     <resources>
         <image name="19-gear.png" width="26" height="26"/>
         <image name="28-star.png" width="26" height="26"/>
         <image name="73-radar.png" width="27" height="27"/>
+        <image name="LoginWithFacebookNormal@2x.png" width="318" height="58"/>
         <image name="left.png" width="50" height="50"/>
         <image name="right.png" width="50" height="50"/>
     </resources>
@@ -1057,6 +1127,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="startTimeCell" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="switcher" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="titleField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ChatRoomViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChatRoomViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="messageInput" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="messageList" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
         <class className="CurrentEventViewController" superclassName="UITableViewController">
@@ -1091,7 +1169,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="click:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="loginbtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="textview" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
@@ -1102,6 +1180,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="PastEventViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PastEventViewController.h"/>
+        </class>
+        <class className="PostedEventViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PostedEventViewController.h"/>
         </class>
         <class className="SettingTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingTableViewController.h"/>
@@ -1141,7 +1222,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9wB-Vh-eDv"/>
+        <segue reference="tgi-4Y-IWJ"/>
+        <segue reference="jVP-Ee-EgF"/>
         <segue reference="CMb-qh-Wt3"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,6 +9,7 @@
 #import "EventDetailViewController.h"
 #import "Event.h"
 #import "RegexKitLite.h"
+#import "ChatRoomViewController.h"
 
 @interface EventDetailViewController ()
 
@@ -63,14 +64,19 @@
 	}
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if((indexPath.section==0)&&(indexPath.row==2)){
-        if(self.numOfLines>1){
-					[self.LocationCell.detailTextLabel setNumberOfLines:self.numOfLines];
-					[self.LocationCell.detailTextLabel setText:self.locatedAt];
-					return ((self.numOfLines - 1 )*21+44);
-        }
-    }
-    return 44;
+	// Address cell needs resize
+	if((indexPath.section==0)&&(indexPath.row==2)) {
+		if(self.numOfLines>1){
+			[self.LocationCell.detailTextLabel setNumberOfLines:self.numOfLines];
+			[self.LocationCell.detailTextLabel setText:self.locatedAt];
+			return ((self.numOfLines - 1 )*21+44);
+		}
+	}
+	// Mapview cell height
+	else if(indexPath.section == 1)
+		return 224;
+	// Regular cell height
+	return 44;
 }
 
 
@@ -124,4 +130,11 @@
 	return YES;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ShowChatRoom"]) {
+        ChatRoomViewController *chatRoomViewController = [segue destinationViewController];
+        chatRoomViewController.hidesBottomBarWhenPushed = YES;
+        chatRoomViewController.eventId = self.event.eventId;
+    }
+}
 @end

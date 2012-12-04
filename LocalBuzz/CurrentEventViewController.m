@@ -21,6 +21,8 @@
 @synthesize dataController;
 @synthesize locationManager = _locationManager;
 
+#define kGetCurrentEvents 0
+
 - (CLLocationManager *) locationManager
 {
 	if (_locationManager == nil) {
@@ -85,8 +87,11 @@
 	refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to refresh"];
 	[refresh addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
 	self.refreshControl = refresh;
-
 	//self.view.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:202.0f/255.0f blue:84.0f/255.0f alpha:1.0f];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (IBAction)eventCreated:(UIStoryboardSegue *)segue
@@ -98,25 +103,25 @@
 
 - (void) refreshEvents
 {
-    NSLog(@"%@", [NSTimeZone knownTimeZoneNames]);
     NSURL *url = [NSURL URLWithString:@"http://localbuzz.vforvincent.info"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     CLLocationCoordinate2D currentCoord = [[self.locationManager location] coordinate];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZ"];
     dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-    NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             [NSNumber numberWithDouble:currentCoord.latitude], @"lat",
                             [NSNumber numberWithDouble:currentCoord.longitude], @"lng",
                             [dateFormatter stringFromDate:[NSDate date]], @"time",
+                            [[NSUserDefaults standardUserDefaults] valueForKey:@"range"], @"range",
+                            [NSNumber numberWithInteger:kGetCurrentEvents], @"past",
                             nil];
+    NSLog(@"%@", params);
     NSLog(@"current is %@ |%@",[NSNumber numberWithDouble:currentCoord.latitude],[NSNumber numberWithDouble:currentCoord.longitude]);
     [httpClient getPath:@"events.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.dataController emptyEventList];
         NSDictionary *events = [NSJSONSerialization JSONObjectWithData:responseObject options:
                                 NSJSONReadingMutableContainers error:nil];
-        NSLog(@"Events count: %d", [events count]);
         NSEnumerator *enumerator = [events objectEnumerator];
         id value;
         while (value = [enumerator nextObject]) {
@@ -152,7 +157,6 @@
     } else if ([locations count] == 1) {
         [self refreshEvents];
     }
-    NSLog(@"Location count: %d", [locations count]);
     [self.locationManager stopUpdatingLocation];
 }
 
@@ -213,14 +217,18 @@
     }else{
         cell.StatusImage.image = [UIImage imageNamed:@"button_play.png"];
         NSTimeInterval distanceBetweenDates = [end timeIntervalSinceNow];
-        double secondsInAnHour = 3600;
-        NSInteger hoursBetweenDates = distanceBetweenDates / secondsInAnHour;
-        if(hoursBetweenDates >= 24){
-            NSInteger remainingDays = hoursBetweenDates/24;
-            hoursBetweenDates = hoursBetweenDates - remainingDays*24;
-            cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d D %d H",remainingDays,hoursBetweenDates ];
-        }else{
-            cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d H",hoursBetweenDates ];
+        if (distanceBetweenDates < 0) {
+            cell.timeLabel.text = @"ended";
+        } else {
+            double secondsInAnHour = 3600;
+            NSInteger hoursBetweenDates = distanceBetweenDates / secondsInAnHour;
+            if(hoursBetweenDates >= 24){
+                NSInteger remainingDays = hoursBetweenDates/24;
+                hoursBetweenDates = hoursBetweenDates - remainingDays*24;
+                cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d D %d H",remainingDays,hoursBetweenDates ];
+            }else{
+                cell.timeLabel.text = [NSString stringWithFormat:@"ends in %d H",hoursBetweenDates ];
+            }
         }
 
     }

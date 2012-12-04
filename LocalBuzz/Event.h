@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Event : NSObject
-
+@property (nonatomic, copy) NSNumber *eventId;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSNumber *longitude;
 @property (nonatomic, copy) NSNumber *latitude;
